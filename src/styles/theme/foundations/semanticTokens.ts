@@ -1,66 +1,22 @@
 export const semanticTokens = {
   colors: {
     text: {
-      primary: {
-        default: 'gray.900',
-        _dark: 'gray.0',
-      },
-      secondary: {
-        default: 'gray.400',
-        _dark: 'gray.200',
-      },
-      disabled: {
-        default: 'gray.200',
-        _dark: 'gray.500',
-      },
-      brand: {
-        default: 'primary.500',
-        _dark: 'primary.300',
-      },
-      inverter: {
-        default: 'gray.0',
-        _dark: 'gray.900',
-      },
+      primary: '#212121',
+      secondary: '#AEAEAE',
+      footnote: '#555555',
+      disabled: '#B3B3B3',
+      inverter: '#FFFFFF',
     },
     surface: {
-      primary: {
-        default: 'gray.0',
-        _dark: 'gray.900',
-      },
-      secondary: {
-        default: 'gray.50',
-        _dark: 'gray.800',
-      },
-      disabled: {
-        default: 'gray.200',
-        _dark: 'gray.400',
-      },
-      brand: {
-        default: 'primary.500',
-        _dark: 'primary.300',
-      },
-      inverter: {
-        default: 'gray.900',
-        _dark: 'gray.100',
-      },
+      primary: '#FFFFFF',
+      secondary: '#FAFAFA',
+      brand: '#37C745',
+      disabled: '#A6A6A6',
+      invert: '#212121',
     },
     border: {
-      primary: {
-        default: 'gray.50',
-        _dark: 'gray.700',
-      },
-      disabled: {
-        default: 'gray.200',
-        _dark: 'gray.600',
-      },
-      brand: {
-        default: 'primary.500',
-        _dark: 'primary.300',
-      },
-      inverter: {
-        default: 'gray.900',
-        _dark: 'gray.200',
-      },
+      primary: '#ECECEC',
+      invert: '#CCCCCC',
     },
     code: {
       success: {
