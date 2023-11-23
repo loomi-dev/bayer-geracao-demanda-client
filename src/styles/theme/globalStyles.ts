@@ -5,17 +5,23 @@ export const styles: ChakraTheme['styles'] = {
   global: (props) => ({
     '*': {
       boxSizing: 'border-box',
+      padding: 0,
+      margin: 0,
     },
     html: {
       bg: mode('whiteAlpha.600', 'gray.800')(props),
-      minH: '100vh',
+      fontSize: '62.5%',
+      minH: '100%',
     },
     body: {
       bg: mode('whiteAlpha.600', 'gray.800')(props),
       h: '100%',
+      fontSize: '1.6rem',
       WebkitTapHighlightColor: 'transparent',
-      padding: 0,
-      margin: 0,
+    },
+    '#__next': {
+      minH: '100%',
+      w: '100%',
     },
     '#chakra-toast-portal > *': {
       pt: 'safe-top',
