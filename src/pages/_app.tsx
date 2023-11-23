@@ -1,15 +1,26 @@
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
+import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, ReactNode, ReactElement } from 'react';
 
-import { AuthProvider } from '@/contexts';
 import { queryClient as defaultQueryClient } from '@/lib/react-query';
 import { theme } from '@/styles';
 
-function MyApp({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(defaultQueryClient);
+
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <ChakraProvider theme={theme}>
       <Head>
@@ -18,9 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <AuthProvider>
-            <Component {...pageProps} />
-          </AuthProvider>
+          {getLayout(<Component {...pageProps} />)}
         </Hydrate>
       </QueryClientProvider>
     </ChakraProvider>
