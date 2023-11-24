@@ -1,22 +1,53 @@
 export const semanticTokens = {
   colors: {
     text: {
-      primary: '#212121',
-      secondary: '#AEAEAE',
-      footnote: '#555555',
-      disabled: '#B3B3B3',
-      inverter: '#FFFFFF',
+      primary: 'greyscale.1000',
+      secondary: 'greyscale.600',
+      disabled: 'greyscale.400',
+      footnote: 'greyscale.800',
+      brand: 'green.500',
+      invert: 'greyscale.0',
     },
     surface: {
-      primary: '#FFFFFF',
-      secondary: '#FAFAFA',
-      brand: '#37C745',
-      disabled: '#A6A6A6',
-      invert: '#212121',
+      primary: 'greyscale.0',
+      secondary: 'greyscale.150',
+      disabled: 'greyscale.400',
+      brand: 'green.500',
+      inverter: 'greyscale.1000',
     },
     border: {
-      primary: '#ECECEC',
-      invert: '#CCCCCC',
+      primary: 'greyscale.1000',
+      secondary: 'greyscale.800',
+      divider: 'greyscale.100',
+      brand: 'green.600',
+      invert: 'greyscale.400',
+    },
+    background: {
+      primary: {
+        default: 'green.500',
+        hover: 'green.700',
+        focussed: 'green.800',
+        pressed: 'green.700',
+        //disabled: TODO
+      },
+      success: {
+        primary: 'green.100',
+        hover: 'green.200',
+        focussed: 'green.200',
+        pressed: 'green.400',
+      },
+      warning: {
+        primary: 'warning_10',
+        hover: 'warning_20',
+        focussed: 'warning_20',
+        pressed: 'warning_40',
+      },
+      error: {
+        primary: 'danger_10',
+        hover: 'danger_20',
+        focussed: 'danger_20',
+        pressed: 'danger_40',
+      },
     },
     code: {
       success: {
