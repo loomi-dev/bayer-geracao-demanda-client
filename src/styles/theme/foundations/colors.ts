@@ -20,6 +20,7 @@ const greyscale = {
   100: '#FAFAFA',
   150: '#F5F5F5',
   200: '#F1F1F1',
+  300: '#F7F7F7',
   400: '#CCCCCC',
   600: '#AEAEAE',
   800: '#555555',
