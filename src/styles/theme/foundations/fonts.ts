@@ -20,7 +20,7 @@ const arial = localFont({
   ],
 });
 
-export const fonts: ChakraTheme['fontSizes'] = {
+export const fonts: ChakraTheme['fonts'] = {
   heading: arial.style.fontFamily,
   body: arial.style.fontFamily,
   mono: arial.style.fontFamily,
