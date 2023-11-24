@@ -1,12 +1,14 @@
-import { inputAnatomy } from '@chakra-ui/anatomy';
-import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
+import { defineStyleConfig } from '@chakra-ui/react';
 
-const { defineMultiStyleConfig } = createMultiStyleConfigHelpers(inputAnatomy.keys);
-
-export const Input = defineMultiStyleConfig({
-  baseStyle: {
-    field: {
-      bg: 'secondary.200',
+export const Input = defineStyleConfig({
+  variants: {
+    text: {
+      field: {
+        borderRadius: '21.6rem',
+        bgColor: 'greyscale.300',
+        border: '1px solid',
+        borderColor: 'opacity.border.14',
+      },
     },
   },
 });
