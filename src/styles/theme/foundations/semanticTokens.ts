@@ -28,7 +28,7 @@ export const semanticTokens = {
         hover: 'green.700',
         focussed: 'green.800',
         pressed: 'green.700',
-        //disabled: TODO
+        //disabled: TODO --> missing in styleguide
       },
       success: {
         primary: 'green.100',
@@ -37,16 +37,16 @@ export const semanticTokens = {
         pressed: 'green.400',
       },
       warning: {
-        primary: 'warning_10',
-        hover: 'warning_20',
-        focussed: 'warning_20',
-        pressed: 'warning_40',
+        primary: 'yellow.warning_10',
+        hover: 'yellow.warning_20',
+        focussed: 'yellow.warning_20',
+        pressed: 'yellow.warning_40',
       },
       error: {
-        primary: 'danger_10',
-        hover: 'danger_20',
-        focussed: 'danger_20',
-        pressed: 'danger_40',
+        primary: 'red.danger_10',
+        hover: 'red.danger_20',
+        focussed: 'red.danger_20',
+        pressed: 'red.danger_40',
       },
     },
     code: {
