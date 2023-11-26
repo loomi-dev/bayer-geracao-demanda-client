@@ -11,7 +11,7 @@
     "validate": "yarn type-check && yarn lint && yarn prettier --write .",
     "husky-init-commit": "husky install && husky set .husky/pre-commit \"yarn validate\"",
     "husky-init-push": "husky install && husky set .husky/pre-push \"yarn validate\"",
-    "create-icons": "npx @svgr/cli --typescript -d src/components/iconsComponents --ignore-existing public/assets/icons",
+    "create-icons": "npx @svgr/cli --typescript -d src/components/Icons --ignore-existing public/assets/icons",
     "h:module": "hygen module with-prompt && eslint src/modules/**/*.{ts,tsx} --fix"
   },
   "dependencies": {

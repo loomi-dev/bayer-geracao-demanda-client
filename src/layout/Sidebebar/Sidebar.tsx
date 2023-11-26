@@ -1,5 +1,9 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+
+import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon } from '@/components/Icons';
+
+import { MenuItem } from './MenuItem';
 
 export const Sidebar = () => (
   <Flex
@@ -17,19 +21,10 @@ export const Sidebar = () => (
       </Text>
     </Flex>
     <Flex flexDir="column">
-      <Button
-        fontSize="1.6rem"
-        color="greyscale.600"
-        w="22rem"
-        bg="green"
-        h="5rem"
-        fontWeight="normal"
-      >
-        Carteira
-      </Button>
-      <Button>Planejamento</Button>
-      <Button>Comprovações</Button>
-      <Button>Simulador</Button>
+      <MenuItem label="Carteira" src="#" leftIcon={<CardIcon />} />
+      <MenuItem label="Planejamento" src="#" leftIcon={<CalendarIcon />} />
+      <MenuItem label="Comprovações" src="#" leftIcon={<ImageIcon />} />
+      <MenuItem label="Simulador" src="#" leftIcon={<ComputerIcon />} />
     </Flex>
   </Flex>
 );
