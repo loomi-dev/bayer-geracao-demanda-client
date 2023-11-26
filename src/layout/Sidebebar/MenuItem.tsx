@@ -20,6 +20,7 @@ export const MenuItem = ({ label, src, isSelected = false, ...props }: MenuItemP
       fontWeight="normal"
       bgColor={isSelected ? 'surface.brand' : 'surface.primary'}
       borderRadius="3.2rem"
+      _hover={{ color: isSelected ? 'text.invert' : 'text.primary' }}
       {...props}
     >
       {label}

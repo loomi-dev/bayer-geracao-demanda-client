@@ -29,8 +29,9 @@ export const Sidebar = () => (
       borderTop="1px solid"
       borderBottom="1px solid"
       borderColor="surface.disabled"
+      mb="10rem"
     >
-      <MenuItem label="Carteira" src="#" isSelected leftIcon={<CardIcon />} />
+      <MenuItem label="Carteira" src="#" leftIcon={<CardIcon />} />
       <MenuItem label="Planejamento" src="#" leftIcon={<CalendarIcon />} />
       <MenuItem label="Comprovações" src="#" leftIcon={<ImageIcon />} />
       <MenuItem label="Simulador" src="#" leftIcon={<ComputerIcon />} />
