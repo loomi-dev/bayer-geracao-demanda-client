@@ -13,7 +13,6 @@ export const MenuItem = ({ label, src, isSelected = false, ...props }: MenuItemP
       w="22rem"
       h="5rem"
       gap="2rem"
-      py="0.6rem"
       px="1.6rem"
       fontSize="1.6rem"
       justifyContent="flex-start"
