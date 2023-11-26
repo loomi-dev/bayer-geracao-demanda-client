@@ -20,8 +20,16 @@ export const Sidebar = () => (
         Top Multiplicadores
       </Text>
     </Flex>
-    <Flex flexDir="column">
-      <MenuItem label="Carteira" src="#" leftIcon={<CardIcon />} />
+    <Flex
+      flexDir="column"
+      mt="14rem"
+      gap="1.6rem"
+      py="1.6rem"
+      borderTop="1px solid"
+      borderBottom="1px solid"
+      borderColor="surface.disabled"
+    >
+      <MenuItem label="Carteira" src="#" isSelected leftIcon={<CardIcon />} />
       <MenuItem label="Planejamento" src="#" leftIcon={<CalendarIcon />} />
       <MenuItem label="Comprovações" src="#" leftIcon={<ImageIcon />} />
       <MenuItem label="Simulador" src="#" leftIcon={<ComputerIcon />} />
