@@ -13,6 +13,12 @@ export const Sidebar = () => {
   const isReceiptsPage = pathname === '/comprovantes';
   const isSimulatorPage = pathname === '/simulador';
 
+  const menuItens = [
+    { label: 'Carteira', src: '#', isSelected: isWalletPage, leftIcon: <CardIcon /> },
+    { label: 'Planejamento', src: '#', isSelected: isPlanningPage, leftIcon: <CalendarIcon /> },
+    { label: 'Comprovantes', src: '#', isSelected: isReceiptsPage, leftIcon: <ImageIcon /> },
+    { label: 'Simulador', src: '#', isSelected: isSimulatorPage, leftIcon: <ComputerIcon /> },
+  ];
   return (
     <Flex
       flexDir="column"
@@ -39,25 +45,15 @@ export const Sidebar = () => {
         borderColor="surface.disabled"
         mb="10rem"
       >
-        <MenuItem label="Carteira" src="#" isSelected={isWalletPage} leftIcon={<CardIcon />} />
-        <MenuItem
-          label="Planejamento"
-          src="#"
-          isSelected={isPlanningPage}
-          leftIcon={<CalendarIcon />}
-        />
-        <MenuItem
-          label="Comprovantes"
-          src="#"
-          isSelected={isReceiptsPage}
-          leftIcon={<ImageIcon />}
-        />
-        <MenuItem
-          label="Simulador"
-          src="#"
-          isSelected={isSimulatorPage}
-          leftIcon={<ComputerIcon />}
-        />
+        {menuItens.map((item) => (
+          <MenuItem
+            key={item.label}
+            label={item.label}
+            src={item.src}
+            isSelected={item.isSelected}
+            leftIcon={item.leftIcon}
+          />
+        ))}
       </Flex>
       <Flex align="center" gap="1.8rem">
         <Text w="8.7rem" textStyle="caption3" color="text.footnote">

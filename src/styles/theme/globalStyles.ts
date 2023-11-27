@@ -17,7 +17,7 @@ export const styles: ChakraTheme['styles'] = {
       bg: mode('whiteAlpha.600', 'gray.800')(props),
       h: '100%',
       fontSize: '1.6rem',
-      color: 'greyscale.1000',
+      color: 'text.primary',
       WebkitTapHighlightColor: 'transparent',
     },
     '#__next': {
