@@ -2,6 +2,6 @@ export * from './breakpoints';
 export * from './colors';
 export * from './layerStyles';
 export * from './shadows';
-export * from './typography';
+export * from './fonts';
 export * from './semanticTokens';
 export * from './textStyles';

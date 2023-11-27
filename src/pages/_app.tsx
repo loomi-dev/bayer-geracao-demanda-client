@@ -1,8 +1,8 @@
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
+import localFont from 'next/font/local';
 import { useState, ReactNode, ReactElement } from 'react';
 
 import { queryClient as defaultQueryClient } from '@/lib/react-query';
@@ -16,23 +16,49 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+const arial = localFont({
+  src: [
+    { path: '../../public/fonts/Arial-Bold.ttf', weight: '600' },
+    { path: '../../public/fonts/Arial-Regular.ttf', weight: '400' },
+  ],
+  preload: true,
+  variable: '--font-arial',
+  fallback: [
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Helvetica',
+    'sans-serif',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+  ],
+});
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(defaultQueryClient);
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <ChakraProvider theme={theme}>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-      </Head>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          {getLayout(<Component {...pageProps} />)}
-        </Hydrate>
-      </QueryClientProvider>
-    </ChakraProvider>
+    <>
+      {/* eslint-disable react/no-unknown-property */}
+      <style jsx global>
+        {`
+          :root {
+            --font-arial: ${arial.style.fontFamily};
+          }
+        `}
+      </style>
+
+      <ChakraProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            {getLayout(<Component {...pageProps} />)}
+          </Hydrate>
+        </QueryClientProvider>
+      </ChakraProvider>
+    </>
   );
 }
 
