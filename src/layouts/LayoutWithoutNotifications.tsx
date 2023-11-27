@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-import { Sidebar } from './Sidebebar';
+import { Sidebar } from '@/components/Sidebebar';
 
 type LayoutWithoutNotificationsProps = {
   children: ReactNode;
