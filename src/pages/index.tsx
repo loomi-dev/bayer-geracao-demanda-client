@@ -1,9 +1,8 @@
 import { LayoutWithNotifications } from '@/layouts';
-import { Landing } from '@/modules/misc/pages/Landing';
 
 import { NextPageWithLayout } from './_app';
 
-const Page: NextPageWithLayout = () => <Landing />;
+const Page: NextPageWithLayout = () => <></>;
 
 Page.getLayout = function getLayout(page) {
   return <LayoutWithNotifications>{page}</LayoutWithNotifications>;
