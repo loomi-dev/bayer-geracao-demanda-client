@@ -1,8 +1,8 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
-import { SVGProps } from 'react';
+import { ReactElement } from 'react';
 
 type CircleIconProps = {
-  children: (props: SVGProps<SVGSVGElement>) => React.JSX.Element;
+  children: ReactElement<any, any>;
 } & FlexProps;
 
 export const CircleIcon = ({ children, ...props }: CircleIconProps) => (

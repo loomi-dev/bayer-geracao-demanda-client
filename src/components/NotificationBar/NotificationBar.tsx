@@ -1,5 +1,6 @@
 import { Divider, Flex, HStack, Text } from '@chakra-ui/react';
 
+import { CircleIcon } from '../CircleIcon';
 import { BellIcon } from '../icons';
 
 import { NotificationCard } from './components';
@@ -25,18 +26,11 @@ export const NotificationBar = () => (
       left="-3.4rem"
       top="0rem"
     />
-    <Flex w="100%" flexDir="column">
+    <Flex w="100%" gap="5rem" flexDir="column">
       <HStack gap="1rem">
-        <Flex
-          justify="center"
-          align="center"
-          rounded="full"
-          bgColor="green.600"
-          w="5.1rem"
-          h="5.1rem"
-        >
+        <CircleIcon>
           <BellIcon />
-        </Flex>
+        </CircleIcon>
         <Text textStyle="h3">Notificações</Text>
       </HStack>
       <NotificationCard />

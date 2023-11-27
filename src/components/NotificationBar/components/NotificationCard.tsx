@@ -1,7 +1,7 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
 
 export const NotificationCard = () => (
-  <Flex flexDir="column" layerStyle="card" gap="0.9rem" mt="4rem" h="auto" px="2.4rem" py="2rem">
+  <Flex flexDir="column" layerStyle="card" gap="0.9rem" h="auto" px="2.4rem" py="2rem">
     <Text textTransform="uppercase" textStyle="action2">
       Planejamento 2023/24
     </Text>
