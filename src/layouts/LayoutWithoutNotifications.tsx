@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-import { Sidebar } from '@/components/Sidebebar';
+import { Sidebar } from '@/components';
 
 type LayoutWithoutNotificationsProps = {
   children: ReactNode;
