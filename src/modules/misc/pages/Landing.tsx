@@ -7,6 +7,7 @@ import {
   Box,
   chakra,
   SimpleGrid,
+  ButtonGroup,
 } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import { useRef } from 'react';
@@ -24,11 +25,23 @@ export const Landing = () => {
         px="8"
         display="grid"
         placeItems="center"
-        bgImage="/assets/landing-bg.png"
         bgPosition="center"
         bgSize="cover"
       >
         <Box pos="relative" zIndex="banner" display="grid" placeItems="center">
+          <ButtonGroup>
+            <Button
+              bg="opacity.black-020"
+              backdropFilter="blur(20px)"
+              borderRadius="full"
+              color="surface.primary"
+            >
+              <Text py="1.6rem" pl="2.4rem" textStyle="action3">
+                Adicionar
+              </Text>
+            </Button>
+          </ButtonGroup>
+
           <Box mb={8}>
             <Text fontSize="10rem" fontStyle="italic" color="text.primary" fontWeight="bold">
               Next leap

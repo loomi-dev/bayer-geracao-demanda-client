@@ -49,6 +49,9 @@ export const semanticTokens = {
         pressed: 'red.danger_40',
       },
     },
+    opacity: {
+      'black-020': 'rgba(0, 0, 0, 0.20)',
+    },
     code: {
       success: {
         default: 'green.500',
