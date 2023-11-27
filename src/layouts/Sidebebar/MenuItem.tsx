@@ -10,7 +10,7 @@ type MenuItemProps = {
 export const MenuItem = ({ label, src, isSelected = false, ...props }: MenuItemProps) => (
   <Link href={src}>
     <Button
-      w="22rem"
+      w="100%"
       h="5rem"
       gap="2rem"
       px="1.6rem"
@@ -19,7 +19,7 @@ export const MenuItem = ({ label, src, isSelected = false, ...props }: MenuItemP
       color={isSelected ? 'text.invert' : 'text.secondary'}
       fontWeight="normal"
       bgColor={isSelected ? 'surface.brand' : 'surface.primary'}
-      borderRadius="3.2rem"
+      borderRadius="full"
       _hover={{ color: isSelected ? 'text.invert' : 'text.primary' }}
       {...props}
     >

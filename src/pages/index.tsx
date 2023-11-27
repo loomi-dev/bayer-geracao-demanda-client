@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 
-import { Layout } from '@/layout';
+import { LayoutWithoutNotifications } from '@/layouts';
 import { Landing } from '@/modules/misc/pages/Landing';
 
 const Home: NextPage = () => (
-  <Layout>
+  <LayoutWithoutNotifications>
     <Landing />
-  </Layout>
+  </LayoutWithoutNotifications>
 );
 export default Home;

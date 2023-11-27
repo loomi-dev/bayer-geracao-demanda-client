@@ -3,10 +3,10 @@ import { ReactNode } from 'react';
 
 import { Sidebar } from './Sidebebar';
 
-type LayoutProps = {
+type LayoutWithoutNotificationsProps = {
   children: ReactNode;
 };
-export const Layout = ({ children }: LayoutProps) => (
+export const LayoutWithoutNotifications = ({ children }: LayoutWithoutNotificationsProps) => (
   <Flex flex={1}>
     <Sidebar />
     {children}
