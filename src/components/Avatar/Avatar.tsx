@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@chakra-ui/react';
+import { Box, BoxProps, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 import { BiUser } from 'react-icons/bi';
 
@@ -14,6 +14,8 @@ export const Avatar = ({ url = '', imageFallbackSize = 20, ...props }: AvatarPro
       <Image src={url} fill alt="Imagem do perfil do usuario" quality={100} />
     </Box>
   ) : (
-    <BiUser fontSize={imageFallbackSize} />
+    <Flex rounded="full" align="center" justifyContent="center" {...props}>
+      <BiUser fontSize={imageFallbackSize} />
+    </Flex>
   );
 };
