@@ -12,6 +12,7 @@ export const CircleIcon = ({ children, ...props }: CircleIconProps) => (
     rounded="full"
     bgColor="green.600"
     boxSize="5.1rem"
+    minW={props.boxSize}
     {...props}
   >
     {children}
