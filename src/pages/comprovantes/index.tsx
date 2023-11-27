@@ -1,8 +1,8 @@
-import { EvidenceScreen } from '@/modules/evidence';
+import { ReceiptsScreen } from '@/modules/receipts';
 
 import { NextPageWithLayout } from '../_app';
 
-const Page: NextPageWithLayout = () => <EvidenceScreen />;
+const Page: NextPageWithLayout = () => <ReceiptsScreen />;
 
 Page.getLayout = function getLayout(page) {
   return <>{page}</>;
