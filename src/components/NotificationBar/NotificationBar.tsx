@@ -1,13 +1,15 @@
-import { Divider, Flex, HStack } from '@chakra-ui/react';
+import { Divider, Flex, HStack, Text } from '@chakra-ui/react';
 
 import { BellIcon } from '../icons';
+
+import { NotificationCard } from './components';
 
 export const NotificationBar = () => (
   <Flex
     w="35.8rem"
     h="100%"
     position="fixed"
-    background="linear-gradient(260deg, #D9D9D9 23.87%, rgba(217, 217, 217, 0.00) 57.77%)"
+    background="linear-gradient(250deg, #D9D9D9 23.87%, rgba(217, 217, 217, 0.00) 57.77%)"
     right={0}
     pl="2.8rem"
     pr="5.2rem"
@@ -23,8 +25,8 @@ export const NotificationBar = () => (
       left="-3.4rem"
       top="0rem"
     />
-    <Flex flexDir="column">
-      <HStack>
+    <Flex w="100%" flexDir="column">
+      <HStack gap="1rem">
         <Flex
           justify="center"
           align="center"
@@ -35,7 +37,9 @@ export const NotificationBar = () => (
         >
           <BellIcon />
         </Flex>
+        <Text textStyle="h3">Notificações</Text>
       </HStack>
+      <NotificationCard />
     </Flex>
   </Flex>
 );
