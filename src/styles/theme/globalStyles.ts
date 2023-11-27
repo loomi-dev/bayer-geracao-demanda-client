@@ -11,16 +11,17 @@ export const styles: ChakraTheme['styles'] = {
     html: {
       bg: mode('whiteAlpha.600', 'gray.800')(props),
       fontSize: '62.5%',
-      minH: '100%',
+      h: '100%',
     },
     body: {
       bg: mode('whiteAlpha.600', 'gray.800')(props),
       h: '100%',
       fontSize: '1.6rem',
+      color: 'text.primary',
       WebkitTapHighlightColor: 'transparent',
     },
     '#__next': {
-      minH: '100%',
+      h: '100%',
       w: '100%',
     },
     '#chakra-toast-portal > *': {

@@ -1,27 +1,11 @@
-import { QueryClient, dehydrate } from '@tanstack/react-query';
-import type { GetServerSideProps, NextPage } from 'next';
-
-import { getRandomUsers } from '@/api/endpoints/example';
+import { LayoutWithoutNotifications } from '@/layouts';
 import { Landing } from '@/modules/misc/pages/Landing';
 
-const Home: NextPage = () => (
-  // exemplo de como fazer com o prefetch. o QueryClient.getQueryCache só mostra que está cacheado a request
-  // const { data } = useGetRandomUsers();
+import { NextPageWithLayout } from './_app';
 
-  // console.log('aa', data, queryClient.getQueryCache());
+const Page: NextPageWithLayout = () => <Landing />;
 
-  <Landing />
-);
-export default Home;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(['random-user'], getRandomUsers);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
+Page.getLayout = function getLayout(page) {
+  return <LayoutWithoutNotifications>{page}</LayoutWithoutNotifications>;
 };
+export default Page;
