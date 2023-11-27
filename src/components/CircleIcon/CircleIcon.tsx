@@ -1,11 +1,11 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
 import { SVGProps } from 'react';
 
-type IconProps = {
+type CircleIconProps = {
   children: (props: SVGProps<SVGSVGElement>) => React.JSX.Element;
 } & FlexProps;
 
-const Icon = ({ children, ...props }: IconProps) => (
+export const CircleIcon = ({ children, ...props }: CircleIconProps) => (
   <Flex
     justify="center"
     align="center"
@@ -17,5 +17,3 @@ const Icon = ({ children, ...props }: IconProps) => (
     {children}
   </Flex>
 );
-
-export default Icon;
