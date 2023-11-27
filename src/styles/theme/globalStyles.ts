@@ -1,21 +1,21 @@
 import { ChakraTheme } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
 
 export const styles: ChakraTheme['styles'] = {
-  global: (props) => ({
+  global: () => ({
     '*': {
       boxSizing: 'border-box',
       padding: 0,
       margin: 0,
     },
     html: {
-      bg: mode('whiteAlpha.600', 'gray.800')(props),
+      bg: '#EFEFEF',
+      bgGradient: 'linear(to-r, #D9D9D9 11.1%, rgba(217, 217, 217, 0.00) 46.44%)',
       fontSize: '62.5%',
       minH: '100%',
     },
     body: {
-      bg: mode('whiteAlpha.600', 'gray.800')(props),
       h: '100%',
+      bg: 'inherit',
       fontSize: '1.6rem',
       WebkitTapHighlightColor: 'transparent',
     },
