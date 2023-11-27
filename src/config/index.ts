@@ -1,6 +1,6 @@
 export const APP_NAME = 'Bayer - Geração de Demanda';
 
-export const API_URL = process.env.NEXT_PUBLIC_AUTH_URL as string;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 export const ENVIRONMENT = process.env.NODE_ENV;
 
