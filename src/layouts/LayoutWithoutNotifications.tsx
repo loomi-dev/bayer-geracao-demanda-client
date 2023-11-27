@@ -10,7 +10,13 @@ export const LayoutWithoutNotifications = ({ children }: LayoutWithoutNotificati
   <>
     <Sidebar />
 
-    <Box w="calc(100% - 28.7rem)" ml="28.7rem">
+    <Box
+      w="calc(100% - 28.7rem)"
+      h="100%"
+      ml="28.7rem"
+      bgColor="greyscale.200"
+      background="linear-gradient(110deg, #D9D9D9 11.1%, rgba(217, 217, 217, 0.00) 46.44%)"
+    >
       {children}
     </Box>
   </>
