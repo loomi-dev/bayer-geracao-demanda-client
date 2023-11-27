@@ -13,7 +13,7 @@ export const semanticTokens = {
       secondary: 'greyscale.150',
       disabled: 'greyscale.400',
       brand: 'green.500',
-      inverter: 'greyscale.1000',
+      invert: 'greyscale.1000',
     },
     border: {
       primary: 'greyscale.1000',
@@ -50,7 +50,13 @@ export const semanticTokens = {
       },
     },
     opacity: {
-      'black-020': 'rgba(0, 0, 0, 0.20)',
+      white: {
+        '0.40': 'rgba(255, 255, 255, 0.40)',
+      },
+      black: {
+        '0.14': 'rgba(0, 0, 0, 0.14)',
+        '0.20': 'rgba(0, 0, 0, 0.20)',
+      },
     },
     code: {
       success: {
