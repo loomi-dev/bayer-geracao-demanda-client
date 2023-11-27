@@ -1,4 +1,4 @@
-import { Divider, Flex, HStack, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text } from '@chakra-ui/react';
 
 import { CircleIcon } from '../CircleIcon';
 import { BellIcon } from '../icons';
@@ -10,19 +10,19 @@ export const NotificationBar = () => (
     w="35.8rem"
     h="100%"
     position="fixed"
-    background="linear-gradient(250deg, #D9D9D9 23.87%, rgba(217, 217, 217, 0.00) 57.77%)"
+    bg="transparent"
     right={0}
     pl="2.8rem"
     pr="5.2rem"
     pt="5rem"
     pb="2rem"
   >
-    <Divider
-      orientation="vertical"
+    <Box
+      w="1px"
       h="inherit"
       opacity="0.4"
+      bgGradient="linear(to-t,rgba(174, 174, 174, 0.00) 9.13%, rgba(147, 147, 147, 0.88) 43.47%, rgba(174, 174, 174, 0.00) 81.67%)"
       position="absolute"
-      bg="red"
       left="-3.4rem"
       top="0rem"
     />
