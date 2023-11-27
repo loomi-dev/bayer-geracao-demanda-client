@@ -7,6 +7,7 @@ export const semanticTokens = {
       footnote: 'greyscale.800',
       brand: 'green.500',
       invert: 'greyscale.0',
+      copytext: 'greyscale.900',
     },
     surface: {
       primary: 'greyscale.0',
@@ -54,8 +55,13 @@ export const semanticTokens = {
         '0.40': 'rgba(255, 255, 255, 0.40)',
       },
       black: {
+        '0.10': 'rgba(0, 0, 0, 0.10)',
         '0.14': 'rgba(0, 0, 0, 0.14)',
         '0.20': 'rgba(0, 0, 0, 0.20)',
+      },
+      gray: {
+        '0.30': 'rgba(33, 33, 33, 0.30)',
+        '0.10': 'rgba(33, 33, 33, 0.10)',
       },
     },
     code: {
