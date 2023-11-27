@@ -6,19 +6,27 @@ import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon } from '@/components/ic
 
 import { MenuItem } from './MenuItem';
 
+const menuItens = [
+  { label: 'Carteira', src: '/carteira', leftIcon: <CardIcon /> },
+  {
+    label: 'Planejamento',
+    src: '/planejamento',
+    leftIcon: <CalendarIcon />,
+  },
+  {
+    label: 'Comprovantes',
+    src: '/comprovantes',
+    leftIcon: <ImageIcon />,
+  },
+  {
+    label: 'Simulador',
+    src: '/simulador',
+    leftIcon: <ComputerIcon />,
+  },
+];
+
 export const Sidebar = () => {
   const { pathname } = useRouter();
-  const isWalletPage = pathname === '/carteira';
-  const isPlanningPage = pathname === '/planejamento';
-  const isReceiptsPage = pathname === '/comprovantes';
-  const isSimulatorPage = pathname === '/simulador';
-
-  const menuItens = [
-    { label: 'Carteira', src: '#', isSelected: isWalletPage, leftIcon: <CardIcon /> },
-    { label: 'Planejamento', src: '#', isSelected: isPlanningPage, leftIcon: <CalendarIcon /> },
-    { label: 'Comprovantes', src: '#', isSelected: isReceiptsPage, leftIcon: <ImageIcon /> },
-    { label: 'Simulador', src: '#', isSelected: isSimulatorPage, leftIcon: <ComputerIcon /> },
-  ];
   return (
     <Flex
       flexDir="column"
@@ -50,7 +58,7 @@ export const Sidebar = () => {
             key={item.label}
             label={item.label}
             src={item.src}
-            isSelected={item.isSelected}
+            isSelected={item.src === pathname}
             leftIcon={item.leftIcon}
           />
         ))}
