@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 import { Sidebar } from '@/components/Sidebebar';
@@ -7,8 +7,11 @@ type LayoutWithoutNotificationsProps = {
   children: ReactNode;
 };
 export const LayoutWithoutNotifications = ({ children }: LayoutWithoutNotificationsProps) => (
-  <Flex flex={1}>
+  <>
     <Sidebar />
-    {children}
-  </Flex>
+
+    <Box w="calc(100% - 28.7rem)" ml="28.7rem">
+      {children}
+    </Box>
+  </>
 );

@@ -11,7 +11,7 @@ export const styles: ChakraTheme['styles'] = {
     html: {
       bg: mode('whiteAlpha.600', 'gray.800')(props),
       fontSize: '62.5%',
-      minH: '100%',
+      h: '100%',
     },
     body: {
       bg: mode('whiteAlpha.600', 'gray.800')(props),
@@ -21,7 +21,7 @@ export const styles: ChakraTheme['styles'] = {
       WebkitTapHighlightColor: 'transparent',
     },
     '#__next': {
-      minH: '100%',
+      h: '100%',
       w: '100%',
     },
     '#chakra-toast-portal > *': {
