@@ -7,3 +7,4 @@ export { default as UserIcon } from './User';
 export { default as BellIcon } from './Bell';
 export { default as BigCardIcon } from './BigCard';
 export { default as AddInsideCircleIcon } from './AddInsideCircle';
+export { default as AddIcon } from './Add';

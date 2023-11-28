@@ -7,7 +7,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { AddInsideCircleIcon, CircleIcon } from '@/components';
+import { AddIcon, CircleIcon } from '@/components';
 
 export const Faq = () => (
   <Flex flexDir="column" w="100%">
@@ -21,7 +21,7 @@ export const Faq = () => (
               O que eu preciso fazer para ganhar pontos?
             </Text>
             <CircleIcon bgColor="surface.invert" w="7.4rem" h="5.7rem">
-              <AddInsideCircleIcon />
+              <AddIcon />
             </CircleIcon>
           </AccordionButton>
         </h2>
