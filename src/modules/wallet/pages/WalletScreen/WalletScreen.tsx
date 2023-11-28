@@ -1,8 +1,9 @@
-import { Balance, Resources } from './components';
+import { Balance, Faq, Resources } from './components';
 
 export const WalletScreen = () => (
   <>
     <Balance />
     <Resources />
+    <Faq />
   </>
 );
