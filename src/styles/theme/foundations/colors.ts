@@ -22,6 +22,7 @@ const greyscale = {
   200: '#F1F1F1',
   250: '#EFEFEF',
   300: '#F7F7F7',
+  350: '#DBDBDB80',
   400: '#CCCCCC',
   600: '#AEAEAE',
   800: '#555555',
