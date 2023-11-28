@@ -3,3 +3,5 @@ export * from './Avatar';
 export * from './Sidebar';
 export * from './NotificationBar';
 export * from './UserProfile';
+export * from './CircleIcon';
+export * from './icons';
