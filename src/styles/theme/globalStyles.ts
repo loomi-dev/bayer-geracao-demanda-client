@@ -15,6 +15,8 @@ export const styles: ChakraTheme['styles'] = {
       h: '100%',
       bg: 'greyscale.250',
       fontSize: '1.6rem',
+      WebkitFontSmoothing: 'antialiased',
+      MozOsxFontSmoothing: 'antialiased',
       color: 'text.primary',
       WebkitTapHighlightColor: 'transparent',
     },

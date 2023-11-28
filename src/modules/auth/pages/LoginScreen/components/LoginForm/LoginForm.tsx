@@ -29,7 +29,7 @@ export const LoginForm = () => (
       mt="5.1rem"
       mx="auto"
       rightIcon={
-        <CircleIcon bg="green.400">
+        <CircleIcon color="green.400">
           <ArrowRightIcon />
         </CircleIcon>
       }

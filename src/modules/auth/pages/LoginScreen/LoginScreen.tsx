@@ -1,4 +1,5 @@
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import Image from 'next/image';
 
 import { LoginForm } from './components';
 
@@ -8,6 +9,8 @@ export const LoginScreen = () => (
     bg="url(./assets/images/banner.png) center / cover no-repeat"
     p="2.4rem"
     pl="9.5rem"
+    align="center"
+    justify="center"
   >
     <VStack spacing="1.5rem" align="flex-start">
       <Text fontSize="4rem" fontWeight="bold" color="greyscale.0" opacity="0.8">
@@ -37,8 +40,12 @@ export const LoginScreen = () => (
 
       <LoginForm />
 
-      <HStack>
-        <Text>Uma plataforma</Text>
+      <HStack mt="14rem">
+        <Text textStyle="caption3" color="text.footnote" maxW="8.7rem">
+          Uma plataforma
+        </Text>
+
+        <Image src="/assets/images/bayer-logo.png" alt="" width={66} height={66} quality={100} />
       </HStack>
     </Flex>
   </HStack>
