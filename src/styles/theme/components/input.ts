@@ -10,6 +10,10 @@ export const Input = defineMultiStyleConfig({
         bg: 'surface.brand',
         color: 'text.primary',
       },
+
+      _invalid: {
+        borderColor: 'code.danger',
+      },
     },
   },
   variants: {
