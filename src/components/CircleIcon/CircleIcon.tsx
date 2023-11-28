@@ -10,7 +10,7 @@ export const CircleIcon = ({ children, ...props }: CircleIconProps) => (
     justify="center"
     align="center"
     rounded="full"
-    bgColor="green.600"
+    bgColor="surface.brand"
     boxSize="5.1rem"
     minW={props.boxSize}
     {...props}

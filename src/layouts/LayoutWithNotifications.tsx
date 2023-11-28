@@ -16,6 +16,10 @@ export const LayoutWithNotifications = ({ children }: LayoutWithNotificationsPro
       h="100%"
       ml={LAYOUT_SIDEBAR_WIDTH}
       background="linear-gradient(110deg, #D9D9D9 11.1%, rgba(217, 217, 217, 0.00) 46.44%)"
+      pt="5rem"
+      pb="4rem"
+      pl="5.5rem"
+      pr="7rem"
     >
       {children}
     </Box>

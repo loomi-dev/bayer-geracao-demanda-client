@@ -5,5 +5,6 @@ export { default as ImageIcon } from './Image';
 export { default as ChevronDownIcon } from './ChevronDown';
 export { default as UserIcon } from './User';
 export { default as BellIcon } from './Bell';
+export { default as BigCardIcon } from './BigCard';
 export { default as DoneIcon } from './Done';
 export { default as CloseIcon } from './Close';
