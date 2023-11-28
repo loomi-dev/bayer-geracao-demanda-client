@@ -6,3 +6,5 @@ export * from './UserProfile';
 export * from './Header';
 export * from './icons';
 export * from './CustomToast';
+export * from './CircleIcon';
+export * from './icons';
