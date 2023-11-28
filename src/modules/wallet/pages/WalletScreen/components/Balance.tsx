@@ -1,4 +1,5 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
 import { AddInsideCircleIcon, CircleIcon } from '@/components';
 
@@ -32,22 +33,24 @@ export const Balance = () => (
         Válido até <Text as="strong">20/10/2024</Text>
       </Text>
     </Flex>
-    <Button
-      w="24.5rem"
-      pl="2rem"
-      _hover={{ pl: '0rem' }}
-      transition="0.3s"
-      pr="0rem"
-      variant="third"
-      rightIcon={
-        <CircleIcon>
-          <AddInsideCircleIcon />
-        </CircleIcon>
-      }
-    >
-      <Text as="span" w="full">
-        Adicionar Planejamento
-      </Text>
-    </Button>
+    <Link href="/planejamento">
+      <Button
+        w="24.5rem"
+        pl="2rem"
+        _hover={{ pl: '0rem' }}
+        transition="0.3s"
+        pr="0rem"
+        variant="third"
+        rightIcon={
+          <CircleIcon>
+            <AddInsideCircleIcon />
+          </CircleIcon>
+        }
+      >
+        <Text as="span" w="full">
+          Adicionar Planejamento
+        </Text>
+      </Button>
+    </Link>
   </Flex>
 );
