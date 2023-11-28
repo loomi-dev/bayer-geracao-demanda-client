@@ -1,12 +1,12 @@
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import { TextInput, CircleIcon, ArrowRightIcon, UserIcon, LockClosedIcon } from '@/components';
+import { TextInput, CircleIcon, ArrowRightIcon, LockClosedIcon, PersonIcon } from '@/components';
 
 export const LoginForm = () => (
   <Box mt="5.4rem" maxW="48.5rem" w="full">
     <VStack spacing="2.4rem" mb="1rem">
-      <TextInput placeholder="Usuário" size="xl" leftIcon={<UserIcon />} />
+      <TextInput placeholder="Usuário" size="xl" leftIcon={<PersonIcon />} />
       <TextInput placeholder="Senha" size="xl" leftIcon={<LockClosedIcon />} />
     </VStack>
 
