@@ -18,13 +18,17 @@ export const UserProfile = () => {
     <Flex gap="1.8rem" align="center" justify="center">
       <Avatar layerStyle="card" boxSize="5.5rem" imageFallbackSize={30} bg="white" />
       <HStack gap="1rem">
-        <Text textStyle="body1">Olá, Roberto</Text>
+        <Text textStyle="body1" color="text.primary">
+          Olá, Roberto
+        </Text>
         <Menu placement="bottom" isOpen={isOpen} onClose={onClose}>
           <MenuButton onClick={onOpen}>
             <ArrowDownIcon width="2rem" height="2rem" />
           </MenuButton>
-          <MenuList>
-            <MenuItem>Sair</MenuItem>
+          <MenuList bg="surface.primary" shadow="none">
+            <MenuItem _hover={{ opacity: '0.7' }} bg="surface.primary" color="text.primary">
+              Sair
+            </MenuItem>
           </MenuList>
         </Menu>
       </HStack>
