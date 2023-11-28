@@ -1,6 +1,6 @@
-import { Box, Button, Flex, HStack, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
-import { AddIcon, CircleIcon } from '@/components';
+import { Balance } from './components';
 
 export const WalletScreen = () => (
   <Flex
@@ -13,34 +13,6 @@ export const WalletScreen = () => (
     pt="2.4rem"
     pb="1.8rem"
   >
-    <Flex flexDir="column">
-      <Text textTransform="uppercase" textStyle="action3">
-        Seu saldo
-      </Text>
-      <HStack>
-        <Text textStyle="h1" color="text.brand">
-          R$
-        </Text>
-        <Text textStyle="h1" color="text.primary">
-          20.000,00
-        </Text>
-      </HStack>
-      <Text textStyle="caption3" color="text.footnote">
-        em ações para solicitar os recursos Válido até 20/10/2024
-      </Text>
-      <Text textStyle="caption3" color="text.footnote">
-        Válido até <Text as="strong">20/10/2024</Text>
-      </Text>
-    </Flex>
-    <Box position="relative">
-      <Button w="24.5rem" justifyContent="flex-start" variant="third">
-        Adicionar Planejamento
-      </Button>
-      <Box position="absolute" top={0} right={0}>
-        <CircleIcon>
-          <AddIcon />
-        </CircleIcon>
-      </Box>
-    </Box>
+    <Balance />
   </Flex>
 );
