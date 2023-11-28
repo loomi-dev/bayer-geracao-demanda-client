@@ -21,7 +21,7 @@ export const LayoutWithNotifications = ({ children }: LayoutWithNotificationsPro
       pl="5.5rem"
       pr="7rem"
       gap="5rem"
-      align="center"
+      align="flex-start"
       flexDir="column"
     >
       {children}
