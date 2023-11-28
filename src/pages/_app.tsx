@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, ToastProviderProps } from '@chakra-ui/react';
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
@@ -6,6 +6,7 @@ import localFont from 'next/font/local';
 import Head from 'next/head';
 import { useState, ReactNode, ReactElement } from 'react';
 
+import { CustomToast } from '@/components';
 import { queryClient as defaultQueryClient } from '@/lib/react-query';
 import { theme } from '@/styles';
 
@@ -41,6 +42,15 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
+  const toastOptions: ToastProviderProps = {
+    defaultOptions: {
+      position: 'bottom-right',
+      render: ({ description, onClose }) => (
+        <CustomToast description={description} onClose={onClose} />
+      ),
+    },
+  };
+
   return (
     <>
       {/* eslint-disable react/no-unknown-property */}
@@ -55,7 +65,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
 
-      <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme} toastOptions={toastOptions}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
             {getLayout(<Component {...pageProps} />)}
