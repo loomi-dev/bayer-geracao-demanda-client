@@ -68,7 +68,7 @@ export const Sidebar = () => {
           Uma plataforma
         </Text>
         <Image
-          src="/assets/images/bayer-logo.png"
+          src="/assets/images/bayer-logo.webp"
           width={66}
           height={66}
           quality={100}

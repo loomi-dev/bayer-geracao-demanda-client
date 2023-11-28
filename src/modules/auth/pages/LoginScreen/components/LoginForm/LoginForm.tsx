@@ -3,12 +3,23 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
-import { TextInput, CircleIcon, ArrowRightIcon, LockClosedIcon, PersonIcon } from '@/components';
+import {
+  TextInput,
+  CircleIcon,
+  ArrowRightIcon,
+  LockClosedIcon,
+  PersonIcon,
+  FormWrapper,
+} from '@/components';
 
 import { LoginFormSchemaType, loginFormSchema } from './loginForm.schema';
 
 export const LoginForm = () => {
-  const { register, handleSubmit } = useForm<LoginFormSchemaType>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
   });
 
@@ -19,19 +30,23 @@ export const LoginForm = () => {
   return (
     <Box as="form" mt="5.4rem" maxW="48.5rem" w="full" onSubmit={handleSubmit(onSubmitLogin)}>
       <VStack spacing="2.4rem" mb="1rem">
-        <TextInput
-          placeholder="Usuário"
-          size="xl"
-          leftIcon={<PersonIcon />}
-          {...register('user')}
-        />
+        <FormWrapper error={errors.user} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+          <TextInput
+            placeholder="Usuário"
+            size="xl"
+            leftIcon={<PersonIcon />}
+            {...register('user')}
+          />
+        </FormWrapper>
 
-        <TextInput
-          placeholder="Senha"
-          size="xl"
-          leftIcon={<LockClosedIcon />}
-          {...register('password')}
-        />
+        <FormWrapper error={errors.password} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+          <TextInput
+            placeholder="Senha"
+            size="xl"
+            leftIcon={<LockClosedIcon />}
+            {...register('password')}
+          />
+        </FormWrapper>
       </VStack>
 
       <Link href="/esqueceu-a-senha" passHref legacyBehavior>

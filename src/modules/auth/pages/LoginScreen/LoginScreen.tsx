@@ -2,17 +2,21 @@ import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import { LoginForm } from './components';
+import { LoginBanner } from './components/LoginBanner/LoginBanner';
 
 export const LoginScreen = () => (
   <HStack
     minH="100%"
-    bg="url(./assets/images/banner.png) center / cover no-repeat"
+    bg="linear-gradient(54deg, rgba(45, 100, 27, 0.40) 49.83%, rgba(18, 15, 2, 0.40) 100%)"
     p="2.4rem"
     pl="9.5rem"
     align="center"
     justify="center"
     gap="2rem"
+    position="relative"
   >
+    <LoginBanner />
+
     <VStack spacing="1.5rem" align="flex-start">
       <Text fontSize="4rem" fontWeight="bold" color="greyscale.0" opacity="0.8">
         TOP MULTIPLICADORES
@@ -46,7 +50,7 @@ export const LoginScreen = () => (
           Uma plataforma
         </Text>
 
-        <Image src="/assets/images/bayer-logo.png" alt="" width={66} height={66} quality={100} />
+        <Image src="/assets/images/bayer-logo.webp" alt="" width={66} height={66} quality={100} />
       </HStack>
     </Flex>
   </HStack>
