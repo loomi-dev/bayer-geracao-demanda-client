@@ -39,7 +39,7 @@ export const Sidebar = () => {
       pb="3rem"
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
-        <Image src="/images/logo.png" width={95} height={94} alt="app logo" />
+        <Image src="/assets/images/logo.png" width={95} height={94} quality={100} alt="app logo" />
         <Text textStyle="action2" align="center" w="12rem">
           Top Multiplicadores
         </Text>
@@ -67,7 +67,13 @@ export const Sidebar = () => {
         <Text w="8.7rem" textStyle="caption3" color="text.footnote">
           Uma plataforma
         </Text>
-        <Image src="/images/bayer-logo.png" width={66} height={66} alt="bayer logo" />
+        <Image
+          src="/assets/images/bayer-logo.png"
+          width={66}
+          height={66}
+          quality={100}
+          alt="bayer logo"
+        />
       </Flex>
     </Flex>
   );
