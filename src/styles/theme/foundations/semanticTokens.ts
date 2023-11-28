@@ -65,22 +65,10 @@ export const semanticTokens = {
       },
     },
     code: {
-      success: {
-        default: 'green.500',
-        _dark: 'green.300',
-      },
-      danger: {
-        default: 'red.500',
-        _dark: 'red.300',
-      },
-      warning: {
-        default: 'yellow.500',
-        _dark: 'yellow.300',
-      },
-      info: {
-        default: 'primary.500',
-        _dark: 'primary.300',
-      },
+      success: 'green.500',
+      danger: 'red.danger_40',
+      warning: 'yellow.warning_40',
+      info: 'text.secondary',
     },
   },
 };
