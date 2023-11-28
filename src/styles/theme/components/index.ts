@@ -7,3 +7,4 @@ export * from './select';
 export * from './textarea';
 export * from './radio';
 export * from './checkbox';
+export * from './accordion';
