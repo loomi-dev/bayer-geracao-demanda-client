@@ -36,6 +36,10 @@ export const Accordion = defineStyleConfig({
         borderBottom: '1px solid',
         borderColor: 'surface.disabled',
       },
+      panel: {
+        fontSize: '1.6rem',
+        color: 'surface.invert',
+      },
     },
   },
 

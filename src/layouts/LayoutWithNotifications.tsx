@@ -9,11 +9,11 @@ type LayoutWithNotificationsProps = {
 };
 
 export const LayoutWithNotifications = ({ children }: LayoutWithNotificationsProps) => (
-  <Flex h="100%">
+  <Flex minH="100%">
     <Sidebar />
     <Flex
       w={`calc(100% - (${LAYOUT_NOTIFICATION_BAR_WIDTH} + ${LAYOUT_SIDEBAR_WIDTH}))`}
-      h="100%"
+      minH="100%"
       ml={LAYOUT_SIDEBAR_WIDTH}
       background="linear-gradient(110deg, #D9D9D9 11.1%, rgba(217, 217, 217, 0.00) 46.44%)"
       pt="5rem"
