@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { Avatar } from '../Avatar';
-import { ArrowDownIcon } from '../icons';
+import { ChevronDownIcon } from '../icons';
 
 export const UserProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,7 +23,7 @@ export const UserProfile = () => {
         </Text>
         <Menu placement="bottom" isOpen={isOpen} onClose={onClose}>
           <MenuButton onClick={onOpen}>
-            <ArrowDownIcon width="2rem" height="2rem" />
+            <ChevronDownIcon width="2rem" height="2rem" />
           </MenuButton>
           <MenuList bg="surface.primary" shadow="none">
             <MenuItem _hover={{ opacity: '0.7' }} bg="surface.primary" color="text.primary">

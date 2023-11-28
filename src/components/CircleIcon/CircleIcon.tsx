@@ -1,8 +1,8 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
-import { SVGProps } from 'react';
+import { ReactNode } from 'react';
 
 type CircleIconProps = {
-  children: (props: SVGProps<SVGSVGElement>) => React.JSX.Element;
+  children: ReactNode;
 } & FlexProps;
 
 export const CircleIcon = ({ children, ...props }: CircleIconProps) => (
@@ -12,6 +12,7 @@ export const CircleIcon = ({ children, ...props }: CircleIconProps) => (
     rounded="full"
     bgColor="green.600"
     boxSize="5.1rem"
+    minW={props.boxSize}
     {...props}
   >
     {children}
