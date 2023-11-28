@@ -9,7 +9,7 @@ type CardProps = {
   imageUrl: string;
 };
 export const Card = ({ label, imageUrl }: CardProps) => (
-  <Flex gap="1.6rem">
+  <Link href="/planejamento">
     <Flex
       position="relative"
       w="22.5rem"
@@ -28,7 +28,7 @@ export const Card = ({ label, imageUrl }: CardProps) => (
         },
       }}
     >
-      <Image src={imageUrl} quality={100} fill alt="ação 1" style={{ objectFit: 'cover' }} />
+      <Image src={imageUrl} quality={100} fill alt={label} style={{ objectFit: 'cover' }} />
       <Box
         position="absolute"
         opacity="0"
@@ -46,26 +46,25 @@ export const Card = ({ label, imageUrl }: CardProps) => (
           {label}
         </Text>
       </Box>
-      <Link href="/planejamento">
-        <Button
-          pos="absolute"
-          bottom="1.4rem"
-          right="1rem"
-          w="15.2rem"
-          h="5.1rem"
-          pr="0rem"
-          variant="third"
-          rightIcon={
-            <CircleIcon>
-              <AddInsideCircleIcon />
-            </CircleIcon>
-          }
-        >
-          <Text as="span" w="full">
-            Adicionar
-          </Text>
-        </Button>
-      </Link>
+
+      <Button
+        pos="absolute"
+        bottom="1.4rem"
+        right="1rem"
+        w="15.2rem"
+        h="5.1rem"
+        pr="0rem"
+        variant="third"
+        rightIcon={
+          <CircleIcon>
+            <AddInsideCircleIcon />
+          </CircleIcon>
+        }
+      >
+        <Text as="span" w="full">
+          Adicionar
+        </Text>
+      </Button>
     </Flex>
-  </Flex>
+  </Link>
 );
