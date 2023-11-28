@@ -78,6 +78,12 @@ export const Button = defineStyleConfig({
       fontSize: '1.6rem',
       fontWeight: 'normal',
     },
+    unstyled: {
+      p: '0',
+      border: '0',
+      h: 'initial',
+      w: 'initial',
+    },
   },
   sizes: {
     xs: {
