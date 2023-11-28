@@ -1,8 +1,8 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 
 type CircleIconProps = {
-  children: ReactElement<any, any>;
+  children: ReactNode;
 } & FlexProps;
 
 export const CircleIcon = ({ children, ...props }: CircleIconProps) => (
