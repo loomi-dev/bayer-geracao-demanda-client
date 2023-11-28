@@ -1,7 +1,7 @@
 import { Button, Flex, FlexProps, HStack, Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-import { Close, Done } from '../icons';
+import { CloseIcon, DoneIcon } from '../icons';
 
 type CustomToastProps = {
   description: ReactNode;
@@ -23,14 +23,14 @@ export const CustomToast = ({ description, onClose, ...restProps }: CustomToastP
     {...restProps}
   >
     <HStack spacing="3rem">
-      <Done fontSize={32} />
+      <DoneIcon fontSize={32} />
       <Text textStyle="action3" color="surface.primary">
         {description}
       </Text>
     </HStack>
 
     <Button variant="unstyled" onClick={onClose}>
-      <Close fontSize={20} />
+      <CloseIcon fontSize={20} />
     </Button>
   </Flex>
 );
