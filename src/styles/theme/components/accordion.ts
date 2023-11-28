@@ -26,7 +26,19 @@ export const Accordion = defineStyleConfig({
         color: 'greyscale.800',
       },
     },
+    secondary: {
+      button: {
+        py: '1rem',
+        mb: '1rem',
+        fontSize: '1.8rem',
+        color: 'surface.invert',
+        borderTop: '1px solid',
+        borderBottom: '1px solid',
+        borderColor: 'surface.disabled',
+      },
+    },
   },
+
   defaultProps: {
     variant: 'primary',
   },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-const SvgAdd = (props: SVGProps<SVGSVGElement>) => (
+const SvgAddInsideCircle = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="32"
     height="32"
@@ -18,4 +18,4 @@ const SvgAdd = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 );
-export default SvgAdd;
+export default SvgAddInsideCircle;

@@ -1,6 +1,6 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 
-import { AddIcon, CircleIcon } from '@/components';
+import { AddInsideCircleIcon, CircleIcon } from '@/components';
 
 export const Balance = () => (
   <Flex
@@ -41,7 +41,7 @@ export const Balance = () => (
       variant="third"
       rightIcon={
         <CircleIcon>
-          <AddIcon />
+          <AddInsideCircleIcon />
         </CircleIcon>
       }
     >
