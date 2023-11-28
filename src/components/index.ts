@@ -4,3 +4,4 @@ export * from './Sidebar';
 export * from './NotificationBar';
 export * from './UserProfile';
 export * from './Header';
+export * from './icons';
