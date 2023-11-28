@@ -17,6 +17,7 @@ const green = {
 
 const greyscale = {
   0: '#FFFFFF',
+  25: '#C7C7C7',
   100: '#FAFAFA',
   150: '#F5F5F5',
   200: '#F1F1F1',
