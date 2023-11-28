@@ -1,13 +1,13 @@
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import { TextInput, CircleIcon, ArrowRightIcon, UserIcon } from '@/components';
+import { TextInput, CircleIcon, ArrowRightIcon, UserIcon, LockClosedIcon } from '@/components';
 
 export const LoginForm = () => (
   <Box mt="5.4rem" maxW="48.5rem" w="full">
     <VStack spacing="2.4rem" mb="1rem">
-      <TextInput placeholder="E-mail/CNPJ" h="7.7rem" borderRadius="2rem" leftIcon={<UserIcon />} />
-      <TextInput placeholder="Senha" h="7.7rem" borderRadius="2rem" />
+      <TextInput placeholder="Usuário" size="xl" leftIcon={<UserIcon />} />
+      <TextInput placeholder="Senha" size="xl" leftIcon={<LockClosedIcon />} />
     </VStack>
 
     <Link href="/esqueceu-a-senha" passHref legacyBehavior>
@@ -15,6 +15,7 @@ export const LoginForm = () => (
         as="a"
         textStyle="caption3"
         color="surface.brand"
+        pl="1rem"
         _hover={{ textDecoration: 'underline' }}
       >
         Esqueceu a senha?

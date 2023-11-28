@@ -11,6 +11,7 @@ export const LoginScreen = () => (
     pl="9.5rem"
     align="center"
     justify="center"
+    gap="2rem"
   >
     <VStack spacing="1.5rem" align="flex-start">
       <Text fontSize="4rem" fontWeight="bold" color="greyscale.0" opacity="0.8">
@@ -27,8 +28,8 @@ export const LoginScreen = () => (
       bg="linear-gradient(191deg, #FFF 42.41%, rgba(255, 255, 255, 0.00) 195.79%)"
       backdropFilter="blur(27px)"
       borderRadius="2.8rem"
-      width="73.2rem"
-      h="93.4rem"
+      maxW="73.2rem"
+      w="full"
       p="18rem 8.7rem 6rem 12.7rem"
     >
       <Text textStyle="action3" color="text.primary">

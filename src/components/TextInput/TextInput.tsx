@@ -13,7 +13,7 @@ type TextInputProps = {
 } & InputProps;
 
 export const TextInput = ({ leftIcon, rightIcon, ...props }: TextInputProps) => (
-  <InputGroup variant="text">
+  <InputGroup>
     {!!leftIcon && <InputLeftElement pointerEvents="none">{leftIcon}</InputLeftElement>}
 
     <Input type="text" {...props} />
