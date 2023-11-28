@@ -29,7 +29,7 @@ export const semanticTokens = {
         hover: 'green.700',
         focussed: 'green.800',
         pressed: 'green.700',
-        //disabled: TODO --> missing in styleguide
+        disabled: 'surface.disabled',
       },
       success: {
         primary: 'green.100',
