@@ -9,9 +9,7 @@ const Page: NextPageWithLayout = () => <WalletScreen />;
 Page.getLayout = function getLayout(page) {
   return (
     <LayoutWithNotifications>
-      <Header label="Carteira">
-        <BigCardIcon />
-      </Header>
+      <Header label="Carteira" icon={<BigCardIcon />} />
       {page}
     </LayoutWithNotifications>
   );

@@ -6,12 +6,12 @@ import { UserProfile } from '../UserProfile';
 
 type HeaderProps = {
   label: string;
-  children: ReactNode;
+  icon: ReactNode;
 };
-export const Header = ({ label, children }: HeaderProps) => (
+export const Header = ({ label, icon }: HeaderProps) => (
   <Flex justify="space-between" width="100%">
     <HStack gap="1.6rem">
-      <CircleIcon>{children}</CircleIcon>
+      <CircleIcon>{icon}</CircleIcon>
       <Text textStyle="h3">{label}</Text>
     </HStack>
     <UserProfile />
