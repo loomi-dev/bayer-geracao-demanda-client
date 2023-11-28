@@ -1,9 +1,18 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 
-import { AddIcon, CircleIcon } from '@/components';
+import { AddInsideCircleIcon, CircleIcon } from '@/components';
 
 export const Balance = () => (
-  <>
+  <Flex
+    justify="space-between"
+    align="flex-end"
+    w="100%"
+    h="16.4rem"
+    layerStyle="card"
+    px="2.4rem"
+    pt="2.4rem"
+    pb="1.8rem"
+  >
     <Flex flexDir="column">
       <Text textTransform="uppercase" textStyle="action3">
         Seu saldo
@@ -32,7 +41,7 @@ export const Balance = () => (
       variant="third"
       rightIcon={
         <CircleIcon>
-          <AddIcon />
+          <AddInsideCircleIcon />
         </CircleIcon>
       }
     >
@@ -40,5 +49,5 @@ export const Balance = () => (
         Adicionar Planejamento
       </Text>
     </Button>
-  </>
+  </Flex>
 );
