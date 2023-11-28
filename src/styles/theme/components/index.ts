@@ -5,3 +5,4 @@ export * from './modal';
 export * from './popover';
 export * from './select';
 export * from './textarea';
+export * from './checkbox';
