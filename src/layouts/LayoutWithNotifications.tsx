@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 import { Sidebar, NotificationBar } from '@/components';
@@ -11,7 +11,7 @@ type LayoutWithNotificationsProps = {
 export const LayoutWithNotifications = ({ children }: LayoutWithNotificationsProps) => (
   <Flex h="100%">
     <Sidebar />
-    <Box
+    <Flex
       w={`calc(100% - (${LAYOUT_NOTIFICATION_BAR_WIDTH} + ${LAYOUT_SIDEBAR_WIDTH}))`}
       h="100%"
       ml={LAYOUT_SIDEBAR_WIDTH}
@@ -20,9 +20,12 @@ export const LayoutWithNotifications = ({ children }: LayoutWithNotificationsPro
       pb="4rem"
       pl="5.5rem"
       pr="7rem"
+      gap="5rem"
+      align="center"
+      flexDir="column"
     >
       {children}
-    </Box>
+    </Flex>
     <NotificationBar />
   </Flex>
 );

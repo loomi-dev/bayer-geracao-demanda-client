@@ -1,8 +1,6 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
 
-import { UserProfile } from '@/components';
-import { CircleIcon } from '@/components/CircleIcon';
-import { BigCard } from '@/components/icons';
+import { BigCardIcon, CircleIcon, UserProfile } from '@/components';
 import { LayoutWithNotifications } from '@/layouts';
 import { WalletScreen } from '@/modules/wallet';
 
@@ -16,7 +14,7 @@ Page.getLayout = function getLayout(page) {
       <Flex justify="space-between" width="100%">
         <HStack gap="1.6rem">
           <CircleIcon>
-            <BigCard color="white" />
+            <BigCardIcon color="white" />
           </CircleIcon>
           <Text textStyle="h3">Carteira </Text>
         </HStack>
