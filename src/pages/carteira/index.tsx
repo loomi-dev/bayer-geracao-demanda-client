@@ -1,4 +1,4 @@
-import { Header, BigCard } from '@/components';
+import { Header, BigCardIcon } from '@/components';
 import { LayoutWithNotifications } from '@/layouts';
 import { WalletScreen } from '@/modules';
 
@@ -10,7 +10,7 @@ Page.getLayout = function getLayout(page) {
   return (
     <LayoutWithNotifications>
       <Header label="Carteira">
-        <BigCard />
+        <BigCardIcon />
       </Header>
       {page}
     </LayoutWithNotifications>
