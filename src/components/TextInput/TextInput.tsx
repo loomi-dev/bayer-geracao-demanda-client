@@ -1,7 +1,23 @@
-import { Input, InputProps } from '@chakra-ui/react';
+import {
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputProps,
+  InputRightElement,
+} from '@chakra-ui/react';
+import { ReactNode } from 'react';
 
-type TextInputProps = InputProps;
+type TextInputProps = {
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+} & InputProps;
 
-export const TextInput = ({ ...props }: TextInputProps) => (
-  <Input variant="text" {...props} type="text" />
+export const TextInput = ({ leftIcon, rightIcon, ...props }: TextInputProps) => (
+  <InputGroup>
+    {leftIcon && <InputLeftElement pointerEvents="none">{leftIcon}</InputLeftElement>}
+
+    <Input type="text" {...props} />
+
+    {rightIcon && <InputRightElement pointerEvents="none">{rightIcon}</InputRightElement>}
+  </InputGroup>
 );

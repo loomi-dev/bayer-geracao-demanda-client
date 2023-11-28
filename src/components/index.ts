@@ -5,3 +5,7 @@ export * from './NotificationBar';
 export * from './UserProfile';
 export * from './icons';
 export * from './CircleIcon';
+export * from './Header';
+export * from './CustomToast';
+export * from './CircleIcon';
+export * from './icons';

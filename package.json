@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "rm -rf .next && next dev",
+    "build": "rm -rf .next && next build",
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
@@ -12,7 +12,9 @@
     "husky-init-commit": "husky install && husky set .husky/pre-commit \"yarn validate\"",
     "husky-init-push": "husky install && husky set .husky/pre-push \"yarn validate\"",
     "create-icons": "npx @svgr/cli --typescript -d src/components/icons --ignore-existing public/assets/icons",
-    "h:module": "hygen module with-prompt && eslint src/modules/**/*.{ts,tsx} --fix"
+    "h:module": "hygen module with-prompt && eslint src/modules/**/*.{ts,tsx} --fix",
+    "theme": "chakra-cli tokens ./src/styles/theme/index.ts",
+    "theme:watch": "chakra-cli tokens ./src/styles/theme/index.ts --watch"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.7.1",
@@ -31,6 +33,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@chakra-ui/cli": "^2.4.1",
     "@next/eslint-plugin-next": "^12.1.0",
     "@svgr/webpack": "^8.0.1",
     "@tanstack/eslint-plugin-query": "^4.32.5",
