@@ -14,6 +14,7 @@ export const MenuItem = ({ label, src, isSelected = false, ...props }: MenuItemP
       h="5rem"
       gap="2rem"
       px="1.6rem"
+      leftIcon={props.leftIcon}
       fontSize="1.6rem"
       justifyContent="flex-start"
       color={isSelected ? 'text.invert' : 'text.secondary'}
