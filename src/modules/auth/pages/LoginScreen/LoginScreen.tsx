@@ -1,8 +1,7 @@
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { LoginForm } from './components';
-import { LoginBanner } from './components/LoginBanner/LoginBanner';
+import { LoginForm, LoginBanner } from './components';
 
 export const LoginScreen = () => (
   <HStack
