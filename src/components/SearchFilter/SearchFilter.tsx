@@ -16,14 +16,15 @@ import { TextInput } from '../TextInput';
 
 import { FilterOption, FilterOptionProps } from './components';
 
-type FilterProps = {
+type SearchFilterProps = {
   label: string;
+  placeholder?: string;
   leftIcon?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
   options?: FilterOptionProps[];
 };
 
-export const Filter = ({ label, leftIcon, options = [] }: FilterProps) => (
-  <Popover>
+export const SearchFilter = ({ label, placeholder, leftIcon, options = [] }: SearchFilterProps) => (
+  <Popover placement="bottom-end">
     <PopoverTrigger>
       <Button
         variant="white"
@@ -43,7 +44,7 @@ export const Filter = ({ label, leftIcon, options = [] }: FilterProps) => (
         {label}
       </Button>
     </PopoverTrigger>
-    <PopoverContent w="31rem">
+    <PopoverContent overflowY="scroll" w="31rem">
       <PopoverHeader p="1.6rem">
         <TextInput
           variant="primary"
@@ -51,15 +52,16 @@ export const Filter = ({ label, leftIcon, options = [] }: FilterProps) => (
           color="text.primary"
           py="1.2rem"
           bgColor="surface.primary"
+          placeholder={placeholder}
           leftIcon={<SearchIcon />}
         />
       </PopoverHeader>
-      <PopoverBody>
+      <PopoverBody h="35rem" overflowY="scroll">
         {options.map((option) => (
           <FilterOption
             key={option.value}
             label={option.label}
-            subLabel={option.value}
+            subLabel={option.subLabel ?? option.value}
             value={option.value}
           />
         ))}
