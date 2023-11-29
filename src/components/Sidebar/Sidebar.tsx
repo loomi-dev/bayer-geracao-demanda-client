@@ -41,6 +41,7 @@ export const Sidebar = () => {
       bgColor="surface.primary"
       position="fixed"
       h="100%"
+      overflowY="scroll"
       pb="3rem"
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
@@ -56,6 +57,8 @@ export const Sidebar = () => {
         borderTop="1px solid"
         borderBottom="1px solid"
         borderColor="surface.disabled"
+        w="80%"
+        mt="5rem"
         mb="10rem"
       >
         {menuItens.map((item) => (
