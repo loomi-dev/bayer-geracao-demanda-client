@@ -4,87 +4,21 @@ import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
 const { defineMultiStyleConfig } = createMultiStyleConfigHelpers(popoverAnatomy.keys);
 
 export const Popover = defineMultiStyleConfig({
-  baseStyle: {
-    popper: {
-      bg: 'white',
-    },
-    content: {
-      color: 'black',
-    },
-  },
-  sizes: {
-    '3xs': {
+  variants: {
+    filter: {
       content: {
-        width: '3xs',
+        borderRadius: '2rem',
+        border: '1px solid',
+        borderColor: 'surface.primary',
+        bgColor: 'surface.secondary',
+        px: '1.6rem',
       },
-    },
-    '2xs': {
-      content: {
-        width: '2xs',
-      },
-    },
-    xs: {
-      content: {
-        width: 'xs',
-      },
-    },
-    sm: {
-      content: {
-        width: 'sm',
-      },
-    },
-    md: {
-      content: {
-        width: 'md',
-      },
-    },
-    lg: {
-      content: {
-        width: 'lg',
-      },
-    },
-    xl: {
-      content: {
-        width: 'xl',
-      },
-    },
-    '2xl': {
-      content: {
-        width: '2xl',
-      },
-    },
-    '3xl': {
-      content: {
-        width: '3xl',
-      },
-    },
-    '4xl': {
-      content: {
-        width: '4xl',
-      },
-    },
-    '5xl': {
-      content: {
-        width: '5xl',
-      },
-    },
-    '6xl': {
-      content: {
-        width: '6xl',
-      },
-    },
-    '7xl': {
-      content: {
-        width: '7xl',
-      },
-    },
-    '8xl': {
-      content: {
-        width: '8xl',
+      body: {
+        p: 'initial',
       },
     },
   },
   defaultProps: {
-    size: 'xs',
+    variant: 'filter',
   },
 });

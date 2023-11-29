@@ -18,11 +18,10 @@ export const Checkbox = defineMultiStyleConfig({
         bg: 'surface.secondary',
         borderColor: 'surface.disabled',
         borderRadius: '0.8rem',
-
         _checked: {
+          color: 'surface.primary',
           bg: 'green.300',
           borderColor: 'surface.disabled',
-
           _hover: {
             bg: 'green.400',
             borderColor: 'surface.disabled',

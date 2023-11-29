@@ -8,4 +8,3 @@ export * from './textarea';
 export * from './radio';
 export * from './checkbox';
 export * from './accordion';
-export * from './menu';
