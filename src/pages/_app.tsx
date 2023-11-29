@@ -4,6 +4,7 @@ import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import Head from 'next/head';
+import { SessionProvider } from 'next-auth/react';
 import { useState, ReactNode, ReactElement } from 'react';
 
 import { CustomToast } from '@/components';
@@ -45,8 +46,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const toastOptions: ToastProviderProps = {
     defaultOptions: {
       position: 'bottom-right',
-      render: ({ description, onClose }) => (
-        <CustomToast description={description} onClose={onClose} />
+      render: ({ description, status, onClose }) => (
+        <CustomToast description={description} onClose={onClose} status={status} />
       ),
     },
   };
@@ -67,9 +68,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
       <ChakraProvider theme={theme} toastOptions={toastOptions}>
         <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            {getLayout(<Component {...pageProps} />)}
-          </Hydrate>
+          <SessionProvider>
+            <Hydrate state={pageProps.dehydratedState}>
+              {getLayout(<Component {...pageProps} />)}
+            </Hydrate>
+          </SessionProvider>
         </QueryClientProvider>
       </ChakraProvider>
     </>
