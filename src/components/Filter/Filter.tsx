@@ -14,21 +14,7 @@ type FilterProps = {
 export const Filter = ({ label, leftIcon, options = [] }: FilterProps) => (
   <Popover>
     <PopoverTrigger>
-      <Button
-        variant="white"
-        shadow="initial"
-        w="15.5rem"
-        h="5rem"
-        py="1.2rem"
-        px="0.95rem"
-        bgColor="surface.primary"
-        border="1px solid"
-        borderColor="greyscale.25"
-        borderRadius="1.6rem"
-        leftIcon={leftIcon}
-        rightIcon={<ChevronDownIcon />}
-        color="text.copytext"
-      >
+      <Button variant="filter" leftIcon={leftIcon} rightIcon={<ChevronDownIcon />}>
         {label}
       </Button>
     </PopoverTrigger>
