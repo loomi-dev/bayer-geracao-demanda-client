@@ -2,7 +2,7 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { AddInsideCircleIcon, CircleIcon } from '@/components';
+import { ArrowRightIcon, CircleIcon } from '@/components';
 
 type CardProps = {
   label: string;
@@ -57,7 +57,7 @@ export const Card = ({ label, imageUrl }: CardProps) => (
         variant="third"
         rightIcon={
           <CircleIcon>
-            <AddInsideCircleIcon />
+            <ArrowRightIcon />
           </CircleIcon>
         }
       >
