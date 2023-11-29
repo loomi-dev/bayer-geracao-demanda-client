@@ -30,14 +30,14 @@ export const Accordion = defineStyleConfig({
       button: {
         py: '1rem',
         mb: '1rem',
-        fontSize: '1.8rem',
+        fontSize: { lg: '1.6rem', xl: '1.8rem' },
         color: 'surface.invert',
         borderTop: '1px solid',
         borderBottom: '1px solid',
         borderColor: 'surface.disabled',
       },
       panel: {
-        fontSize: '1.6rem',
+        fontSize: { lg: '1.4rem', xl: '1.6rem' },
         color: 'surface.invert',
       },
     },

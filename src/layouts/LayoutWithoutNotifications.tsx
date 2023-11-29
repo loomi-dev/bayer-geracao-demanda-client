@@ -11,8 +11,13 @@ export const LayoutWithoutNotifications = ({ children }: LayoutWithoutNotificati
   <Flex minH="100%">
     <Sidebar />
     <Flex
-      w={`calc(100% - ${LAYOUT_SIDEBAR_WIDTH})`}
       minH="100%"
+      w={{
+        lg: `calc(100% - ${LAYOUT_SIDEBAR_WIDTH['lg']})`,
+        xl: `calc(100% - ${LAYOUT_SIDEBAR_WIDTH['xl']})`,
+        '3xl': `calc(100% - ${LAYOUT_SIDEBAR_WIDTH['3xl']})`,
+      }}
+      h="100%"
       ml={LAYOUT_SIDEBAR_WIDTH}
       pt="5rem"
       pb="4rem"

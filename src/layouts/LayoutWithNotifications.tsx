@@ -12,7 +12,11 @@ export const LayoutWithNotifications = ({ children }: LayoutWithNotificationsPro
   <Flex minH="100%">
     <Sidebar />
     <Flex
-      w={`calc(100% - (${LAYOUT_NOTIFICATION_BAR_WIDTH} + ${LAYOUT_SIDEBAR_WIDTH}))`}
+      w={{
+        lg: `calc(100% - (${LAYOUT_NOTIFICATION_BAR_WIDTH['lg']} + ${LAYOUT_SIDEBAR_WIDTH['lg']}))`,
+        xl: `calc(100% - (${LAYOUT_NOTIFICATION_BAR_WIDTH['xl']} + ${LAYOUT_SIDEBAR_WIDTH['xl']}))`,
+        '3xl': `calc(100% - (${LAYOUT_NOTIFICATION_BAR_WIDTH['3xl']} + ${LAYOUT_SIDEBAR_WIDTH['3xl']}))`,
+      }}
       minH="100%"
       ml={LAYOUT_SIDEBAR_WIDTH}
       background="linear-gradient(110deg, #D9D9D9 11.1%, rgba(217, 217, 217, 0.00) 46.44%)"
