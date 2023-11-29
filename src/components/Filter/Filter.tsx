@@ -1,7 +1,18 @@
-import { Button, Popover, PopoverBody, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
+  Text,
+} from '@chakra-ui/react';
 import { JSXElementConstructor, ReactElement } from 'react';
 
-import { ChevronDownIcon } from '../icons';
+import { ChevronDownIcon, SearchIcon } from '../icons';
+import { TextInput } from '../TextInput';
 
 import { FilterOption, FilterOptionProps } from './components';
 
@@ -32,7 +43,17 @@ export const Filter = ({ label, leftIcon, options = [] }: FilterProps) => (
         {label}
       </Button>
     </PopoverTrigger>
-    <PopoverContent>
+    <PopoverContent w="31rem">
+      <PopoverHeader p="1.6rem">
+        <TextInput
+          variant="primary"
+          borderRadius="1.6rem"
+          color="text.primary"
+          py="1.2rem"
+          bgColor="surface.primary"
+          leftIcon={<SearchIcon />}
+        />
+      </PopoverHeader>
       <PopoverBody>
         {options.map((option) => (
           <FilterOption
@@ -43,6 +64,12 @@ export const Filter = ({ label, leftIcon, options = [] }: FilterProps) => (
           />
         ))}
       </PopoverBody>
+      <PopoverFooter mt="1rem" borderTop="1px solid" borderTopColor="surface.primary">
+        <Flex py="0.5rem" justify="center" gap="1rem">
+          <Text as="strong">{options.length}</Text>
+          <Text>{label}</Text>
+        </Flex>
+      </PopoverFooter>
     </PopoverContent>
   </Popover>
 );

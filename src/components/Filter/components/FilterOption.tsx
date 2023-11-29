@@ -7,7 +7,13 @@ export type FilterOptionProps = {
 };
 
 export const FilterOption = ({ label, subLabel, value }: FilterOptionProps) => (
-  <Flex gap="1.2rem" py="1.2rem" borderBottom="1px solid" borderBottomColor="surface.primary">
+  <Flex
+    align="flex-start"
+    gap="1.2rem"
+    py="1.2rem"
+    borderBottom="1px solid"
+    borderBottomColor="surface.primary"
+  >
     <Checkbox value={value} />
     <Flex flexDir="column">
       <Text textStyle="body2">{label}</Text>

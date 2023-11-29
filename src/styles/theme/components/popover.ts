@@ -11,10 +11,10 @@ export const Popover = defineMultiStyleConfig({
         border: '1px solid',
         borderColor: 'surface.primary',
         bgColor: 'surface.secondary',
-        px: '1.6rem',
+        px: 'initial',
       },
       body: {
-        p: 'initial',
+        px: '1.2rem',
       },
     },
   },
