@@ -33,8 +33,9 @@ const accordionItems = [
 ];
 export const Faq = () => (
   <Flex flexDir="column" w="100%" gap="2.3rem">
-    <Text textStyle="h2">FAQ</Text>
-
+    <Text textStyle={{ lg: 'h4', xl: 'h2' }} fontWeight={{ lg: 'bold' }}>
+      FAQ
+    </Text>
     <Accordion variant="secondary" allowMultiple>
       {accordionItems.map((item, index) => (
         <AccordionItem key={index}>
@@ -45,7 +46,11 @@ export const Faq = () => (
                   <Text flex="1" textAlign="left">
                     {item.label}
                   </Text>
-                  <CircleIcon bgColor="surface.invert" w="7.4rem" h="5.7rem">
+                  <CircleIcon
+                    bgColor="surface.invert"
+                    w={{ lg: '5.4rem', xl: '6.4rem', '3xl': '7.4rem' }}
+                    h={{ çg: '3.7rem', xl: '4.7rem', '3xl': '5.7rem' }}
+                  >
                     {isExpanded ? <MinusIcon /> : <AddIcon />}
                   </CircleIcon>
                 </AccordionButton>

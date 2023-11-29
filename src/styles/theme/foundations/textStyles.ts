@@ -61,6 +61,10 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontSize: '1.4rem',
     fontWeight: 'normal',
   },
+  caption5: {
+    fontSize: '1.2rem',
+    fontWeight: 'normal',
+  },
   footnote: {
     fontSize: { lg: '1rem', xl: '1.2rem' },
     fontWeight: 'normal',

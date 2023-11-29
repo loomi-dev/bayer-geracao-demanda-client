@@ -37,7 +37,7 @@ export const NotificationBar = () => (
         <CircleIcon boxSize={{ lg: '4.5rem', xl: '5.1rem' }}>
           <BellIcon />
         </CircleIcon>
-        <Text textStyle={{ lg: 'h4', xl: 'h3' }} fontWeight={{ lg: 'normal', xl: 'bold' }}>
+        <Text textStyle={{ lg: 'h4', xl: 'h3' }} fontWeight={{ lg: 'normal' }}>
           Notificações
         </Text>
       </HStack>
