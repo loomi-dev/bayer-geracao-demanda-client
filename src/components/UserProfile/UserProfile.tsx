@@ -29,7 +29,11 @@ export const UserProfile = () => {
         <Menu placement="bottom" isOpen={isOpen} onClose={onClose}>
           <MenuButton onClick={onOpen}>
             <HStack gap="1rem">
-              <Text textStyle="footnote" color="text.footnote">
+              <Text
+                textStyle="footnote"
+                color="text.footnote"
+                fontSize={{ lg: '1rem', xl: '1.2rem' }}
+              >
                 Opções
               </Text>
               <ChevronDownIcon width="2rem" height="2rem" />

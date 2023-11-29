@@ -49,7 +49,7 @@ export const Faq = () => (
                   <CircleIcon
                     bgColor="surface.invert"
                     w={{ lg: '5.4rem', xl: '6.4rem', '3xl': '7.4rem' }}
-                    h={{ çg: '3.7rem', xl: '4.7rem', '3xl': '5.7rem' }}
+                    h={{ lg: '3.7rem', xl: '4.7rem', '3xl': '5.7rem' }}
                   >
                     {isExpanded ? <MinusIcon /> : <AddIcon />}
                   </CircleIcon>

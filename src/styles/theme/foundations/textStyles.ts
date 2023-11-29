@@ -66,11 +66,11 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontWeight: 'normal',
   },
   footnote: {
-    fontSize: { lg: '1rem', xl: '1.2rem' },
+    fontSize: '1.2rem',
     fontWeight: 'normal',
   },
   'footnote-bold': {
-    fontSize: { lg: '1rem', xl: '1.2rem' },
+    fontSize: '1.2rem',
     fontWeight: 700,
   },
 };

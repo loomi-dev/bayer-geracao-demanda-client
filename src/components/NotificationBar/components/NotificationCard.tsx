@@ -6,9 +6,15 @@ export const NotificationCard = () => (
       Planejamento 2023/24
     </Text>
     <HStack w="100%" justify="space-between" align="center">
-      <Text textStyle="footnote">Valor já planejado</Text>
-      <Text textStyle="footnote-bold">R$ 40.000</Text>
+      <Text textStyle="footnote" fontSize={{ lg: '1rem', xl: '1.2rem' }}>
+        Valor já planejado
+      </Text>
+      <Text textStyle="footnote-bold" fontSize={{ lg: '1rem', xl: '1.2rem' }}>
+        R$ 40.000
+      </Text>
     </HStack>
-    <Text textStyle="footnote-bold">Falta planejar R$ 20.000 em ações</Text>
+    <Text textStyle="footnote-bold" fontSize={{ lg: '1rem', xl: '1.2rem' }}>
+      Falta planejar R$ 20.000 em ações
+    </Text>
   </Flex>
 );
