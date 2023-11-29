@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { Avatar } from '../Avatar';
-import { ChevronDownIcon } from '../icons';
+import { CircleChevronDownIcon } from '../icons';
 
 export const UserProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,7 +27,7 @@ export const UserProfile = () => {
               <Text textStyle="footnote" color="text.footnote">
                 Opções
               </Text>
-              <ChevronDownIcon width="2rem" height="2rem" />
+              <CircleChevronDownIcon width="2rem" height="2rem" />
             </HStack>
           </MenuButton>
           <MenuList bg="surface.primary" shadow="none">

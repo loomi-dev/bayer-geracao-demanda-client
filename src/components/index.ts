@@ -8,3 +8,4 @@ export * from './CircleIcon';
 export * from './Header';
 export * from './CustomToast';
 export * from './FormWrapper';
+export * from './Filter';
