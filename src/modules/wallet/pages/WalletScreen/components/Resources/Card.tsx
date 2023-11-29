@@ -12,8 +12,8 @@ export const Card = ({ label, imageUrl }: CardProps) => (
   <Link href="/planejamento">
     <Flex
       position="relative"
-      w="22.5rem"
-      h="25.4rem"
+      w={{ lg: '17rem', xl: '18.5rem', '3xl': '22.5rem' }}
+      h={{ lg: '19rem', xl: '20.5rem', '3xl': '25.4rem' }}
       borderRadius="3.2rem"
       border="1px solid"
       borderColor="opacity.black.0.10"
@@ -22,8 +22,8 @@ export const Card = ({ label, imageUrl }: CardProps) => (
       cursor="pointer"
       _hover={{
         Button: {
-          width: '17rem',
-          height: '6rem',
+          width: { lg: '14rem', xl: '17rem' },
+          height: { lg: '4.8rem', xl: '6rem' },
           transition: '0.2s linear',
         },
       }}
@@ -51,12 +51,12 @@ export const Card = ({ label, imageUrl }: CardProps) => (
         pos="absolute"
         bottom="1.4rem"
         right="1rem"
-        w="15.2rem"
-        h="5.1rem"
+        w={{ lg: '12.2rem', xl: '15.2rem' }}
+        h={{ lg: '4.1rem', xl: '5.1rem' }}
         pr="0rem"
         variant="third"
         rightIcon={
-          <CircleIcon>
+          <CircleIcon boxSize={{ lg: '4.2rem', xl: '5.1rem' }}>
             <ArrowRightIcon />
           </CircleIcon>
         }

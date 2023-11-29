@@ -38,7 +38,7 @@ export const Button = defineStyleConfig({
       borderRadius: 'full',
       backdropFilter: 'blur(20px)',
 
-      fontSize: '1.4rem',
+      fontSize: { lg: '1rem', '3xl': '1.4rem' },
       fontWeight: 'bold',
     },
     fourth: {

@@ -13,8 +13,10 @@ const cardItems = [
 
 export const Resources = () => (
   <Flex flexDir="column" gap="1.7rem">
-    <Text textStyle="h2">Transforme seus recursos em ações</Text>
-    <Flex gap="1rem">
+    <Text textStyle={{ lg: 'h4', xl: 'h2' }} fontWeight={{ lg: 'bold' }}>
+      Transforme seus recursos em ações
+    </Text>
+    <Flex gap="1rem" flexWrap={{ lg: 'wrap', xl: 'nowrap' }}>
       {cardItems.map((item) => (
         <Card key={item.label} label={item.label} imageUrl={item.imageUrl} />
       ))}
