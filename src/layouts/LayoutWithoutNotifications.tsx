@@ -11,7 +11,11 @@ export const LayoutWithoutNotifications = ({ children }: LayoutWithoutNotificati
   <>
     <Sidebar />
     <Box
-      w={`calc(100% - ${LAYOUT_SIDEBAR_WIDTH})`}
+      w={{
+        lg: `calc(100% - ${LAYOUT_SIDEBAR_WIDTH['lg']})`,
+        xl: `calc(100% - ${LAYOUT_SIDEBAR_WIDTH['xl']})`,
+        '3xl': `calc(100% - ${LAYOUT_SIDEBAR_WIDTH['3xl']})`,
+      }}
       h="100%"
       ml={LAYOUT_SIDEBAR_WIDTH}
       background="linear-gradient(110deg, #D9D9D9 11.1%, rgba(217, 217, 217, 0.00) 46.44%)"

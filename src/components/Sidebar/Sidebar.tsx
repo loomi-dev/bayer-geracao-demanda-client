@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon } from '@/components/icons';
+import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 
 import { MenuItem } from './MenuItem';
 
@@ -31,7 +32,11 @@ export const Sidebar = () => {
     <Flex
       flexDir="column"
       align="center"
-      w="28.7rem"
+      w={{
+        lg: LAYOUT_SIDEBAR_WIDTH['lg'],
+        xl: LAYOUT_SIDEBAR_WIDTH['xl'],
+        '3xl': LAYOUT_SIDEBAR_WIDTH['3xl'],
+      }}
       justifyContent="space-between"
       bgColor="surface.primary"
       position="fixed"

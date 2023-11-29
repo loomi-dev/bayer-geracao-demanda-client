@@ -1,5 +1,7 @@
 import { Box, Flex, HStack, Text } from '@chakra-ui/react';
 
+import { LAYOUT_NOTIFICATION_BAR_WIDTH } from '@/config';
+
 import { CircleIcon } from '../CircleIcon';
 import { BellIcon } from '../icons';
 
@@ -7,10 +9,14 @@ import { NotificationCard } from './components';
 
 export const NotificationBar = () => (
   <Flex
-    w="35.8rem"
+    w={{
+      lg: LAYOUT_NOTIFICATION_BAR_WIDTH['lg'],
+      xl: LAYOUT_NOTIFICATION_BAR_WIDTH['xl'],
+      '3xl': LAYOUT_NOTIFICATION_BAR_WIDTH['3xl'],
+    }}
     h="100%"
-    position="fixed"
     bg="transparent"
+    position="fixed"
     right={0}
     pl="2.8rem"
     pr="5.2rem"
@@ -28,10 +34,12 @@ export const NotificationBar = () => (
     />
     <Flex w="100%" gap="5rem" flexDir="column">
       <HStack gap="1rem">
-        <CircleIcon>
+        <CircleIcon boxSize={{ lg: '4.5rem', xl: '5.1rem' }}>
           <BellIcon />
         </CircleIcon>
-        <Text textStyle="h3">Notificações</Text>
+        <Text textStyle={{ lg: 'h4', xl: 'h3' }} fontWeight={{ lg: 'normal', xl: 'bold' }}>
+          Notificações
+        </Text>
       </HStack>
       <NotificationCard />
     </Flex>
