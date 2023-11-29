@@ -2,11 +2,12 @@ import { Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon } from '@/components/icons';
+import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon, UserGroupIcon } from '@/components/icons';
 
 import { MenuItem } from './MenuItem';
 
 const menuItens = [
+  { label: 'Clientes', src: '/clientes', leftIcon: <UserGroupIcon /> },
   { label: 'Carteira', src: '/carteira', leftIcon: <CardIcon /> },
   {
     label: 'Planejamento',

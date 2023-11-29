@@ -1,3 +1,5 @@
+import { Header, UserGroupBigIcon } from '@/components';
+import { LayoutWithoutNotifications } from '@/layouts';
 import { CustomersScreen } from '@/modules/customers';
 
 import { NextPageWithLayout } from '../_app';
@@ -5,7 +7,12 @@ import { NextPageWithLayout } from '../_app';
 const Page: NextPageWithLayout = () => <CustomersScreen />;
 
 Page.getLayout = function getLayout(page) {
-  return <>{page}</>;
+  return (
+    <LayoutWithoutNotifications>
+      <Header label="Clientes" icon={<UserGroupBigIcon />} />
+      {page}
+    </LayoutWithoutNotifications>
+  );
 };
 
 export default Page;

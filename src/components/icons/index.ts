@@ -14,3 +14,5 @@ export { default as ArrowRightIcon } from './ArrowRight';
 export { default as LockClosedIcon } from './LockClosed';
 export { default as PersonIcon } from './Person';
 export { default as MinusIcon } from './Minus';
+export { default as UserGroupIcon } from './UserGroup';
+export { default as UserGroupBigIcon } from './UserGroupBig';
