@@ -33,8 +33,9 @@ export const Balance = () => (
         Válido até <Text as="strong">20/10/2024</Text>
       </Text>
     </Flex>
-    <Link href="/planejamento">
+    <Link href="/planejamento" legacyBehavior passHref>
       <Button
+        as="a"
         w="24.5rem"
         pl="2rem"
         _hover={{ pl: '0rem' }}
