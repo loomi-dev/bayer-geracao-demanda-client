@@ -5,6 +5,11 @@ export type FarmerWallet = {
   id: number;
 };
 
+export type Faq = {
+  question: string;
+  answer: string;
+};
+
 export type Farmer = {
   company_identifier: string;
   company_name: string;
@@ -14,5 +19,5 @@ export type Farmer = {
   wallet: FarmerWallet;
 };
 
-export type GetFaqsResponse = void;
+export type GetFaqsResponse = GenericListResponseType<Faq>;
 export type GetFarmersResponse = GenericListResponseType<Farmer>;
