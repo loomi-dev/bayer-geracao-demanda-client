@@ -8,25 +8,25 @@ import {
   FilterOptionProps,
   FilterTrigger,
 } from '@/components/BaseFilter';
-import { ChevronDownIcon, ChevronTopIcon, UserIcon } from '@/components/icons';
+import { ChevronDownIcon, ChevronTopIcon, MapMarkerIcon } from '@/components/icons';
 
-type CustomerFilterProps = {
+type DistrictFilterProps = {
   options?: FilterOptionProps[];
 };
-export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
+export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Filter isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
-        label="Clientes"
+        label="Distrito"
         onClick={onOpen}
-        leftIcon={<UserIcon />}
+        leftIcon={<MapMarkerIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent>
-        <FilterHeader placeholder="Pesquisar por nome ou CNPJ" />
+        <FilterHeader placeholder="Pesquisar distrito" />
         <FilterBody options={options} />
       </FilterContent>
     </Filter>
