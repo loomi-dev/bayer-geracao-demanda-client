@@ -20,3 +20,5 @@ export { default as ChevronTopIcon } from './ChevronTop';
 export { default as MapMarkerIcon } from './MapMarker';
 export { default as FilterIcon } from './Filter';
 export { default as SlidersIcon } from './Sliders';
+export { default as UserGroupIcon } from './UserGroup';
+export { default as UserGroupBigIcon } from './UserGroupBig';

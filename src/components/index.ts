@@ -9,3 +9,4 @@ export * from './Header';
 export * from './CustomToast';
 export * from './FormWrapper';
 export * from './filters';
+export * from './DynamicTable';

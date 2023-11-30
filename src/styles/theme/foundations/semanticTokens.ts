@@ -65,6 +65,12 @@ export const semanticTokens = {
         '0.30': 'rgba(33, 33, 33, 0.30)',
         '0.10': 'rgba(33, 33, 33, 0.10)',
       },
+      red: {
+        '0.30': 'rgba(222, 59, 59, 0.30)',
+      },
+      green: {
+        '0.30': 'rgba(55, 199, 69, 0.30)',
+      },
     },
     code: {
       success: 'green.500',
