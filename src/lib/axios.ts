@@ -12,12 +12,13 @@ const defaultOptions: AxiosRequestConfig = {
   },
 };
 
+const unauthenticatedInstance = axiosInstance.create(defaultOptions);
+const authenticatedInstance = axiosInstance.create(defaultOptions);
+
 let lastSession: Session | null = null;
 
 const axiosObject = {
   unauthorized() {
-    const unauthenticatedInstance = axiosInstance.create(defaultOptions);
-
     unauthenticatedInstance.interceptors.response.use(
       async (response) => response,
       async (error: AxiosError) => Promise.reject(error.response),
@@ -26,8 +27,6 @@ const axiosObject = {
     return unauthenticatedInstance;
   },
   authorized(ctx?: GetServerSidePropsContext) {
-    const authenticatedInstance = axiosInstance.create(defaultOptions);
-
     authenticatedInstance.interceptors.request.use(
       async (request) => {
         if (lastSession === null) {
