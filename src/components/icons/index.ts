@@ -14,3 +14,7 @@ export { default as ArrowRightIcon } from './ArrowRight';
 export { default as LockClosedIcon } from './LockClosed';
 export { default as PersonIcon } from './Person';
 export { default as MinusIcon } from './Minus';
+export { default as Search } from './Search';
+export { default as Minus2 } from './Minus2';
+export { default as CloseIcon2 } from './Close2';
+export { default as DocumentIcon } from './Document';
