@@ -14,6 +14,10 @@ export const Button = defineStyleConfig({
     alignItems: 'center',
     justifyContent: 'center',
     gap: '1rem',
+
+    _disabled: {
+      opacity: 0.65,
+    },
   },
   variants: {
     primary: {
@@ -77,6 +81,12 @@ export const Button = defineStyleConfig({
 
       fontSize: '1.6rem',
       fontWeight: 'normal',
+
+      _disabled: {
+        _hover: {
+          bg: 'surface.primary !important',
+        },
+      },
     },
     unstyled: {
       p: '0',
