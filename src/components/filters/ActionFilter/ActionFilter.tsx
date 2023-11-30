@@ -5,31 +5,32 @@ import {
   FilterBody,
   FilterContent,
   FilterFooter,
-  FilterHeader,
   FilterOptionProps,
   FilterTrigger,
 } from '@/components/BaseFilter';
-import { ChevronDownIcon, ChevronTopIcon, MapMarkerIcon } from '@/components/icons';
+import { ChevronDownIcon, ChevronTopIcon, FilterIcon } from '@/components/icons';
 
-type RegionFilterProps = {
+type ActionFilterProps = {
   options?: FilterOptionProps[];
 };
-export const RegionFilter = ({ options = [] }: RegionFilterProps) => {
+export const ActionFilter = ({ options = [] }: ActionFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Filter isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
-        label="Região"
+        label="Tipo de ação"
         onClick={onOpen}
-        leftIcon={<MapMarkerIcon />}
+        leftIcon={<FilterIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent>
-        <FilterHeader placeholder="Pequisar por região" />
         <FilterBody options={options} />
-        <FilterFooter label={options.length > 1 ? 'Regiões' : 'Região'} value={options.length} />
+        <FilterFooter
+          label={options.length > 1 ? 'Tipos de ações ' : 'Tipo de ação'}
+          value={options.length}
+        />
       </FilterContent>
     </Filter>
   );

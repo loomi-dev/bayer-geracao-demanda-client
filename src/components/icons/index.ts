@@ -18,3 +18,5 @@ export { default as MinusIcon } from './Minus';
 export { default as SearchIcon } from './Search';
 export { default as ChevronTopIcon } from './ChevronTop';
 export { default as MapMarkerIcon } from './MapMarker';
+export { default as FilterIcon } from './Filter';
+export { default as SlidersIcon } from './Sliders';

@@ -4,6 +4,7 @@ import {
   Filter,
   FilterBody,
   FilterContent,
+  FilterFooter,
   FilterHeader,
   FilterOptionProps,
   FilterTrigger,
@@ -26,8 +27,12 @@ export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent>
-        <FilterHeader placeholder="Pesquisar distrito" />
+        <FilterHeader placeholder="Pesquisar por distrito" />
         <FilterBody options={options} />
+        <FilterFooter
+          label={options.length > 1 ? 'Distritos' : 'Distrito'}
+          value={options.length}
+        />
       </FilterContent>
     </Filter>
   );
