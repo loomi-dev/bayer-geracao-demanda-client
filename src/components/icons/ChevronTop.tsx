@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-const SvgChevronDown = (props: SVGProps<SVGSVGElement>) => (
+const SvgChevronTop = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="21"
     height="21"
@@ -12,8 +12,8 @@ const SvgChevronDown = (props: SVGProps<SVGSVGElement>) => (
     <g id="COCO/Line/Arrow - Bottom">
       <path
         id="Vector"
-        d="M14.6663 8.81575L10.4997 12.9824L6.33301 8.81576"
-        stroke="currentColor"
+        d="M6.33073 12.3466L10.4974 8.17993L14.6641 12.3466"
+        stroke="#333333"
         strokeWidth="1.25"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -21,4 +21,4 @@ const SvgChevronDown = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 );
-export default SvgChevronDown;
+export default SvgChevronTop;
