@@ -2,7 +2,7 @@ import qs from 'qs';
 
 import axios from '@/lib/axios';
 
-import { GetFaqsResponse, GetFarmersResponse } from './types';
+import { GetFaqsResponse, GetFarmerData, GetFarmerResponse } from './types';
 
 export const getFaqs = async (): Promise<GetFaqsResponse> => {
   const response = await axios.authorized().get('/faqs');
@@ -10,27 +10,17 @@ export const getFaqs = async (): Promise<GetFaqsResponse> => {
   return response.data;
 };
 
-export const getFarmers = async (): Promise<GetFarmersResponse> => {
+export const getFarmer = async ({ id }: GetFarmerData): Promise<GetFarmerResponse> => {
   const query = qs.stringify({
     filters: {
       users_permissions_user: {
         id: {
-          $eq: 1,
+          $eq: id,
         },
       },
     },
     populate: {
       wallet: true,
-      notifications: {
-        populate: {
-          safra: true,
-          planning: {
-            populate: {
-              actions: true,
-            },
-          },
-        },
-      },
     },
   });
   const response = await axios.authorized().get(`/farmers?${query}`);

@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import { QueryOpt } from '@/api';
 
-import { getFarmers } from '../endpoints';
-import { GetFarmersResponse } from '../types';
+import { getFarmer } from '../endpoints';
+import { GetFarmerData, GetFarmerResponse } from '../types';
 
-export const useGetFarmers = (options?: QueryOpt<GetFarmersResponse>) =>
+export const useGetFarmers = (params: GetFarmerData, options?: QueryOpt<GetFarmerResponse>) =>
   useQuery({
     ...options,
-    queryKey: ['get-farmers'],
-    queryFn: () => getFarmers(),
+    queryKey: ['get-farmers', ...Object.values(params)],
+    queryFn: () => getFarmer(params),
   });

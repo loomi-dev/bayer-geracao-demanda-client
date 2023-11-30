@@ -20,4 +20,6 @@ export type Farmer = {
 };
 
 export type GetFaqsResponse = GenericListResponseType<Faq>;
-export type GetFarmersResponse = GenericListResponseType<Farmer>;
+
+export type GetFarmerData = { id: number | string };
+export type GetFarmerResponse = GenericListResponseType<Farmer>;

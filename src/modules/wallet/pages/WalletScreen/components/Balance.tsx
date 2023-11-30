@@ -1,12 +1,15 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 import { AddInsideCircleIcon, CircleIcon } from '@/components';
 import { useGetFarmers } from '@/modules/wallet/api';
 import { formatPrice } from '@/utils';
 
 export const Balance = () => {
-  const { data, isLoading } = useGetFarmers();
+  const user = useSession();
+  const userId = user.data?.user.id;
+  const { data, isLoading } = useGetFarmers({ id: userId ?? '' }, { enabled: Boolean(userId) });
   const farmers = data?.data[0];
 
   return (
