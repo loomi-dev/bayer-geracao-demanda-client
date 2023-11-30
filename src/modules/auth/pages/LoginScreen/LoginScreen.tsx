@@ -1,7 +1,9 @@
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { LoginForm, LoginBanner } from './components';
+import { AuthBanner } from '../../components';
+
+import { LoginForm } from './components';
 
 export const LoginScreen = () => (
   <HStack
@@ -14,7 +16,7 @@ export const LoginScreen = () => (
     gap="2rem"
     position="relative"
   >
-    <LoginBanner />
+    <AuthBanner />
 
     <VStack spacing="1.5rem" align="flex-start">
       <Text fontSize="4rem" fontWeight="bold" color="greyscale.0" opacity="0.8">

@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactNode, forwardRef } from 'react';
 
-type TextInputProps = {
+export type TextInputProps = {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   inputGroupProps?: InputGroupProps;

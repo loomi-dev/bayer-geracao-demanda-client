@@ -1,8 +1,9 @@
-import { Box, Button, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Spinner, Text, VStack } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
+import { useLoginMutation } from '@/api/';
 import {
   TextInput,
   CircleIcon,
@@ -10,37 +11,40 @@ import {
   LockClosedIcon,
   PersonIcon,
   FormWrapper,
+  PasswordInput,
 } from '@/components';
 
 import { LoginFormSchemaType, loginFormSchema } from './loginForm.schema';
 
 export const LoginForm = () => {
+  const { mutate: mutateLogin, isLoading: isLoadingLogin } = useLoginMutation();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
   });
 
-  const onSubmitLogin = async (data: LoginFormSchemaType) => {
-    console.log(data);
+  const onSubmitLogin = async ({ identifier, password }: LoginFormSchemaType) => {
+    mutateLogin({ identifier, password });
   };
 
   return (
     <Box as="form" mt="5.4rem" maxW="48.5rem" w="full" onSubmit={handleSubmit(onSubmitLogin)}>
       <VStack spacing="2.4rem" mb="1rem">
-        <FormWrapper error={errors.user} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.identifier} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
           <TextInput
-            placeholder="Usuário"
+            placeholder="CNPJ ou E-mail"
             size="xl"
             leftIcon={<PersonIcon />}
-            {...register('user')}
+            {...register('identifier')}
           />
         </FormWrapper>
 
         <FormWrapper error={errors.password} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
-          <TextInput
+          <PasswordInput
             placeholder="Senha"
             size="xl"
             leftIcon={<LockClosedIcon />}
@@ -69,9 +73,10 @@ export const LoginForm = () => {
         px="1rem"
         mt="5.1rem"
         mx="auto"
+        isDisabled={!isValid || isLoadingLogin}
         rightIcon={
           <CircleIcon color="green.400">
-            <ArrowRightIcon />
+            {isLoadingLogin ? <Spinner color="#fff" fontSize={20} /> : <ArrowRightIcon />}
           </CircleIcon>
         }
       >

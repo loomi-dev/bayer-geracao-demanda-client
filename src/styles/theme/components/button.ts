@@ -14,6 +14,10 @@ export const Button = defineStyleConfig({
     alignItems: 'center',
     justifyContent: 'center',
     gap: '1rem',
+
+    _disabled: {
+      opacity: 0.65,
+    },
   },
   variants: {
     primary: {
@@ -38,7 +42,7 @@ export const Button = defineStyleConfig({
       borderRadius: 'full',
       backdropFilter: 'blur(20px)',
 
-      fontSize: '1.4rem',
+      fontSize: { lg: '1rem', '3xl': '1.4rem' },
       fontWeight: 'bold',
     },
     fourth: {
@@ -77,6 +81,28 @@ export const Button = defineStyleConfig({
 
       fontSize: '1.6rem',
       fontWeight: 'normal',
+
+      _disabled: {
+        _hover: {
+          bg: 'surface.primary !important',
+        },
+      },
+    },
+    'primary-filter': {
+      fontSize: '1.6rem',
+      fontWeight: 'normal',
+      color: 'text.copytext',
+      borderRadius: '1.6rem',
+      bg: 'surface.primary',
+      border: '1px solid',
+      borderColor: 'greyscale.25',
+    },
+    'secondary-filter': {
+      layerStyle: 'card',
+      fontWeight: 'bold',
+      fontSize: '1.6rem',
+      borderRadius: '3.2rem',
+      bgColor: 'surface.secondary',
     },
     unstyled: {
       p: '0',
