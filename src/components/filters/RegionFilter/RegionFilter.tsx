@@ -5,7 +5,7 @@ import {
   FilterBody,
   FilterContent,
   FilterFooter,
-  FilterHeader,
+  FilterSearchInput,
   FilterOption,
   FilterOptionProps,
   FilterTrigger,
@@ -28,7 +28,7 @@ export const RegionFilter = ({ options = [] }: RegionFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent w="28rem" overflowY="scroll">
-        <FilterHeader placeholder="Pequisar por região" />
+        <FilterSearchInput placeholder="Pequisar por região" />
         <FilterBody h="28rem" overflowY="scroll">
           {options.map((option) => (
             <FilterOption

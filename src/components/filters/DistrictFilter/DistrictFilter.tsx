@@ -5,7 +5,7 @@ import {
   FilterBody,
   FilterContent,
   FilterFooter,
-  FilterHeader,
+  FilterSearchInput,
   FilterOption,
   FilterOptionProps,
   FilterTrigger,
@@ -28,7 +28,7 @@ export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent w="28rem" overflowY="scroll">
-        <FilterHeader placeholder="Pesquisar por distrito" />
+        <FilterSearchInput placeholder="Pesquisar por distrito" />
         <FilterBody h="28rem" overflowY="scroll">
           {options.map((option) => (
             <FilterOption

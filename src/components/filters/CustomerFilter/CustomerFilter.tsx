@@ -5,7 +5,7 @@ import {
   FilterBody,
   FilterContent,
   FilterFooter,
-  FilterHeader,
+  FilterSearchInput,
   FilterOption,
   FilterOptionProps,
   FilterTrigger,
@@ -28,7 +28,7 @@ export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent w="28rem">
-        <FilterHeader placeholder="Pesquisar por nome ou CNPJ" />
+        <FilterSearchInput placeholder="Pesquisar por nome ou CNPJ" />
         <FilterBody h="28rem" overflowY="scroll">
           {options.map((option) => (
             <FilterOption

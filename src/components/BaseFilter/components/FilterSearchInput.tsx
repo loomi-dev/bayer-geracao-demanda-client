@@ -3,9 +3,9 @@ import { PopoverHeader } from '@chakra-ui/react';
 import { SearchIcon } from '@/components/icons';
 import { TextInput, TextInputProps } from '@/components/TextInput';
 
-type FilterHeaderProps = TextInputProps;
+type FilterSearchInputProps = TextInputProps;
 
-export const FilterHeader = ({ ...props }: FilterHeaderProps) => (
+export const FilterSearchInput = ({ ...props }: FilterSearchInputProps) => (
   <PopoverHeader {...props}>
     <TextInput
       variant="primary"
