@@ -27,7 +27,7 @@ export const Input = defineMultiStyleConfig({
         fontWeight: 'normal',
         color: 'text.secondary',
         pl: '5.5rem',
-        pr: '2.1rem',
+        pr: '6.5rem',
 
         _placeholder: {
           fontSize: '1.6rem',
