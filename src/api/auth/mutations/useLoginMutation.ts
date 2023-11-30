@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 
 import { MutOpt } from '@/api/types';
+import { DEFAULT_PRIVATE_PAGE } from '@/config';
 
 import { Credentials } from '../types';
 
@@ -11,7 +12,7 @@ const CUSTOM_MESSAGES_ERROR = {
   ValidationError: 'Credenciais incorretas',
 };
 
-export const useLoginMutation = (options?: MutOpt<void, Credentials>) => {
+export const useLoginMutation = (options?: MutOpt<void, Credentials, Error>) => {
   const toast = useToast();
   const { push } = useRouter();
 
@@ -23,7 +24,7 @@ export const useLoginMutation = (options?: MutOpt<void, Credentials>) => {
       if (response?.error) throw new Error(response.error);
     },
     onSuccess: () => {
-      push('/carteira');
+      push(DEFAULT_PRIVATE_PAGE);
 
       toast({
         description: 'Autenticado com sucesso!',

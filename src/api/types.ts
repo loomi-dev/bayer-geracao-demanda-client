@@ -1,5 +1,5 @@
 import { UseMutationOptions } from '@tanstack/react-query';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 export type ApiResponseErr = {
   data: null;
@@ -11,9 +11,9 @@ export type ApiResponseErr = {
 };
 export type ApiServiceErr = AxiosResponse<ApiResponseErr>;
 
-export type MutOpt<Response = void, Variables = unknown, Error = AxiosError> = UseMutationOptions<
-  Response,
-  Error,
-  Variables,
-  unknown
->;
+export type MutOpt<
+  Response = void,
+  Variables = unknown,
+  Error = ApiServiceErr,
+  MutationContext = unknown,
+> = UseMutationOptions<Response, Error, Variables, MutationContext>;
