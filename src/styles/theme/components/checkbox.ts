@@ -37,6 +37,30 @@ export const Checkbox = defineMultiStyleConfig({
         fontSize: '1.2rem',
       },
     },
+    round: {
+      control: {
+        bg: 'surface.secondary',
+        rounded: 'full',
+        borderColor: 'surface.disabled',
+        _checked: {
+          color: 'surface.primary',
+          bg: 'green.300',
+          borderColor: 'surface.disabled',
+          _hover: {
+            bg: 'green.400',
+            borderColor: 'surface.disabled',
+          },
+        },
+      },
+      label: {
+        fontSize: '1.6rem',
+        fontWeight: 'normal',
+        color: 'text.primary',
+      },
+      icon: {
+        fontSize: '1.2rem',
+      },
+    },
   },
   sizes: {
     md: {

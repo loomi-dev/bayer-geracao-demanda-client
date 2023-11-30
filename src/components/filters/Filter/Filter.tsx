@@ -32,7 +32,13 @@ export const Filter = ({ options = [] }: FilterProps) => {
       <FilterContent w="28rem" overflowY="scroll">
         <FilterBody h="28rem" overflowY="scroll">
           {options.map((option) => (
-            <FilterOption key={option.value} label={option.label} value={option.value} />
+            <FilterOption
+              key={option.value}
+              label={option.label}
+              value={option.value}
+              border="unset"
+              checkBoxStyle={{ variant: 'round' }}
+            />
           ))}
         </FilterBody>
       </FilterContent>
