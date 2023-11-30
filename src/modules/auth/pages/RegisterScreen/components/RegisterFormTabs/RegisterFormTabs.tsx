@@ -23,7 +23,7 @@ export const RegisterFormTabs = () => {
           Dados da conta
         </Text>
 
-        <ArrowRightSmallIcon color="#AEAEAE" />
+        <ArrowRightSmallIcon />
 
         <Text textStyle="action4" color="text.disabled">
           <Text as="span" mr="1.2rem">

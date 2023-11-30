@@ -22,9 +22,14 @@ export const PrivacyPoliciesModalButton = () => {
     onClose: onClosePrivacyPoliciesModal,
   } = useDisclosure();
 
-  const {
-    formState: { isValid },
-  } = useFormContext();
+  const { register, watch } = useFormContext();
+
+  const nameValue = watch('name');
+  const emailValue = watch('email');
+  const roleValue = watch('role');
+  const agreePrivacyPolicies = watch('agreePrivacyPolicies');
+
+  const isValidAccountDataForm = false;
 
   return (
     <>
@@ -40,7 +45,7 @@ export const PrivacyPoliciesModalButton = () => {
             <ArrowRightMediumIcon />
           </CircleIcon>
         }
-        isDisabled={!isValid}
+        isDisabled={!isValidAccountDataForm}
         onClick={onOpenPrivacyPoliciesModal}
       >
         <Text as="span" textStyle="action3" color="text.footnote" w="full" align="center">
@@ -93,7 +98,7 @@ export const PrivacyPoliciesModalButton = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Checkbox>
+            <Checkbox {...register('agreePrivacyPolicies')}>
               Declaro que li e concordo com os termos da Política de privacidade e entendo como
               coletam e utilizam os dados pessoais dos usuários da aplicação
             </Checkbox>

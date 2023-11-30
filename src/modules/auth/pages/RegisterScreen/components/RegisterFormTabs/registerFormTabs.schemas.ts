@@ -10,3 +10,15 @@ export const accountDataFormSchema = z.object({
 });
 
 export type AccountDataFormSchemaType = z.infer<typeof accountDataFormSchema>;
+
+export const createPasswordFormSchema = z.object({
+  password: z
+    .string()
+    .trim()
+    .min(1, { message: 'Digite uma senha.' })
+    .min(8, { message: 'Sua senha deve conter no mínimo 8 caracteres.' }),
+});
+
+export type CreatePasswordFormSchemaType = z.infer<typeof createPasswordFormSchema>;
+
+export const registerFormSchema = accountDataFormSchema.merge(createPasswordFormSchema);
