@@ -78,6 +78,20 @@ export const Button = defineStyleConfig({
       fontSize: '1.6rem',
       fontWeight: 'normal',
     },
+    'primary-filter': {
+      fontSize: '1.6rem',
+      fontWeight: 'normal',
+      color: 'text.copytext',
+      borderRadius: '1.6rem',
+      bg: 'surface.primary',
+      border: '1px solid',
+      borderColor: 'greyscale.25',
+    },
+    'secondary-filter': {
+      layerStyle: 'card',
+      borderRadius: '3.2rem',
+      bgColor: 'surface.secondary',
+    },
     unstyled: {
       p: '0',
       border: '0',

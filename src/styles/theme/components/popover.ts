@@ -5,7 +5,7 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers(popoverAnatomy.
 
 export const Popover = defineMultiStyleConfig({
   variants: {
-    filter: {
+    primary: {
       content: {
         borderRadius: '2rem',
         border: '1px solid',
@@ -17,8 +17,18 @@ export const Popover = defineMultiStyleConfig({
         px: '1.2rem',
       },
     },
+    secondary: {
+      content: {
+        layerStyle: 'card',
+        bgColor: 'opacity.white.0.50',
+        borderRadius: '2rem',
+        border: '1px solid',
+        borderColor: 'surface.primary',
+        backdropFilter: 'blur(22px)',
+      },
+    },
   },
   defaultProps: {
-    variant: 'filter',
+    variant: 'primary',
   },
 });

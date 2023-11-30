@@ -53,6 +53,7 @@ export const semanticTokens = {
     opacity: {
       white: {
         '0.40': 'rgba(255, 255, 255, 0.40)',
+        '0.50': 'rgba(255, 255, 255, 0.50)',
       },
       black: {
         '0.10': 'rgba(0, 0, 0, 0.10)',
