@@ -1,6 +1,7 @@
 import {
   Input,
   InputGroup,
+  InputGroupProps,
   InputLeftElement,
   InputProps,
   InputRightElement,
@@ -10,11 +11,12 @@ import { ReactNode, forwardRef } from 'react';
 type TextInputProps = {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  inputGroupProps?: InputGroupProps;
 } & InputProps;
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ leftIcon, rightIcon, ...props }, ref) => (
-    <InputGroup>
+  ({ leftIcon, rightIcon, inputGroupProps, ...props }, ref) => (
+    <InputGroup {...inputGroupProps}>
       {leftIcon && <InputLeftElement pointerEvents="none">{leftIcon}</InputLeftElement>}
 
       <Input type="text" ref={ref} {...props} />

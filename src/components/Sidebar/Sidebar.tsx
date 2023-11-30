@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, FlexProps, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -25,7 +25,11 @@ const menuItens = [
   },
 ];
 
-export const Sidebar = () => {
+type SidebarProps = {
+  containerProps?: FlexProps;
+};
+
+export const Sidebar = ({ containerProps }: SidebarProps) => {
   const { pathname } = useRouter();
   return (
     <Flex
@@ -37,6 +41,7 @@ export const Sidebar = () => {
       position="fixed"
       h="100%"
       pb="3rem"
+      {...containerProps}
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
         <Image src="/assets/images/logo.png" width={95} height={94} quality={100} alt="app logo" />
