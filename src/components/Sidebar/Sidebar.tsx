@@ -2,11 +2,13 @@ import { Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon } from '@/components/icons';
+import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon, UserGroupIcon } from '@/components/icons';
+import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 
 import { MenuItem } from './MenuItem';
 
 const menuItens = [
+  { label: 'Clientes', src: '/clientes', leftIcon: <UserGroupIcon /> },
   { label: 'Carteira', src: '/carteira', leftIcon: <CardIcon /> },
   {
     label: 'Planejamento',
@@ -31,11 +33,16 @@ export const Sidebar = () => {
     <Flex
       flexDir="column"
       align="center"
-      w="28.7rem"
+      w={{
+        lg: LAYOUT_SIDEBAR_WIDTH['lg'],
+        xl: LAYOUT_SIDEBAR_WIDTH['xl'],
+        '3xl': LAYOUT_SIDEBAR_WIDTH['3xl'],
+      }}
       justifyContent="space-between"
       bgColor="surface.primary"
       position="fixed"
       h="100%"
+      overflowY="scroll"
       pb="3rem"
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
@@ -51,6 +58,8 @@ export const Sidebar = () => {
         borderTop="1px solid"
         borderBottom="1px solid"
         borderColor="surface.disabled"
+        w="80%"
+        mt="5rem"
         mb="10rem"
       >
         {menuItens.map((item) => (
