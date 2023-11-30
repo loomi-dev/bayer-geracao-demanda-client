@@ -17,8 +17,15 @@ export const createPasswordFormSchema = z.object({
     .trim()
     .min(1, { message: 'Digite uma senha.' })
     .min(8, { message: 'Sua senha deve conter no mínimo 8 caracteres.' }),
+  confirmPassword: z.string().trim(),
 });
 
 export type CreatePasswordFormSchemaType = z.infer<typeof createPasswordFormSchema>;
 
-export const registerFormSchema = accountDataFormSchema.merge(createPasswordFormSchema);
+export const registerFormSchema = accountDataFormSchema
+  .merge(createPasswordFormSchema)
+  .refine(({ password, confirmPassword }) => password === confirmPassword, {
+    message: 'As senhas devem ser iguais.',
+    path: ['confirmPassword'],
+  });
+export type RegisterFormSchemaType = z.infer<typeof registerFormSchema>;

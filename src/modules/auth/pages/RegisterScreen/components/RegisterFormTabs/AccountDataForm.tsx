@@ -1,26 +1,35 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Button, Text, VStack, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { BusinessIcon, EmailIcon, FormWrapper, PersonIcon, TextInput } from '@/components';
+import {
+  ArrowRightMediumIcon,
+  BusinessIcon,
+  CircleIcon,
+  EmailIcon,
+  FormWrapper,
+  PersonIcon,
+  TextInput,
+} from '@/components';
 
-import { PrivacyPoliciesModalButton } from './PrivacyPoliciesModalButton';
+import { PrivacyPoliciesModal } from './PrivacyPoliciesModal';
 import { AccountDataFormSchemaType } from './registerFormTabs.schemas';
 
 export const AccountDataForm = () => {
   const {
-    handleSubmit,
+    isOpen: isOpenPrivacyPoliciesModal,
+    onOpen: onOpenPrivacyPoliciesModal,
+    onClose: onClosePrivacyPoliciesModal,
+  } = useDisclosure();
+
+  const {
     register,
     formState: { errors },
   } = useFormContext<AccountDataFormSchemaType>();
 
-  const onSubmitAccountDataForm = (data: AccountDataFormSchemaType) => {
-    console.log(data);
-  };
-
   return (
-    <Box as="form" mt="5rem" onSubmit={handleSubmit(onSubmitAccountDataForm)}>
-      <VStack spacing="1.2rem">
+    <>
+      <VStack mt="5rem" spacing="1.2rem">
         <FormWrapper error={errors.name} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
           <TextInput
             size="xl"
@@ -50,7 +59,28 @@ export const AccountDataForm = () => {
         </FormWrapper>
       </VStack>
 
-      <PrivacyPoliciesModalButton />
-    </Box>
+      <Button
+        size="lg"
+        variant="white"
+        w="17.7rem"
+        p="1rem"
+        mt="8.8rem"
+        mx="auto"
+        rightIcon={
+          <CircleIcon boxSize="3.9rem" bg="green.600">
+            <ArrowRightMediumIcon />
+          </CircleIcon>
+        }
+        onClick={onOpenPrivacyPoliciesModal}
+      >
+        <Text as="span" textStyle="action3" color="text.footnote" w="full" align="center">
+          Próximo
+        </Text>
+      </Button>
+      <PrivacyPoliciesModal
+        isOpen={isOpenPrivacyPoliciesModal}
+        onClose={onClosePrivacyPoliciesModal}
+      />
+    </>
   );
 };
