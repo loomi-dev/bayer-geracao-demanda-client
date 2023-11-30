@@ -10,7 +10,7 @@ import { AuthBanner } from '../../components';
 import { Benefit, DividerBenefit } from './components';
 
 export const OnboardingScreen = () => (
-  <Flex minH="100%">
+  <Flex minH="100%" position="relative">
     <AuthBanner />
 
     <Flex
