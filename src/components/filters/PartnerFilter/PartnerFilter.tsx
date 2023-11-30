@@ -23,7 +23,6 @@ export const PartnerFilter = ({ options = [] }: PartnerFilterProps) => {
       <FilterTrigger
         variant="primary-filter"
         label="Parceiros"
-        w="20.5rem"
         onClick={onOpen}
         leftIcon={<UserGroupIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
