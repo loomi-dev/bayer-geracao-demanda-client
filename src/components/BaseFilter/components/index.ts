@@ -3,4 +3,5 @@ export * from './FilterBody';
 export * from './FilterFooter';
 export * from './FilterHeader';
 export * from './FilterTrigger';
-export * from './Filter';
+export * from './BaseFilter';
+export * from './FilterOption';

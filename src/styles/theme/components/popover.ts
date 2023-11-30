@@ -9,7 +9,7 @@ export const Popover = defineMultiStyleConfig({
       content: {
         borderRadius: '2rem',
         border: '1px solid',
-        borderColor: 'surface.primary',
+        borderColor: 'transparent',
         bgColor: 'surface.secondary',
         px: 'initial',
       },
@@ -19,12 +19,14 @@ export const Popover = defineMultiStyleConfig({
     },
     secondary: {
       content: {
-        layerStyle: 'card',
         bgColor: 'opacity.white.0.50',
         borderRadius: '2rem',
         border: '1px solid',
-        borderColor: 'surface.primary',
+        borderColor: 'transparent',
         backdropFilter: 'blur(22px)',
+      },
+      body: {
+        pl: '2rem',
       },
     },
   },

@@ -1,11 +1,12 @@
 import { useDisclosure } from '@chakra-ui/react';
 
 import {
-  Filter,
+  BaseFilter,
   FilterBody,
   FilterContent,
   FilterFooter,
   FilterHeader,
+  FilterOption,
   FilterOptionProps,
   FilterTrigger,
 } from '@/components/BaseFilter';
@@ -18,7 +19,7 @@ export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Filter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
+    <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
         label="Clientes"
@@ -28,9 +29,18 @@ export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
       />
       <FilterContent w="28rem">
         <FilterHeader placeholder="Pesquisar por nome ou CNPJ" />
-        <FilterBody h="28rem" overflowY="scroll" options={options} />
+        <FilterBody h="28rem" overflowY="scroll">
+          {options.map((option) => (
+            <FilterOption
+              key={option.value}
+              label={option.label}
+              subLabel={option.subLabel}
+              value={option.value}
+            />
+          ))}
+        </FilterBody>
         <FilterFooter label={options.length > 1 ? 'Clientes' : 'Cliente'} value={options.length} />
       </FilterContent>
-    </Filter>
+    </BaseFilter>
   );
 };

@@ -1,20 +1,8 @@
 import { PopoverBody, PopoverBodyProps } from '@chakra-ui/react';
+import { ReactNode } from 'react';
 
-import { FilterOptionProps } from '../types';
+type FilterBodyProps = { children: ReactNode } & PopoverBodyProps;
 
-import { FilterOption } from './FilterOption';
-
-type FilterBodyProps = { options?: FilterOptionProps[] } & PopoverBodyProps;
-
-export const FilterBody = ({ options = [], ...props }: FilterBodyProps) => (
-  <PopoverBody {...props}>
-    {options.map((option) => (
-      <FilterOption
-        key={option.value}
-        label={option.label}
-        subLabel={option.subLabel}
-        value={option.value}
-      />
-    ))}
-  </PopoverBody>
+export const FilterBody = ({ children, ...props }: FilterBodyProps) => (
+  <PopoverBody {...props}>{children}</PopoverBody>
 );

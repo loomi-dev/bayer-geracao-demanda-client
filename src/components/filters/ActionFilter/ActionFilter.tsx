@@ -1,10 +1,11 @@
 import { useDisclosure } from '@chakra-ui/react';
 
 import {
-  Filter,
+  BaseFilter,
   FilterBody,
   FilterContent,
   FilterFooter,
+  FilterOption,
   FilterOptionProps,
   FilterTrigger,
 } from '@/components/BaseFilter';
@@ -17,7 +18,7 @@ export const ActionFilter = ({ options = [] }: ActionFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Filter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
+    <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
         label="Tipo de ação"
@@ -26,12 +27,16 @@ export const ActionFilter = ({ options = [] }: ActionFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent w="28rem">
-        <FilterBody h="18rem" overflowY="scroll" options={options} />
+        <FilterBody h="18rem" overflowY="scroll">
+          {options.map((option) => (
+            <FilterOption key={option.value} label={option.label} value={option.value} />
+          ))}
+        </FilterBody>
         <FilterFooter
           label={options.length > 1 ? 'Tipos de ações ' : 'Tipo de ação'}
           value={options.length}
         />
       </FilterContent>
-    </Filter>
+    </BaseFilter>
   );
 };

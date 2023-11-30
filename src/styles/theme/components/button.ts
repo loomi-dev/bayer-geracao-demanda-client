@@ -89,6 +89,8 @@ export const Button = defineStyleConfig({
     },
     'secondary-filter': {
       layerStyle: 'card',
+      fontWeight: 'bold',
+      fontSize: '1.6rem',
       borderRadius: '3.2rem',
       bgColor: 'surface.secondary',
     },

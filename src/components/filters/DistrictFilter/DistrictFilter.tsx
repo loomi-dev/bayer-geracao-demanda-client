@@ -1,11 +1,12 @@
 import { useDisclosure } from '@chakra-ui/react';
 
 import {
-  Filter,
+  BaseFilter,
   FilterBody,
   FilterContent,
   FilterFooter,
   FilterHeader,
+  FilterOption,
   FilterOptionProps,
   FilterTrigger,
 } from '@/components/BaseFilter';
@@ -18,7 +19,7 @@ export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Filter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
+    <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
         label="Distrito"
@@ -28,12 +29,21 @@ export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
       />
       <FilterContent w="28rem" overflowY="scroll">
         <FilterHeader placeholder="Pesquisar por distrito" />
-        <FilterBody h="28rem" overflowY="scroll" options={options} />
+        <FilterBody h="28rem" overflowY="scroll">
+          {options.map((option) => (
+            <FilterOption
+              key={option.value}
+              label={option.label}
+              subLabel={option.subLabel}
+              value={option.value}
+            />
+          ))}
+        </FilterBody>
         <FilterFooter
           label={options.length > 1 ? 'Distritos' : 'Distrito'}
           value={options.length}
         />
       </FilterContent>
-    </Filter>
+    </BaseFilter>
   );
 };

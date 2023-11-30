@@ -7,7 +7,7 @@ export const FilterOption = ({ label, subLabel, value }: FilterOptionProps) => (
     align="flex-start"
     gap="1.2rem"
     py="1.2rem"
-    borderBottom="1px solid"
+    borderBottom={'1px solid'}
     borderBottomColor="surface.primary"
   >
     <Checkbox value={value} />
