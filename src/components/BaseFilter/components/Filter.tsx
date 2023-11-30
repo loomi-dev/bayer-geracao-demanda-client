@@ -5,4 +5,6 @@ type FilterProps = {
   children: ReactNode;
 } & PopoverProps;
 
-export const Filter = ({ children }: FilterProps) => <Popover>{children}</Popover>;
+export const Filter = ({ children, ...props }: FilterProps) => (
+  <Popover {...props}>{children}</Popover>
+);

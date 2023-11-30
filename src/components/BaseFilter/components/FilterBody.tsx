@@ -6,8 +6,8 @@ import { FilterOption } from './FilterOption';
 
 type FilterBodyProps = { options?: FilterOptionProps[] } & PopoverBodyProps;
 
-export const FilterBody = ({ options = [] }: FilterBodyProps) => (
-  <PopoverBody>
+export const FilterBody = ({ options = [], ...props }: FilterBodyProps) => (
+  <PopoverBody {...props}>
     {options.map((option) => (
       <FilterOption
         key={option.value}

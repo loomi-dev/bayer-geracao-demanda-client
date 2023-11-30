@@ -18,7 +18,7 @@ export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Filter isOpen={isOpen} onClose={onClose}>
+    <Filter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
         label="Clientes"
@@ -26,9 +26,9 @@ export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
         leftIcon={<UserIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
-      <FilterContent>
+      <FilterContent w="28rem">
         <FilterHeader placeholder="Pesquisar por nome ou CNPJ" />
-        <FilterBody options={options} />
+        <FilterBody h="28rem" overflowY="scroll" options={options} />
         <FilterFooter label={options.length > 1 ? 'Clientes' : 'Cliente'} value={options.length} />
       </FilterContent>
     </Filter>

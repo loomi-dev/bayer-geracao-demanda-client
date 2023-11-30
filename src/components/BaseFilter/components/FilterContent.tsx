@@ -3,6 +3,6 @@ import { ReactNode } from 'react';
 
 type FilterContentProps = { children: ReactNode } & PopoverContentProps;
 
-export const FilterContent = ({ children }: FilterContentProps) => (
-  <PopoverContent>{children}</PopoverContent>
+export const FilterContent = ({ children, ...props }: FilterContentProps) => (
+  <PopoverContent {...props}>{children}</PopoverContent>
 );

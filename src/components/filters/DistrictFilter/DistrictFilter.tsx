@@ -18,7 +18,7 @@ export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Filter isOpen={isOpen} onClose={onClose}>
+    <Filter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
         label="Distrito"
@@ -26,9 +26,9 @@ export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
         leftIcon={<MapMarkerIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
-      <FilterContent>
+      <FilterContent w="28rem" overflowY="scroll">
         <FilterHeader placeholder="Pesquisar por distrito" />
-        <FilterBody options={options} />
+        <FilterBody h="28rem" overflowY="scroll" options={options} />
         <FilterFooter
           label={options.length > 1 ? 'Distritos' : 'Distrito'}
           value={options.length}

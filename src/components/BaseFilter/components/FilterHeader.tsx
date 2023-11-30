@@ -6,7 +6,7 @@ import { TextInput, TextInputProps } from '@/components/TextInput';
 type FilterHeaderProps = TextInputProps;
 
 export const FilterHeader = ({ ...props }: FilterHeaderProps) => (
-  <PopoverHeader>
+  <PopoverHeader {...props}>
     <TextInput
       variant="primary"
       borderRadius="1.6rem"
