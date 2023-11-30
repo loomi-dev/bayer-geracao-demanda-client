@@ -1,6 +1,13 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
 
-import { DistrictFilter, PartnerFilter, RegionFilter, SearchIcon, TextInput } from '@/components';
+import {
+  DistrictFilter,
+  DynamicTable,
+  PartnerFilter,
+  RegionFilter,
+  SearchIcon,
+  TextInput,
+} from '@/components';
 
 export const CustomerTable = () => (
   <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
@@ -19,5 +26,6 @@ export const CustomerTable = () => (
         />
       </HStack>
     </Flex>
+    <DynamicTable data={[]} />
   </Flex>
 );
