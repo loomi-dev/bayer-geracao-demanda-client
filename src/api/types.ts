@@ -20,7 +20,6 @@ export type MutOpt<
 
 export type QueryOpt<
   Response = void,
-  Variables = unknown,
   Error = unknown,
   TQueryKey extends QueryKey = any[],
-> = UseQueryOptions<Response, Error, Variables, TQueryKey>;
+> = UseQueryOptions<Response, Error, Response, TQueryKey>;
