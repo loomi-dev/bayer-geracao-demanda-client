@@ -16,3 +16,5 @@ export { default as PersonIcon } from './Person';
 export { default as MinusIcon } from './Minus';
 export { default as UserGroupIcon } from './UserGroup';
 export { default as UserGroupBigIcon } from './UserGroupBig';
+export { default as Eye } from './Eye';
+export { default as EyeOff } from './EyeOff';

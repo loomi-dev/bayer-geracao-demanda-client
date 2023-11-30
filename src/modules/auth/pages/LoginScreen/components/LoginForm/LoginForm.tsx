@@ -11,6 +11,7 @@ import {
   LockClosedIcon,
   PersonIcon,
   FormWrapper,
+  PasswordInput,
 } from '@/components';
 
 import { LoginFormSchemaType, loginFormSchema } from './loginForm.schema';
@@ -35,7 +36,7 @@ export const LoginForm = () => {
       <VStack spacing="2.4rem" mb="1rem">
         <FormWrapper error={errors.identifier} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
           <TextInput
-            placeholder="Usuário"
+            placeholder="CNPJ ou E-mail"
             size="xl"
             leftIcon={<PersonIcon />}
             {...register('identifier')}
@@ -43,7 +44,7 @@ export const LoginForm = () => {
         </FormWrapper>
 
         <FormWrapper error={errors.password} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
-          <TextInput
+          <PasswordInput
             placeholder="Senha"
             size="xl"
             leftIcon={<LockClosedIcon />}
