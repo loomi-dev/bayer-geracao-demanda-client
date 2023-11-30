@@ -90,7 +90,7 @@ export const OnboardingScreen = () => (
     </Flex>
 
     <Image
-      src="/assets/images/onboarding-agro.png"
+      src="/assets/images/onboarding-agro.webp"
       alt=""
       width={622}
       height={707}
