@@ -16,3 +16,4 @@ export { default as LockClosedIcon } from './LockClosed';
 export { default as PersonIcon } from './Person';
 export { default as MinusIcon } from './Minus';
 export { default as SearchIcon } from './Search';
+export { default as ChevronTopIcon } from './ChevronTop';
