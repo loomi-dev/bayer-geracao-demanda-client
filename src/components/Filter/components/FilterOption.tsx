@@ -2,8 +2,8 @@ import { Checkbox, Flex, Text } from '@chakra-ui/react';
 
 export type FilterOptionProps = {
   label: string;
-  subLabel?: string;
   value: string;
+  subLabel?: string;
 };
 
 export const FilterOption = ({ label, subLabel, value }: FilterOptionProps) => (
