@@ -25,7 +25,7 @@ export const Input = defineMultiStyleConfig({
         borderColor: 'opacity.black.0.14',
         fontSize: '1.6rem',
         fontWeight: 'normal',
-        color: 'text.secondary',
+        color: 'text.primary',
         pl: '5.5rem',
         pr: '6.5rem',
 

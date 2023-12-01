@@ -2,11 +2,12 @@ import { DefaultSession, DefaultUser, DefaultJWT } from 'next-auth';
 
 declare module 'next-auth' {
   interface User extends DefaultUser {
-    id: string | number;
+    id: number;
     username: string;
     email: string;
     confirmed: boolean;
     accessToken: string;
+    role: 'Farmer' | 'Manager';
   }
 
   interface Session extends DefaultSession {
@@ -17,11 +18,12 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   interface JWT extends DefaultJWT {
     user: {
-      id: string | number;
+      id: number;
       username: string;
       email: string;
       confirmed: boolean;
       accessToken: string;
+      role: 'Farmer' | 'Manager';
     };
   }
 }
