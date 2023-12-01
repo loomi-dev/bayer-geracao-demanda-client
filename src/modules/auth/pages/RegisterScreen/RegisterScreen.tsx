@@ -6,7 +6,7 @@ import { AuthBanner } from '../../components';
 import { RegisterFormTabs, RegisterOverlay } from './components';
 
 export const RegisterScreen = () => (
-  <Flex align="center" justify="center" h="100%" w="full" position="relative" py="3rem">
+  <Flex align="center" justify="center" minH="100%" w="full" position="relative" py="3rem">
     <AuthBanner />
 
     <RegisterOverlay />
@@ -18,10 +18,10 @@ export const RegisterScreen = () => (
       bg="linear-gradient(187deg, #FFF 40.98%, rgba(255, 255, 255, 0.00) 153.35%)"
       maxW="115.8rem"
       w="full"
-      minH="100%"
       position="relative"
       zIndex="2"
-      p="6.6rem initial 7.3rem"
+      pt="6.6rem"
+      pb="7.3rem"
       borderRadius="2.8rem"
     >
       <Image
