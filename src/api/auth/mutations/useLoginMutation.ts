@@ -33,6 +33,10 @@ export const useLoginMutation = (
     },
     onSuccess: (session) => {
       const isNewUser = session?.user.confirmed === false;
+      const redirectRoute =
+        session?.user.role === 'Manager'
+          ? `${DEFAULT_PRIVATE_PAGE}/clientes`
+          : `${DEFAULT_PRIVATE_PAGE}/carteira`;
 
       if (isNewUser) {
         push(DEFAULT_ONBOARDING_PAGE);
@@ -44,7 +48,7 @@ export const useLoginMutation = (
         return;
       }
 
-      push(DEFAULT_PRIVATE_PAGE);
+      push(redirectRoute);
       toast({
         description: 'Conectado com sucesso!',
         status: 'success',

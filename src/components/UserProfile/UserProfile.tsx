@@ -11,7 +11,7 @@ import {
 import { signOut, useSession } from 'next-auth/react';
 
 import { Avatar } from '../Avatar';
-import { CircleChevronDownIcon } from '../icons';
+import { CircleChevronDownIcon, LogoutIcon, UserIcon } from '../icons';
 
 export const UserProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,7 +31,7 @@ export const UserProfile = () => {
         <Text textStyle={{ lg: 'body2', xl: 'body1' }} color="text.primary">
           Olá, {username}
         </Text>
-        <Menu placement="bottom" isOpen={isOpen} onClose={onClose}>
+        <Menu placement="bottom-end" isOpen={isOpen} onClose={onClose}>
           <MenuButton onClick={onOpen}>
             <HStack gap="1rem">
               <Text
@@ -44,14 +44,39 @@ export const UserProfile = () => {
               <CircleChevronDownIcon width="2rem" height="2rem" />
             </HStack>
           </MenuButton>
-          <MenuList bg="surface.primary" shadow="none">
+          <MenuList
+            w="20rem"
+            borderRadius="1.6rem"
+            border="1px solid"
+            borderColor="greyscale.150"
+            boxShadow="card"
+            bg="surface.primary"
+            shadow="none"
+            px="1.6rem"
+            py="1rem"
+          >
+            <MenuItem
+              display="none"
+              borderBottom="1px solid"
+              borderColor="greyscale.150"
+              _hover={{ opacity: '0.7' }}
+              bg="surface.primary"
+              color="text.footnote"
+              pb="1rem"
+              gap="1rem"
+            >
+              <UserIcon />
+              <Text textStyle="footnote">Meu perfil</Text>
+            </MenuItem>
             <MenuItem
               _hover={{ opacity: '0.7' }}
               bg="surface.primary"
-              color="text.primary"
               onClick={() => signOut()}
+              color="text.footnote"
+              gap="1rem"
             >
-              Sair
+              <LogoutIcon />
+              <Text textStyle="footnote">Sair da plataforma</Text>
             </MenuItem>
           </MenuList>
         </Menu>
