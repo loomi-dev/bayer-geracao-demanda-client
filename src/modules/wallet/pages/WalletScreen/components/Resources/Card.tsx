@@ -1,12 +1,12 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
 import { ArrowRightIcon, CircleIcon } from '@/components';
 
 type CardProps = {
   label: string;
-  imageUrl: string;
+  imageUrl: StaticImageData;
 };
 export const Card = ({ label, imageUrl }: CardProps) => (
   <Link href="/planejamento">
@@ -28,7 +28,14 @@ export const Card = ({ label, imageUrl }: CardProps) => (
         },
       }}
     >
-      <Image src={imageUrl} quality={100} fill alt={label} style={{ objectFit: 'cover' }} />
+      <Image
+        src={imageUrl}
+        placeholder="blur"
+        quality={100}
+        fill
+        alt={label}
+        style={{ objectFit: 'cover' }}
+      />
       <Box
         position="absolute"
         opacity="0"

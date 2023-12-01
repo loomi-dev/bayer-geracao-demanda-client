@@ -1,10 +1,15 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
-import { AddInsideCircleIcon, CircleIcon } from '@/components';
+import { AddInsideCircleIcon, CardSkeletonProps, CircleIcon } from '@/components';
 import { useGetFarmers } from '@/modules/wallet/api';
 import { formatPrice } from '@/utils';
+
+const DynamicCardSkeleton = dynamic<CardSkeletonProps>(() =>
+  import('@/components').then(({ CardSkeleton }) => CardSkeleton),
+);
 
 export const Balance = () => {
   const user = useSession();
@@ -31,9 +36,13 @@ export const Balance = () => {
           <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.brand">
             R$
           </Text>
-          <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
-            {formatPrice(farmers?.wallet.balance)}
-          </Text>
+          {isLoading ? (
+            <DynamicCardSkeleton w="14rem" borderRadius="1.2rem" h="4rem" />
+          ) : (
+            <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
+              {formatPrice(farmers?.wallet.balance)}
+            </Text>
+          )}
         </HStack>
         <Text w={{ lg: '16rem' }} textStyle="caption5" color="text.footnote">
           em ações para solicitar os recursos.
