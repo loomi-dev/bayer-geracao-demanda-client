@@ -1,14 +1,18 @@
 import { Flex, Text } from '@chakra-ui/react';
 
+import action1Url from '@/../public/assets/images/action1.webp';
+import action2Url from '@/../public/assets/images/action2.jpeg';
+import action3Url from '@/../public/assets/images/action3.webp';
+
 import { Card } from './Card';
 
 const cardItems = [
   {
     label: 'Ação de relacionamento',
-    imageUrl: '/assets/images/action1.webp',
+    imageUrl: action1Url,
   },
-  { label: 'Ação de campo', imageUrl: '/assets/images/action2.jpeg' },
-  { label: 'Enxoval', imageUrl: '/assets/images/action3.webp' },
+  { label: 'Ação de campo', imageUrl: action2Url },
+  { label: 'Enxoval', imageUrl: action3Url },
 ];
 
 export const Resources = () => (
