@@ -23,3 +23,15 @@ export type QueryOpt<
   Error = unknown,
   TQueryKey extends QueryKey = any[],
 > = UseQueryOptions<Response, Error, Response, TQueryKey>;
+
+export type GenericListResponseType<T> = {
+  meta: {
+    pagination: {
+      page: number;
+      pageCount: number;
+      pageSize: number;
+      total: number;
+    };
+  };
+  data: T[];
+};
