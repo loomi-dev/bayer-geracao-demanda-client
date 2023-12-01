@@ -2,6 +2,7 @@ import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
 import { Customer } from '@/modules/customers/api';
+import { formatPrice } from '@/utils';
 
 const columnHelper = createColumnHelper<Customer>();
 
@@ -14,19 +15,19 @@ export const CustomerColumns = [
   columnHelper.accessor(() => null, {
     id: 'recursoGdInicial',
     header: () => <Text textStyle="action4">Recurso GD Inicial</Text>,
-    cell: () => <Text textStyle="caption3">-</Text>,
+    cell: () => <Text textStyle="caption3">{formatPrice(80000)}</Text>,
   }),
   columnHelper.accessor(() => null, {
     id: 'recursoGdFinal',
     header: () => <Text textStyle="action4">Recurso GD Final</Text>,
-    cell: () => <Text textStyle="caption3">-</Text>,
+    cell: () => <Text textStyle="caption3">{formatPrice(80000)}</Text>,
   }),
   columnHelper.accessor(() => null, {
     id: 'saldo',
     header: () => <Text textStyle="action4">Saldo</Text>,
     cell: () => (
       <Text textStyle="caption3" color="green.600">
-        -
+        {formatPrice(1000000)}
       </Text>
     ),
   }),
@@ -35,7 +36,7 @@ export const CustomerColumns = [
     header: () => <Text textStyle="action4">Utilizado</Text>,
     cell: () => (
       <Text textStyle="caption3" color="green.600">
-        -
+        {formatPrice(1000000)}
       </Text>
     ),
   }),
