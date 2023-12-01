@@ -1,5 +1,6 @@
 import { TableContainer, Table, TableProps } from '@chakra-ui/react';
 import { useReactTable, TableOptions, getCoreRowModel } from '@tanstack/react-table';
+import { ReactNode } from 'react';
 
 import { TableBody } from './TableBody';
 import { TableHeader } from './TableHead';
@@ -7,12 +8,14 @@ import { TableHeader } from './TableHead';
 type DynamicTableProps<TData> = {
   data: TableOptions<TData>['data'];
   columns?: TableOptions<TData>['columns'];
+  children?: ReactNode;
 } & TableProps;
 
 export const DynamicTable = <TData extends Record<string, unknown>>({
   data = [],
   columns = [],
   variant = 'primary',
+  children,
   ...restProps
 }: DynamicTableProps<TData>) => {
   const { getHeaderGroups, getRowModel } = useReactTable<TData>({
@@ -37,6 +40,8 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
 
         <TableBody<TData> rows={rows} />
       </Table>
+
+      {children}
     </TableContainer>
   );
 };

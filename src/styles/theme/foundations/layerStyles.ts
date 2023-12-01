@@ -3,9 +3,9 @@ import { ChakraTheme } from '@chakra-ui/react';
 export const layerStyles: ChakraTheme['layerStyles'] = {
   card: {
     border: '1px solid',
-    borderColor: 'surface.secondary',
+    borderColor: 'surface.primary',
     borderRadius: '3.2rem',
-    bgColor: 'surface.primary',
+    bgColor: 'surface.secondary',
     boxShadow: 'primary',
   },
 };
