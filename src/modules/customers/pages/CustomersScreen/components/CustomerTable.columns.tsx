@@ -1,55 +1,57 @@
 import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-const columnHelper = createColumnHelper<any>();
+import { Customer } from '@/modules/customers/api';
+
+const columnHelper = createColumnHelper<Customer>();
 
 export const CustomerColumns = [
-  columnHelper.accessor((data) => data.safra, {
+  columnHelper.accessor((data) => data.farmer.company_name, {
     id: 'razaoSocial',
     header: () => <Text textStyle="action4">Razão Social</Text>,
     cell: (info) => <Text textStyle="body3">{info.getValue()}</Text>,
   }),
-  columnHelper.accessor((data) => data.data, {
+  columnHelper.accessor(() => null, {
     id: 'recursoGdInicial',
     header: () => <Text textStyle="action4">Recurso GD Inicial</Text>,
-    cell: (info) => <Text textStyle="caption3">{info.getValue()}</Text>,
+    cell: () => <Text textStyle="caption3">-</Text>,
   }),
-  columnHelper.accessor((data) => data.status, {
+  columnHelper.accessor(() => null, {
     id: 'recursoGdFinal',
     header: () => <Text textStyle="action4">Recurso GD Final</Text>,
-    cell: (info) => <Text textStyle="caption3">{info.getValue()}</Text>,
+    cell: () => <Text textStyle="caption3">-</Text>,
   }),
-  columnHelper.accessor((data) => data.orcamento, {
+  columnHelper.accessor(() => null, {
     id: 'saldo',
     header: () => <Text textStyle="action4">Saldo</Text>,
-    cell: (info) => (
+    cell: () => (
       <Text textStyle="caption3" color="green.600">
-        {info.getValue()}
+        -
       </Text>
     ),
   }),
-  columnHelper.accessor((data) => data.status, {
+  columnHelper.accessor(() => null, {
     id: 'utilizado',
     header: () => <Text textStyle="action4">Utilizado</Text>,
-    cell: (info) => (
+    cell: () => (
       <Text textStyle="caption3" color="green.600">
-        {info.getValue()}
+        -
       </Text>
     ),
   }),
-  columnHelper.accessor((data) => data.orcamento, {
+  columnHelper.accessor(() => null, {
     id: 'status',
     header: () => <Text textStyle="action4">Status</Text>,
-    cell: (info) => <Text textStyle="action3">{info.getValue()}</Text>,
+    cell: () => <Text textStyle="action3">-</Text>,
   }),
-  columnHelper.accessor((data) => data.status, {
+  columnHelper.accessor(() => null, {
     id: 'tempoStatus',
     header: () => <Text textStyle="action4">Tempo no status</Text>,
-    cell: (info) => <Text textStyle="footnote">{info.getValue()}</Text>,
+    cell: () => <Text textStyle="footnote">-</Text>,
   }),
-  columnHelper.accessor((data) => data.orcamento, {
+  columnHelper.accessor(() => null, {
     id: 'ultimoAcesso',
     header: () => <Text textStyle="action4">Ultimo acesso</Text>,
-    cell: (info) => <Text textStyle="footnote">{info.getValue()}</Text>,
+    cell: () => <Text textStyle="footnote">-</Text>,
   }),
 ];

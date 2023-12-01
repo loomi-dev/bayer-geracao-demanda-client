@@ -2,7 +2,7 @@ import { Flex, HStack, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
 import { DistrictFilter, DynamicTable, RegionFilter, SearchIcon, TextInput } from '@/components';
-import { useGetCustomers } from '@/modules/customers/api';
+import { Customer, useGetCustomers } from '@/modules/customers/api';
 
 import { CustomerColumns } from './CustomerTable.columns';
 
@@ -14,7 +14,7 @@ export const CustomerTable = () => {
     { id: userId, filter: {} },
     { enabled: Boolean(userId) },
   );
-  console.log(data);
+  const customers = data?.data ?? [];
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
@@ -31,12 +31,14 @@ export const CustomerTable = () => {
           />
         </HStack>
       </Flex>
-      <DynamicTable data={[]} columns={CustomerColumns}>
-        <Flex justify="center" mt="1.6rem">
-          <Text textStyle={{ lg: 'action4', '2xl': 'action3' }} color="text.secondary">
-            Não existe clientes cadastrados na plataforma
-          </Text>
-        </Flex>
+      <DynamicTable<Customer> data={customers} columns={CustomerColumns}>
+        {!customers.length && (
+          <Flex justify="center" mt="1.6rem">
+            <Text textStyle={{ lg: 'action4', '2xl': 'action3' }} color="text.secondary">
+              Não existe clientes cadastrados na plataforma
+            </Text>
+          </Flex>
+        )}
       </DynamicTable>
     </Flex>
   );

@@ -9,7 +9,7 @@ export type GetCustomerParams = {
   };
 };
 
-type Customer = {
+export type Customer = {
   date: Date;
   farmer: Farmer;
   historic: any; // TODO
