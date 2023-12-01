@@ -13,7 +13,7 @@ import {
 } from '@/components';
 
 import { PrivacyPoliciesModal } from './PrivacyPoliciesModal';
-import { AccountDataFormSchemaType } from './registerFormTabs.schemas';
+import { AccountDataFormSchemaType, accountDataFormSchema } from './registerFormTabs.schemas';
 
 export const AccountDataForm = () => {
   const {
@@ -24,8 +24,15 @@ export const AccountDataForm = () => {
 
   const {
     register,
+    watch,
     formState: { errors },
   } = useFormContext<AccountDataFormSchemaType>();
+
+  const isValidAccountDataForm = accountDataFormSchema.safeParse({
+    name: watch('name'),
+    email: watch('email'),
+    role: watch('role'),
+  }).success;
 
   return (
     <>
@@ -66,6 +73,7 @@ export const AccountDataForm = () => {
         p="1rem"
         mt="8.8rem"
         mx="auto"
+        isDisabled={!isValidAccountDataForm}
         rightIcon={
           <CircleIcon boxSize="3.9rem" bg="green.600">
             <ArrowRightMediumIcon />

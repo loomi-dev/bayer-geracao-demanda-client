@@ -19,7 +19,7 @@ export type CreatePasswordFormProps = {
 export const CreatePasswordForm = ({ isLoadingSignInButton }: CreatePasswordFormProps) => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useFormContext<CreatePasswordFormSchemaType>();
 
   return (
@@ -57,7 +57,7 @@ export const CreatePasswordForm = ({ isLoadingSignInButton }: CreatePasswordForm
         p="1rem"
         mt="17.7rem"
         mx="auto"
-        isDisabled={isLoadingSignInButton}
+        isDisabled={isLoadingSignInButton || !isValid}
         rightIcon={
           <CircleIcon boxSize="3.9rem" bg="green.600">
             {isLoadingSignInButton ? (

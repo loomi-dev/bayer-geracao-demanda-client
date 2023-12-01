@@ -11,19 +11,33 @@ import {
   Checkbox,
   ModalProps,
 } from '@chakra-ui/react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
+
+import { useRegisterFormTabs } from '../../stores';
 
 type PrivacyPoliciesModalProps = Omit<ModalProps, 'children'>;
 
-export const PrivacyPoliciesModal = ({ ...restProps }: PrivacyPoliciesModalProps) => {
-  const [agreePrivacyPolicies, setAgreePrivacyPolicies] = useState(false);
+export const PrivacyPoliciesModal = ({ onClose, ...restProps }: PrivacyPoliciesModalProps) => {
+  const [agreePrivacyPolicies, setCurrentTabForm, setAgreePrivacyPolicies] = useRegisterFormTabs(
+    (state) => [state.agreePrivacyPolicies, state.setCurrentTabForm, state.setAgreePrivacyPolicies],
+  );
 
-  const handleChangeCheckboxPrivacyPolicies = (e: ChangeEvent<HTMLInputElement>) => {
-    setAgreePrivacyPolicies(e.target.checked);
+  const handleChangeCheckboxPrivacyPolicies = (event: ChangeEvent<HTMLInputElement>) => {
+    setAgreePrivacyPolicies(event.target.checked);
+  };
+
+  const handleNextFormStep = () => {
+    setCurrentTabForm(1);
+    onClose();
+  };
+
+  const handleCloseModal = () => {
+    onClose();
+    setAgreePrivacyPolicies(false);
   };
 
   return (
-    <Modal isCentered {...restProps}>
+    <Modal onClose={handleCloseModal} isCentered {...restProps}>
       <ModalOverlay />
 
       <ModalContent
@@ -72,7 +86,13 @@ export const PrivacyPoliciesModal = ({ ...restProps }: PrivacyPoliciesModalProps
             coletam e utilizam os dados pessoais dos usuários da aplicação
           </Checkbox>
 
-          <Button size="lg" maxW="32.4rem" w="full" isDisabled={!agreePrivacyPolicies}>
+          <Button
+            size="lg"
+            maxW="32.4rem"
+            w="full"
+            isDisabled={!agreePrivacyPolicies}
+            onClick={handleNextFormStep}
+          >
             Continuar
           </Button>
         </ModalFooter>

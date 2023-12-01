@@ -18,24 +18,26 @@ export const loginWithCredentials = async (
 };
 
 export const updateUser = async ({
-  id,
+  id: userId,
   name,
   email,
   confirmed,
   companyRole,
 }: UpdateUserData): Promise<UpdateUserResponse> => {
   const [putUserInfoResponse, putRoleInfoResponse] = await Promise.all([
-    axios.authorized().put<UpdateUserResponse>(`/users/${id}`, {
+    axios.authorized().put<UpdateUserResponse>(`/users/${userId}`, {
       name,
       confirmed,
       email,
     }),
-    axios.authorized().put(`/farmer/${id}`, {
-      company_role: companyRole,
+    axios.authorized().put(`/farmer/${userId}`, {
+      data: {
+        company_role: companyRole,
+      },
     }),
   ]);
 
-  const user = { ...putUserInfoResponse.data, ...putRoleInfoResponse };
+  const user = { ...putUserInfoResponse.data, ...putRoleInfoResponse.data };
 
   return user;
 };

@@ -1,40 +1,41 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import dynamic from 'next/dynamic';
 import { useSession } from 'next-auth/react';
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useUpdateUser } from '@/api';
 import { ArrowRightSmallIcon } from '@/components';
 
-import { RegisterFormSchemaType, registerFormSchema } from './registerFormTabs.schemas';
+import { useRegisterFormTabs } from '../../stores';
 
-const DynamicAccountDataForm = dynamic(async () => {
-  const { AccountDataForm } = await import('./AccountDataForm');
-
-  return AccountDataForm;
-});
-
-const DynamicCreatePasswordForm = dynamic(async () => {
-  const { CreatePasswordForm } = await import('./CreatePasswordForm');
-
-  return CreatePasswordForm;
-});
+import { AccountDataForm } from './AccountDataForm';
+import { CreatePasswordForm } from './CreatePasswordForm';
+import {
+  RegisterFormSchemaType,
+  accountDataFormSchema,
+  registerFormSchema,
+} from './registerFormTabs.schemas';
 
 export const RegisterFormTabs = () => {
   const session = useSession();
-
-  const [currentTabForm, setCurrentTabForm] = useState(0);
   const userId = session.data?.user.id as number;
+
+  const [agreePrivacyPolicies, currentTabForm, setCurrentTabForm] = useRegisterFormTabs((state) => [
+    state.agreePrivacyPolicies,
+    state.currentTabForm,
+    state.setCurrentTabForm,
+  ]);
 
   const { mutate: updateUser, isLoading: isUpdatingUser } = useUpdateUser();
 
   const methods = useForm<RegisterFormSchemaType>({
     resolver: zodResolver(registerFormSchema),
+    mode: 'all',
+    criteriaMode: 'all',
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, watch } = methods;
 
   const onSubmitAccountDataForm = (data: RegisterFormSchemaType) => {
     updateUser({
@@ -45,6 +46,14 @@ export const RegisterFormTabs = () => {
       confirmed: true,
     });
   };
+
+  const isValidAccountDataForm = accountDataFormSchema.safeParse({
+    name: watch('name'),
+    email: watch('email'),
+    role: watch('role'),
+  }).success;
+
+  const allowedPasswordStep = isValidAccountDataForm && agreePrivacyPolicies;
 
   return (
     <Box
@@ -72,8 +81,8 @@ export const RegisterFormTabs = () => {
         <Text
           textStyle="action4"
           color={currentTabForm === 1 ? 'border.brand' : 'text.disabled'}
-          cursor="pointer"
-          onClick={() => setCurrentTabForm(1)}
+          cursor={allowedPasswordStep ? 'pointer' : 'not-allowed'}
+          {...(allowedPasswordStep && { onClick: () => setCurrentTabForm(1) })}
         >
           <Text as="span" mr="1.2rem">
             02
@@ -83,10 +92,8 @@ export const RegisterFormTabs = () => {
       </HStack>
 
       <FormProvider {...methods}>
-        {currentTabForm === 0 && <DynamicAccountDataForm />}
-        {currentTabForm === 1 && (
-          <DynamicCreatePasswordForm isLoadingSignInButton={isUpdatingUser} />
-        )}
+        {currentTabForm === 0 && <AccountDataForm />}
+        {currentTabForm === 1 && <CreatePasswordForm isLoadingSignInButton={isUpdatingUser} />}
       </FormProvider>
     </Box>
   );
