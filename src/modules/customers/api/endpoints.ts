@@ -2,21 +2,21 @@ import qs from 'qs';
 
 import axios from '@/lib/axios';
 
+import { GetCustomersResponse, GetCustomerParams } from './types';
+
 export const getCustomers = async ({
   id,
-  region,
-  district,
-  company_identifier,
-}: any): Promise<any> => {
+  filter,
+}: GetCustomerParams): Promise<GetCustomersResponse> => {
   const filters = {
     farmer: {
       manager: {
         id: { $eq: id },
       },
     },
-    ...(region ? { region: { $eq: region } } : {}),
-    ...(district ? { district: { $eq: district } } : {}),
-    ...(company_identifier ? { company_identifier: { $eq: district } } : {}),
+    ...(filter?.region ? { region: { $eq: filter?.region } } : {}),
+    ...(filter?.district ? { district: { $eq: filter?.district } } : {}),
+    ...(filter?.company_identifier ? { company_identifier: { $eq: filter?.district } } : {}),
   };
   const query = qs.stringify({
     filters,

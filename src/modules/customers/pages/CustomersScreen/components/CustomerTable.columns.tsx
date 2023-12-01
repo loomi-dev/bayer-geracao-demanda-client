@@ -48,8 +48,8 @@ export const CustomerColumns = [
     cell: (info) => <Text textStyle="footnote">{info.getValue()}</Text>,
   }),
   columnHelper.accessor((data) => data.orcamento, {
-    id: 'Último acesso',
-    header: () => <Text textStyle="action4">Saldo</Text>,
+    id: 'ultimoAcesso',
+    header: () => <Text textStyle="action4">Ultimo acesso</Text>,
     cell: (info) => <Text textStyle="footnote">{info.getValue()}</Text>,
   }),
 ];

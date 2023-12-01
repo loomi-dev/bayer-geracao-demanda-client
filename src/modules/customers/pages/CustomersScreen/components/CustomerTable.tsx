@@ -1,27 +1,26 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
 
-import {
-  DistrictFilter,
-  DynamicTable,
-  PartnerFilter,
-  RegionFilter,
-  SearchIcon,
-  TextInput,
-} from '@/components';
+import { DistrictFilter, DynamicTable, RegionFilter, SearchIcon, TextInput } from '@/components';
 import { useGetCustomers } from '@/modules/customers/api';
 
 import { CustomerColumns } from './CustomerTable.columns';
 
 export const CustomerTable = () => {
-  const { data, isLoading } = useGetCustomers({});
+  const session = useSession();
+  const userId = session.data?.user.id;
 
+  const { data, isLoading } = useGetCustomers(
+    { id: userId, filter: {} },
+    { enabled: Boolean(userId) },
+  );
+  console.log(data);
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
       <Flex align="center" justify="space-between" px="1.6rem" w="100%">
         <Text textStyle="h5">Filtros</Text>
         <HStack gap="1.2rem">
-          <PartnerFilter options={[]} />
           <DistrictFilter options={[]} />
           <RegionFilter options={[]} />
           <TextInput
