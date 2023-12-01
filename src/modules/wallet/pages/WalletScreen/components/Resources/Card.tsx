@@ -18,7 +18,7 @@ export const Card = ({ label, imageUrl }: CardProps) => (
       border="1px solid"
       borderColor="opacity.black.0.10"
       overflow="hidden"
-      boxShadow="third"
+      boxShadow="card"
       cursor="pointer"
       _hover={{
         Button: {

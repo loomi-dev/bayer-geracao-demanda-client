@@ -5,7 +5,8 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 export const ENVIRONMENT = process.env.NODE_ENV;
 
 export const DEFAULT_PUBLIC_PAGE = '/entrar';
-export const DEFAULT_PRIVATE_PAGE = '/';
+export const DEFAULT_PRIVATE_MANAGER_PAGE = '/clientes';
+export const DEFAULT_PRIVATE_FARMER_PAGE = '/carteira';
 export const DEFAULT_ONBOARDING_PAGE = '/bem-vindo';
 
 export const ACCESS_TOKEN_ID = 'next-leap_access';
