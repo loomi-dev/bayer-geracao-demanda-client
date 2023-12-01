@@ -16,21 +16,31 @@ export const authOptions: NextAuthOptions = {
     },
     jwt: async ({ token, user, trigger, session }) => {
       if (user) {
-        token.user = user;
+        token.user = {
+          ...user,
+          id: Number(user.id),
+        };
       }
 
-      if (trigger === 'update') {
+      if (trigger === 'update' && session) {
         token.user = session.user;
-
-        return token;
       }
 
       return token;
     },
-    session: async ({ session, token: { user } }) => ({
-      ...session,
-      user,
-    }),
+    session: async ({ session, token: { user }, trigger, newSession }) => {
+      if (trigger === 'update' && newSession) {
+        session.user = {
+          ...newSession,
+          accessToken: session.user.accessToken,
+        };
+      }
+
+      return {
+        ...session,
+        user,
+      };
+    },
   },
   pages: {
     signIn: DEFAULT_PUBLIC_PAGE,

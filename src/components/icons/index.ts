@@ -25,3 +25,7 @@ export { default as UserGroupBigIcon } from './UserGroupBig';
 export { default as Eye } from './Eye';
 export { default as EyeOff } from './EyeOff';
 export { default as LogoutIcon } from './Logout';
+export { default as ArrowRightMediumIcon } from './ArrowRightMediumIcon';
+export { default as ArrowRightSmallIcon } from './ArrowRightSmallIcon';
+export { default as BusinessIcon } from './BusinessIcon';
+export { default as EmailIcon } from './EmailIcon';

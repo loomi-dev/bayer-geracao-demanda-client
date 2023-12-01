@@ -37,7 +37,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
               variant="unstyled"
               display="flex"
               justifyContent="center"
-              pr="0.8rem"
+              pr="1.2rem"
               onClick={handleToggleShowPassword}
             >
               {showPassword ? <EyeOff fontSize={22} /> : <Eye fontSize={22} />}
