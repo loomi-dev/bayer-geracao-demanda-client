@@ -18,6 +18,7 @@ export const credentialsProvider = CredentialsProvider({
         email: user.email,
         confirmed: user.confirmed,
         accessToken: jwt,
+        role: user.role,
       };
     } catch (err) {
       const error = err as ApiServiceErr;

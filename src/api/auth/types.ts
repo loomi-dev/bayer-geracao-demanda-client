@@ -9,6 +9,7 @@ export type UserType = {
   provider: string;
   confirmed: boolean;
   blocked: boolean;
+  role: 'Farmer' | 'Manager';
 };
 
 export type LoginWithCredentialsData = Credentials;
