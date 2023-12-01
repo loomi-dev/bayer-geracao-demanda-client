@@ -9,6 +9,8 @@ import {
   TextInput,
 } from '@/components';
 
+import { CustomerColumns } from './CustomerTable.columns';
+
 export const CustomerTable = () => (
   <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
     <Text textStyle="h4">Planejamentos</Text>
@@ -26,6 +28,12 @@ export const CustomerTable = () => (
         />
       </HStack>
     </Flex>
-    <DynamicTable data={[]} />
+    <DynamicTable data={[]} columns={CustomerColumns}>
+      <Flex justify="center" mt="1.6rem">
+        <Text textStyle={{ lg: 'action4', '2xl': 'action3' }} color="text.secondary">
+          Não existe clientes cadastrados na plataforma
+        </Text>
+      </Flex>
+    </DynamicTable>
   </Flex>
 );
