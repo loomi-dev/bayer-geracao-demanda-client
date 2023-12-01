@@ -29,3 +29,4 @@ export { default as ArrowRightMediumIcon } from './ArrowRightMediumIcon';
 export { default as ArrowRightSmallIcon } from './ArrowRightSmallIcon';
 export { default as BusinessIcon } from './BusinessIcon';
 export { default as EmailIcon } from './EmailIcon';
+export { default as BigCalendarIcon } from './BigCalendarIcon';
