@@ -22,5 +22,6 @@ export { default as FilterIcon } from './Filter';
 export { default as SlidersIcon } from './Sliders';
 export { default as UserGroupIcon } from './UserGroup';
 export { default as UserGroupBigIcon } from './UserGroupBig';
-export { default as Eye } from './Eye';
-export { default as EyeOff } from './EyeOff';
+export { default as EyeIcon } from './Eye';
+export { default as EyeOffIcon } from './EyeOff';
+export { default as BigCalendarIcon } from './BigCalendarIcon';

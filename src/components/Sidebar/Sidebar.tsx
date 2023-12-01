@@ -42,7 +42,7 @@ export const Sidebar = () => {
       bgColor="surface.primary"
       position="fixed"
       h="100%"
-      overflowY="scroll"
+      overflowY="auto"
       pb="3rem"
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
