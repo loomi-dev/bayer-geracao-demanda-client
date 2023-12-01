@@ -21,7 +21,7 @@ const axiosObject = {
   unauthorized() {
     unauthenticatedInstance.interceptors.response.use(
       async (response) => response,
-      async (error: AxiosError) => Promise.reject(error.response),
+      async (error: AxiosError) => Promise.reject(error?.response),
     );
 
     return unauthenticatedInstance;
@@ -41,12 +41,12 @@ const axiosObject = {
 
         return request;
       },
-      async (error: AxiosError) => Promise.reject(error.response),
+      async (error: AxiosError) => Promise.reject(error?.response),
     );
 
     authenticatedInstance.interceptors.response.use(
       async (response) => response,
-      async (error: AxiosError) => Promise.reject(error.response),
+      async (error: AxiosError) => Promise.reject(error?.response),
     );
 
     return authenticatedInstance;

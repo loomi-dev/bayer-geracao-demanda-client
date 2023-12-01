@@ -2,15 +2,19 @@ import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
+import { useGetFarmer } from '@/api';
 import { AddInsideCircleIcon, CircleIcon } from '@/components';
-import { useGetFarmers } from '@/modules/wallet/api';
-import { formatPrice } from '@/utils';
+import { centsToInteger, formatPrice } from '@/utils';
 
 export const Balance = () => {
   const user = useSession();
-  const userId = user.data?.user.id;
-  const { data, isLoading } = useGetFarmers({ id: userId ?? '' }, { enabled: Boolean(userId) });
-  const farmers = data?.data[0];
+  const userId = user.data?.user.id as number;
+  const { data: dataGetFarmer, isLoading } = useGetFarmer(
+    { farmerId: userId },
+    { enabled: Boolean(userId) },
+  );
+
+  const balanceValue = formatPrice(centsToInteger(dataGetFarmer?.data?.[0].wallet.balance ?? 0));
 
   return (
     <Flex
@@ -32,7 +36,7 @@ export const Balance = () => {
             R$
           </Text>
           <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
-            {formatPrice(farmers?.wallet.balance)}
+            {balanceValue}
           </Text>
         </HStack>
         <Text w={{ lg: '16rem' }} textStyle="caption5" color="text.footnote">

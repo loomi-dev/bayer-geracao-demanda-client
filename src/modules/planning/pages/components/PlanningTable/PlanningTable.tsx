@@ -1,70 +1,61 @@
 import { Box, Button, HStack, Text } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
 
 import { AddInsideCircleIcon, CircleIcon, DynamicTable } from '@/components';
+import { useGetFarmerAllPlans } from '@/modules/planning/api';
 
 import { planningColumns } from './planningTable.columns';
 
-const mockData = [
-  {
-    id: 1,
-    safra: '2023/2024',
-    data: '23 Outubro 2023',
-    status: 'em construção',
-    orcamento: 'R$ 20.000',
-  },
-  {
-    id: 2,
-    safra: '2023/2024',
-    data: '23 Outubro 2023',
-    status: 'ajustes',
-    orcamento: 'R$ 20.000',
-  },
-  {
-    id: 3,
-    safra: '2022/2023',
-    data: '12 Janeiro 2022',
-    status: 'aprovado',
-    orcamento: 'R$ 20.000',
-  },
-];
+export const PlanningTable = () => {
+  const session = useSession();
+  const userId = session.data?.user.id as number;
 
-export const PlanningTable = () => (
-  <Box w="full">
-    <Text textStyle="h4" mb="2rem">
-      Planejamentos
-    </Text>
+  const { data: dataGetFarmerAllPlans } = useGetFarmerAllPlans(
+    { farmerId: userId },
+    { enabled: Boolean(userId) },
+  );
 
-    <DynamicTable data={mockData} columns={planningColumns}>
-      <HStack
-        justify="space-between"
-        px="2.4rem"
-        borderTop="1px solid"
-        borderColor="rgba(217, 217, 217, 0.40)"
-        mb="2rem"
-        pt="2rem"
+  return (
+    <Box w="full">
+      <Text textStyle="h4" mb="2rem">
+        Planejamentos
+      </Text>
+
+      <DynamicTable<PlanningType>
+        data={dataGetFarmerAllPlans?.data ?? []}
+        columns={planningColumns}
       >
-        <Text textStyle="action3" textTransform="uppercase" lineHeight="0">
-          Total{' '}
-          <Text as="span" textStyle="action1" color="surface.brand" ml="2.3rem">
-            R$ 20.000
-          </Text>
-        </Text>
-
-        <Button
-          variant="third"
-          pl="2.4rem"
-          pr="0"
-          rightIcon={
-            <CircleIcon>
-              <AddInsideCircleIcon />
-            </CircleIcon>
-          }
+        <HStack
+          justify="space-between"
+          px="2.4rem"
+          borderTop="1px solid"
+          borderColor="opacity.white.1.40"
+          mb="2rem"
+          pt="2rem"
         >
-          <Text as="span" w="full" align="center">
-            Novo planejamento
+          <Text textStyle="action3" textTransform="uppercase" lineHeight="0">
+            Total{' '}
+            <Text as="span" textStyle="action1" color="surface.brand" ml="2.3rem">
+              R$ 20.000
+            </Text>
           </Text>
-        </Button>
-      </HStack>
-    </DynamicTable>
-  </Box>
-);
+
+          <Button
+            variant="third"
+            pl="2.4rem"
+            pr="0"
+            rightIcon={
+              <CircleIcon>
+                <AddInsideCircleIcon />
+              </CircleIcon>
+            }
+          >
+            <Text as="span" w="full" align="center">
+              Novo planejamento
+            </Text>
+          </Button>
+        </HStack>
+      </DynamicTable>
+    </Box>
+  );
+};
