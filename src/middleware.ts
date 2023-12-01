@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from 'next-auth/middleware';
 
-import { DEFAULT_PRIVATE_PAGE } from './config';
+import { DEFAULT_ONBOARDING_PAGE, DEFAULT_PRIVATE_PAGE } from './config';
 
 export const config = {
   matcher: [
@@ -17,12 +17,16 @@ export const config = {
 
 export default withAuth(
   function middleware({ url, nextUrl: { pathname }, nextauth: { token } }) {
-    if (pathname === '/bem-vindo' || pathname === '/bem-vindo/completar-cadastro') {
-      const isNewUser = token?.user.confirmed === false;
+    const isNewUser = token?.user.confirmed === false;
+    const isOnboardingPage =
+      pathname === '/bem-vindo' || pathname === '/bem-vindo/completar-cadastro';
 
-      if (!isNewUser) {
-        return NextResponse.redirect(new URL(DEFAULT_PRIVATE_PAGE, url));
-      }
+    if (isNewUser && !isOnboardingPage) {
+      return NextResponse.redirect(new URL(DEFAULT_ONBOARDING_PAGE, url));
+    }
+
+    if (!isNewUser && isOnboardingPage) {
+      return NextResponse.redirect(new URL(DEFAULT_PRIVATE_PAGE, url));
     }
   },
   {

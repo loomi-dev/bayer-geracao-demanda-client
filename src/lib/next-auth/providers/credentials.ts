@@ -23,7 +23,7 @@ export const credentialsProvider = CredentialsProvider({
     } catch (err) {
       const error = err as ApiServiceErr;
 
-      throw new Error(error.data.error.name ?? 'FailedRequest');
+      throw new Error(error?.data?.error?.name ?? 'FailedRequest');
     }
   },
 });
