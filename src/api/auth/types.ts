@@ -13,5 +13,6 @@ export type LoginWithCredentialsResponse = {
     provider: string;
     confirmed: boolean;
     blocked: boolean;
+    role: 'Farmer' | 'Manager';
   };
 };
