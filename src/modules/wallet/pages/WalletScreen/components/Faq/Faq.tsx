@@ -4,17 +4,14 @@ import {
   AccordionItem,
   AccordionPanel,
   Flex,
-  SkeletonProps,
   Text,
 } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
 
 import { AddIcon, CircleIcon, MinusIcon } from '@/components';
 import { useGetFaqs } from '@/modules/wallet/api';
 
-const DynamicFaqSkeleton = dynamic<SkeletonProps>(() =>
-  import('./FaqSkeleton').then(({ FaqSkeleton }) => FaqSkeleton),
-);
+import { FaqSkeleton } from './FaqSkeleton';
+
 export const Faq = () => {
   const { data, isLoading } = useGetFaqs();
   const faq = data?.data ?? [];
@@ -25,7 +22,7 @@ export const Faq = () => {
         FAQ
       </Text>
       {isLoading ? (
-        <DynamicFaqSkeleton />
+        <FaqSkeleton />
       ) : (
         <Accordion variant="secondary" allowMultiple>
           {faq.map((item, index) => (
