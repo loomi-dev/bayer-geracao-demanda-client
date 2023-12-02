@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { AddInsideCircleIcon, CircleIcon, DynamicTable } from '@/components';
 import { useGetFarmerAllPlans } from '@/modules/planning/api';
-import { centsToInteger, formatPrice } from '@/utils';
+import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
 import { planningColumns } from './planningTable.columns';
 
@@ -25,16 +25,7 @@ export const PlanningTable = () => {
   const totalAllPlansBudgetValue = useMemo(
     () =>
       allPlansList.reduce((totalAllPlansValue, planning) => {
-        const totalPlanningBudgeValue =
-          planning.actions?.reduce((totalActionsValue, planningAction) => {
-            const planningActionValueConvertedInInteger = centsToInteger(
-              planningAction?.amountInCents ?? 0,
-            );
-
-            totalActionsValue += planningActionValueConvertedInInteger;
-
-            return totalActionsValue;
-          }, 0) ?? 0;
+        const totalPlanningBudgeValue = getTotalPlanningBudgetValue(planning?.actions ?? []);
 
         totalAllPlansValue += totalPlanningBudgeValue;
 

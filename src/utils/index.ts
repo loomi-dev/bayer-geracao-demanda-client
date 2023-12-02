@@ -8,3 +8,4 @@ export * from './formatPrice';
 export * from './centsToInteger';
 export * from './numberToCompactValue';
 export * from './centsToCompactValue';
+export * from './getTotalPlanningBudgetValue';
