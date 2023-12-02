@@ -1,20 +1,21 @@
 import { GetServerSideProps } from 'next';
 import { getToken } from 'next-auth/jwt';
 
-import { DEFAULT_PRIVATE_PAGE } from '@/config';
+import { DEFAULT_PRIVATE_FARMER_PAGE, DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 import { LoginScreen } from '@/modules/auth';
 
 import { NextPageWithLayout } from '../_app';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = await getToken(ctx);
-
+  const privatePage =
+    token?.user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
   const isAuthenticated = !!token?.user.accessToken;
 
   if (isAuthenticated) {
     return {
       redirect: {
-        destination: DEFAULT_PRIVATE_PAGE,
+        destination: privatePage,
         permanent: false,
       },
     };

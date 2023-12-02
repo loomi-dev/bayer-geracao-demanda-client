@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Text } from '@chakra-ui/react';
+import { Skeleton, Button, Flex, HStack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
@@ -35,9 +35,13 @@ export const Balance = () => {
           <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.brand">
             R$
           </Text>
-          <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
-            {balanceValue}
-          </Text>
+          {isLoading ? (
+            <Skeleton w="14rem" borderRadius="1.2rem" h="4rem" />
+          ) : (
+            <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
+              {balanceValue}
+            </Text>
+          )}
         </HStack>
         <Text w={{ lg: '16rem' }} textStyle="caption5" color="text.footnote">
           em ações para solicitar os recursos.
