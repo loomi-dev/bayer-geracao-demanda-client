@@ -1,8 +1,10 @@
 import { Box, Button, HStack, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
+import { useMemo } from 'react';
 
 import { AddInsideCircleIcon, CircleIcon, DynamicTable } from '@/components';
 import { useGetFarmerAllPlans } from '@/modules/planning/api';
+import { centsToInteger, formatPrice } from '@/utils';
 
 import { planningColumns } from './planningTable.columns';
 
@@ -15,16 +17,39 @@ export const PlanningTable = () => {
     { enabled: Boolean(userId) },
   );
 
+  const allPlansList = useMemo(
+    () => dataGetFarmerAllPlans?.data ?? [],
+    [dataGetFarmerAllPlans?.data],
+  );
+
+  const totalAllPlansBudgetValue = useMemo(
+    () =>
+      allPlansList.reduce((totalAllPlansValue, planning) => {
+        const totalPlanningBudgeValue =
+          planning.actions?.reduce((totalActionsValue, planningAction) => {
+            const planningActionValueConvertedInInteger = centsToInteger(
+              planningAction?.amountInCents ?? 0,
+            );
+
+            totalActionsValue += planningActionValueConvertedInInteger;
+
+            return totalActionsValue;
+          }, 0) ?? 0;
+
+        totalAllPlansValue += totalPlanningBudgeValue;
+
+        return totalAllPlansValue;
+      }, 0),
+    [allPlansList],
+  );
+
   return (
     <Box w="full">
       <Text textStyle="h4" mb="2rem">
         Planejamentos
       </Text>
 
-      <DynamicTable<PlanningType>
-        data={dataGetFarmerAllPlans?.data ?? []}
-        columns={planningColumns}
-      >
+      <DynamicTable<PlanningType> data={allPlansList} columns={planningColumns}>
         <HStack
           justify="space-between"
           px="2.4rem"
@@ -36,7 +61,7 @@ export const PlanningTable = () => {
           <Text textStyle="action3" textTransform="uppercase" lineHeight="0">
             Total{' '}
             <Text as="span" textStyle="action1" color="surface.brand" ml="2.3rem">
-              R$ 20.000
+              {`R$ ${formatPrice(totalAllPlansBudgetValue)}`}
             </Text>
           </Text>
 

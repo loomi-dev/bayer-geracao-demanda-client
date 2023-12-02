@@ -32,13 +32,13 @@ export const Balance = () => {
           Seu saldo
         </Text>
         <HStack>
-          <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.brand">
-            R$
-          </Text>
           {isLoading ? (
-            <Skeleton w="14rem" borderRadius="1.2rem" h="4rem" />
+            <Skeleton w="16rem" h="5.4rem" />
           ) : (
             <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
+              <Text as="span" color="text.brand">
+                R$
+              </Text>{' '}
               {balanceValue}
             </Text>
           )}
