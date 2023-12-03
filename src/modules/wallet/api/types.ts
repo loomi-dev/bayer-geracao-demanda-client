@@ -5,6 +5,12 @@ export type FarmerWallet = {
   id: number;
 };
 
+export type Harvest = {
+  createdAt: Date;
+  deadline_to_add_plannings: Date;
+  id: number;
+  year: string;
+};
 export type Faq = {
   question: string;
   answer: string;
@@ -16,7 +22,8 @@ export type Farmer = {
   cpf: string;
   id: number;
   name: string;
-  wallet: FarmerWallet;
+  wallet?: FarmerWallet;
+  harvest?: Harvest;
 };
 
 export type GetFaqsResponse = GenericListResponseType<Faq>;

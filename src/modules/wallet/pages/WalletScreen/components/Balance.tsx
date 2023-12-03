@@ -4,8 +4,7 @@ import { useSession } from 'next-auth/react';
 
 import { AddInsideCircleIcon, CircleIcon } from '@/components';
 import { useGetFarmers } from '@/modules/wallet/api';
-import { formatPrice } from '@/utils';
-
+import { formatDate, formatPrice } from '@/utils';
 export const Balance = () => {
   const user = useSession();
   const userId = user.data?.user.id;
@@ -35,16 +34,23 @@ export const Balance = () => {
             <Skeleton w="14rem" borderRadius="1.2rem" h="4rem" />
           ) : (
             <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
-              {formatPrice(farmers?.wallet.balance)}
+              {formatPrice(farmers?.wallet?.balance)}
             </Text>
           )}
         </HStack>
         <Text w={{ lg: '16rem' }} textStyle="caption5" color="text.footnote">
           em ações para solicitar os recursos.
         </Text>
-        <Text textStyle="caption5" color="text.footnote">
-          Válido até <Text as="strong">20/10/2024</Text>
-        </Text>
+        <HStack align="center">
+          <Text textStyle="caption5" color="text.footnote">
+            Válido até
+          </Text>
+          {isLoading ? (
+            <Skeleton w="8rem" borderRadius="1.2rem" h="2rem" />
+          ) : (
+            <Text as="strong">{formatDate(farmers?.harvest?.deadline_to_add_plannings)}</Text>
+          )}
+        </HStack>
       </Flex>
       <Link href="/planejamento" legacyBehavior passHref>
         <Button

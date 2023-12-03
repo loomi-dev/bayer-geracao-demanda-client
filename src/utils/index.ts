@@ -5,3 +5,4 @@ export * from './toISO';
 export * from './formatToBRDate';
 export * from './mask';
 export * from './formatPrice';
+export * from './formatDate';

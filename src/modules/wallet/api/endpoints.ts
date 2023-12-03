@@ -21,6 +21,11 @@ export const getFarmer = async ({ id }: GetFarmerData): Promise<GetFarmerRespons
     },
     populate: {
       wallet: true,
+      notifications: {
+        populate: {
+          safra: true,
+        },
+      },
     },
   });
   const response = await axios.authorized().get(`/farmers?${query}`);
