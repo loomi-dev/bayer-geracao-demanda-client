@@ -26,6 +26,7 @@ export const getCustomers = async ({
           wallet: {
             transaction: true,
           },
+          planning_summary: true,
         },
       },
       historic: true,

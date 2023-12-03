@@ -1,20 +1,20 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
+import { Customer, useGetCustomers } from '@/api/customer';
 import { DistrictFilter, DynamicTable, RegionFilter, SearchIcon, TextInput } from '@/components';
-import { Customer, useGetCustomers } from '@/modules/customers/api';
 
 import { CustomerColumns } from './CustomerTable.columns';
 
 export const CustomerTable = () => {
   const session = useSession();
   const userId = session.data?.user.id;
-
   const { data, isLoading } = useGetCustomers(
     { id: userId, filter: {} },
     { enabled: Boolean(userId) },
   );
   const customers = data?.data ?? [];
+  console.log(customers);
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>

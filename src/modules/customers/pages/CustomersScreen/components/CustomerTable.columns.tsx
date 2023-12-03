@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { Customer } from '@/modules/customers/api';
+import { Customer } from '@/api/customer';
 import { formatPrice } from '@/utils';
 
 const columnHelper = createColumnHelper<Customer>();
