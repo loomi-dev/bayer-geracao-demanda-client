@@ -28,6 +28,12 @@ export default withAuth(
     const isOnboardingPage =
       pathname === '/bem-vindo' || pathname === '/bem-vindo/completar-cadastro';
 
+    const isRoutePage = pathname === '/';
+
+    if (isRoutePage) {
+      return NextResponse.redirect(new URL(privatePage, url));
+    }
+
     if (isNewUser && !isOnboardingPage) {
       return NextResponse.redirect(new URL(DEFAULT_ONBOARDING_PAGE, url));
     }

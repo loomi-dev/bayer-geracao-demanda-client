@@ -8,7 +8,7 @@ const Page: NextPageWithLayout = () => <CustomersScreen />;
 
 Page.getLayout = function getLayout(page) {
   return (
-    <LayoutWithoutNotifications>
+    <LayoutWithoutNotifications title="Clientes - Top Multiplicadores">
       <Header label="Clientes" icon={<UserGroupBigIcon />} />
       {page}
     </LayoutWithoutNotifications>
