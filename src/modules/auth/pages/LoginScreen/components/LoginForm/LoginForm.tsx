@@ -13,6 +13,7 @@ import {
   FormWrapper,
   PasswordInput,
 } from '@/components';
+import { Mask } from '@/utils';
 
 import { LoginFormSchemaType, loginFormSchema } from './loginForm.schema';
 
@@ -22,10 +23,14 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
   });
+
+  const identifierValue = watch('identifier')?.replace(/[^a-zA-Z0-9]/g, '');
+  const identifierValueIsOnlyNumber = /^\d+$/.test(identifierValue);
 
   const onSubmitLogin = async ({ identifier, password }: LoginFormSchemaType) => {
     mutateLogin({ identifier, password });
@@ -38,6 +43,8 @@ export const LoginForm = () => {
           <TextInput
             placeholder="CNPJ ou E-mail"
             size="xl"
+            mask={Mask.formatCNPJ}
+            maskEnabled={identifierValueIsOnlyNumber}
             leftIcon={<PersonIcon />}
             {...register('identifier')}
           />
