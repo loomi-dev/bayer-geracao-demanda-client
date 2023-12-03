@@ -42,7 +42,7 @@ export const Button = defineStyleConfig({
       borderRadius: 'full',
       backdropFilter: 'blur(20px)',
 
-      fontSize: { lg: '1rem', '3xl': '1.4rem' },
+      fontSize: '1.4rem',
       fontWeight: 'bold',
     },
     fourth: {

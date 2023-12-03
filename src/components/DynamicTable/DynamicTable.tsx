@@ -34,6 +34,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
       pb={variant === 'primary' ? '1.2rem' : ''}
       boxShadow={variant === 'primary' ? 'primary' : 'fourth'}
       bg="surface.secondary"
+      w="full"
     >
       <Table variant={variant} {...restProps}>
         <TableHeader<TData> headerGroups={headerGroups} />
