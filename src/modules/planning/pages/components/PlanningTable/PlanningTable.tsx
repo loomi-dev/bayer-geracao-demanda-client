@@ -34,7 +34,7 @@ export const PlanningTable = () => (
       Planejamentos
     </Text>
 
-    <DynamicTable data={mockData} columns={planningColumns}>
+    <DynamicTable variant="third" data={mockData} columns={planningColumns} pb="0">
       <HStack
         justify="space-between"
         px="2.4rem"

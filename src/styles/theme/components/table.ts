@@ -94,6 +94,52 @@ export const Table = defineMultiStyleConfig({
         },
       },
     },
+    third: {
+      thead: {
+        bg: 'surface.primary',
+      },
+      tbody: {
+        bg: 'surface.secondary',
+      },
+      th: {
+        color: 'text.primary',
+        fontSize: '1.2rem',
+        fontWeight: 'bold',
+        p: '3.4rem 1.2rem 1.4rem',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        borderBottom: '1px solid',
+        borderColor: 'text.disabled',
+
+        '&:first-of-type': {
+          textAlign: 'left',
+          pl: '2.4rem',
+        },
+        '&:last-of-type': {
+          pr: '2.4rem',
+        },
+      },
+      td: {
+        textAlign: 'center',
+        p: '1.6rem 1.3rem 1.6rem',
+        color: 'text.primary',
+        fontSize: '1.6rem',
+        fontWeight: 'normal',
+
+        '&:first-of-type': {
+          textAlign: 'left',
+          pl: '2.4rem',
+        },
+        '&:last-of-type': {
+          pr: '2.4rem',
+        },
+      },
+      tr: {
+        '&:first-of-type > td': {
+          pt: '2.8rem',
+        },
+      },
+    },
   },
   defaultProps: {
     variant: 'primary',
