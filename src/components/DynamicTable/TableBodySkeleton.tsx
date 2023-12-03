@@ -6,7 +6,7 @@ type TableBodySkeletonProps = {
 
 export const TableBodySkeleton = ({ headersAmount }: TableBodySkeletonProps) => (
   <ChakraTbody>
-    {Array.from({ length: 8 }).map((_, i) => (
+    {Array.from({ length: 6 }).map((_, i) => (
       <Tr key={i}>
         {Array.from({ length: headersAmount }).map((_, i) => (
           <Td key={i}>
