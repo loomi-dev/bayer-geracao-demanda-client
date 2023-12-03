@@ -4,9 +4,9 @@ import { useSession } from 'next-auth/react';
 import { useGetPlanningStatistics } from '@/modules/planning/api';
 import { centsToCompactValue } from '@/utils';
 
-import { StatCard } from './StatCard';
+import { StatCard } from '../../../components';
 
-export const StatisticsSection = () => {
+export const PlanningStatisticsSection = () => {
   const session = useSession();
   const userId = session.data?.user.id as number;
 

@@ -1,6 +1,6 @@
 import { centsToInteger } from './centsToInteger';
 
-export const getTotalPlanningBudgetValue = (planningActions: PlanningActionType[]): number => {
+export const getTotalPlanningBudgetValue = (planningActions: PlanningAction[]): number => {
   const totalPlanningBudgetValue = planningActions.reduce((totalValue, planningAction) => {
     const planningActionValueConvertedInInteger = centsToInteger(
       planningAction?.amountInCents ?? 0,

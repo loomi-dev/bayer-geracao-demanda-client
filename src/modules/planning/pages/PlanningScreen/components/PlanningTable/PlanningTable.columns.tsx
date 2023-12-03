@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 import { PlanningBudgetColumn } from './PlanningBudgetColumn';
 
-const columnHelper = createColumnHelper<PlanningType>();
+const columnHelper = createColumnHelper<Planning>();
 
 export const planningColumns = [
   columnHelper.accessor((data) => data?.safra?.year, {
@@ -23,7 +23,7 @@ export const planningColumns = [
     cell: (info) => (info.getValue() ? <Badge>{info.getValue()}</Badge> : '-'),
   }),
   columnHelper.accessor((data) => data?.actions, {
-    id: 'orcamento',
+    id: 'budget',
     header: () => <Text>Orçamento</Text>,
     cell: (info) => <PlanningBudgetColumn planningActions={info.getValue() ?? []} />,
   }),

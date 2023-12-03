@@ -3,8 +3,8 @@ import qs from 'qs';
 import axios from '@/lib/axios';
 
 import {
-  GetFarmerAllPlansParams,
-  GetFarmerAllPlansResponse,
+  GetFarmerPlansParams,
+  GetFarmerPlansResponse,
   GetPlanningStatisticsParams,
   GetPlanningStatisticsResponse,
 } from './types';
@@ -32,9 +32,9 @@ export const getPlanningStatistics = async ({
   return data;
 };
 
-export const getFarmerAllPlans = async ({
+export const getFarmerPlans = async ({
   farmerId,
-}: GetFarmerAllPlansParams): Promise<GetFarmerAllPlansResponse> => {
+}: GetFarmerPlansParams): Promise<GetFarmerPlansResponse> => {
   const query = qs.stringify({
     filters: {
       users_permissions_user: {
