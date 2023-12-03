@@ -1,5 +1,5 @@
-import { Center, Flex, Heading, Text } from '@chakra-ui/react';
-import { default as NextHead } from 'next/head';
+import { Center, Flex, Text } from '@chakra-ui/react';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,11 +8,17 @@ import { APP_NAME } from '@/config';
 export default function Custom404() {
   return (
     <>
-      <NextHead>
-        <title>{APP_NAME} - 404</title>
-      </NextHead>
+      <Head>
+        <title>{`${APP_NAME} - 404`}</title>
+      </Head>
 
-      <Center minH="100vh" gap="3rem" position="relative" bgColor="secondary2" padding="0 3rem">
+      <Center
+        minH="100%"
+        gap="3rem"
+        position="relative"
+        bgColor="surface.secondary"
+        padding="0 3rem"
+      >
         <Flex
           align="center"
           direction={{ base: 'column', md: 'row' }}
@@ -33,15 +39,15 @@ export default function Custom404() {
               height={125}
               quality={100}
             />
-            <Heading fontWeight="bold" fontSize={{ base: '2.8rem' }} color="primary.200">
+            <Text as="h1" textStyle="h1" color="text.primary">
               Ops! Parece que você se perdeu.
-            </Heading>
-            <Text fontWeight={300} fontSize={{ base: '1.6rem' }} color="black">
+            </Text>
+            <Text textStyle="action2" color="text.footnote">
               A página que você estava procurando não foi encontrada. Não se preocupe, acontece com
               todo mundo.
             </Text>
             <Link href="/">
-              <Text color="primary.400" fontWeight={700} fontSize={{ base: '1.6rem' }}>
+              <Text as="span" color="text.brand" textStyle="action2">
                 Voltar para tela inicial
               </Text>
             </Link>

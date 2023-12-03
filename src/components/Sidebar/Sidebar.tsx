@@ -46,7 +46,7 @@ export const Sidebar = () => {
       pb="3rem"
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
-        <Image src="/assets/images/logo.png" width={95} height={94} quality={100} alt="app logo" />
+        <Image src="/assets/images/logo.webp" width={95} height={94} quality={100} alt="app logo" />
         <Text textStyle="action2" align="center" w="12rem">
           Top Multiplicadores
         </Text>

@@ -30,3 +30,5 @@ export { default as ArrowRightSmallIcon } from './ArrowRightSmallIcon';
 export { default as BusinessIcon } from './BusinessIcon';
 export { default as EmailIcon } from './EmailIcon';
 export { default as BigCalendarIcon } from './BigCalendarIcon';
+export { default as ChevronLeftIcon } from './ChevronLeftIcon';
+export { default as ChevronRightIcon } from './ChevronRightIcon';
