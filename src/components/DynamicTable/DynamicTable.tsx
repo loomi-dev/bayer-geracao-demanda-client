@@ -32,6 +32,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   });
 
   const headerGroups = getHeaderGroups();
+  const headerColumnsAmount = headerGroups[0].headers.length ?? 1;
   const rows = getRowModel().rows;
 
   return (
@@ -47,7 +48,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
 
         {rows.length > 0 && !isLoading && <TableBody<TData> rows={rows} />}
 
-        {isLoading && <TableBodySkeleton headersAmount={headerGroups[0].headers.length ?? 1} />}
+        {isLoading && <TableBodySkeleton headersAmount={headerColumnsAmount} />}
       </Table>
 
       {rows.length === 0 && !isLoading && (
