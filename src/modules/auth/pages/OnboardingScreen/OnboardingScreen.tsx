@@ -26,7 +26,7 @@ export const OnboardingScreen = () => (
       px={{ base: '2rem', '2xl': '9.6rem' }}
       position="relative"
     >
-      <Image src="/assets/images/logo.png" alt="" width={80} height={80} />
+      <Image src="/assets/images/logo.webp" alt="" width={80} height={80} />
 
       <Text
         fontSize="3.6rem"
