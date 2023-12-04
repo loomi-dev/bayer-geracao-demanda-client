@@ -1,4 +1,5 @@
 type PlanningActionStatus = 'rejected' | 'accepted' | 'not_evaluated';
+type PlanningActionType = 'farm_task' | 'farm_kit' | 'relationship_task';
 
 type HistoricStatus = 'ready_for_evaluation' | 'accepted' | 'rejected';
 
@@ -12,7 +13,7 @@ type PlanningAction = {
   detail?: string;
   status?: PlanningActionStatus;
   title?: string;
-  type?: string;
+  type?: PlanningActionType;
 };
 
 type Harvest = {

@@ -20,8 +20,8 @@ export const CreatePlanningBalance = () => {
       <HStack w="full" align="center" justify="space-between">
         <Balance.ExpirationDate />
 
-        <Balance.Button onClick={handleCreatePlanningAction} isDisabled>
-          Novo planejamento
+        <Balance.Button w="15.6rem" onClick={handleCreatePlanningAction}>
+          Nova ação
         </Balance.Button>
       </HStack>
     </Balance.Container>

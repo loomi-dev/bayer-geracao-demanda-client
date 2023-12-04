@@ -1,24 +1,34 @@
-import { BigCalendarIcon, CircleIcon, Header } from '@/components';
+import { useRouter } from 'next/router';
+
+import { ChevronLeftIcon, CircleIcon, Header } from '@/components';
 import { LayoutWithNotifications } from '@/layouts';
 import { CreatePlanningScreen } from '@/modules/planning';
 import { NextPageWithLayout } from '@/pages/_app';
 
-const Page: NextPageWithLayout = () => <CreatePlanningScreen />;
+const Page: NextPageWithLayout = () => {
+  const { push } = useRouter();
 
-Page.getLayout = function getLayout(page) {
+  const handleNavigateToPlanningScreen = () => {
+    push('/planejamento');
+  };
+
   return (
-    <LayoutWithNotifications>
+    <>
       <Header
         label="Criar novo planejamento"
         icon={
-          <CircleIcon>
-            <BigCalendarIcon />
+          <CircleIcon cursor="pointer" onClick={handleNavigateToPlanningScreen}>
+            <ChevronLeftIcon fontSize={36} color="#fff" />
           </CircleIcon>
         }
       />
-      {page}
-    </LayoutWithNotifications>
+      <CreatePlanningScreen />
+    </>
   );
+};
+
+Page.getLayout = function getLayout(page) {
+  return <LayoutWithNotifications>{page}</LayoutWithNotifications>;
 };
 
 export default Page;
