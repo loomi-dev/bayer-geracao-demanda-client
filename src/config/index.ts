@@ -23,4 +23,4 @@ export const IS_CLIENT = typeof window !== 'undefined';
 export const LAYOUT_SIDEBAR_WIDTH = { lg: '22.5rem', xl: '25.5rem', '3xl': '28.7rem' };
 export const LAYOUT_NOTIFICATION_BAR_WIDTH = { lg: '28rem', xl: '32rem', '3xl': '35.8rem' };
 
-export const PAGINATION_PAGE_SIZE = 1;
+export const PAGINATION_PAGE_SIZE = 30;
