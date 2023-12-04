@@ -1,9 +1,9 @@
-import { Box, Button, HStack, Skeleton, Text } from '@chakra-ui/react';
+import { Box, Button, HStack, Skeleton, Spinner, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
 import { AddInsideCircleIcon, CircleIcon, DynamicTable } from '@/components';
-import { useGetFarmerPlans } from '@/modules/planning/api';
+import { useCreatePlanning, useGetFarmerPlans } from '@/modules/planning/api';
 import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
 import { planningTableColumns } from './PlanningTable.columns';
@@ -17,6 +17,8 @@ export const PlanningTable = () => {
     isLoading: isLoadingDataGetFarmerPlans,
     isFetching: isFetchingDataGetFarmerPlans,
   } = useGetFarmerPlans({ farmerId: userId }, { enabled: Boolean(userId) });
+
+  const { mutate: createPlanning, isLoading: isLoadingCreatePlanning } = useCreatePlanning();
 
   const isLoadingPlansList = isLoadingDataGetFarmerPlans || isFetchingDataGetFarmerPlans;
   const plansList = useMemo(() => dataGetFarmerPlans?.data ?? [], [dataGetFarmerPlans?.data]);
@@ -32,6 +34,12 @@ export const PlanningTable = () => {
       }, 0),
     [plansList],
   );
+
+  const handleCreatePlanning = () => {
+    createPlanning({
+      farmerId: userId,
+    });
+  };
 
   return (
     <Box w="full">
@@ -71,10 +79,19 @@ export const PlanningTable = () => {
             transition="all 0.2s linear"
             rightIcon={
               <CircleIcon>
-                <AddInsideCircleIcon />
+                {isLoadingCreatePlanning ? (
+                  <Spinner color="#fff" fontSize={20} />
+                ) : (
+                  <AddInsideCircleIcon />
+                )}
               </CircleIcon>
             }
+            isDisabled={isLoadingCreatePlanning}
+            onClick={handleCreatePlanning}
             _hover={{
+              pl: '1rem',
+            }}
+            _disabled={{
               pl: '1rem',
             }}
           >

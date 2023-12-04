@@ -19,3 +19,13 @@ export type GetFarmerPlansParams = {
   farmerId: number;
 };
 export type GetFarmerPlansResponse = GenericListResponseType<Planning>;
+
+export type CreatePlanningData = {
+  farmerId: number;
+};
+export type CreatePlanningResponse = {
+  data: {
+    date: string;
+    id: number;
+  };
+};

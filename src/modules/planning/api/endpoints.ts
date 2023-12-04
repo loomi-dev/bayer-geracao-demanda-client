@@ -1,8 +1,11 @@
+import dayjs from 'dayjs';
 import qs from 'qs';
 
 import axios from '@/lib/axios';
 
 import {
+  CreatePlanningData,
+  CreatePlanningResponse,
   GetFarmerPlansParams,
   GetFarmerPlansResponse,
   GetPlanningStatisticsParams,
@@ -56,6 +59,32 @@ export const getFarmerPlans = async ({
   });
 
   const { data } = await axios.authorized().get(`/plannings?${query}`);
+
+  return data;
+};
+
+export const createPlanning = async ({
+  farmerId,
+}: CreatePlanningData): Promise<CreatePlanningResponse> => {
+  const { data } = await axios.authorized().post('/plannings', {
+    data: {
+      farmer: {
+        connect: [
+          {
+            id: farmerId,
+          },
+        ],
+      },
+      safra: {
+        connect: [
+          {
+            id: farmerId,
+          },
+        ],
+      },
+      date: dayjs().format('YYYY-MM-DD'),
+    },
+  });
 
   return data;
 };
