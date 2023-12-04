@@ -6,7 +6,9 @@ type SegmentProps = {
 
 const conditionalValues = {
   relationshipAction: {
-    badgeProps: {},
+    badgeProps: {
+      variant: 'table_success',
+    },
     text: 'Ação de relacionamento',
   },
 };
