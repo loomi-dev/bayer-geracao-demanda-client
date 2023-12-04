@@ -1,4 +1,4 @@
-import { Text, TextProps } from '@chakra-ui/react';
+import { SkeletonText, Text, TextProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 import { useBalanceContext } from './BalanceContainer';
@@ -11,15 +11,21 @@ export const BalanceExpirationDate = ({ children, ...restProps }: BalanceExpirat
   const context = useBalanceContext();
 
   return (
-    <Text textStyle="body3" color="text.footnote" {...restProps}>
-      {children ? (
-        children
+    <>
+      {context?.isLoading ? (
+        <SkeletonText w="18rem" noOfLines={2} skeletonHeight="1.2rem" />
       ) : (
-        <>
-          em ações para solicitar os recursos <br /> Válido{' '}
-          <Text as="strong">até {context?.expirationDate}</Text>
-        </>
+        <Text textStyle="body3" color="text.footnote" {...restProps}>
+          {children ? (
+            children
+          ) : (
+            <>
+              em ações para solicitar os recursos <br /> Válido{' '}
+              <Text as="strong">até {context?.expirationDate}</Text>
+            </>
+          )}
+        </Text>
       )}
-    </Text>
+    </>
   );
 };
