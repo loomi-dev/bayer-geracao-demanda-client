@@ -7,6 +7,10 @@ export type GetCustomerParams = {
     district?: string;
     search?: string; //TODO vai virar search
   };
+  pagination: {
+    pageSize: number;
+    page: number;
+  };
 };
 
 export type Customer = {

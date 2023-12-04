@@ -7,6 +7,7 @@ import { GetCustomersResponse, GetCustomerParams } from './types';
 export const getCustomers = async ({
   id,
   filter,
+  pagination,
 }: GetCustomerParams): Promise<GetCustomersResponse> => {
   const filters = {
     farmer: {
@@ -36,6 +37,7 @@ export const getCustomers = async ({
 
   const query = qs.stringify({
     filters,
+    pagination,
     populate: {
       farmer: {
         populate: {

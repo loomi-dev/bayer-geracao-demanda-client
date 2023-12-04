@@ -4,9 +4,19 @@ import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
 import { Customer, useGetCustomers } from '@/api/customer';
-import { DistrictFilter, DynamicTable, RegionFilter, SearchIcon, TextInput } from '@/components';
+import {
+  DistrictFilter,
+  DynamicTable,
+  Pagination,
+  RegionFilter,
+  SearchIcon,
+  TextInput,
+} from '@/components';
+import { PAGINATION_PAGE_SIZE } from '@/config';
+import { usePagination } from '@/hooks';
 
 import { CustomerColumns } from './CustomerTable.columns';
+
 const debouncedSearch = debounce(
   (value: string, setValue: (value: string) => void) => setValue(value),
   250,
@@ -14,9 +24,14 @@ const debouncedSearch = debounce(
 export const CustomerTable = () => {
   const session = useSession();
   const userId = session.data?.user.id;
+  const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
   const { data, isLoading } = useGetCustomers(
-    { id: userId, filter: { search } },
+    {
+      id: 1,
+      filter: { search },
+      pagination: { page: currentPage, pageSize: PAGINATION_PAGE_SIZE },
+    },
     { enabled: Boolean(userId) },
   );
   const customers = data?.data ?? [];
@@ -47,6 +62,13 @@ export const CustomerTable = () => {
         isLoading={isLoading}
         fallbackMessage="Nenhum cliente encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
+      />
+      <Pagination
+        page={currentPage}
+        countItems={customers.length}
+        totalPages={data?.meta.pagination.pageCount ?? 1}
+        onNextPage={handleNextPage}
+        onPreviousPage={handlePreviousPage}
       />
     </Flex>
   );
