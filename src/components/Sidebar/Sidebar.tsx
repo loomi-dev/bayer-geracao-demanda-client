@@ -51,7 +51,7 @@ export const Sidebar = () => {
             key={item.label}
             label={item.label}
             src={item.src}
-            isSelected={item.src === pathname}
+            isSelected={pathname.includes(item.src)}
             leftIcon={item.leftIcon}
           />
         ))}
