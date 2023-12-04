@@ -48,6 +48,7 @@ export const PlanningTable = () => {
       </Text>
 
       <DynamicTable<Planning>
+        variant="third"
         data={plansList}
         columns={planningTableColumns}
         isLoading={isLoadingPlansList}

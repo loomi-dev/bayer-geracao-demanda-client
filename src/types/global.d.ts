@@ -1,3 +1,12 @@
+type PlanningSummary = {
+  farm_in_task_cents: number;
+  id: number;
+  farm_kit_in_cents: number;
+  planned_actions: number;
+  planned_budget_in_cents: number;
+  relationship_action_in_cents: number;
+  total_budget_value: number;
+};
 type PlanningActionStatus = 'rejected' | 'accepted' | 'not_evaluated';
 type PlanningActionType = 'farm_task' | 'farm_kit' | 'relationship_task';
 
@@ -51,4 +60,9 @@ type Farmer = {
   name: string;
   wallet: Wallet;
   safra: Harvest;
+};
+
+type Pagination = {
+  pageSize: number;
+  page: number;
 };
