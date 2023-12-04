@@ -12,14 +12,10 @@ import { usePagination } from '@/hooks';
 
 import { CustomerColumns } from './CustomerTable.columns';
 
-const debouncedSearch = debounce(
-  (value: string, setValue: (value: string) => void) => setValue(value),
-  250,
-);
 export const CustomerTable = () => {
   const session = useSession();
   const { pathname, push } = useRouter();
-  const userId = session.data?.user.id;
+  const userId = session.data?.user.id as number;
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
   const { data, isLoading } = useGetCustomers(
@@ -33,7 +29,7 @@ export const CustomerTable = () => {
   const customers = data?.data ?? [];
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
-    debouncedSearch(e.target.value, setSearch);
+    debounce(() => setSearch(e.target.value), 250);
 
   const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);
 

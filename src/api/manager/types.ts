@@ -6,5 +6,5 @@ export type Manager = {
   current_planned_amount_in_cents: number;
 };
 
-export type GetManagerParams = { id: number | undefined };
+export type GetManagerParams = { id: number };
 export type GetManagerResponse = GenericListResponseType<Manager>;

@@ -60,3 +60,8 @@ type Farmer = {
   wallet: Wallet;
   safra: Harvest;
 };
+
+type Pagination = {
+  pageSize: number;
+  page: number;
+};

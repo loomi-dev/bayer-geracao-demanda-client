@@ -1,22 +1,19 @@
-import { GenericListResponseType } from '@/api';
+import { GenericListResponseType, Pagination } from '@/api';
 
 export type GetCustomerParams = {
-  id: number | undefined;
+  id: number;
   filter: {
     region?: string;
     district?: string;
-    search?: string; //TODO vai virar search
+    search?: string;
   };
-  pagination: {
-    pageSize: number;
-    page: number;
-  };
+  pagination: Pagination;
 };
 
 export type Customer = {
   date: Date;
   farmer: Farmer;
-  historic: any; // TODO
+  historic: Historic;
 };
 
 export type GetCustomersResponse = GenericListResponseType<Customer>;

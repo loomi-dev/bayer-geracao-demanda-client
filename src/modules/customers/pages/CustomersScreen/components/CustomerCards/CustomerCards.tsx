@@ -1,12 +1,12 @@
 import { Flex, Skeleton, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
-import { useGetManager } from '@/api/manager/queries';
+import { useGetManager } from '@/api';
 import { formatPrice } from '@/utils';
 
 export const CustomerCards = () => {
   const session = useSession();
-  const userId = session.data?.user.id;
+  const userId = session.data?.user.id as number;
   const { data, isLoading } = useGetManager(
     {
       id: userId,

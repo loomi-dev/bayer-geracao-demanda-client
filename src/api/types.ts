@@ -36,3 +36,8 @@ export type GenericListResponseType<T> = {
   };
   data: T[];
 };
+
+export type Pagination = {
+  pageSize: number;
+  page: number;
+};
