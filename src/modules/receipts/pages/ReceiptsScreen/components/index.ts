@@ -4,3 +4,6 @@ export * from './DrawerExpenseReceipt';
 export * from './ImageCarousel';
 export * from './ProveYourExpenses';
 export * from './ActionDetails';
+export * from './RunningTable';
+export * from './ActionsTableComponents';
+export * from './FinalizedTables';
