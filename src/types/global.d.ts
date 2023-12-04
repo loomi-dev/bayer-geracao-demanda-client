@@ -1,3 +1,5 @@
+type Safra = { id: number; deadline_to_add_plannings: Date; year: string };
+
 type PlanningSummary = {
   farm_in_task_cents: number;
   id: number;
