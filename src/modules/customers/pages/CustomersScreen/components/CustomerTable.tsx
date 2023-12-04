@@ -1,5 +1,7 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
+import { Row } from '@tanstack/react-table';
 import debounce from 'lodash.debounce';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
@@ -16,6 +18,7 @@ const debouncedSearch = debounce(
 );
 export const CustomerTable = () => {
   const session = useSession();
+  const { pathname, push } = useRouter();
   const userId = session.data?.user.id;
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
@@ -31,6 +34,8 @@ export const CustomerTable = () => {
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
     debouncedSearch(e.target.value, setSearch);
+
+  const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);
 
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
@@ -53,6 +58,7 @@ export const CustomerTable = () => {
         isLoading={isLoading}
         fallbackMessage="Nenhum cliente encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
+        onRowClick={handleRowClick}
       />
       <Pagination
         page={currentPage}
