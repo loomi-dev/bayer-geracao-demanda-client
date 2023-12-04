@@ -21,13 +21,18 @@ export const BalanceSection = () => (
 
       <Button
         variant="third"
+        w="21.5rem"
         pl="2.4rem"
         pr="0"
+        transition="all 0.2s linear"
         rightIcon={
           <CircleIcon>
             <AddInsideCircleIcon />
           </CircleIcon>
         }
+        _hover={{
+          pl: '1rem',
+        }}
       >
         <Text as="span" w="full" align="center">
           Novo planejamento

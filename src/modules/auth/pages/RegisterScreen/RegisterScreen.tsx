@@ -25,7 +25,7 @@ export const RegisterScreen = () => (
       borderRadius="2.8rem"
     >
       <Image
-        src="/assets/images/logo.png"
+        src="/assets/images/logo.webp"
         alt=""
         width={80}
         height={80}
