@@ -4,14 +4,7 @@ import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
 import { Customer, useGetCustomers } from '@/api/customer';
-import {
-  DistrictFilter,
-  DynamicTable,
-  Pagination,
-  RegionFilter,
-  SearchIcon,
-  TextInput,
-} from '@/components';
+import { DynamicTable, Pagination, SearchIcon, TextInput } from '@/components';
 import { PAGINATION_PAGE_SIZE } from '@/config';
 import { usePagination } from '@/hooks';
 
@@ -45,8 +38,6 @@ export const CustomerTable = () => {
       <Flex align="center" justify="space-between" px="1.6rem" w="100%">
         <Text textStyle="h5">Filtros</Text>
         <HStack gap="1.2rem">
-          <DistrictFilter options={[]} />
-          <RegionFilter options={[]} />
           <TextInput
             w="32rem"
             leftIcon={<SearchIcon />}

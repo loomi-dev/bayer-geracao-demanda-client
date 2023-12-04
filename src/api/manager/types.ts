@@ -1,7 +1,7 @@
 import { GenericListResponseType } from '../types';
 
 export type Manager = {
-  farmer: Farmer;
+  farmers: Farmer[];
   safra: Safra;
   current_planned_amount_in_cents: number;
 };
