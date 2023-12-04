@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { ChevronLeftIcon, Header } from '@/components';
 import { useGetPlanningStatistics } from '@/modules/planning/api';
 
-import { CustomerStatisticsSection } from './components';
+import { CustomerPlanningTable, CustomerStatisticsSection } from './components';
 
 export const CustomerDetailScreen = () => {
   const { push, query } = useRouter();
@@ -27,6 +27,7 @@ export const CustomerDetailScreen = () => {
         isLoading={isLoading}
       />
       <CustomerStatisticsSection summary={farmer?.planning_summary} isLoading={isLoading} />
+      <CustomerPlanningTable />
     </>
   );
 };
