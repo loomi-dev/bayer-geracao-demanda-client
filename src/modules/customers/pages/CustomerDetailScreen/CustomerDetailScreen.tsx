@@ -7,9 +7,8 @@ import { CustomerStatisticsSection } from './components';
 
 export const CustomerDetailScreen = () => {
   const { push, query } = useRouter();
-  const customerId = Number(query.id);
-
-  const { data: dataGetPlanningStatistics, isLoading } = useGetPlanningStatistics(
+  const customerId = Number(query.customer_id);
+  const { data, isLoading } = useGetPlanningStatistics(
     {
       userId: customerId,
     },
@@ -18,16 +17,17 @@ export const CustomerDetailScreen = () => {
     },
   );
 
-  const statistics = dataGetPlanningStatistics?.data[0];
+  const farmer = data?.data[0];
+  console.log(farmer);
   return (
     <>
       <Header
-        label={`${statistics?.name}`}
+        label={`${farmer?.name}`}
         onClick={() => push('/clientes')}
         icon={<ChevronLeftIcon fontSize={36} color="white" />}
         isLoading={isLoading}
       />
-      <CustomerStatisticsSection summary={statistics?.planning_summary} isLoading={isLoading} />
+      <CustomerStatisticsSection summary={farmer?.planning_summary} isLoading={isLoading} />
     </>
   );
 };
