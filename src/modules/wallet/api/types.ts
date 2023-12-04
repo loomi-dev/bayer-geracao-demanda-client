@@ -1,10 +1,5 @@
 import { GenericListResponseType } from '@/api';
 
-export type FarmerWallet = {
-  balance: number;
-  id: number;
-};
-
 export type Faq = {
   question: string;
   answer: string;
