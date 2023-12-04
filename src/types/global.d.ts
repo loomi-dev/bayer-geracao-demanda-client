@@ -18,6 +18,15 @@ type PlanningAction = {
 type Harvest = {
   id: number;
   year?: string;
+  deadline_to_add_plannings: string;
+};
+
+type Historic = {
+  id: number;
+  actions: PlanningAction[];
+  creation_date: string;
+  description: string;
+  status: HistoricStatus;
 };
 
 type Planning = {
@@ -25,6 +34,7 @@ type Planning = {
   date?: string;
   safra?: Harvest;
   actions?: PlanningAction[];
+  historic?: Historic[];
 };
 
 type Wallet = {
@@ -39,4 +49,5 @@ type Farmer = {
   id: number;
   name: string;
   wallet: Wallet;
+  safra: Harvest;
 };
