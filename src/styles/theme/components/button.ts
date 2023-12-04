@@ -42,7 +42,7 @@ export const Button = defineStyleConfig({
       borderRadius: 'full',
       backdropFilter: 'blur(20px)',
 
-      fontSize: { lg: '1rem', '3xl': '1.4rem' },
+      fontSize: '1.4rem',
       fontWeight: 'bold',
     },
     fourth: {
@@ -109,6 +109,20 @@ export const Button = defineStyleConfig({
       border: '0',
       h: 'initial',
       w: 'initial',
+    },
+    page: {
+      bg: 'surface.brand',
+      color: 'greyscale.0',
+      borderRadius: 'full',
+      boxSize: '3.2rem',
+      minH: '3.2rem',
+      minW: '3.2rem',
+      py: '0',
+      px: '0',
+
+      _active: {
+        bg: 'green.600',
+      },
     },
   },
   sizes: {

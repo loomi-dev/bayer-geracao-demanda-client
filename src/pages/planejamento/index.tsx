@@ -8,7 +8,7 @@ const Page: NextPageWithLayout = () => <PlanningScreen />;
 
 Page.getLayout = function getLayout(page) {
   return (
-    <LayoutWithNotifications>
+    <LayoutWithNotifications title="Planejamento - Top Multiplicadores">
       <Header
         label="Planejamento"
         icon={
