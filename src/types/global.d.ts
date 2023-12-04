@@ -1,26 +1,53 @@
-type PlanningActionStatusType = 'rejected' | 'accepted' | 'not_evaluated';
+type PlanningActionStatus = 'rejected' | 'accepted' | 'not_evaluated';
 
-type HistoricStatusType = 'ready_for_evaluation' | 'accepted' | 'rejected';
+type HistoricStatus = 'ready_for_evaluation' | 'accepted' | 'rejected';
 
-type PlanningActionType = {
+type Roles = 'Farmer' | 'Manager';
+
+type PlanningAction = {
   id: number;
   initialDate?: string;
   finishDate?: string;
   amountInCents?: number;
   detail?: string;
-  status?: PlanningActionStatusType;
+  status?: PlanningActionStatus;
   title?: string;
   type?: string;
 };
 
-type HarvestType = {
+type Harvest = {
   id: number;
   year?: string;
+  deadline_to_add_plannings: string;
 };
 
-type PlanningType = {
+type Historic = {
+  id: number;
+  actions: PlanningAction[];
+  creation_date: string;
+  description: string;
+  status: HistoricStatus;
+};
+
+type Planning = {
   id: number;
   date?: string;
-  safra?: HarvestType;
-  actions?: PlanningActionType[];
+  safra?: Harvest;
+  actions?: PlanningAction[];
+  historic?: Historic[];
+};
+
+type Wallet = {
+  balance: number;
+  id: number;
+};
+
+type Farmer = {
+  company_identifier: string;
+  company_name: string;
+  cpf: string;
+  id: number;
+  name: string;
+  wallet: Wallet;
+  safra: Harvest;
 };

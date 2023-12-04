@@ -1,9 +1,9 @@
-import { Button, HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { Button, HStack, Skeleton, SkeletonText, Text, VStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
 import { useGetFarmer } from '@/api';
 import { AddInsideCircleIcon, CircleIcon } from '@/components';
-import { centsToInteger, formatPrice } from '@/utils';
+import { centsToInteger, formatDate, formatPrice } from '@/utils';
 
 export const BalanceSection = () => {
   const session = useSession();
@@ -15,6 +15,9 @@ export const BalanceSection = () => {
   );
 
   const balanceValue = formatPrice(centsToInteger(dataGetFarmer?.data?.[0].wallet.balance ?? 0));
+  const expirationDateValue = formatDate(
+    dataGetFarmer?.data?.[0]?.safra?.deadline_to_add_plannings,
+  );
 
   return (
     <VStack as="section" layerStyle="card" align="flex-start" w="full" spacing="0.8rem" p="2.4rem">
@@ -33,19 +36,29 @@ export const BalanceSection = () => {
       )}
 
       <HStack w="full" align="center" justify="space-between">
-        <Text textStyle="body3" color="text.footnote">
-          em ações para solicitar os recursos <br /> Válido <Text as="strong">até 20/10/2024</Text>
-        </Text>
+        {isLoadingDataGetFarmer ? (
+          <SkeletonText w="18rem" noOfLines={2} skeletonHeight="1rem" />
+        ) : (
+          <Text textStyle="body3" color="text.footnote">
+            em ações para solicitar os recursos <br /> Válido{' '}
+            <Text as="strong">até {expirationDateValue}</Text>
+          </Text>
+        )}
 
         <Button
           variant="third"
+          w="21.5rem"
           pl="2.4rem"
           pr="0"
+          transition="all 0.2s linear"
           rightIcon={
             <CircleIcon>
               <AddInsideCircleIcon />
             </CircleIcon>
           }
+          _hover={{
+            pl: '1rem',
+          }}
         >
           <Text as="span" w="full" align="center">
             Novo planejamento

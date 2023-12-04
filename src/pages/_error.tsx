@@ -1,5 +1,5 @@
 import { Center, Flex, Heading, Text } from '@chakra-ui/react';
-import { default as NextHead } from 'next/head';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,16 +8,16 @@ import { APP_NAME } from '@/config';
 function Error() {
   return (
     <>
-      <NextHead>
-        <title>{APP_NAME} - Erro</title>
-      </NextHead>
+      <Head>
+        <title>{`${APP_NAME} - Erro`}</title>
+      </Head>
 
       <Center
         flexDirection="column"
-        minH="100vh"
+        minH="100%"
         gap="3rem"
         position="relative"
-        bgColor="secondary2"
+        bg="surface.secondary"
         padding="0 3rem"
         w="full"
       >
@@ -41,16 +41,16 @@ function Error() {
               height={125}
               quality={100}
             />
-            <Heading fontWeight="bold" fontSize={{ base: '2.8rem' }} color="primary.200">
+            <Heading as="h1" textStyle="h1" color="text.primary">
               Desculpe, algo inesperado aconteceu em nossos servidores.
             </Heading>
-            <Text fontWeight={300} fontSize={{ base: '1.6rem' }} color="black">
+            <Text textStyle="action2" color="text.footnote">
               Nossa equipe técnica já está ciente do problema e trabalhando para corrigi-lo. Por
               favor, tente novamente em alguns minutos. Se o problema persistir, entre em contato
               conosco para que possamos ajudar.
             </Text>
             <Link href="/">
-              <Text color="primary.400" fontWeight={700} fontSize={{ base: '1.6rem' }}>
+              <Text as="span" color="text.brand" textStyle="action2">
                 Entrar em contato
               </Text>
             </Link>

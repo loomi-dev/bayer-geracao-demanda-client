@@ -1,10 +1,10 @@
 import { BalanceSection } from '../../components';
 
-import { PlanningTable, StatisticsSection } from './components';
+import { PlanningStatisticsSection, PlanningTable } from './components';
 
 export const PlanningScreen = () => (
   <>
-    <StatisticsSection />
+    <PlanningStatisticsSection />
     <BalanceSection />
     <PlanningTable />
   </>

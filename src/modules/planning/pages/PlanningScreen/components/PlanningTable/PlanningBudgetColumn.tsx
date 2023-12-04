@@ -4,7 +4,7 @@ import React from 'react';
 import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
 type PlanningBudgetColumnProps = {
-  planningActions: PlanningActionType[];
+  planningActions: PlanningAction[];
 };
 
 export const PlanningBudgetColumn = ({ planningActions }: PlanningBudgetColumnProps) => {

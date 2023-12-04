@@ -5,7 +5,7 @@ import { useGetPlanningStatistics } from '@/modules/planning/api';
 import { StatCard } from '@/modules/planning/components';
 import { centsToCompactValue } from '@/utils';
 
-export const StatisticsSection = () => {
+export const PlanningStatisticsSection = () => {
   const session = useSession();
   const userId = session.data?.user.id as number;
 

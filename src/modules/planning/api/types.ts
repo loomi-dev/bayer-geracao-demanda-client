@@ -15,7 +15,7 @@ export type GetPlanningStatisticsResponse = GenericListResponseType<{
   };
 }>;
 
-export type GetFarmerAllPlansParams = {
+export type GetFarmerPlansParams = {
   farmerId: number;
 };
-export type GetFarmerAllPlansResponse = GenericListResponseType<PlanningType>;
+export type GetFarmerPlansResponse = GenericListResponseType<Planning>;

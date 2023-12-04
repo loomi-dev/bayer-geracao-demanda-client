@@ -110,6 +110,20 @@ export const Button = defineStyleConfig({
       h: 'initial',
       w: 'initial',
     },
+    page: {
+      bg: 'surface.brand',
+      color: 'greyscale.0',
+      borderRadius: 'full',
+      boxSize: '3.2rem',
+      minH: '3.2rem',
+      minW: '3.2rem',
+      py: '0',
+      px: '0',
+
+      _active: {
+        bg: 'green.600',
+      },
+    },
   },
   sizes: {
     xs: {

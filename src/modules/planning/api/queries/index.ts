@@ -1,2 +1,2 @@
 export * from './useGetPlanningStatistics';
-export * from './useGetFarmerAllPlans';
+export * from './useGetFarmerPlans';
