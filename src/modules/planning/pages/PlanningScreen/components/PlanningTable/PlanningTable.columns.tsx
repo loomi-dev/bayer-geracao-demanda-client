@@ -7,7 +7,7 @@ import { PlanningStatusColumn } from './PlanningStatusColumn';
 
 const columnHelper = createColumnHelper<Planning>();
 
-export const planningColumns = [
+export const planningTableColumns = [
   columnHelper.accessor((data) => data?.safra?.year, {
     id: 'safra',
     header: () => <Text>Safra</Text>,
