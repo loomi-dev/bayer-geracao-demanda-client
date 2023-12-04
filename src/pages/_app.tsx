@@ -1,5 +1,8 @@
 import { ChakraProvider, ToastProviderProps } from '@chakra-ui/react';
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import ptBR from 'dayjs/locale/pt-br';
+import updateLocale from 'dayjs/plugin/updateLocale';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
@@ -10,6 +13,26 @@ import { useState, ReactNode, ReactElement } from 'react';
 import { CustomToast } from '@/components';
 import { queryClient as defaultQueryClient } from '@/lib/react-query';
 import { theme } from '@/styles';
+
+dayjs.locale(ptBR);
+dayjs.extend(updateLocale);
+dayjs.updateLocale('pt-br', {
+  months: [
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+  ],
+  monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+});
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
