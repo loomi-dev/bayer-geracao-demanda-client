@@ -17,6 +17,10 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontSize: '2.2rem',
     fontWeight: 'bold',
   },
+  h5: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+  },
   body1: {
     fontSize: '1.8rem',
     fontWeight: 'normal',

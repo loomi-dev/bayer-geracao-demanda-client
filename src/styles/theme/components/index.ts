@@ -9,3 +9,4 @@ export * from './radio';
 export * from './checkbox';
 export * from './accordion';
 export * from './table';
+export * from './skeleton';

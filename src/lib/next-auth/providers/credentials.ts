@@ -18,11 +18,12 @@ export const credentialsProvider = CredentialsProvider({
         email: user.email,
         confirmed: user.confirmed,
         accessToken: jwt,
+        role: user.role,
       };
     } catch (err) {
       const error = err as ApiServiceErr;
 
-      throw new Error(error.data.error.name ?? 'FailedRequest');
+      throw new Error(error?.data?.error?.name ?? 'FailedRequest');
     }
   },
 });

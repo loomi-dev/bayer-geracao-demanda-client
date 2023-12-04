@@ -1,38 +1,22 @@
 import { Flex, FlexProps, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
-import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon, UserGroupIcon } from '@/components/icons';
 import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 
 import { MenuItem } from './MenuItem';
-
-const menuItens = [
-  { label: 'Clientes', src: '/clientes', leftIcon: <UserGroupIcon /> },
-  { label: 'Carteira', src: '/carteira', leftIcon: <CardIcon /> },
-  {
-    label: 'Planejamento',
-    src: '/planejamento',
-    leftIcon: <CalendarIcon />,
-  },
-  {
-    label: 'Comprovantes',
-    src: '/comprovantes',
-    leftIcon: <ImageIcon />,
-  },
-  {
-    label: 'Simulador',
-    src: '/simulador',
-    leftIcon: <ComputerIcon />,
-  },
-];
+import { farmerMenuItens, managerMenuItens } from './Sidebar.items';
 
 type SidebarProps = {
   containerProps?: FlexProps;
 };
 
 export const Sidebar = ({ containerProps }: SidebarProps) => {
+  const user = useSession();
   const { pathname } = useRouter();
+  const isManager = user.data?.user.role === 'Manager';
+  const menuItems = isManager ? managerMenuItens : farmerMenuItens;
   return (
     <Flex
       flexDir="column"
@@ -46,12 +30,12 @@ export const Sidebar = ({ containerProps }: SidebarProps) => {
       bgColor="surface.primary"
       position="fixed"
       h="100%"
-      overflowY="scroll"
+      overflowY="auto"
       pb="3rem"
       {...containerProps}
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
-        <Image src="/assets/images/logo.png" width={95} height={94} quality={100} alt="app logo" />
+        <Image src="/assets/images/logo.webp" width={95} height={94} quality={100} alt="app logo" />
         <Text textStyle="action2" align="center" w="12rem">
           Top Multiplicadores
         </Text>
@@ -67,7 +51,7 @@ export const Sidebar = ({ containerProps }: SidebarProps) => {
         mt="5rem"
         mb="10rem"
       >
-        {menuItens.map((item) => (
+        {menuItems.map((item) => (
           <MenuItem
             key={item.label}
             label={item.label}

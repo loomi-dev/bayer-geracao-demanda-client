@@ -21,5 +21,18 @@ export type MutOpt<
 export type QueryOpt<
   Response = void,
   Error = unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TQueryKey extends QueryKey = any[],
 > = UseQueryOptions<Response, Error, Response, TQueryKey>;
+
+export type GenericListResponseType<T> = {
+  meta: {
+    pagination: {
+      page: number;
+      pageCount: number;
+      pageSize: number;
+      total: number;
+    };
+  };
+  data: T[];
+};

@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactNode, forwardRef, useState } from 'react';
 
-import { Eye, EyeOff } from '../icons';
+import { EyeIcon, EyeOffIcon } from '../icons';
 
 type PasswordInputProps = {
   leftIcon?: ReactNode;
@@ -37,10 +37,10 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
               variant="unstyled"
               display="flex"
               justifyContent="center"
-              pr="0.8rem"
+              pr="1.2rem"
               onClick={handleToggleShowPassword}
             >
-              {showPassword ? <EyeOff fontSize={22} /> : <Eye fontSize={22} />}
+              {showPassword ? <EyeOffIcon fontSize={22} /> : <EyeIcon fontSize={22} />}
             </Button>
           </InputRightElement>
         )}

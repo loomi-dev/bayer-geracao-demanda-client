@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -10,7 +10,7 @@ import { AuthBanner } from '../../components';
 import { Benefit, DividerBenefit } from './components';
 
 export const OnboardingScreen = () => (
-  <Flex minH="100%">
+  <Flex minH="100%" position="relative" overflow="hidden">
     <AuthBanner />
 
     <Flex
@@ -24,8 +24,9 @@ export const OnboardingScreen = () => (
       w="full"
       py="10rem"
       px={{ base: '2rem', '2xl': '9.6rem' }}
+      position="relative"
     >
-      <Image src="/assets/images/logo.png" alt="" width={80} height={80} />
+      <Image src="/assets/images/logo.webp" alt="" width={80} height={80} />
 
       <Text
         fontSize="3.6rem"
@@ -87,20 +88,29 @@ export const OnboardingScreen = () => (
           </Text>
         </Button>
       </Link>
-    </Flex>
 
-    <Image
-      src="/assets/images/onboarding-agro.webp"
-      alt=""
-      width={622}
-      height={707}
-      layout="intrinsic"
-      style={{
-        objectFit: 'contain',
-        position: 'absolute',
-        bottom: '0',
-        left: 'calc(65% - 5rem)',
-      }}
-    />
+      <Center
+        position="absolute"
+        bottom="-0"
+        right={{ base: '-41rem', '3xl': '-50rem' }}
+        alignItems="flex-end"
+        justifyContent="flex-end"
+      >
+        <Box
+          w={{ base: '48rem', '3xl': '60.5rem' }}
+          h={{ base: '55rem', '3xl': '70rem' }}
+          position="relative"
+        >
+          <Image
+            src="/assets/images/onboarding-agro.webp"
+            alt=""
+            fill
+            style={{
+              objectFit: 'cover',
+            }}
+          />
+        </Box>
+      </Center>
+    </Flex>
   </Flex>
 );

@@ -6,7 +6,7 @@ type FilterTriggerProps = {
 
 export const FilterTrigger = ({ label, ...props }: FilterTriggerProps) => (
   <PopoverTrigger>
-    <Button w="15.5rem" h="5rem" py="1.2rem" px="0.95rem" {...props}>
+    <Button minW="15.5rem" h="5rem" py="1.2rem" px="0.95rem" {...props}>
       {label}
     </Button>
   </PopoverTrigger>
