@@ -2,7 +2,6 @@ import { Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useMemo } from 'react';
 
 import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 
@@ -13,7 +12,7 @@ export const Sidebar = () => {
   const user = useSession();
   const { pathname } = useRouter();
   const isManager = user.data?.user.role === 'Manager';
-  const menuItems = useMemo(() => (isManager ? managerMenuItens : farmerMenuItens), [isManager]);
+  const menuItems = isManager ? managerMenuItens : farmerMenuItens;
   return (
     <Flex
       flexDir="column"
