@@ -14,7 +14,7 @@ export const BalanceSection = () => {
     { enabled: Boolean(userId) },
   );
 
-  const balanceValue = formatPrice(centsToInteger(dataGetFarmer?.data?.[0].wallet.balance ?? 0));
+  const balanceValue = formatPrice(centsToInteger(dataGetFarmer?.data?.[0]?.wallet.balance ?? 0));
   const expirationDateValue = formatDate(
     dataGetFarmer?.data?.[0]?.safra?.deadline_to_add_plannings,
   );

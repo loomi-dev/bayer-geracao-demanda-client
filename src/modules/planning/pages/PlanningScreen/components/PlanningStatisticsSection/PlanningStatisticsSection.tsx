@@ -1,10 +1,9 @@
 import { Flex, Grid, HStack, Skeleton, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
+import { GridCard } from '@/components';
 import { useGetPlanningStatistics } from '@/modules/planning/api';
 import { centsToCompactValue } from '@/utils';
-
-import { StatCard } from '../../../components';
 
 export const PlanningStatisticsSection = () => {
   const session = useSession();
@@ -19,25 +18,15 @@ export const PlanningStatisticsSection = () => {
         enabled: Boolean(userId),
       },
     );
+  const summary = dataGetPlanningStatistics?.data?.[0]?.planning_summary ?? null;
 
-  const plannedActions = dataGetPlanningStatistics?.data?.[0].planning_summary.planned_actions ?? 0;
+  const plannedActions = summary?.planned_actions ?? 0;
 
-  const plannedKit = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.farmk_kit_in_cents ?? 0,
-  );
-  const plannedRelationship = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.relationship_action_in_cents ?? 0,
-  );
-  const plannedTask = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.farm_task_in_cents ?? 0,
-  );
-
-  const planningValue = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.planned_budget_in_cents ?? 0,
-  );
-  const totalValue = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.total_budget_in_cents ?? 0,
-  );
+  const plannedKit = centsToCompactValue(summary?.farmk_kit_in_cents ?? 0);
+  const plannedRelationship = centsToCompactValue(summary?.relationship_action_in_cents ?? 0);
+  const plannedTask = centsToCompactValue(summary?.farm_task_in_cents ?? 0);
+  const planningValue = centsToCompactValue(summary?.planned_budget_in_cents ?? 0);
+  const totalValue = centsToCompactValue(summary?.total_budget_in_cents ?? 0);
 
   return (
     <Grid
@@ -50,7 +39,7 @@ export const PlanningStatisticsSection = () => {
       gridTemplateColumns="repeat(3, 1fr)"
       gap="1.6rem"
     >
-      <StatCard
+      <GridCard
         value={plannedActions}
         label="Ações planejadas"
         gridArea="stat1"
@@ -77,20 +66,20 @@ export const PlanningStatisticsSection = () => {
           </Text>
         )}
       </Flex>
-      <StatCard
+      <GridCard
         value={`R$ ${plannedKit}`}
         label="Ações de enxoval"
         gridArea="stat3"
         isLoading={isLoadingDataGetPlanningStatistics}
       />
-      <StatCard
+      <GridCard
         value={`R$ ${plannedRelationship}`}
         label="Ações de relacionamento"
         gridArea="stat4"
         labelStyles={{ maxW: '12rem' }}
         isLoading={isLoadingDataGetPlanningStatistics}
       />
-      <StatCard
+      <GridCard
         value={`R$ ${plannedTask}`}
         label="Ações de campo"
         gridArea="stat5"

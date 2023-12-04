@@ -1,7 +1,7 @@
 import { HStack, Skeleton, SkeletonProps, StackProps, Text, TextProps } from '@chakra-ui/react';
 import React from 'react';
 
-type StatCardProps = {
+type GridCardProps = {
   value: number | string;
   label: string;
   labelStyles?: TextProps;
@@ -9,14 +9,14 @@ type StatCardProps = {
   skeletonStyles?: SkeletonProps;
 } & StackProps;
 
-export const StatCard = ({
+export const GridCard = ({
   value,
   label,
   labelStyles,
   isLoading = false,
   skeletonStyles,
   ...restProps
-}: StatCardProps) => (
+}: GridCardProps) => (
   <HStack layerStyle="card" gap="1.2rem" p="2.4rem" {...restProps}>
     {isLoading ? (
       <Skeleton h="3rem" w="10rem" {...skeletonStyles} />
