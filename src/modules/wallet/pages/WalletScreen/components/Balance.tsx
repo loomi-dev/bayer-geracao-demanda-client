@@ -2,16 +2,20 @@ import { Skeleton, Button, Flex, HStack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
+import { useGetFarmer } from '@/api';
 import { AddInsideCircleIcon, CircleIcon } from '@/components';
-import { useGetFarmers } from '@/modules/wallet/api';
-import { formatPrice } from '@/utils';
+import { centsToInteger, formatPrice, formatDate } from '@/utils';
 
 export const Balance = () => {
   const user = useSession();
-  const userId = user.data?.user.id;
-  const { data, isLoading } = useGetFarmers({ id: userId ?? '' }, { enabled: Boolean(userId) });
-  const farmers = data?.data[0];
+  const userId = user.data?.user.id as number;
+  const { data: dataGetFarmer, isLoading } = useGetFarmer(
+    { farmerId: userId },
+    { enabled: Boolean(userId) },
+  );
 
+  const balanceValue = formatPrice(centsToInteger(dataGetFarmer?.data?.[0].wallet.balance ?? 0));
+  const deadlinePlanning = dataGetFarmer?.data[0].safra.deadline_to_add_plannings;
   return (
     <Flex
       justify="space-between"
@@ -28,23 +32,30 @@ export const Balance = () => {
           Seu saldo
         </Text>
         <HStack>
-          <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.brand">
-            R$
-          </Text>
           {isLoading ? (
-            <Skeleton w="14rem" borderRadius="1.2rem" h="4rem" />
+            <Skeleton w="16rem" h="5.4rem" />
           ) : (
             <Text textStyle={{ lg: 'h4', xl: 'h2', '3xl': 'h1' }} color="text.primary">
-              {formatPrice(farmers?.wallet.balance)}
+              <Text as="span" color="text.brand">
+                R$
+              </Text>{' '}
+              {balanceValue}
             </Text>
           )}
         </HStack>
         <Text w={{ lg: '16rem' }} textStyle="caption5" color="text.footnote">
           em ações para solicitar os recursos.
         </Text>
-        <Text textStyle="caption5" color="text.footnote">
-          Válido até <Text as="strong">20/10/2024</Text>
-        </Text>
+        <HStack align="center">
+          <Text textStyle="caption5" color="text.footnote">
+            Válido até
+          </Text>
+          {isLoading ? (
+            <Skeleton w="8rem" borderRadius="1.2rem" h="2rem" />
+          ) : (
+            <Text as="strong">{formatDate(deadlinePlanning)}</Text>
+          )}
+        </HStack>
       </Flex>
       <Link href="/planejamento" legacyBehavior passHref>
         <Button

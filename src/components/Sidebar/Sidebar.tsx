@@ -1,34 +1,18 @@
 import { Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
-import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon, UserGroupIcon } from '@/components/icons';
 import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 
 import { MenuItem } from './MenuItem';
-
-const menuItens = [
-  { label: 'Clientes', src: '/clientes', leftIcon: <UserGroupIcon /> },
-  { label: 'Carteira', src: '/carteira', leftIcon: <CardIcon /> },
-  {
-    label: 'Planejamento',
-    src: '/planejamento',
-    leftIcon: <CalendarIcon />,
-  },
-  {
-    label: 'Comprovantes',
-    src: '/comprovantes',
-    leftIcon: <ImageIcon />,
-  },
-  {
-    label: 'Simulador',
-    src: '/simulador',
-    leftIcon: <ComputerIcon />,
-  },
-];
+import { farmerMenuItens, managerMenuItens } from './Sidebar.items';
 
 export const Sidebar = () => {
+  const user = useSession();
   const { pathname } = useRouter();
+  const isManager = user.data?.user.role === 'Manager';
+  const menuItems = isManager ? managerMenuItens : farmerMenuItens;
   return (
     <Flex
       flexDir="column"
@@ -62,7 +46,7 @@ export const Sidebar = () => {
         mt="5rem"
         mb="10rem"
       >
-        {menuItens.map((item) => (
+        {menuItems.map((item) => (
           <MenuItem
             key={item.label}
             label={item.label}

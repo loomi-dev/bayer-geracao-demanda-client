@@ -8,7 +8,7 @@ const Page: NextPageWithLayout = () => <WalletScreen />;
 
 Page.getLayout = function getLayout(page) {
   return (
-    <LayoutWithNotifications>
+    <LayoutWithNotifications title="Carteira - Top Multiplicadores">
       <Header label="Carteira" icon={<BigCardIcon />} />
       {page}
     </LayoutWithNotifications>

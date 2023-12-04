@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { getToken } from 'next-auth/jwt';
 
 import { DEFAULT_PRIVATE_FARMER_PAGE, DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
@@ -29,7 +30,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 const Page: NextPageWithLayout = () => <LoginScreen />;
 
 Page.getLayout = function getLayout(page) {
-  return <>{page}</>;
+  return (
+    <>
+      <Head>
+        <title>Entrar na plataforma - Top Multiplicadores</title>
+      </Head>
+      {page}
+    </>
+  );
 };
 
 export default Page;

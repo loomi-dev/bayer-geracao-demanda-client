@@ -1,14 +1,18 @@
-import { TableContainer, Table, TableContainerProps } from '@chakra-ui/react';
+import { TableContainer, Table, Text, TextProps, TableContainerProps } from '@chakra-ui/react';
 import { useReactTable, TableOptions, getCoreRowModel } from '@tanstack/react-table';
 import { ReactNode } from 'react';
 
 import { TableBody } from './TableBody';
+import { TableBodySkeleton } from './TableBodySkeleton';
 import { TableHeader } from './TableHead';
 
 type DynamicTableProps<TData> = {
   data: TableOptions<TData>['data'];
   columns?: TableOptions<TData>['columns'];
   children?: ReactNode;
+  isLoading?: boolean;
+  fallbackMessage?: string;
+  fallbackProps?: TextProps;
   variant?: 'primary' | 'secondary' | 'third';
 } & TableContainerProps;
 
@@ -16,6 +20,9 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   data = [],
   columns = [],
   variant = 'primary',
+  isLoading = false,
+  fallbackMessage = 'Não existe dados encontrados.',
+  fallbackProps,
   children,
   ...restProps
 }: DynamicTableProps<TData>) => {
@@ -26,6 +33,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   });
 
   const headerGroups = getHeaderGroups();
+  const headerColumnsAmount = headerGroups[0].headers.length ?? 1;
   const rows = getRowModel().rows;
 
   const tableContainerVariants = {
@@ -61,8 +69,24 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
       <Table variant={variant}>
         <TableHeader<TData> headerGroups={headerGroups} />
 
-        <TableBody<TData> rows={rows} />
+        {rows.length > 0 && !isLoading && <TableBody<TData> rows={rows} />}
+
+        {isLoading && <TableBodySkeleton headersAmount={headerColumnsAmount} />}
       </Table>
+
+      {rows.length === 0 && !isLoading && (
+        <Text
+          w="full"
+          textStyle="action4"
+          color="text.secondary"
+          align="center"
+          lineHeight="6rem"
+          py="1.6rem"
+          {...fallbackProps}
+        >
+          {fallbackMessage}
+        </Text>
+      )}
 
       {children}
     </TableContainer>
