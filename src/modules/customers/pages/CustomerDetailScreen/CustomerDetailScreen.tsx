@@ -18,7 +18,6 @@ export const CustomerDetailScreen = () => {
   );
 
   const farmer = data?.data[0];
-  console.log(farmer);
   return (
     <>
       <Header
