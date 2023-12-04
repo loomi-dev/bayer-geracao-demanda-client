@@ -6,7 +6,7 @@ import { AddInsideCircleIcon, CircleIcon, DynamicTable } from '@/components';
 import { useGetFarmerPlans } from '@/modules/planning/api';
 import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
-import { planningColumns } from './PlanningTable.columns';
+import { planningTableColumns } from './PlanningTable.columns';
 
 export const PlanningTable = () => {
   const session = useSession();
@@ -40,8 +40,9 @@ export const PlanningTable = () => {
       </Text>
 
       <DynamicTable<Planning>
+        variant="third"
         data={plansList}
-        columns={planningColumns}
+        columns={planningTableColumns}
         isLoading={isLoadingPlansList}
       >
         <HStack
