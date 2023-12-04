@@ -1,6 +1,4 @@
-import { BalanceSection } from '../components';
-
-import { PlanningStatisticsSection, PlanningTable } from './components';
+import { BalanceSection, PlanningStatisticsSection, PlanningTable } from './components';
 
 export const PlanningScreen = () => (
   <>

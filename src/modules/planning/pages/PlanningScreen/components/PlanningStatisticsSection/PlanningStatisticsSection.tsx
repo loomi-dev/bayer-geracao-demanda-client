@@ -1,8 +1,8 @@
 import { Flex, Grid, HStack, Skeleton, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
+import { useGetPlanningStatistics } from '@/api';
 import { GridCard } from '@/components';
-import { useGetPlanningStatistics } from '@/modules/planning/api';
 import { centsToCompactValue } from '@/utils';
 
 export const PlanningStatisticsSection = () => {

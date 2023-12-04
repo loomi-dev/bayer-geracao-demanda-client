@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
+import { useGetPlanningStatistics } from '@/api';
 import { ChevronLeftIcon, Header } from '@/components';
-import { useGetPlanningStatistics } from '@/modules/planning/api';
 
 import { CustomerPlanningTable, CustomerStatisticsSection } from './components';
 
