@@ -1,4 +1,11 @@
-import { TableContainer, Table, TableProps, Text, TextProps } from '@chakra-ui/react';
+import {
+  TableContainer,
+  Table,
+  TableProps,
+  Text,
+  TextProps,
+  SystemStyleObject,
+} from '@chakra-ui/react';
 import { useReactTable, TableOptions, getCoreRowModel, Row } from '@tanstack/react-table';
 import { MouseEvent, ReactNode } from 'react';
 
@@ -13,6 +20,7 @@ type DynamicTableProps<TData> = {
   isLoading?: boolean;
   fallbackMessage?: string;
   fallbackProps?: TextProps;
+  hoverProps?: SystemStyleObject;
   onRowClick?: (row: Row<TData>, event: MouseEvent<HTMLTableRowElement>) => void;
 } & TableProps;
 
@@ -23,7 +31,9 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   isLoading = false,
   fallbackMessage = 'Não existe dados encontrados.',
   fallbackProps,
+  hoverProps,
   children,
+
   onRowClick,
   ...restProps
 }: DynamicTableProps<TData>) => {
@@ -48,7 +58,9 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
       <Table variant={variant} {...restProps}>
         <TableHeader<TData> headerGroups={headerGroups} />
 
-        {rows.length > 0 && !isLoading && <TableBody<TData> rows={rows} onRowClick={onRowClick} />}
+        {rows.length > 0 && !isLoading && (
+          <TableBody<TData> hoverProps={hoverProps} rows={rows} onRowClick={onRowClick} />
+        )}
 
         {isLoading && <TableBodySkeleton headersAmount={headerColumnsAmount} />}
       </Table>

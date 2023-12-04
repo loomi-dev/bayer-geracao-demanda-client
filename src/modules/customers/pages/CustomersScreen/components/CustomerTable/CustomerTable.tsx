@@ -30,7 +30,6 @@ export const CustomerTable = () => {
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
     debounce(() => setSearch(e.target.value), 250);
-
   const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);
 
   return (
@@ -55,6 +54,7 @@ export const CustomerTable = () => {
         fallbackMessage="Nenhum cliente encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
         onRowClick={handleRowClick}
+        hoverProps={{ bgColor: 'opacity.green.0.10', cursor: 'pointer' }}
       />
       <Pagination
         page={currentPage}
