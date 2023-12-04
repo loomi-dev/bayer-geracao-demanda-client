@@ -39,6 +39,7 @@ type Historic = {
 };
 
 type Planning = {
+  createdAt: Date;
   id: number;
   date?: string;
   safra?: Harvest;
