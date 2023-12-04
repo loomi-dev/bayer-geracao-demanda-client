@@ -5,7 +5,7 @@ export type GetCustomerParams = {
   filter: {
     region?: string;
     district?: string;
-    company_identifier?: string; //TODO vai virar search
+    search?: string; //TODO vai virar search
   };
 };
 

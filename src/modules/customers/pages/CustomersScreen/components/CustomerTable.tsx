@@ -1,20 +1,29 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
+import debounce from 'lodash.debounce';
 import { useSession } from 'next-auth/react';
+import { ChangeEvent, useState } from 'react';
 
 import { Customer, useGetCustomers } from '@/api/customer';
 import { DistrictFilter, DynamicTable, RegionFilter, SearchIcon, TextInput } from '@/components';
 
 import { CustomerColumns } from './CustomerTable.columns';
-
+const debouncedSearch = debounce(
+  (value: string, setValue: (value: string) => void) => setValue(value),
+  250,
+);
 export const CustomerTable = () => {
   const session = useSession();
   const userId = session.data?.user.id;
+  const [search, setSearch] = useState('');
   const { data, isLoading } = useGetCustomers(
-    { id: userId, filter: {} },
+    { id: userId, filter: { search } },
     { enabled: Boolean(userId) },
   );
   const customers = data?.data ?? [];
-  console.log(customers);
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
+    debouncedSearch(e.target.value, setSearch);
+
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
@@ -28,18 +37,17 @@ export const CustomerTable = () => {
             leftIcon={<SearchIcon />}
             bgColor="surface.primary"
             placeholder="Pesquisar por Nome ou CNPJ"
+            onChange={handleSearch}
           />
         </HStack>
       </Flex>
-      <DynamicTable<Customer> data={customers} columns={CustomerColumns}>
-        {!customers.length && (
-          <Flex justify="center" mt="1.6rem">
-            <Text textStyle={{ lg: 'action4', '2xl': 'action3' }} color="text.secondary">
-              Não existe clientes cadastrados na plataforma
-            </Text>
-          </Flex>
-        )}
-      </DynamicTable>
+      <DynamicTable<Customer>
+        data={customers}
+        columns={CustomerColumns}
+        isLoading={isLoading}
+        fallbackMessage="Nenhum cliente encontrado"
+        fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
+      />
     </Flex>
   );
 };

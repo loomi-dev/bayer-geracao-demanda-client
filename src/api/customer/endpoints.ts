@@ -13,11 +13,27 @@ export const getCustomers = async ({
       manager: {
         id: { $eq: id },
       },
+      ...(filter?.region ? { region: { $eq: filter?.region } } : {}),
+      ...(filter?.district ? { district: { $eq: filter?.district } } : {}),
+      ...(filter?.search
+        ? {
+            $or: [
+              {
+                company_identifier: {
+                  $contains: filter.search,
+                },
+              },
+              {
+                company_name: {
+                  $contains: filter.search,
+                },
+              },
+            ],
+          }
+        : {}),
     },
-    ...(filter?.region ? { region: { $eq: filter?.region } } : {}),
-    ...(filter?.district ? { district: { $eq: filter?.district } } : {}),
-    ...(filter?.company_identifier ? { company_identifier: { $eq: filter?.district } } : {}),
   };
+
   const query = qs.stringify({
     filters,
     populate: {
