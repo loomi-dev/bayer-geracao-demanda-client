@@ -71,6 +71,23 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontSize: '1.2rem',
     fontWeight: 'normal',
   },
+  caption6: {
+    fontSize: '1.6rem',
+    fontWeight: '700',
+    lineHeight: '1.8rem',
+    color: 'greyscale.1000',
+  },
+  caption7: {
+    fontSize: '1.6rem',
+    fontWeight: '400',
+    lineHeight: 'normal',
+    color: 'greyscale.1000',
+  },
+  caption8: {
+    fontSize: '1.2rem',
+    fontWeight: '700',
+    lineHeight: '1.8rem',
+  },
   footnote: {
     fontSize: '1.2rem',
     fontWeight: 'normal',
@@ -101,5 +118,11 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontWeight: '400',
     lineHeight: '2rem',
     color: 'greyscale.900',
+  },
+  'footnote-700': {
+    fontSize: '1.4rem',
+    fontWeight: '700',
+    lineHeight: '1.8rem',
+    color: 'greyscale.600',
   },
 };
