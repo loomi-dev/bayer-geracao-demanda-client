@@ -1,10 +1,9 @@
 import { Flex, Grid, HStack, Skeleton, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
-import { useGetPlanningStatistics } from '@/modules/planning/api';
+import { useGetPlanningStatistics } from '@/api';
+import { StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
-
-import { StatCard } from '../../../components';
 
 export const PlanningStatisticsSection = () => {
   const session = useSession();
@@ -19,25 +18,15 @@ export const PlanningStatisticsSection = () => {
         enabled: Boolean(userId),
       },
     );
+  const summary = dataGetPlanningStatistics?.data?.[0]?.planning_summary ?? null;
 
-  const plannedActions = dataGetPlanningStatistics?.data?.[0].planning_summary.planned_actions ?? 0;
+  const plannedActions = summary?.planned_actions ?? 0;
 
-  const plannedKit = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.farmk_kit_in_cents ?? 0,
-  );
-  const plannedRelationship = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.relationship_action_in_cents ?? 0,
-  );
-  const plannedTask = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.farm_task_in_cents ?? 0,
-  );
-
-  const planningValue = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.planned_budget_in_cents ?? 0,
-  );
-  const totalValue = centsToCompactValue(
-    dataGetPlanningStatistics?.data?.[0].planning_summary.total_budget_in_cents ?? 0,
-  );
+  const plannedKit = centsToCompactValue(summary?.farmk_kit_in_cents ?? 0);
+  const plannedRelationship = centsToCompactValue(summary?.relationship_action_in_cents ?? 0);
+  const plannedTask = centsToCompactValue(summary?.farm_task_in_cents ?? 0);
+  const planningValue = centsToCompactValue(summary?.planned_budget_in_cents ?? 0);
+  const totalValue = centsToCompactValue(summary?.total_budget_in_cents ?? 0);
 
   return (
     <Grid

@@ -15,6 +15,7 @@ export const getFarmer = async ({ farmerId }: GetFarmerParams): Promise<GetFarme
     },
     populate: {
       wallet: true,
+      safra: true,
     },
   });
 

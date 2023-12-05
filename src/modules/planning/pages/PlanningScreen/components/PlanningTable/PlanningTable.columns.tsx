@@ -7,14 +7,14 @@ import { PlanningStatusColumn } from './PlanningStatusColumn';
 
 const columnHelper = createColumnHelper<Planning>();
 
-export const planningColumns = [
+export const planningTableColumns = [
   columnHelper.accessor((data) => data?.safra?.year, {
     id: 'safra',
     header: () => <Text>Safra</Text>,
     cell: (info) => <Text textStyle="action2">{info.getValue()}</Text>,
   }),
   columnHelper.accessor((data) => data?.date, {
-    id: 'dataPlanejamento',
+    id: 'datePlanning',
     header: () => <Text>Data do plan.</Text>,
     cell: (info) => <Text>{dayjs(info.getValue()).format('DD MMMM YYYY')}</Text>,
   }),

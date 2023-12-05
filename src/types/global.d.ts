@@ -1,4 +1,14 @@
+type PlanningSummary = {
+  id: number;
+  farm_task_in_cents: number;
+  farmk_kit_in_cents: number;
+  planned_actions: number;
+  planned_budget_in_cents: number;
+  relationship_action_in_cents: number;
+  total_budget_in_cents: number;
+};
 type PlanningActionStatus = 'rejected' | 'accepted' | 'not_evaluated';
+type PlanningActionType = 'farm_task' | 'farm_kit' | 'relationship_task';
 
 type HistoricStatus = 'ready_for_evaluation' | 'accepted' | 'rejected';
 
@@ -12,7 +22,7 @@ type PlanningAction = {
   detail?: string;
   status?: PlanningActionStatus;
   title?: string;
-  type?: string;
+  type?: PlanningActionType;
 };
 
 type Harvest = {
@@ -30,6 +40,7 @@ type Historic = {
 };
 
 type Planning = {
+  createdAt: Date;
   id: number;
   date?: string;
   safra?: Harvest;
@@ -50,4 +61,9 @@ type Farmer = {
   name: string;
   wallet: Wallet;
   safra: Harvest;
+};
+
+type Pagination = {
+  pageSize: number;
+  page: number;
 };

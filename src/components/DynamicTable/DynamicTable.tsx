@@ -1,6 +1,13 @@
-import { TableContainer, Table, TableProps, Text, TextProps } from '@chakra-ui/react';
-import { useReactTable, TableOptions, getCoreRowModel } from '@tanstack/react-table';
-import { ReactNode } from 'react';
+import {
+  TableContainer,
+  Table,
+  Text,
+  TextProps,
+  SystemStyleObject,
+  TableContainerProps,
+} from '@chakra-ui/react';
+import { useReactTable, TableOptions, getCoreRowModel, Row } from '@tanstack/react-table';
+import { MouseEvent, ReactNode } from 'react';
 
 import { TableBody } from './TableBody';
 import { TableBodySkeleton } from './TableBodySkeleton';
@@ -13,7 +20,10 @@ type DynamicTableProps<TData> = {
   isLoading?: boolean;
   fallbackMessage?: string;
   fallbackProps?: TextProps;
-} & TableProps;
+  hoverProps?: SystemStyleObject;
+  variant?: 'primary' | 'secondary' | 'third';
+  onRowClick?: (row: Row<TData>, event: MouseEvent<HTMLTableRowElement>) => void;
+} & TableContainerProps;
 
 export const DynamicTable = <TData extends Record<string, unknown>>({
   data = [],
@@ -22,7 +32,10 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   isLoading = false,
   fallbackMessage = 'Não existe dados encontrados.',
   fallbackProps,
+  hoverProps,
   children,
+
+  onRowClick,
   ...restProps
 }: DynamicTableProps<TData>) => {
   const { getHeaderGroups, getRowModel } = useReactTable<TData>({
@@ -35,18 +48,43 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   const headerColumnsAmount = headerGroups[0].headers.length ?? 1;
   const rows = getRowModel().rows;
 
+  const tableContainerVariants = {
+    primary: {
+      layerStyle: 'card',
+      borderRadius: '3.6rem',
+      pb: '1.2rem',
+      boxShadow: 'primary',
+    },
+    secondary: {
+      layerStyle: '',
+      borderRadius: '1.9rem',
+      pb: '',
+      boxShadow: 'fourth',
+    },
+    third: {
+      layerStyle: 'card',
+      borderRadius: '3.2rem',
+      pb: '2rem',
+      boxShadow: 'primary',
+    },
+  } as const;
+
   return (
     <TableContainer
-      layerStyle={variant === 'primary' ? 'card' : ''}
-      borderRadius={variant === 'primary' ? '3.6rem' : '1.9rem'}
-      pb={variant === 'primary' ? '1.2rem' : ''}
-      boxShadow={variant === 'primary' ? 'primary' : 'fourth'}
+      layerStyle={tableContainerVariants[variant]?.layerStyle}
+      borderRadius={tableContainerVariants[variant]?.borderRadius}
+      pb={tableContainerVariants[variant]?.pb}
+      boxShadow={tableContainerVariants[variant]?.boxShadow}
       bg="surface.secondary"
+      w="full"
+      {...restProps}
     >
-      <Table variant={variant} {...restProps}>
+      <Table variant={variant}>
         <TableHeader<TData> headerGroups={headerGroups} />
 
-        {rows.length > 0 && !isLoading && <TableBody<TData> rows={rows} />}
+        {rows.length > 0 && !isLoading && (
+          <TableBody<TData> hoverProps={hoverProps} rows={rows} onRowClick={onRowClick} />
+        )}
 
         {isLoading && <TableBodySkeleton headersAmount={headerColumnsAmount} />}
       </Table>

@@ -6,24 +6,36 @@ import {
   InputProps,
   InputRightElement,
 } from '@chakra-ui/react';
-import { ReactNode, forwardRef } from 'react';
+import { ChangeEvent, ReactNode, forwardRef } from 'react';
+
+import { MaskType } from '@/utils';
 
 export type TextInputProps = {
+  maskEnabled?: boolean;
+  mask?: (value: string, maskType?: MaskType) => string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   inputGroupProps?: InputGroupProps;
 } & InputProps;
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ leftIcon, rightIcon, inputGroupProps, ...props }, ref) => (
-    <InputGroup {...inputGroupProps}>
-      {leftIcon && <InputLeftElement pointerEvents="none">{leftIcon}</InputLeftElement>}
+  ({ mask, maskEnabled = true, leftIcon, rightIcon, inputGroupProps, ...props }, ref) => {
+    const handleChangeInputValue = (event: ChangeEvent<HTMLInputElement>) => {
+      if (maskEnabled && mask) {
+        return (event.currentTarget.value = mask(event.currentTarget.value));
+      }
+    };
 
-      <Input type="text" ref={ref} {...props} />
+    return (
+      <InputGroup {...inputGroupProps}>
+        {leftIcon && <InputLeftElement pointerEvents="none">{leftIcon}</InputLeftElement>}
 
-      {rightIcon && <InputRightElement pointerEvents="none">{rightIcon}</InputRightElement>}
-    </InputGroup>
-  ),
+        <Input type="text" onChangeCapture={handleChangeInputValue} {...props} ref={ref} />
+
+        {rightIcon && <InputRightElement pointerEvents="none">{rightIcon}</InputRightElement>}
+      </InputGroup>
+    );
+  },
 );
 
 TextInput.displayName = 'TextInput';
