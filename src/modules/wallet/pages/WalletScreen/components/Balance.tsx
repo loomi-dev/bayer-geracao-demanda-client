@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 
 import { useGetFarmer } from '@/api';
 import { AddInsideCircleIcon, CircleIcon } from '@/components';
-import { centsToInteger, formatPrice, formatDate } from '@/utils';
+import { formatDate, formatPrice } from '@/utils';
 
 export const Balance = () => {
   const user = useSession();
@@ -14,7 +14,7 @@ export const Balance = () => {
     { enabled: Boolean(userId) },
   );
 
-  const balanceValue = formatPrice(centsToInteger(dataGetFarmer?.data?.[0].wallet.balance ?? 0));
+  const balanceValue = formatPrice(dataGetFarmer?.data?.[0].wallet.balance ?? 0);
   const deadlinePlanning = dataGetFarmer?.data[0].safra.deadline_to_add_plannings;
   return (
     <Flex
