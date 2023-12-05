@@ -1,11 +1,17 @@
-import { Text } from '@chakra-ui/react';
+import { Box, HStack, Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { Customer } from '@/api/customer';
+import { ClockIcon } from '@/components';
 import { formatPrice } from '@/utils';
+
+import { CustomerTableStatusColumn } from './CustomerTableStatusColumn';
 
 const columnHelper = createColumnHelper<Customer>();
 
+dayjs.extend(relativeTime);
 export const CustomerColumns = [
   columnHelper.accessor((data) => data.farmer.company_name, {
     id: 'razaoSocial',
@@ -40,15 +46,22 @@ export const CustomerColumns = [
       </Text>
     ),
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.historic ?? [], {
     id: 'status',
     header: () => <Text textStyle="action4">Status</Text>,
-    cell: () => <Text textStyle="action3">-</Text>,
+    cell: (cell) => <CustomerTableStatusColumn historic={cell.getValue()} />,
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.date, {
     id: 'tempoStatus',
     header: () => <Text textStyle="action4">Tempo no status</Text>,
-    cell: () => <Text textStyle="footnote">-</Text>,
+    cell: (cell) => (
+      <HStack align="center" justify="center">
+        <Box mt="0.3rem">
+          <ClockIcon />
+        </Box>
+        <Text textStyle="footnote">{dayjs(cell.getValue()).to(Date(), true)}</Text>
+      </HStack>
+    ),
   }),
   columnHelper.accessor(() => null, {
     id: 'ultimoAcesso',
