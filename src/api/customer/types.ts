@@ -13,7 +13,7 @@ export type GetCustomerParams = {
 export type Customer = {
   date: Date;
   farmer: Farmer;
-  historic: Historic;
+  historic: Historic[];
 };
 
 export type GetCustomersResponse = GenericListResponseType<Customer>;

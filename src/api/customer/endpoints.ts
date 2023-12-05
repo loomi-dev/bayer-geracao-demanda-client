@@ -12,7 +12,11 @@ export const getCustomers = async ({
   const filters = {
     farmer: {
       manager: {
-        id: { $eq: id },
+        users_permissions_user: {
+          id: {
+            $eq: id,
+          },
+        },
       },
       ...(filter?.region ? { region: { $eq: filter?.region } } : {}),
       ...(filter?.district ? { district: { $eq: filter?.district } } : {}),
@@ -51,6 +55,7 @@ export const getCustomers = async ({
     },
   });
 
+  console.log(query);
   const response = await axios.authorized().get(`/plannings?${query}`);
   return response.data;
 };

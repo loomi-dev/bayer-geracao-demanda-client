@@ -33,3 +33,4 @@ export { default as BigCalendarIcon } from './BigCalendarIcon';
 export { default as ChevronLeftIcon } from './ChevronLeftIcon';
 export { default as ChevronRightIcon } from './ChevronRightIcon';
 export { default as BigChevronLeftIcon } from './BigChevronLeft';
+export { default as ClockIcon } from './Clock';
