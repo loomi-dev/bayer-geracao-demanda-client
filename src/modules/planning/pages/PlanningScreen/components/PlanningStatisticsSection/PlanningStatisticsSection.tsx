@@ -2,9 +2,8 @@ import { Flex, Grid, HStack, Skeleton, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
 import { useGetPlanningStatistics } from '@/modules/planning/api';
+import { StatCard } from '@/modules/planning/components';
 import { centsToCompactValue } from '@/utils';
-
-import { StatCard } from '../../../components';
 
 export const PlanningStatisticsSection = () => {
   const session = useSession();

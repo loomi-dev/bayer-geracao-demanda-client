@@ -76,6 +76,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
       pb={tableContainerVariants[variant]?.pb}
       boxShadow={tableContainerVariants[variant]?.boxShadow}
       bg="surface.secondary"
+      w="full"
       {...restProps}
     >
       <Table variant={variant}>
