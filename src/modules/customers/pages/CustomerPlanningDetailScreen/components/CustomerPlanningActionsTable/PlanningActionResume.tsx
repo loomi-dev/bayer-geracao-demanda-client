@@ -1,6 +1,9 @@
-import { Button, Flex, HStack, Skeleton, Text } from '@chakra-ui/react';
+import { Flex, HStack, Skeleton, Text } from '@chakra-ui/react';
 
 import { formatPrice } from '@/utils';
+
+import { AcceptPlanningModal } from './AcceptPlanningModal';
+import { RefusePlanningModal } from './RefusePlanningModal';
 
 type PlanningActionResumeProps = {
   planningValue: number;
@@ -21,10 +24,8 @@ export const PlanningActionResume = ({ planningValue }: PlanningActionResumeProp
       )}
     </HStack>
     <HStack gap="1rem">
-      <Button variant="fifth" w="14.5rem" fontSize="1.2rem">
-        Recusar planejamento
-      </Button>
-      <Button fontSize="1.2rem">Autorizar planejamento</Button>
+      <RefusePlanningModal />
+      <AcceptPlanningModal />
     </HStack>
   </Flex>
 );
