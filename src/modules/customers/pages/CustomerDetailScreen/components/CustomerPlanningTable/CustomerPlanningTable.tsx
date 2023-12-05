@@ -4,6 +4,7 @@ import { useGetFarmerPlans } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 
+import { CustomerPendingPlanningNotification } from './CustomerPendingPlanningNotification';
 import { customerPlanningColumns } from './CustomerPlanningTable.columns';
 
 type CustomerPlanningTableProps = {
@@ -13,14 +14,20 @@ type CustomerPlanningTableProps = {
 export const CustomerPlanningTable = ({ customerId }: CustomerPlanningTableProps) => {
   const { data, isLoading } = useGetFarmerPlans({ farmerId: customerId });
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
-  const plans = data?.data ?? [];
+  const plannings = data?.data ?? [];
+  const pendingPlans = plannings.reduce((pendingValue, planning) => {
+    if (planning.historic?.at(-1)?.status === 'ready_for_evaluation') {
+      pendingValue++;
+    }
+    return pendingValue;
+  }, 0);
 
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
-
+      <CustomerPendingPlanningNotification quantity={pendingPlans} />
       <DynamicTable<Planning>
-        data={plans}
+        data={plannings}
         isLoading={isLoading}
         columns={customerPlanningColumns}
         fallbackMessage="Nenhum planejamento encontrado"
@@ -29,7 +36,7 @@ export const CustomerPlanningTable = ({ customerId }: CustomerPlanningTableProps
       />
       <Pagination
         page={currentPage}
-        countItems={plans.length}
+        countItems={plannings.length}
         totalPages={data?.meta.pagination.pageCount ?? 1}
         onNextPage={handleNextPage}
         onPreviousPage={handlePreviousPage}
