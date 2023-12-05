@@ -10,8 +10,8 @@ import { NextPageWithLayout } from '../_app';
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = await getToken(ctx);
   const privatePage =
-    token?.user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
-  const isAuthenticated = !!token?.user.accessToken;
+    token?.user?.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+  const isAuthenticated = !!token?.user?.accessToken;
 
   if (isAuthenticated) {
     return {
