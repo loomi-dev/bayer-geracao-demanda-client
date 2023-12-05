@@ -27,6 +27,14 @@ export const Button = defineStyleConfig({
 
       fontSize: '1.6rem',
       fontWeight: 'bold',
+
+      _hover: {
+        bg: 'green.600',
+
+        _disabled: {
+          bg: 'surface.brand',
+        },
+      },
     },
     secondary: {
       bg: 'surface.secondary',
@@ -35,6 +43,12 @@ export const Button = defineStyleConfig({
 
       fontSize: '1.6rem',
       fontWeight: 'bold',
+
+      _hover: {
+        _disabled: {
+          bg: 'surface.secondary',
+        },
+      },
     },
     third: {
       bg: 'opacity.black.0.20',
@@ -44,6 +58,12 @@ export const Button = defineStyleConfig({
 
       fontSize: '1.4rem',
       fontWeight: 'bold',
+
+      _hover: {
+        _disabled: {
+          bg: 'opacity.black.0.20',
+        },
+      },
     },
     fourth: {
       bg: 'linear-gradient(90deg, rgba(244, 242, 242, 0.50) 50.42%, rgba(120, 120, 120, 0.00) 121.37%)',
@@ -55,6 +75,12 @@ export const Button = defineStyleConfig({
       fontSize: '1.2rem',
       fontWeight: 'bold',
       textTransform: 'uppercase',
+
+      _hover: {
+        _disabled: {
+          bg: 'linear-gradient(90deg, rgba(244, 242, 242, 0.50) 50.42%, rgba(120, 120, 120, 0.00) 121.37%)',
+        },
+      },
     },
     fifth: {
       bg: 'transparent',
@@ -64,6 +90,12 @@ export const Button = defineStyleConfig({
 
       fontSize: '1rem',
       fontWeight: 'bold',
+
+      _hover: {
+        _disabled: {
+          bg: 'transparent',
+        },
+      },
     },
     sixth: {
       bg: 'text.disabled',
@@ -72,6 +104,12 @@ export const Button = defineStyleConfig({
 
       fontSize: '1.4rem',
       fontWeight: 'bold',
+
+      _hover: {
+        _disabled: {
+          bg: 'text.disabled',
+        },
+      },
     },
     white: {
       bg: 'surface.primary',
@@ -82,9 +120,9 @@ export const Button = defineStyleConfig({
       fontSize: '1.6rem',
       fontWeight: 'normal',
 
-      _disabled: {
-        _hover: {
-          bg: 'surface.primary !important',
+      _hover: {
+        _disabled: {
+          bg: 'surface.primary ',
         },
       },
     },
@@ -96,6 +134,12 @@ export const Button = defineStyleConfig({
       bg: 'surface.primary',
       border: '1px solid',
       borderColor: 'greyscale.25',
+
+      _hover: {
+        _disabled: {
+          bg: 'surface.primary',
+        },
+      },
     },
     'secondary-filter': {
       layerStyle: 'card',
@@ -103,12 +147,24 @@ export const Button = defineStyleConfig({
       fontSize: '1.6rem',
       borderRadius: '3.2rem',
       bgColor: 'surface.secondary',
+
+      _hover: {
+        _disabled: {
+          bg: 'surface.secondary',
+        },
+      },
     },
     unstyled: {
       p: '0',
       border: '0',
       h: 'initial',
       w: 'initial',
+
+      _hover: {
+        _disabled: {
+          bg: 'transparent',
+        },
+      },
     },
     page: {
       bg: 'surface.brand',
@@ -122,6 +178,14 @@ export const Button = defineStyleConfig({
 
       _active: {
         bg: 'green.600',
+      },
+
+      _hover: {
+        bg: 'green.600',
+
+        _disabled: {
+          bg: 'surface.brand',
+        },
       },
     },
   },

@@ -21,23 +21,21 @@ export const updateUser = async ({
   id: userId,
   name,
   email,
-  confirmed,
   companyRole,
+  password,
+  confirmPassword,
+  confirmed,
 }: UpdateUserData): Promise<UpdateUserResponse> => {
-  const [putUserInfoResponse, putRoleInfoResponse] = await Promise.all([
-    axios.authorized().put(`/users/${userId}`, {
-      name,
-      confirmed,
+  const { data } = await axios.authorized().put(`/farmers/${userId}`, {
+    data: {
+      company_position: companyRole,
+      username: name,
       email,
-    }),
-    axios.authorized().put(`/farmer/${userId}`, {
-      data: {
-        company_role: companyRole,
-      },
-    }),
-  ]);
+      password,
+      passwordConfirmation: confirmPassword,
+      confirmed,
+    },
+  });
 
-  const user = { ...putUserInfoResponse.data, ...putRoleInfoResponse.data };
-
-  return user;
+  return data;
 };

@@ -25,7 +25,7 @@ export const LoginScreen = () => (
         TOP MULTIPLICADORES
       </Text>
       <Text fontSize="7rem" fontWeight="bold" color="greyscale.0" maxW="66rem" mr="10rem">
-        A plataforma de pontos Bayer
+        A plataforma de gestão Bayer
       </Text>
     </VStack>
 

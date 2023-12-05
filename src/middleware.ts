@@ -14,7 +14,7 @@ export const config = {
     '/carteira',
     '/clientes',
     '/comprovantes',
-    '/planejamento',
+    '/planejamento/:path*',
     '/simulador',
   ],
 };
@@ -44,7 +44,7 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token?.user.accessToken,
+      authorized: ({ token }) => !!token?.user?.accessToken,
     },
   },
 );

@@ -19,7 +19,7 @@ import {
 
 export const RegisterFormTabs = () => {
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const userId = session.data?.user?.id as number;
 
   const [agreePrivacyPolicies, currentTabForm, setCurrentTabForm] = useRegisterFormTabs((state) => [
     state.agreePrivacyPolicies,
@@ -43,6 +43,8 @@ export const RegisterFormTabs = () => {
       email: data.email,
       companyRole: data.role,
       id: userId,
+      password: data.password,
+      confirmPassword: data.confirmPassword,
       confirmed: true,
     });
   };

@@ -22,7 +22,11 @@ export type UpdateUserData = {
   id: number;
   name: string;
   email: string;
-  confirmed: boolean;
   companyRole: string;
+  password: string;
+  confirmPassword: string;
+  confirmed: boolean;
 };
-export type UpdateUserResponse = UserType;
+export type UpdateUserResponse = {
+  data: UserType;
+};
