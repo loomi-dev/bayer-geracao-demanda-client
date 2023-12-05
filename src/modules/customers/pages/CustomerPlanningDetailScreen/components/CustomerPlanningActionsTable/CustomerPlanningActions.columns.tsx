@@ -21,10 +21,15 @@ export const CustomerPlanningActionsColumns = [
     header: () => <Text textStyle="action4">Tipo</Text>,
     cell: (info) => <CustomerPlanningTypeColumn type={info.getValue()} />,
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => [data.initialDate, data.finishDate], {
     id: 'execucao',
     header: () => <Text textStyle="action4">Execução</Text>,
-    cell: () => <Text textStyle="caption3">Março-julho</Text>,
+    cell: (cell) => {
+      const [initialDate, finishDate] = cell.getValue();
+      const formmatedInitialDate = initialDate ? dayjs(initialDate).format('MMMM') : '-';
+      const formmatedFinishDate = finishDate ? dayjs(Date()).format('MMMM') : '-';
+      return <Text textStyle="caption3">{`${formmatedInitialDate}/${formmatedFinishDate}`}</Text>;
+    },
   }),
   columnHelper.accessor((data) => data.amountInCents, {
     id: 'orçamento',
