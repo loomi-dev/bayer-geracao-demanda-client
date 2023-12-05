@@ -53,7 +53,7 @@ const columns = [
 ];
 
 export const RunningTable = () => (
-  <Box>
+  <Box w="100%">
     <Text mb="1rem" ml="1.6rem" textStyle="body4">
       Em execução
     </Text>
@@ -71,6 +71,7 @@ export const RunningTable = () => (
         },
       ]}
       columns={columns}
+      w="100%"
     />
   </Box>
 );

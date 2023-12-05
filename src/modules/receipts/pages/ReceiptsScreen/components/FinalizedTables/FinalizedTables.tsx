@@ -64,7 +64,7 @@ const columns = [
 ];
 
 export const FinalizedTables = () => (
-  <Box>
+  <Box w="100%">
     <Text mb="1rem" ml="1.6rem" textStyle="body4">
       Finalizadas
     </Text>
@@ -82,6 +82,7 @@ export const FinalizedTables = () => (
         },
       ]}
       columns={columns}
+      w="100%"
     />
   </Box>
 );

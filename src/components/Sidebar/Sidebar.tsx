@@ -32,6 +32,7 @@ export const Sidebar = ({ containerProps }: SidebarProps) => {
       h="100%"
       overflowY="auto"
       pb="3rem"
+      zIndex={1}
       {...containerProps}
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
