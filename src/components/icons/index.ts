@@ -34,3 +34,4 @@ export { default as ChevronLeftIcon } from './ChevronLeftIcon';
 export { default as ChevronRightIcon } from './ChevronRightIcon';
 export { default as BigChevronLeftIcon } from './BigChevronLeft';
 export { default as ClockIcon } from './Clock';
+export { default as UploadIcon } from './Upload';
