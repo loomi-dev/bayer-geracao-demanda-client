@@ -2,7 +2,7 @@ import { Flex, Grid, HStack, Skeleton, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
 import { useGetPlanningStatistics } from '@/api';
-import { GridCard } from '@/components';
+import { StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
 
 export const PlanningStatisticsSection = () => {
@@ -39,7 +39,7 @@ export const PlanningStatisticsSection = () => {
       gridTemplateColumns="repeat(3, 1fr)"
       gap="1.6rem"
     >
-      <GridCard
+      <StatCard
         value={plannedActions}
         label="Ações planejadas"
         gridArea="stat1"
@@ -66,20 +66,20 @@ export const PlanningStatisticsSection = () => {
           </Text>
         )}
       </Flex>
-      <GridCard
+      <StatCard
         value={`R$ ${plannedKit}`}
         label="Ações de enxoval"
         gridArea="stat3"
         isLoading={isLoadingDataGetPlanningStatistics}
       />
-      <GridCard
+      <StatCard
         value={`R$ ${plannedRelationship}`}
         label="Ações de relacionamento"
         gridArea="stat4"
         labelStyles={{ maxW: '12rem' }}
         isLoading={isLoadingDataGetPlanningStatistics}
       />
-      <GridCard
+      <StatCard
         value={`R$ ${plannedTask}`}
         label="Ações de campo"
         gridArea="stat5"

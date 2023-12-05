@@ -20,7 +20,7 @@ export const CustomerTable = () => {
   const [search, setSearch] = useState('');
   const { data, isLoading } = useGetCustomers(
     {
-      id: 1,
+      id: userId,
       filter: { search },
       pagination: { page: currentPage, pageSize: PAGINATION_PAGE_SIZE },
     },

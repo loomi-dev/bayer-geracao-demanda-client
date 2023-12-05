@@ -8,6 +8,7 @@ type PlanningSummary = {
   total_budget_in_cents: number;
 };
 type PlanningActionStatus = 'rejected' | 'accepted' | 'not_evaluated';
+type PlanningActionType = 'farm_task' | 'farm_kit' | 'relationship_task';
 
 type HistoricStatus = 'ready_for_evaluation' | 'accepted' | 'rejected';
 
@@ -21,7 +22,7 @@ type PlanningAction = {
   detail?: string;
   status?: PlanningActionStatus;
   title?: string;
-  type?: string;
+  type?: PlanningActionType;
 };
 
 type Harvest = {

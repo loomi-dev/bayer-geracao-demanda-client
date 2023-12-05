@@ -1,10 +1,18 @@
+import dayjs from 'dayjs';
 import qs from 'qs';
 
+import { PAGINATION_PAGE_SIZE } from '@/config';
 import axios from '@/lib/axios';
 
 import {
+  CreatePlanningData,
+  CreatePlanningResponse,
   GetFarmerPlansParams,
   GetFarmerPlansResponse,
+  GetPlanningActionsParams,
+  GetPlanningActionsResponse,
+  GetPlanningActionsStatisticsParams,
+  GetPlanningActionsStatisticsResponse,
   GetPlanningStatisticsParams,
   GetPlanningStatisticsResponse,
 } from './types';
@@ -56,6 +64,64 @@ export const getFarmerPlans = async ({
   });
 
   const { data } = await axios.authorized().get(`/plannings?${query}`);
+
+  return data;
+};
+
+export const createPlanning = async ({
+  farmerId,
+}: CreatePlanningData): Promise<CreatePlanningResponse> => {
+  const { data } = await axios.authorized().post('/plannings', {
+    data: {
+      farmer: {
+        connect: [
+          {
+            id: farmerId,
+          },
+        ],
+      },
+      safra: {
+        connect: [
+          {
+            id: farmerId,
+          },
+        ],
+      },
+      date: dayjs().format('YYYY-MM-DD'),
+    },
+  });
+
+  return data;
+};
+
+export const getPlanningActionsStatistics = async ({
+  planningId,
+}: GetPlanningActionsStatisticsParams): Promise<GetPlanningActionsStatisticsResponse> => {
+  const query = qs.stringify({
+    populate: {
+      metric: true,
+    },
+  });
+
+  const { data } = await axios.authorized().get(`/plannings/${planningId}?${query}`);
+
+  return data;
+};
+
+export const getPlanningActions = async ({
+  page,
+  planningId,
+}: GetPlanningActionsParams): Promise<GetPlanningActionsResponse> => {
+  const query = qs.stringify({
+    filters: {
+      planning: {
+        id: planningId,
+      },
+    },
+    pagination: { page, pageSize: PAGINATION_PAGE_SIZE },
+  });
+
+  const { data } = await axios.authorized().get(`/actions?${query}`);
 
   return data;
 };

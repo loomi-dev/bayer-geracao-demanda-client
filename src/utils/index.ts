@@ -10,3 +10,4 @@ export * from './numberToCompactValue';
 export * from './centsToCompactValue';
 export * from './getTotalPlanningBudgetValue';
 export * from './formatDate';
+export * from './formatMonth';
