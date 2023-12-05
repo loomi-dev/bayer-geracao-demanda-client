@@ -1,6 +1,6 @@
 import { Flex, Grid, GridItem, HStack, Skeleton, Text } from '@chakra-ui/react';
 
-import { Balance, GridCard } from '@/components';
+import { Balance, StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
 
 type CustomerStatisticsSectionProps = {
@@ -37,7 +37,7 @@ export const CustomerStatisticsSection = ({
       </GridItem>
 
       <GridItem colSpan={1}>
-        <GridCard
+        <StatCard
           value={plannedActions}
           label="Ações planejadas"
           skeletonStyles={{ w: '4rem' }}
@@ -66,15 +66,15 @@ export const CustomerStatisticsSection = ({
         </Flex>
       </GridItem>
       <GridItem>
-        <GridCard value={`R$ ${plannedKit}`} label="Ações de enxoval" isLoading={isLoading} />
+        <StatCard value={`R$ ${plannedKit}`} label="Ações de enxoval" isLoading={isLoading} />
       </GridItem>
-      <GridCard
+      <StatCard
         value={`R$ ${plannedRelationship}`}
         label="Ações de relacionamento"
         labelStyles={{ maxW: '12rem' }}
         isLoading={isLoading}
       />
-      <GridCard value={`R$ ${plannedTask}`} label="Ações de campo" isLoading={isLoading} />
+      <StatCard value={`R$ ${plannedTask}`} label="Ações de campo" isLoading={isLoading} />
     </Grid>
   );
 };
