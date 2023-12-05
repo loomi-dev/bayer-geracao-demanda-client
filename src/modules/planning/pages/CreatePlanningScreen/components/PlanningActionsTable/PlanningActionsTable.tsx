@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 
 import { useGetPlanningActions } from '@/api';
 import { AddInsideCircleIcon, CircleIcon, DynamicTable, Pagination } from '@/components';
+import { PAGINATION_PAGE_SIZE } from '@/config';
 import { usePagination } from '@/hooks';
 import { centsToInteger, formatPrice } from '@/utils';
 
@@ -20,7 +21,7 @@ export const PlanningActionsTable = () => {
     isLoading: isLoadingDataPlanningActions,
     isFetching: isFetchingDataPlanningActions,
   } = useGetPlanningActions(
-    { planningId, page: currentPage },
+    { planningId, pagination: { page: currentPage, pageSize: PAGINATION_PAGE_SIZE } },
     {
       enabled: Boolean(planningId),
     },
