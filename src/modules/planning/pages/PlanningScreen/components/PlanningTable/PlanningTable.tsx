@@ -2,8 +2,8 @@ import { Box, Button, HStack, Skeleton, Spinner, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
+import { useGetFarmerPlans, useCreatePlanning } from '@/api';
 import { AddInsideCircleIcon, CircleIcon, DynamicTable } from '@/components';
-import { useCreatePlanning, useGetFarmerPlans } from '@/modules/planning/api';
 import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
 import { planningTableColumns } from './PlanningTable.columns';

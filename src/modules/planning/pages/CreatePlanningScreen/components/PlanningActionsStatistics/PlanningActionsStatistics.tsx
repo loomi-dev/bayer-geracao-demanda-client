@@ -2,8 +2,8 @@ import { Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useGetPlanningActionsStatistics } from '@/modules/planning/api';
-import { StatCard } from '@/modules/planning/components';
+import { useGetPlanningActionsStatistics } from '@/api';
+import { StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
 
 export const PlanningActionsStatistics = () => {

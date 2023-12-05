@@ -2,8 +2,8 @@ import { HStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
+import { useCreatePlanning } from '@/api';
 import { Balance } from '@/components';
-import { useCreatePlanning } from '@/modules/planning/api';
 
 export const PlanningBalance = () => {
   const session = useSession();

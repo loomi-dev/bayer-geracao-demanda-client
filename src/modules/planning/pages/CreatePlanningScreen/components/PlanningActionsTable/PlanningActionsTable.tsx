@@ -2,9 +2,9 @@ import { HStack, Button, Text, Skeleton } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
 
+import { useGetPlanningActions } from '@/api';
 import { AddInsideCircleIcon, CircleIcon, DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
-import { useGetPlanningActions } from '@/modules/planning/api';
 import { centsToInteger, formatPrice } from '@/utils';
 
 import { planningActionsColumns } from './PlanningActionsTable.columns';
