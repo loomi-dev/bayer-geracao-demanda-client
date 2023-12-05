@@ -14,13 +14,11 @@ export const CustomerPlanningTable = ({ customerId }: CustomerPlanningTableProps
   const { data, isLoading } = useGetFarmerPlans({ farmerId: customerId });
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
   const plans = data?.data ?? [];
-  console.log(plans);
+
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
-      <Flex align="center" justify="space-between" px="1.6rem" w="100%">
-        <Text textStyle="h5">Filtros</Text>
-      </Flex>
+
       <DynamicTable<Planning>
         data={plans}
         isLoading={isLoading}
