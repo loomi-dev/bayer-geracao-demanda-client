@@ -11,8 +11,8 @@ import { customerPlanningColumns } from './CustomerPlanningTable.columns';
 export const CustomerPlanningTable = () => {
   const { query } = useRouter();
   const customerId = Number(query.customer_id);
-  const { data, isLoading } = useGetFarmerPlans({ farmerId: customerId });
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
+  const { data, isLoading } = useGetFarmerPlans({ page: currentPage, farmerId: customerId });
   const plannings = data?.data ?? [];
   const pendingPlans = plannings.reduce((pendingValue, planning) => {
     if (planning.historic?.at(-1)?.status === 'ready_for_evaluation') {

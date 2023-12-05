@@ -9,6 +9,7 @@ export type GetPlanningStatisticsResponse = GenericListResponseType<{
 }>;
 
 export type GetFarmerPlansParams = {
+  page: number;
   farmerId: number;
 };
 export type GetFarmerPlansResponse = GenericListResponseType<Planning>;

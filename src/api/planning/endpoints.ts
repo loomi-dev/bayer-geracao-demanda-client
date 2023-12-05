@@ -41,6 +41,7 @@ export const getPlanningStatistics = async ({
 };
 
 export const getFarmerPlans = async ({
+  page,
   farmerId,
 }: GetFarmerPlansParams): Promise<GetFarmerPlansResponse> => {
   const query = qs.stringify({
@@ -60,6 +61,10 @@ export const getFarmerPlans = async ({
           actions: true,
         },
       },
+    },
+    pagination: {
+      page,
+      pageSize: 5,
     },
   });
 
