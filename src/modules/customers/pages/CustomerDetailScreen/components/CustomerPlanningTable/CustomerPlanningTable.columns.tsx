@@ -1,6 +1,7 @@
 import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
+import { PlanningStatusBadge } from '@/components';
 import { formatDate, formatPrice } from '@/utils';
 
 const columnHelper = createColumnHelper<Planning>();
@@ -21,10 +22,10 @@ export const customerPlanningColumns = [
     header: () => <Text textStyle="footnote-bold">Data do planejamento</Text>,
     cell: (info) => <Text textStyle="action3">{formatDate(info.getValue())}</Text>,
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.historic, {
     id: 'status',
     header: () => <Text textStyle="footnote-bold">Status</Text>,
-    cell: () => <Text textStyle="action3">-</Text>,
+    cell: (info) => <PlanningStatusBadge historic={info.getValue() ?? []} />,
   }),
   columnHelper.accessor(() => null, {
     id: 'valor',
