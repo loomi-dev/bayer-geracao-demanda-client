@@ -27,7 +27,7 @@ export const CustomerDetailScreen = () => {
         isLoading={isLoading}
       />
       <CustomerStatisticsSection summary={farmer?.planning_summary} isLoading={isLoading} />
-      <CustomerPlanningTable customerId={customerId} />
+      <CustomerPlanningTable />
     </>
   );
 };

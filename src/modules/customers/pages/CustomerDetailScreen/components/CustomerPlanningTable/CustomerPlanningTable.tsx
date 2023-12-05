@@ -1,4 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 import { useGetFarmerPlans } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
@@ -7,11 +8,9 @@ import { usePagination } from '@/hooks';
 import { CustomerPendingPlanningNotification } from './CustomerPendingPlanningNotification';
 import { customerPlanningColumns } from './CustomerPlanningTable.columns';
 
-type CustomerPlanningTableProps = {
-  customerId: number;
-};
-
-export const CustomerPlanningTable = ({ customerId }: CustomerPlanningTableProps) => {
+export const CustomerPlanningTable = () => {
+  const { query } = useRouter();
+  const customerId = Number(query.customer_id);
   const { data, isLoading } = useGetFarmerPlans({ farmerId: customerId });
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
   const plannings = data?.data ?? [];

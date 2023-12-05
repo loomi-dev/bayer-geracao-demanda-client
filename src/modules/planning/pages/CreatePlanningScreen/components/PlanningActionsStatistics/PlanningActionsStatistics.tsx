@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useGetPlanningActionsStatistics } from '@/api';
-import { StatCard } from '@/modules/planning/components';
+import { StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
 
 export const PlanningActionsStatistics = () => {
