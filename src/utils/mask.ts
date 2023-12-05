@@ -1,4 +1,4 @@
-type MaskType = 'letters' | 'numbers' | 'both';
+export type MaskType = 'letters' | 'numbers' | 'both';
 
 const applyMask = (
   value: string | number,
@@ -38,10 +38,8 @@ const applyMask = (
 };
 
 export const Mask = {
-  formatCNPJ: (value: string) => applyMask(value, '**.***.***/****-**'),
-  formatCPF: (value: string) => applyMask(value, '***.***.***-**'),
-  formatCEP: (value: string): string => applyMask(value, '*****-***'),
-  formatDate: (value: string): string => applyMask(value, '**/**/****'),
+  formatCNPJ: (value: string, maskType: MaskType = 'both') =>
+    applyMask(value, '**.***.***/****-**', maskType),
   formatBRL: (value: string | number, divider = 100): string => {
     if (!value && value !== 0) return '';
 
@@ -54,6 +52,4 @@ export const Mask = {
       currency: 'BRL',
     });
   },
-  formatPhone: (value: string): string => applyMask(value, '(**) *****-****'),
-  formatCustom: (value: string, customMask: string) => applyMask(value, customMask),
 };
