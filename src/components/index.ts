@@ -12,4 +12,5 @@ export * from './filters';
 export * from './DynamicTable';
 export * from './PasswordInput';
 export * from './Pagination';
+export * from './StatCard';
 export * from './Balance';

@@ -1,8 +1,8 @@
-import { BalanceButton } from './BalanceButton';
 import { BalanceContainer } from './BalanceContainer';
 import { BalanceExpirationDate } from './BalanceExpirationDate';
 import { BalanceLabel } from './BalanceLabel';
 import { BalanceValue } from './BalanceValue';
+import { BalanceButton } from './BallanceButton';
 
 export const Balance = {
   Container: BalanceContainer,

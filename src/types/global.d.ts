@@ -1,11 +1,11 @@
 type PlanningSummary = {
-  farm_in_task_cents: number;
   id: number;
-  farm_kit_in_cents: number;
+  farm_task_in_cents: number;
+  farmk_kit_in_cents: number;
   planned_actions: number;
   planned_budget_in_cents: number;
   relationship_action_in_cents: number;
-  total_budget_value: number;
+  total_budget_in_cents: number;
 };
 type PlanningActionStatus = 'rejected' | 'accepted' | 'not_evaluated';
 type PlanningActionType = 'farm_task' | 'farm_kit' | 'relationship_task';
