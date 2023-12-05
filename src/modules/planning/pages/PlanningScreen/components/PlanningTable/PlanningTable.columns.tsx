@@ -2,9 +2,8 @@ import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 
-import { PlanningStatusBadge } from '@/components';
-
 import { PlanningBudgetColumn } from './PlanningBudgetColumn';
+import { PlanningStatusColumn } from './PlanningStatusColumn';
 
 const columnHelper = createColumnHelper<Planning>();
 
@@ -22,7 +21,7 @@ export const planningTableColumns = [
   columnHelper.accessor((data) => data?.historic, {
     id: 'status',
     header: () => <Text>Status</Text>,
-    cell: (info) => <PlanningStatusBadge historic={info.getValue() ?? []} />,
+    cell: (info) => <PlanningStatusColumn historic={info.getValue() ?? []} />,
   }),
   columnHelper.accessor((data) => data?.actions, {
     id: 'budget',

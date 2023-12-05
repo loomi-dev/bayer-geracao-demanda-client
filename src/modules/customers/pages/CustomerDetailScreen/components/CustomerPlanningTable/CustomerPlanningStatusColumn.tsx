@@ -1,6 +1,6 @@
 import { Badge, Center, Text } from '@chakra-ui/react';
 
-type PlanningStatusBadgeProps = {
+type PlanningStatusColumnProps = {
   historic: Historic[];
 };
 
@@ -13,12 +13,12 @@ enum EnumBadgeVariantStatus {
 
 enum EnumBadgeValueStatus {
   'accepted' = 'Aprovado',
-  'rejected' = 'Ajustes solicitados',
-  'ready_for_evaluation' = 'Aguardando aprovação',
+  'rejected' = 'Recusado',
+  'ready_for_evaluation' = 'A aprovar',
   'default' = 'Em construção',
 }
 
-export const PlanningStatusBadge = ({ historic }: PlanningStatusBadgeProps) => {
+export const CustomerPlanningStatusColumn = ({ historic }: PlanningStatusColumnProps) => {
   const historicStatus = historic?.at(-1)?.status ?? 'default';
   const actionsCountRejected = historic?.at(-1)?.actions.length ?? 0;
 

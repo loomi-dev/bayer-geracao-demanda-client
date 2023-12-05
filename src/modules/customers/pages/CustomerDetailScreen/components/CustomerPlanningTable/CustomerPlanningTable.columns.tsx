@@ -1,8 +1,10 @@
 import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { PlanningStatusBadge } from '@/components';
-import { formatDate, formatPrice } from '@/utils';
+import { formatDate } from '@/utils';
+
+import { CustomerPlanningBudgetColumn } from './CustomerPlanningBudgetColumn';
+import { CustomerPlanningStatusColumn } from './CustomerPlanningStatusColumn';
 
 const columnHelper = createColumnHelper<Planning>();
 
@@ -17,7 +19,7 @@ export const customerPlanningColumns = [
     header: () => <Text textStyle="footnote-bold">Safra</Text>,
     cell: (info) => <Text textStyle="action3">{info.getValue()}</Text>,
   }),
-  columnHelper.accessor((data) => data.createdAt, {
+  columnHelper.accessor((data) => data.date, {
     id: 'dataPlanejamento',
     header: () => <Text textStyle="footnote-bold">Data do planejamento</Text>,
     cell: (info) => <Text textStyle="action3">{formatDate(info.getValue())}</Text>,
@@ -25,11 +27,11 @@ export const customerPlanningColumns = [
   columnHelper.accessor((data) => data.historic, {
     id: 'status',
     header: () => <Text textStyle="footnote-bold">Status</Text>,
-    cell: (info) => <PlanningStatusBadge historic={info.getValue() ?? []} />,
+    cell: (info) => <CustomerPlanningStatusColumn historic={info.getValue() ?? []} />,
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.actions ?? [], {
     id: 'valor',
     header: () => <Text textStyle="footnote-bold">Valor</Text>,
-    cell: () => <Text textStyle="caption3">R$ {formatPrice(1000000)}</Text>,
+    cell: (info) => <CustomerPlanningBudgetColumn planningActions={info.getValue()} />,
   }),
 ];
