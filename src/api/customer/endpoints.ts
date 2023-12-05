@@ -55,7 +55,6 @@ export const getCustomers = async ({
     },
   });
 
-  console.log(query);
   const response = await axios.authorized().get(`/plannings?${query}`);
   return response.data;
 };
