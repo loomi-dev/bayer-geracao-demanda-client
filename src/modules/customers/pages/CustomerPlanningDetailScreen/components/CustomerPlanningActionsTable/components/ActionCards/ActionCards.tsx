@@ -1,15 +1,20 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-import { useGetPlanningActions } from '@/api';
+import { useGetPlanningActionsStatistics } from '@/api';
 import { StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
 
 export const ActionCards = () => {
   const { query } = useRouter();
   const planningId = Number(query.planning_id);
-  const { data, isLoading } = useGetPlanningActions({ planningId });
-  const actions = data?.data ?? [];
+  const { data, isLoading } = useGetPlanningActionsStatistics({ planningId });
+
+  const farmKitValue = centsToCompactValue(Number(data?.data?.metric?.farm_kit_in_cents ?? 0));
+  const relationshipTaskValue = centsToCompactValue(
+    Number(data?.data?.metric?.relationship_task_in_cent ?? 0),
+  );
+  const farmTaskValue = centsToCompactValue(Number(data?.data?.metric?.farm_task_in_cents ?? 0));
 
   return (
     <Grid
@@ -19,19 +24,33 @@ export const ActionCards = () => {
       gridTemplateRows="repeat(1,1fr)"
       gap="1rem"
     >
-      {actions.length
-        ? actions.map((action) => (
-            <GridItem key={action.id}>
-              <StatCard
-                value={centsToCompactValue(action.amountInCents ?? 0)}
-                label={action.title ?? ''}
-                isLoading={isLoading}
-              />
-            </GridItem>
-          ))
-        : Array.from({ length: 3 }).map((item, index) => (
-            <StatCard value={0} label="" key={index} isLoading={isLoading} />
-          ))}
+      <GridItem>
+        <StatCard
+          value={farmKitValue}
+          label="Ações de enxoval"
+          isLoading={isLoading}
+          labelStyles={{ maxWidth: 'initial' }}
+          gap="5rem"
+        />
+      </GridItem>
+      <GridItem>
+        <StatCard
+          value={relationshipTaskValue}
+          label="Ações de relacionamento"
+          isLoading={isLoading}
+          labelStyles={{ maxWidth: 'initial' }}
+          gap="5rem"
+        />
+      </GridItem>
+      <GridItem>
+        <StatCard
+          value={farmTaskValue}
+          label="Ações de campo"
+          isLoading={isLoading}
+          labelStyles={{ maxWidth: 'initial' }}
+          gap="5rem"
+        />
+      </GridItem>
     </Grid>
   );
 };
