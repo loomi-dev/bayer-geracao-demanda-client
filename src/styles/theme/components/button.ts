@@ -95,6 +95,7 @@ export const Button = defineStyleConfig({
         _disabled: {
           bg: 'transparent',
         },
+        opacity: '0.6',
       },
     },
     sixth: {
