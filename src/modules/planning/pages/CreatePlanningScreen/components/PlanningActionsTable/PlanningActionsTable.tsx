@@ -26,6 +26,8 @@ export const PlanningActionsTable = () => {
     },
   );
 
+  const totalPlanningActionTablePages = dataPlanningActions?.meta.pagination.pageCount || 1;
+
   const isLoadingPlanningActionsList =
     isLoadingDataPlanningActions || isFetchingDataPlanningActions;
   const planningActionsList = useMemo(
@@ -96,15 +98,13 @@ export const PlanningActionsTable = () => {
         </HStack>
       </DynamicTable>
 
-      {planningActionsList.length > 0 && (
-        <Pagination
-          page={currentPage}
-          countItems={planningActionsList.length}
-          totalPages={dataPlanningActions?.meta.pagination.pageCount || 1}
-          onNextPage={handleNextPage}
-          onPreviousPage={handlePreviousPage}
-        />
-      )}
+      <Pagination
+        page={currentPage}
+        countItems={planningActionsList.length}
+        totalPages={totalPlanningActionTablePages}
+        onNextPage={handleNextPage}
+        onPreviousPage={handlePreviousPage}
+      />
     </>
   );
 };
