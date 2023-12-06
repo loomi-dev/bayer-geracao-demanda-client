@@ -14,7 +14,7 @@ export const DetailTableRow = ({ title, type, value, status }: DetailTableRowPro
   <Grid w="full" templateRows={`repeat(1,1fr)`} templateColumns="repeat(4,1fr)">
     <GridItem>
       <Center h="100%">
-        <Text textStyle="caption2">{title}</Text>
+        <Text textStyle="caption3">{title}</Text>
       </Center>
     </GridItem>
     <GridItem>
