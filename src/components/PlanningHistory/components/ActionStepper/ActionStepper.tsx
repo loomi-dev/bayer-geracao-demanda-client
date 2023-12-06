@@ -8,6 +8,7 @@ export const ActionStepper = () => {
     { title: 'Aprovação do RTV' },
     { title: 'Comprovação das ações' },
   ];
+  const lastStep = steps.length - 1;
   return (
     <Flex bgColor="opacity.green.0.05" px="3.2rem" py="2rem" flexDir="column" h="7.9rem">
       <Text textStyle="footnote" color="text.copytext">
@@ -17,7 +18,7 @@ export const ActionStepper = () => {
         {steps.map((step, index) => (
           <>
             <Text textStyle="action3">{step.title}</Text>
-            {index < steps.length - 1 && <ArrowRightIcon color="#333333" opacity={0.5} />}
+            {index < lastStep && <ArrowRightIcon color="#333333" opacity={0.5} />}
           </>
         ))}
       </HStack>
