@@ -1,23 +1,21 @@
-import { DynamicTable } from '@/components/DynamicTable';
+import { Grid, GridItem } from '@chakra-ui/react';
 
-import { DetailTableColumns } from './DetailTable.columns';
+import { DetailTableRow } from './DetailTableRow';
 
-const data: PlanningAction[] = [
-  {
-    id: 1,
-    title: 'Ação 1',
-    amountInCents: 1000000,
-    type: 'relationship_task',
-    status: 'not_evaluated',
-  },
-  {
-    id: 2,
-    title: 'Ação 2',
-    amountInCents: 1000000,
-    type: 'farm_kit',
-    status: 'not_evaluated',
-  },
-];
-export const DetailTable = () => (
-  <DynamicTable<PlanningAction> data={data} columns={DetailTableColumns} />
+type DetailTableProps = {
+  data: PlanningAction[];
+};
+export const DetailTable = ({ data }: DetailTableProps) => (
+  <Grid w="full" gap="2rem" templateColumns="repeat(1,1fr)" templateRows="repeat(1,1fr)">
+    {data.map((action) => (
+      <GridItem key={action.id}>
+        <DetailTableRow
+          title={action.title}
+          value={action.amountInCents ?? 0}
+          type={action.type ?? ''}
+          status={action.status ?? ''}
+        />
+      </GridItem>
+    ))}
+  </Grid>
 );

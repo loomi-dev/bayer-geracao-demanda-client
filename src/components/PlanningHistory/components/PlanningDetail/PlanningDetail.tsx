@@ -13,6 +13,22 @@ import { ChevronCircleDown, ChevronCircleUp } from '@/components';
 
 import { DetailTable } from './DetailTable';
 
+const mockData: PlanningAction[] = [
+  {
+    id: 1,
+    title: 'Action 1',
+    type: 'farm_task',
+    status: 'rejected',
+    amountInCents: 100000,
+  },
+  {
+    id: 2,
+    title: 'Action 2',
+    type: 'relationship_task',
+    status: 'accepted',
+    amountInCents: 100000,
+  },
+];
 export const PlanningDetail = () => (
   <Accordion px="7.2rem" py="1.6rem">
     <AccordionItem p="initial" border="none">
@@ -46,7 +62,7 @@ export const PlanningDetail = () => (
             </HStack>
           </AccordionButton>
           <AccordionPanel>
-            <DetailTable />
+            <DetailTable data={mockData} />
           </AccordionPanel>
         </h2>
       )}
