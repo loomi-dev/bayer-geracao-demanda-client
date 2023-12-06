@@ -4,13 +4,11 @@ import React from 'react';
 
 import { Balance } from '@/components';
 
+import { CreatePlanningActionDrawerButton } from '../CreatePlanningActionDrawerButton';
+
 export const CreatePlanningBalance = () => {
   const session = useSession();
   const userId = session.data?.user.id as number;
-
-  const handleCreatePlanningAction = () => {
-    console.log(userId);
-  };
 
   return (
     <Balance.Container farmerId={userId}>
@@ -20,9 +18,7 @@ export const CreatePlanningBalance = () => {
       <HStack w="full" align="center" justify="space-between">
         <Balance.ExpirationDate />
 
-        <Balance.Button w="15.6rem" onClick={handleCreatePlanningAction}>
-          Nova ação
-        </Balance.Button>
+        <CreatePlanningActionDrawerButton />
       </HStack>
     </Balance.Container>
   );
