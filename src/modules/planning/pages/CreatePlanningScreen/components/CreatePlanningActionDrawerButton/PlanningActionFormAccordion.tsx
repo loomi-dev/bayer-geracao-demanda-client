@@ -9,6 +9,7 @@ import {
 import { useFormContext } from 'react-hook-form';
 
 import { FormWrapper, SelectInput, TextInput, TextInputProps } from '@/components';
+import { Mask } from '@/utils';
 
 import { AccordionIcon } from './AccordionIcon';
 import { PlanningActionFormSchemaType } from './PlanningActionForm.schema';
@@ -79,7 +80,11 @@ export const PlanningActionFormAccordion = () => {
               </FormWrapper>
 
               <FormWrapper label="Quanto recurso deseja usar?" error={errors.value}>
-                <TextInput {...inputStyles} {...register('value')} />
+                <TextInput
+                  mask={(value) => Mask.formatBRL(value, 100)}
+                  {...inputStyles}
+                  {...register('value')}
+                />
               </FormWrapper>
             </AccordionPanel>
           </>

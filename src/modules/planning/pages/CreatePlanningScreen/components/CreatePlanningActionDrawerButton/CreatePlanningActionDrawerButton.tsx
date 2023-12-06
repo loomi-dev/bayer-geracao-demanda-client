@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Balance, BigCalendarIcon, CircleIcon } from '@/components';
+import { PlanningActionTypeEnum } from '@/types';
 
 import { useCreatePlanningActionStore } from '../../stores';
 import { PlanningActionDetail } from '../PlanningActionDetail';
@@ -49,7 +50,7 @@ export const CreatePlanningActionDrawerButton = () => {
   } = methods;
 
   const planningActionTitle = watch('title') ?? '-';
-  const planningActionType = watch('type') ?? '-';
+  const planningActionType = PlanningActionTypeEnum[watch('type')];
   const planningActionInvestment = watch('value') ?? '-';
   const planningActionDescription = watch('description') ?? '-';
 
