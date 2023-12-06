@@ -59,7 +59,7 @@ export const CreatePasswordForm = ({ isLoadingSignInButton }: CreatePasswordForm
         mx="auto"
         isDisabled={isLoadingSignInButton || !isValid}
         rightIcon={
-          <CircleIcon boxSize="3.9rem" bg="green.600">
+          <CircleIcon boxSize="3.9rem" bg="red.danger_50" color="greyscale.0">
             {isLoadingSignInButton ? (
               <Spinner color="#fff" fontSize={20} />
             ) : (

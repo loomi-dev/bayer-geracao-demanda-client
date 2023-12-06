@@ -84,7 +84,7 @@ export const LoginForm = () => {
         mx="auto"
         isDisabled={!isValid || isLoadingLogin}
         rightIcon={
-          <CircleIcon color="green.400">
+          <CircleIcon color="greyscale.0">
             {isLoadingLogin ? <Spinner color="#fff" fontSize={20} /> : <ArrowRightIcon />}
           </CircleIcon>
         }

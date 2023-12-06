@@ -19,3 +19,4 @@ export * from './PlanningHistory';
 export * from './AbsoluteNextImage';
 export * from './CustomAcordion';
 export * from './DatePicker';
+export * from './PlatformLogo';
