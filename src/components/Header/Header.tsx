@@ -6,11 +6,12 @@ import { UserProfile } from '../UserProfile';
 
 type HeaderProps = {
   label: string;
+  subLabel?: string;
   icon: ReactNode;
   isLoading?: boolean;
   onClick?: () => void;
 };
-export const Header = ({ label, icon, onClick, isLoading }: HeaderProps) => (
+export const Header = ({ label, subLabel, icon, onClick, isLoading }: HeaderProps) => (
   <Flex justify="space-between" width="100%">
     <HStack gap="1.6rem">
       <CircleIcon
@@ -23,9 +24,12 @@ export const Header = ({ label, icon, onClick, isLoading }: HeaderProps) => (
       {isLoading ? (
         <SkeletonText noOfLines={2} skeletonHeight="4rem" w="25rem" />
       ) : (
-        <Text textStyle={{ lg: 'h4', xl: 'h3' }} fontWeight={{ lg: 'normal' }}>
-          {label}
-        </Text>
+        <Flex flexDir="column" align="flex-start">
+          <Text textStyle={{ lg: 'h4', xl: 'h3' }} fontWeight={{ lg: 'normal' }}>
+            {label}
+          </Text>
+          <Text textStyle="body1">{subLabel}</Text>
+        </Flex>
       )}
     </HStack>
     <UserProfile />
