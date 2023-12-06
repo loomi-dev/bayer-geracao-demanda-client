@@ -25,7 +25,7 @@ export const useUpdateUser = (options?: MutOpt<UpdateUserResponse, UpdateUserDat
     },
     onSuccess: ({ user }) => {
       const privatePage =
-        user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+        user?.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
 
       push(privatePage);
       toast({
