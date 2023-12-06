@@ -14,40 +14,30 @@ export const ActionCards = ({
   relationshipTaskValue,
   farmTaskValue,
   isLoading,
-}: ActionCardsProps) => (
-  <Grid
-    as="section"
-    w="full"
-    gridTemplateColumns="repeat(3,1fr)"
-    gridTemplateRows="repeat(1,1fr)"
-    gap="1rem"
-  >
-    <GridItem>
-      <StatCard
-        value={centsToCompactValue(farmKitValue)}
-        label="Ações de enxoval"
-        isLoading={isLoading}
-        labelStyles={{ maxWidth: 'initial' }}
-        gap="5rem"
-      />
-    </GridItem>
-    <GridItem>
-      <StatCard
-        value={centsToCompactValue(relationshipTaskValue)}
-        label="Ações de relacionamento"
-        isLoading={isLoading}
-        labelStyles={{ maxWidth: 'initial' }}
-        gap="5rem"
-      />
-    </GridItem>
-    <GridItem>
-      <StatCard
-        value={centsToCompactValue(farmTaskValue)}
-        label="Ações de campo"
-        isLoading={isLoading}
-        labelStyles={{ maxWidth: 'initial' }}
-        gap="5rem"
-      />
-    </GridItem>
-  </Grid>
-);
+}: ActionCardsProps) => {
+  const metrics = [
+    { label: 'Ações de enxoval', value: farmKitValue },
+    { label: 'Ações de relacionamento', value: relationshipTaskValue },
+    { label: 'Ações de campo', value: farmTaskValue },
+  ];
+  return (
+    <Grid
+      as="section"
+      w="full"
+      gridTemplateColumns="repeat(3,1fr)"
+      gridTemplateRows="repeat(1,1fr)"
+      gap="1rem"
+    >
+      {metrics.map((metric) => (
+        <GridItem key={metric.label}>
+          <StatCard
+            label={metric.label}
+            value={centsToCompactValue(metric.value)}
+            isLoading={isLoading}
+            labelStyles={{ maxWidth: 'initial' }}
+          />
+        </GridItem>
+      ))}
+    </Grid>
+  );
+};

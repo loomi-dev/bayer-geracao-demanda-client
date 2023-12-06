@@ -26,9 +26,9 @@ export const CustomerPlanningActionsColumns = [
     header: () => <Text textStyle="action4">Execução</Text>,
     cell: (cell) => {
       const [initialDate, finishDate] = cell.getValue();
-      const formmatedInitialDate = initialDate ? dayjs(initialDate).format('MMMM') : '-';
-      const formmatedFinishDate = finishDate ? dayjs(Date()).format('MMMM') : '-';
-      return <Text textStyle="caption3">{`${formmatedInitialDate}/${formmatedFinishDate}`}</Text>;
+      const formmatedInitialDate = initialDate ? dayjs(initialDate).format('MMMM') : '';
+      const formmatedFinishDate = finishDate ? dayjs(Date()).format('MMMM') : '';
+      return <Text textStyle="caption3">{`${formmatedInitialDate}-${formmatedFinishDate}`}</Text>;
     },
   }),
   columnHelper.accessor((data) => data.amountInCents, {
