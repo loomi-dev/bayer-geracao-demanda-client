@@ -1,6 +1,12 @@
 import { HStack } from '@chakra-ui/react';
 
-import { CarouselCard, Image } from './CarouselCard';
+import { CarouselCard } from './CarouselCard';
+
+type Image = {
+  id: string | number;
+  path: string;
+  date: string;
+};
 
 type ImageCarouselProps = {
   images: Image[];

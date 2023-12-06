@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 
-import { CustomAcordion, Minus2 } from '@/components';
+import { CustomAcordion, Minus2Icon } from '@/components';
 
 import { DescribeYourExpense } from '../DescribeYourExpense';
 import { ImageCarousel } from '../ImageCarousel';
@@ -35,7 +35,7 @@ const imagesMock = [
 export const ProveYourExpenses = ({ a }: ProveYourExpensesProps) => (
   <CustomAcordion
     accordionProps={{ mt: '1rem' }}
-    accordionIcon={<Minus2 />}
+    accordionIcon={<Minus2Icon />}
     accordionButtonProps={{
       children: (
         <Box as="span" flex="1" textAlign="left">

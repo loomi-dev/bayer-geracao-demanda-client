@@ -1,10 +1,10 @@
 import { Button } from '@chakra-ui/react';
 import { CellContext } from '@tanstack/react-table';
 
-import SvgEye from '@/components/icons/Eye';
+import { EyeIcon } from '@/components';
 
-import { useDrawerExpenseReceipt } from '../../../stores';
-import { ActionType } from '../../FinalizedTables';
+import { useDrawerExpenseReceipt } from '../../stores';
+import { ActionType } from '../FinalizedTables/FinalizedTables.columns';
 
 type ViewButtonProps = {
   value: CellContext<ActionType, ActionType>;
@@ -14,7 +14,7 @@ export const ViewButton = ({ value }: ViewButtonProps) => {
   const onOpen = useDrawerExpenseReceipt((state) => state.onOpen);
 
   return (
-    <Button onClick={onOpen} leftIcon={<SvgEye />} variant="primary-filter" h="3.4rem" px="1.3rem">
+    <Button onClick={onOpen} leftIcon={<EyeIcon />} variant="primary-filter" h="3.4rem" px="1.3rem">
       Visualizar
     </Button>
   );

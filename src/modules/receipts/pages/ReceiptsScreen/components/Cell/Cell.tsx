@@ -5,7 +5,7 @@ type CellProps = {
   textProps?: TextProps;
 };
 export const Cell = ({ value, textProps }: CellProps) => (
-  <Text textStyle="caption6" {...textProps}>
+  <Text textStyle="action2" {...textProps}>
     {value}
   </Text>
 );

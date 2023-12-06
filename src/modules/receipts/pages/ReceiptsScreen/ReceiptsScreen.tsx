@@ -3,8 +3,7 @@ import React from 'react';
 
 import { DocumentIcon, Header } from '@/components';
 
-import { DrawerExpenseReceipt, RunningTable, TableFilter } from './components';
-import { FinalizedTables } from './components/FinalizedTables';
+import { DrawerExpenseReceipt, FinalizedTables, RunningTable, TableFilter } from './components';
 
 export const ReceiptsScreen = () => (
   <Flex boxSize="100%">

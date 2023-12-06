@@ -4,13 +4,13 @@ import { AbsoluteNextImage } from '@/components';
 
 import { ModalCarouselCard } from './ModalCarouselCard';
 
-export type Image = {
+export type CarouselCardProps = {
   id: string | number;
   path: string;
   date: string;
 };
 
-export const CarouselCard = ({ date, path }: Image) => {
+export const CarouselCard = ({ date, path }: CarouselCardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -30,7 +30,9 @@ export const CarouselCard = ({ date, path }: Image) => {
         style={{ objectFit: 'cover' }}
         fill
       />
-      <Text textStyle="footnote-bold-2">{date}</Text>
+      <Text textStyle="footnote-bold-2" color="greyscale.700">
+        {date}
+      </Text>
       <ModalCarouselCard image={path} isOpen={isOpen} onClose={onClose} />
     </Box>
   );

@@ -1,6 +1,6 @@
 import { IconButton, Modal, ModalBody, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
-import { AbsoluteNextImage, CloseIcon2 } from '@/components';
+import { AbsoluteNextImage, Close2Icon } from '@/components';
 
 type ModalCarouselCardProps = {
   image: string;
@@ -30,7 +30,7 @@ export const ModalCarouselCard = ({ image, isOpen, onClose }: ModalCarouselCardP
           zIndex={10}
           right="1.6rem"
           top="1.6rem"
-          icon={<CloseIcon2 />}
+          icon={<Close2Icon />}
           onClick={onClose}
         />
         <AbsoluteNextImage

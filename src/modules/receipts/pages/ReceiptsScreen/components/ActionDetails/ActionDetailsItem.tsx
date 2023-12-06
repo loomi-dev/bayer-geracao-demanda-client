@@ -1,14 +1,16 @@
 import { StackProps, Text, TextProps, VStack } from '@chakra-ui/react';
 
 type ActionDetailsItemProps = {
-  labelProps?: TextProps;
+  label: string;
+  children: string;
   valueProps?: TextProps;
-  containerProps?: StackProps;
-};
+} & StackProps;
+
 export const ActionDetailsItem = ({
-  labelProps,
+  label,
   valueProps,
-  containerProps,
+  children,
+  ...rest
 }: ActionDetailsItemProps) => (
   <VStack
     px="2.4rem"
@@ -17,11 +19,13 @@ export const ActionDetailsItem = ({
     borderTop="1px solid"
     borderColor="black.50"
     w="100%"
-    {...containerProps}
+    {...rest}
   >
-    <Text textStyle="footnote-400" {...labelProps}>
-      {labelProps?.children}
+    <Text textStyle="footnote-400" color="greyscale.700">
+      {label}
     </Text>
-    <Text {...valueProps}>{valueProps?.children}</Text>
+    <Text textStyle="caption7" {...valueProps}>
+      {children}
+    </Text>
   </VStack>
 );

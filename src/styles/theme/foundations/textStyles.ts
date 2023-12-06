@@ -37,7 +37,6 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontSize: '2rem',
     fontWeight: '700',
     lineHeight: '24px',
-    color: 'greyscale.900',
   },
   action1: {
     fontSize: '1.8rem',
@@ -75,22 +74,9 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontSize: '1.2rem',
     fontWeight: 'normal',
   },
-  caption6: {
-    fontSize: '1.6rem',
-    fontWeight: '700',
-    lineHeight: '1.8rem',
-    color: 'greyscale.1000',
-  },
   caption7: {
     fontSize: '1.6rem',
     fontWeight: '400',
-    lineHeight: 'normal',
-    color: 'greyscale.1000',
-  },
-  caption8: {
-    fontSize: '1.2rem',
-    fontWeight: '700',
-    lineHeight: '1.8rem',
   },
   footnote: {
     fontSize: '1.2rem',
@@ -103,30 +89,21 @@ export const textStyles: ChakraTheme['textStyles'] = {
   'footnote-bold-2': {
     fontSize: '1rem',
     fontWeight: 700,
-    fontFeatureSettings: "'clig' off, 'liga' off",
-    color: 'greyscale.700',
   },
   'footnote-bold-3': {
     fontSize: '1.2rem',
     fontWeight: 600,
-    lineHeight: '2rem',
-    color: 'greyscale.700',
   },
   'footnote-400': {
     fontSize: '1.2rem',
     fontWeight: '400',
-    color: 'greyscale.700',
   },
   'footnote-400-2': {
     fontSize: '1.4rem',
     fontWeight: '400',
-    lineHeight: '2rem',
-    color: 'greyscale.900',
   },
   'footnote-700': {
     fontSize: '1.4rem',
     fontWeight: '700',
-    lineHeight: '1.8rem',
-    color: 'greyscale.600',
   },
 };
