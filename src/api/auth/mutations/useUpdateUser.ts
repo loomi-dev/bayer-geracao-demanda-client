@@ -19,13 +19,13 @@ export const useUpdateUser = (options?: MutOpt<UpdateUserResponse, UpdateUserDat
     mutationKey: ['update-user'],
     mutationFn: async (userData) => {
       const newUser = await updateUser(userData);
-      await updateSession(newUser.data);
+      await updateSession(newUser);
 
       return newUser;
     },
-    onSuccess: ({ data }) => {
+    onSuccess: ({ user }) => {
       const privatePage =
-        data.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+        user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
 
       push(privatePage);
       toast({
