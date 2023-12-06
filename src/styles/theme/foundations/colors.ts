@@ -25,19 +25,24 @@ const greyscale = {
   225: '#F0F0F0',
   250: '#EFEFEF',
   300: '#F7F7F7',
+  330: '#ECECEC',
   350: '#DBDBDB80',
   400: '#CCCCCC',
   425: '#D4D4D4',
   450: '#D9D9D9',
   500: '#ECECEC',
   600: '#AEAEAE',
+  650: '#666666',
   700: '#7C7C7C',
   800: '#555555',
   900: '#333333',
   1000: '#212121',
 };
 
-const black = { 200: '#070101' };
+const black = {
+  50: 'rgba(0, 0, 0, 0.08)',
+  200: '#070101',
+};
 
 const yellow = {
   warning_10: '#FBF5D6',

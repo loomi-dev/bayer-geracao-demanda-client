@@ -1,29 +1,20 @@
-import { Box, Flex, HStack } from '@chakra-ui/react';
+import { Box, Flex, VStack } from '@chakra-ui/react';
 import React from 'react';
 
-import { Header, ImageIcon } from '@/components';
+import { DocumentIcon, Header } from '@/components';
 
-import {
-  FilterButton,
-  HowMuchDidYouEarn,
-  HowToProve,
-  TitleWithSubtitle,
-  YourCurrentLevel,
-} from './components';
+import { DrawerExpenseReceipt, FinalizedTables, RunningTable, TableFilter } from './components';
 
 export const ReceiptsScreen = () => (
-  <Box boxSize="100%">
-    <Header label="Comprovações" icon={<ImageIcon color="white" width="30" height="30" />} />
-    <TitleWithSubtitle />
-    <Flex w="100%" justifyContent="space-between">
-      <HStack spacing="1rem">
-        <YourCurrentLevel />
-        <HowMuchDidYouEarn earnedValue={320000} needToWin={450000} progress={56} />
-      </HStack>
-
-      <FilterButton />
-    </Flex>
-
-    <HowToProve />
-  </Box>
+  <Flex boxSize="100%">
+    <DrawerExpenseReceipt />
+    <Box pl="6.4rem" pr="9.343rem" pt="3.8rem" pb="3.3rem" flex={1}>
+      <Header icon={<DocumentIcon />} label="Comprovantes" />
+      <TableFilter />
+      <VStack flex={1} mt="3.2rem" spacing="3.2rem" alignItems="flex-start">
+        <RunningTable />
+        <FinalizedTables />
+      </VStack>
+    </Box>
+  </Flex>
 );

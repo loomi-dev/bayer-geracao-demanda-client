@@ -50,6 +50,18 @@ export const Input = defineMultiStyleConfig({
         px: '1.6rem',
       },
     },
+    third: {
+      field: {
+        border: '1px solid',
+        borderColor: 'greyscale.25',
+        borderRadius: '1.6rem',
+        color: 'opacity.black.0.39',
+        px: '1.6rem',
+        fontSize: '1.6rem',
+        fontWeight: 400,
+        fontStyle: 'normal',
+      },
+    },
   },
   sizes: {
     md: {
