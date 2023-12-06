@@ -35,7 +35,7 @@ export const CustomerPlanningActionsColumns = [
     id: 'orçamento',
     header: () => <Text textStyle="action4">Saldo</Text>,
     cell: (info) => (
-      <Text textStyle="caption3" color="green.600">
+      <Text textStyle="caption3" color="red.danger_50">
         R$ {formatPrice(info.getValue())}
       </Text>
     ),
