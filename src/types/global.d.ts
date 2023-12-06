@@ -5,7 +5,7 @@ type User = {
   provider: string;
   confirmed: boolean;
   blocked: boolean;
-  role: 'Farmer' | 'Manager';
+  role: Roles;
 };
 type PlanningSummary = {
   id: number;
