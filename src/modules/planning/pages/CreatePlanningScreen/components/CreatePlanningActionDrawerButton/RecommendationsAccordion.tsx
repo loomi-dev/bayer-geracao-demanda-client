@@ -20,7 +20,7 @@ export const RecommendationsAccordion = () => (
         <>
           <h2>
             <AccordionButton _hover={{}}>
-              <Text textStyle="caption1" color="green.600">
+              <Text textStyle="caption1" color="red.danger_50">
                 Nossas recomendações
               </Text>
 
