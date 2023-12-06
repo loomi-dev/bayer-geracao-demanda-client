@@ -21,19 +21,19 @@ export const CustomerColumns = [
   columnHelper.accessor((date) => date.financial_summary?.initial_resource_in_cents, {
     id: 'recursoGdInicial',
     header: () => <Text textStyle="action4">Recurso GD Inicial</Text>,
-    cell: (info) => <Text textStyle="caption3">{`$ ${formatPrice(info.getValue())}`}</Text>,
+    cell: (info) => <Text textStyle="caption3">{`R$ ${formatPrice(info.getValue())}`}</Text>,
   }),
   columnHelper.accessor((data) => data.financial_summary?.final_resource_in_cents, {
     id: 'recursoGdFinal',
     header: () => <Text textStyle="action4">Recurso GD Final</Text>,
-    cell: (info) => <Text textStyle="caption3">{`$ ${formatPrice(info.getValue())}`}</Text>,
+    cell: (info) => <Text textStyle="caption3">{`R$ ${formatPrice(info.getValue())}`}</Text>,
   }),
   columnHelper.accessor((data) => data.financial_summary?.balance_in_cents, {
     id: 'saldo',
     header: () => <Text textStyle="action4">Saldo</Text>,
     cell: (info) => (
       <Text textStyle="caption3" color="green.600">
-        {`$ ${formatPrice(info.getValue())}`}
+        {`R$ ${formatPrice(info.getValue())}`}
       </Text>
     ),
   }),
@@ -42,7 +42,7 @@ export const CustomerColumns = [
     header: () => <Text textStyle="action4">Utilizado</Text>,
     cell: (info) => (
       <Text textStyle="caption3" color="green.600">
-        {`$ ${formatPrice(info.getValue())}`}
+        {`R$ ${formatPrice(info.getValue())}`}
       </Text>
     ),
   }),
