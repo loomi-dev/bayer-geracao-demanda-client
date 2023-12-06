@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionButton,
   AccordionItem,
+  AccordionPanel,
   Box,
   HStack,
   Text,
@@ -10,12 +11,14 @@ import {
 
 import { ChevronCircleDown, ChevronCircleUp } from '@/components';
 
+import { DetailTable } from './DetailTable';
+
 export const PlanningDetail = () => (
   <Accordion px="7.2rem" py="1.6rem">
-    <AccordionItem border="none">
+    <AccordionItem p="initial" border="none">
       {({ isExpanded }) => (
         <h2>
-          <AccordionButton>
+          <AccordionButton px="2.4rem" pt="2rem" pb="2rem">
             <VStack align="flex-start">
               <Text textStyle="footnote-small-bold" color="greyscale.700">
                 Detalhe do planejamento
@@ -42,6 +45,9 @@ export const PlanningDetail = () => (
               )}
             </HStack>
           </AccordionButton>
+          <AccordionPanel>
+            <DetailTable />
+          </AccordionPanel>
         </h2>
       )}
     </AccordionItem>
