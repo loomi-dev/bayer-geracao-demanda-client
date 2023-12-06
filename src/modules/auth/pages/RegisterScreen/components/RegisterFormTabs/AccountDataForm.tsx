@@ -75,7 +75,7 @@ export const AccountDataForm = () => {
         mx="auto"
         isDisabled={!isValidAccountDataForm}
         rightIcon={
-          <CircleIcon boxSize="3.9rem" bg="red.danger_50">
+          <CircleIcon boxSize="3.9rem" bg="red.danger_50" color="greyscale.0">
             <ArrowRightMediumIcon />
           </CircleIcon>
         }
