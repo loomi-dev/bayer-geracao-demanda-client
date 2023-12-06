@@ -1,12 +1,11 @@
 import { Text, VStack } from '@chakra-ui/react';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import { UseFieldArrayReturn, FieldValues } from 'react-hook-form';
 import { v4 } from 'uuid';
 
 import { UploadIcon } from '@/components';
-
-import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from './styles';
+import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from '@/styles/theme/externals';
 
 export type MultipleFileInputProps = {
   multiple?: boolean;
@@ -16,25 +15,22 @@ export type MultipleFileInputProps = {
 
 export type SelectedFile = { id?: string; file?: File };
 
-export const MultipleFileInput: React.FC<MultipleFileInputProps> = ({
+export const MultipleFileInput = ({
   multiple = true,
   dropZoneOptions = {},
   fieldArray,
-}) => {
+}: MultipleFileInputProps) => {
   const { append, update } = fieldArray;
 
   const { acceptedFiles, getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone(dropZoneOptions);
 
-  const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isFocused ? focusedStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    [isDragAccept, isDragReject, isFocused],
-  );
+  const style = {
+    ...baseStyle,
+    ...(isFocused ? focusedStyle : {}),
+    ...(isDragAccept ? acceptStyle : {}),
+    ...(isDragReject ? rejectStyle : {}),
+  };
 
   useEffect(() => {
     if (multiple) {
@@ -67,11 +63,12 @@ export const MultipleFileInput: React.FC<MultipleFileInputProps> = ({
         style,
       })}
       spacing="1rem"
+      color="red.danger_50"
     >
       <UploadIcon />
-      <Text textStyle="action5" maxW="25rem" textAlign="center">
+      <Text textStyle="footnote-400-2" maxW="25rem" textAlign="center">
         <Text
-          textStyle="action6"
+          textStyle="footnote-700"
           as="a"
           cursor="pointer"
           textDecor="underline"

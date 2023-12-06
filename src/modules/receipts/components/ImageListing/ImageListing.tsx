@@ -4,7 +4,7 @@ import { scrollbarStyle } from '@/styles/theme/components';
 
 import { CardImageViewing } from '../CardImageViewing';
 
-type ImageViewingProps = {
+type ImageListingProps = {
   files: Array<{
     file: File;
     id: string;
@@ -12,7 +12,7 @@ type ImageViewingProps = {
   handleRemoveFile: (index: number) => void;
 };
 
-export const ImageViewing = ({ files, handleRemoveFile }: ImageViewingProps) => (
+export const ImageListing = ({ files, handleRemoveFile }: ImageListingProps) => (
   <HStack
     overflowX="auto"
     p="0.8rem"

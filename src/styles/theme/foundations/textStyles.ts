@@ -54,18 +54,6 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontSize: '1.2rem',
     fontWeight: 'bold',
   },
-  action5: {
-    fontSize: '1.4rem',
-    fontWeight: '400',
-    lineHeight: '1.8rem',
-    color: 'green.500',
-  },
-  action6: {
-    fontSize: '1.4rem',
-    fontWeight: '700',
-    lineHeight: '1.8rem',
-    color: 'green.500',
-  },
   caption1: {
     fontSize: '2rem',
     fontWeight: 'normal',

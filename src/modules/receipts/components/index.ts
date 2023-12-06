@@ -1,3 +1,3 @@
 export * from './MultipleFileInput';
-export * from './ImageViewing';
+export * from './ImageListing';
 export * from './CardImageViewing';

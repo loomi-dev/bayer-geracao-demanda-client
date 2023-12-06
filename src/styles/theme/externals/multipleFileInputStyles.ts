@@ -4,16 +4,16 @@ export const baseStyle = {
   padding: '20px',
   borderWidth: '2px',
   borderRadius: '1.6rem',
-  borderColor: '#37C745',
+  borderColor: '#212121',
   borderStyle: 'dashed',
-  backgroundColor: '#f3fcf4',
+  backgroundColor: '#f3c3cf',
   outline: 'none',
   transition: 'border .24s ease-in-out',
   overflow: 'hidden',
 };
 
 export const focusedStyle = {
-  borderColor: '#21F3B4',
+  borderColor: '#212121',
 };
 
 export const acceptStyle = {
@@ -21,5 +21,5 @@ export const acceptStyle = {
 };
 
 export const rejectStyle = {
-  borderColor: '#ff1744',
+  borderColor: '#F30000',
 };
