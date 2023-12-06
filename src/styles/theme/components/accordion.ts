@@ -18,6 +18,9 @@ export const Accordion = defineStyleConfig({
         color: 'green.600',
         borderBottom: '1px solid',
         borderColor: 'opacity.gray.0.20',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       },
       panel: {
         pt: '1.2rem',
