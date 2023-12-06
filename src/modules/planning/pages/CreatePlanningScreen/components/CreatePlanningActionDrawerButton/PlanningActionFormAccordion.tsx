@@ -9,10 +9,16 @@ import {
 import { useFormContext } from 'react-hook-form';
 
 import { FormWrapper, SelectInput, TextInput, TextInputProps } from '@/components';
+import { Mask } from '@/utils';
 
 import { AccordionIcon } from './AccordionIcon';
 import { PlanningActionFormSchemaType } from './PlanningActionForm.schema';
 import { SelectDateSection } from './SelectDateSection';
+
+type ActionTypeOption = {
+  label: string;
+  value: PlanningActionType;
+};
 
 export const PlanningActionFormAccordion = () => {
   const {
@@ -25,7 +31,7 @@ export const PlanningActionFormAccordion = () => {
     p: '1.6rem',
   };
 
-  const actionTypeOptions = [
+  const actionTypeOptions: ActionTypeOption[] = [
     {
       label: 'Ação de relacionamento',
       value: 'relationship_task',
@@ -66,7 +72,9 @@ export const PlanningActionFormAccordion = () => {
                 </FormWrapper>
               </HStack>
 
-              <SelectDateSection />
+              <FormWrapper error={errors.date}>
+                <SelectDateSection />
+              </FormWrapper>
 
               <FormWrapper label="Descrição" error={errors.description}>
                 <TextInput
@@ -79,7 +87,11 @@ export const PlanningActionFormAccordion = () => {
               </FormWrapper>
 
               <FormWrapper label="Quanto recurso deseja usar?" error={errors.value}>
-                <TextInput {...inputStyles} {...register('value')} />
+                <TextInput
+                  mask={(value) => Mask.formatBRL(value, 100)}
+                  {...inputStyles}
+                  {...register('value')}
+                />
               </FormWrapper>
             </AccordionPanel>
           </>
