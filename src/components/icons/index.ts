@@ -36,3 +36,5 @@ export { default as BigChevronLeftIcon } from './BigChevronLeft';
 export { default as ClockIcon } from './Clock';
 export { default as DocumentIcon } from './DocumentIcon';
 export { default as ExpandIcon } from './ExpandIcon';
+export { default as ChevronCircleUp } from './ArrowCircleUp';
+export { default as ChevronCircleDown } from './ArrowCircleDown';
