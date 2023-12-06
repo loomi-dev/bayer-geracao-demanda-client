@@ -21,6 +21,7 @@ export const updateUser = async ({
   id: userId,
   name,
   email,
+  number,
   companyRole,
   password,
   confirmPassword,
@@ -34,6 +35,7 @@ export const updateUser = async ({
       password,
       passwordConfirmation: confirmPassword,
       confirmed,
+      number,
     },
   });
 

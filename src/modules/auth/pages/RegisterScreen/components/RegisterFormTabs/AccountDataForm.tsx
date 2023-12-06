@@ -9,8 +9,10 @@ import {
   EmailIcon,
   FormWrapper,
   PersonIcon,
+  PhoneIcon,
   TextInput,
 } from '@/components';
+import { Mask } from '@/utils';
 
 import { PrivacyPoliciesModal } from './PrivacyPoliciesModal';
 import { AccountDataFormSchemaType, accountDataFormSchema } from './registerFormTabs.schemas';
@@ -32,6 +34,7 @@ export const AccountDataForm = () => {
     name: watch('name'),
     email: watch('email'),
     role: watch('role'),
+    phone: watch('phone'),
   }).success;
 
   return (
@@ -53,6 +56,16 @@ export const AccountDataForm = () => {
             leftIcon={<EmailIcon />}
             borderRadius="2.1rem"
             {...register('email')}
+          />
+        </FormWrapper>
+        <FormWrapper error={errors.phone} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+          <TextInput
+            size="xl"
+            mask={Mask.formatPhone}
+            placeholder="Telefone"
+            leftIcon={<PhoneIcon />}
+            borderRadius="2.1rem"
+            {...register('phone')}
           />
         </FormWrapper>
         <FormWrapper error={errors.role} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>

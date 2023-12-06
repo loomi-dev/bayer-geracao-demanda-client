@@ -27,6 +27,8 @@ export const LoginForm = () => {
     formState: { errors, isValid },
   } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
+    mode: 'all',
+    criteriaMode: 'all',
   });
 
   const identifierValue = watch('identifier')?.replace(/[^a-zA-Z0-9]/g, '');

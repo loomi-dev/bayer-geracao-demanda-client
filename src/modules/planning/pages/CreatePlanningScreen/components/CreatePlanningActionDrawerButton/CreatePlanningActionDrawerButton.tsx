@@ -54,6 +54,8 @@ export const CreatePlanningActionDrawerButton = () => {
 
   const methods = useForm<PlanningActionFormSchemaType>({
     resolver: zodResolver(planningActionFormSchema),
+    mode: 'all',
+    criteriaMode: 'all',
   });
 
   const {

@@ -31,8 +31,8 @@ export const authOptions: NextAuthOptions = {
     session: async ({ session, token: { user }, trigger, newSession }) => {
       if (trigger === 'update' && newSession) {
         session.user = {
-          ...newSession,
-          accessToken: session.user.accessToken,
+          ...newSession?.user,
+          accessToken: newSession?.jwt,
         };
       }
 
