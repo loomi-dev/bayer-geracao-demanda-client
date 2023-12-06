@@ -5,7 +5,7 @@ export const semanticTokens = {
       secondary: 'greyscale.600',
       disabled: 'greyscale.400',
       footnote: 'greyscale.800',
-      brand: 'green.500',
+      brand: 'red.danger_50',
       invert: 'greyscale.0',
       copytext: 'greyscale.900',
     },
@@ -13,7 +13,7 @@ export const semanticTokens = {
       primary: 'greyscale.0',
       secondary: 'greyscale.150',
       disabled: 'greyscale.400',
-      brand: 'green.500',
+      brand: 'red.danger_50',
       invert: 'greyscale.1000',
     },
     border: {
@@ -25,7 +25,7 @@ export const semanticTokens = {
     },
     background: {
       primary: {
-        default: 'green.500',
+        default: 'red.danger_50',
         hover: 'green.700',
         focussed: 'green.800',
         pressed: 'green.700',

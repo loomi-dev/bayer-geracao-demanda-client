@@ -6,7 +6,7 @@ export const centsToCompactValue = (valueInCents: number): string => {
   const centsFormattedToInteger = centsToInteger(valueInCents);
 
   if (centsFormattedToInteger < 1000) {
-    return formatPrice(centsFormattedToInteger);
+    return formatPrice(valueInCents);
   }
 
   return numberToCompactValue(centsFormattedToInteger);

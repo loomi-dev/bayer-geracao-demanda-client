@@ -6,7 +6,7 @@ import { useGetPlanningActions } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
 import { PAGINATION_PAGE_SIZE } from '@/config';
 import { usePagination } from '@/hooks';
-import { centsToInteger, formatPrice } from '@/utils';
+import { formatPrice } from '@/utils';
 
 import { CreatePlanningActionDrawerButton } from '../CreatePlanningActionDrawerButton';
 
@@ -41,11 +41,9 @@ export const PlanningActionsTable = () => {
   const totalPlanningActionsBudgetValue = useMemo(
     () =>
       planningActionsList.reduce((totalValue, planningAction) => {
-        const planningActionValueConvertedToInt = centsToInteger(
-          planningAction?.amountInCents ?? 0,
-        );
+        const planningActionValue = planningAction?.amountInCents ?? 0;
 
-        totalValue += planningActionValueConvertedToInt;
+        totalValue += planningActionValue;
 
         return totalValue;
       }, 0),

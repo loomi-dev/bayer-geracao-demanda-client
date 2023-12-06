@@ -36,3 +36,6 @@ export { default as BigChevronLeftIcon } from './BigChevronLeft';
 export { default as ClockIcon } from './Clock';
 export { default as DocumentIcon } from './DocumentIcon';
 export { default as ExpandIcon } from './ExpandIcon';
+export { default as EditIcon } from './EditIcon';
+export { default as EyeOpenIcon } from './EyeOpenIcon';
+export { default as TrashIcon } from './TrashIcon';
