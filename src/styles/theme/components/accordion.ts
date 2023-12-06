@@ -17,7 +17,10 @@ export const Accordion = defineStyleConfig({
         fontWeight: 'normal',
         color: 'green.600',
         borderBottom: '1px solid',
-        borderColor: 'opacity.brack.0.20',
+        borderColor: 'opacity.gray.0.20',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       },
       panel: {
         pt: '1.2rem',

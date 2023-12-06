@@ -1,3 +1,12 @@
+type User = {
+  id: number;
+  username: string;
+  email: string;
+  provider: string;
+  confirmed: boolean;
+  blocked: boolean;
+  role: Roles;
+};
 type PlanningSummary = {
   id: number;
   farm_task_in_cents: number;
@@ -61,6 +70,7 @@ type Farmer = {
   name: string;
   wallet: Wallet;
   safra: Harvest;
+  users_permissions_user: User;
 };
 
 type Pagination = {
