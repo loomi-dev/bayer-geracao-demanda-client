@@ -86,6 +86,10 @@ export const textStyles: ChakraTheme['textStyles'] = {
     fontSize: '1.2rem',
     fontWeight: 700,
   },
+  'footnote-small-bold': {
+    fontSize: '1rem',
+    fontWeight: 'bold',
+  },
   'footnote-bold-2': {
     fontSize: '1rem',
     fontWeight: 700,

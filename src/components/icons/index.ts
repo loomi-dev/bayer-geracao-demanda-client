@@ -37,6 +37,8 @@ export { default as ClockIcon } from './Clock';
 export { default as UploadIcon } from './Upload';
 export { default as DocumentIcon } from './DocumentIcon';
 export { default as ExpandIcon } from './ExpandIcon';
+export { default as ChevronCircleUp } from './ArrowCircleUp';
+export { default as ChevronCircleDown } from './ArrowCircleDown';
 export { default as Minus2Icon } from './Minus2';
 export { default as Close2Icon } from './Close2';
 export { default as EditIcon } from './EditIcon';

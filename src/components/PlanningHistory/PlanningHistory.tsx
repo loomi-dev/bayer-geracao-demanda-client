@@ -8,7 +8,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { ActionStepper } from './components';
+import { PlanningDetail, ActionStepper } from './components';
 
 type PlanningHistoryProps = Omit<DrawerProps, 'children'>;
 
@@ -25,6 +25,7 @@ export const PlanningHistory = ({ ...props }: PlanningHistoryProps) => (
       </DrawerHeader>
       <DrawerBody p="initial" bgColor="surface.primary">
         <ActionStepper />
+        <PlanningDetail />
       </DrawerBody>
     </DrawerContent>
   </Drawer>
