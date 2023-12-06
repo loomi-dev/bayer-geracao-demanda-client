@@ -1,14 +1,16 @@
 import { useRouter } from 'next/router';
 
-import { useGetPlanningStatistics } from '@/api';
+import { useGetFarmer, useGetPlanningStatistics } from '@/api';
 import { ChevronLeftIcon, Header } from '@/components';
+import { Mask } from '@/utils';
 
 import { CustomerPlanningTable, CustomerStatisticsSection } from './components';
 
 export const CustomerDetailScreen = () => {
   const { push, query } = useRouter();
   const customerId = Number(query.customer_id);
-  const { data, isLoading } = useGetPlanningStatistics(
+  const { data: getCustomerData } = useGetFarmer({ farmerId: customerId });
+  const { data: getPlanningData, isLoading } = useGetPlanningStatistics(
     {
       userId: customerId,
     },
@@ -16,17 +18,21 @@ export const CustomerDetailScreen = () => {
       enabled: Boolean(customerId),
     },
   );
-
-  const farmer = data?.data[0];
+  const customer = getCustomerData?.data[0];
+  const customerPlannings = getPlanningData?.data[0];
   return (
     <>
       <Header
-        label={`${farmer?.name}`}
+        label={`${customer?.users_permissions_user.username}`}
+        subLabel={Mask.formatCNPJ(customer?.company_identifier ?? '')}
         onClick={() => push('/clientes')}
         icon={<ChevronLeftIcon fontSize={36} color="white" />}
         isLoading={isLoading}
       />
-      <CustomerStatisticsSection summary={farmer?.planning_summary} isLoading={isLoading} />
+      <CustomerStatisticsSection
+        summary={customerPlannings?.planning_summary}
+        isLoading={isLoading}
+      />
       <CustomerPlanningTable />
     </>
   );

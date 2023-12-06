@@ -49,8 +49,10 @@ export const getCustomers = async ({
             transaction: true,
           },
           planning_summary: true,
+          users_permissions_user: true,
         },
       },
+      financial_summary: true,
       historic: true,
     },
   });

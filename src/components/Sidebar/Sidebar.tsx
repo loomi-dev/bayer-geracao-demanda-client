@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, FlexProps, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
@@ -10,7 +10,11 @@ import { PlatformLogo } from '../PlatformLogo';
 import { MenuItem } from './MenuItem';
 import { farmerMenuItens, managerMenuItens } from './Sidebar.items';
 
-export const Sidebar = () => {
+type SidebarProps = {
+  containerProps?: FlexProps;
+};
+
+export const Sidebar = ({ containerProps }: SidebarProps) => {
   const user = useSession();
   const { pathname } = useRouter();
   const isManager = user.data?.user.role === 'Manager';
@@ -30,6 +34,8 @@ export const Sidebar = () => {
       h="100%"
       overflowY="auto"
       pb="3rem"
+      zIndex={1}
+      {...containerProps}
     >
       <Flex mt="7rem" align="center" flexDir="column" gap="2rem">
         <Image src="/assets/images/logo.webp" width={95} height={94} quality={100} alt="app logo" />
