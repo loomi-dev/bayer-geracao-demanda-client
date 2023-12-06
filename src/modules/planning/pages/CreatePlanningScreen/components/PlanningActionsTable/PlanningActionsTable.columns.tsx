@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { centsToInteger, formatMonth, formatPrice } from '@/utils';
+import { formatMonth, formatPrice } from '@/utils';
 
 import { PlanningActionTypeColumn } from './PlanningActionTypeColumn';
 
@@ -30,8 +30,6 @@ export const planningActionsColumns = [
   columnHelper.accessor((data) => data?.amountInCents, {
     id: 'orcamento',
     header: () => <Text>Orçamento</Text>,
-    cell: (info) => (
-      <Text textStyle="action3">{`R$ ${formatPrice(centsToInteger(info.getValue() ?? 0))}`}</Text>
-    ),
+    cell: (info) => <Text textStyle="action3">{`R$ ${formatPrice(info.getValue() ?? 0)}`}</Text>,
   }),
 ];

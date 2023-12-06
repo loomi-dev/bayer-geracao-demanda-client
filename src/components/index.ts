@@ -15,3 +15,4 @@ export * from './Pagination';
 export * from './StatCard';
 export * from './Balance';
 export * from './SelectInput';
+export * from './DatePicker';
