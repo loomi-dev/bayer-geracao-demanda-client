@@ -2,6 +2,7 @@ import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import logoImageSrc from '@/../public/assets/images/logo.webp';
+import { PlatformLogo } from '@/components';
 
 import { AuthBanner } from '../../components';
 
@@ -24,8 +25,8 @@ export const LoginScreen = () => (
       <Text fontSize="4rem" fontWeight="bold" color="greyscale.0" opacity="0.8">
         TOP MULTIPLICADORES
       </Text>
-      <Text fontSize="7rem" fontWeight="bold" color="greyscale.0" maxW="66rem" mr="10rem">
-        A plataforma de gestão Bayer
+      <Text fontSize="7rem" fontWeight="bold" color="greyscale.0" maxW="53.8rem" mr="10rem">
+        A plataforma de GD da Bayer
       </Text>
     </VStack>
 
@@ -74,13 +75,7 @@ export const LoginScreen = () => (
 
         <LoginForm />
 
-        <HStack mt="14rem">
-          <Text textStyle="caption3" color="text.footnote" maxW="8.7rem">
-            Uma plataforma
-          </Text>
-
-          <Image src="/assets/images/bayer-logo.webp" alt="" width={66} height={66} quality={100} />
-        </HStack>
+        <PlatformLogo mt="15rem" />
       </Flex>
     </Box>
   </HStack>

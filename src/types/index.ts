@@ -9,3 +9,17 @@ export enum PlanningActionStatus {
   'farm_kit' = 'table_warning',
   'relationship_task' = 'table_success',
 }
+
+export enum PlanningStatus {
+  'accepted' = 'table_success',
+  'rejected' = 'table_error',
+  'ready_for_evaluation' = 'table_warning',
+  'default' = 'table_primary',
+}
+
+export enum PlanningValue {
+  'accepted' = 'Aprovado',
+  'rejected' = 'Ajustes solicitados',
+  'ready_for_evaluation' = 'Aguardando aprovação',
+  'default' = 'Em construção',
+}

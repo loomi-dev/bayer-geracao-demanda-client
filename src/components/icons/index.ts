@@ -40,3 +40,6 @@ export { default as Minus2Icon } from './Minus2';
 export { default as Close2Icon } from './Close2';
 export { default as DiamondLevelIcon } from './DiamondLevel';
 export { default as InboxIcon } from './Inbox';
+export { default as EditIcon } from './EditIcon';
+export { default as EyeOpenIcon } from './EyeOpenIcon';
+export { default as TrashIcon } from './TrashIcon';

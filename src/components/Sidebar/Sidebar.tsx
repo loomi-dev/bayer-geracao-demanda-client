@@ -5,6 +5,8 @@ import { useSession } from 'next-auth/react';
 
 import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 
+import { PlatformLogo } from '../PlatformLogo';
+
 import { MenuItem } from './MenuItem';
 import { farmerMenuItens, managerMenuItens } from './Sidebar.items';
 
@@ -62,18 +64,8 @@ export const Sidebar = ({ containerProps }: SidebarProps) => {
           />
         ))}
       </Flex>
-      <Flex align="center" gap="1.8rem">
-        <Text w="8.7rem" textStyle="caption3" color="text.footnote">
-          Uma plataforma
-        </Text>
-        <Image
-          src="/assets/images/bayer-logo.webp"
-          width={66}
-          height={66}
-          quality={100}
-          alt="bayer logo"
-        />
-      </Flex>
+
+      <PlatformLogo />
     </Flex>
   );
 };

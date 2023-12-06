@@ -57,6 +57,7 @@ const red = {
   danger_20: '#EB8989',
   danger_30: '#F30000',
   danger_40: '#DE3B3B',
+  danger_50: '#A10B30',
   danger_60: '#B22F2F',
   danger_80: '#852323',
 };
