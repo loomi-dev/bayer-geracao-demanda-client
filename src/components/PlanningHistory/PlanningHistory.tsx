@@ -8,8 +8,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { ActionStepper } from './components';
-import { PlanningDetail } from './components/PlanningDetail';
+import { PlanningDetail, ActionStepper } from './components';
 
 type PlanningHistoryProps = Omit<DrawerProps, 'children'>;
 
