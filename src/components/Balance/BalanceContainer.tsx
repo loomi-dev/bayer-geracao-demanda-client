@@ -2,7 +2,7 @@ import { StackProps, VStack } from '@chakra-ui/react';
 import { ReactNode, createContext, useContext } from 'react';
 
 import { useGetFarmer } from '@/api';
-import { centsToInteger, formatDate, formatPrice } from '@/utils';
+import { formatDate, formatPrice } from '@/utils';
 
 type BalanceContextProps = {
   isLoading: boolean;
@@ -22,8 +22,7 @@ export const BalanceContainer = ({ farmerId, children, ...restProps }: BalancePr
     { farmerId },
     { enabled: Boolean(farmerId) },
   );
-
-  const balanceValue = formatPrice(centsToInteger(dataGetFarmer?.data?.[0].wallet.balance ?? 0));
+  const balanceValue = formatPrice(dataGetFarmer?.data?.[0].wallet.balance ?? 0);
   const expirationDateValue = formatDate(
     dataGetFarmer?.data?.[0]?.safra?.deadline_to_add_plannings,
   );
