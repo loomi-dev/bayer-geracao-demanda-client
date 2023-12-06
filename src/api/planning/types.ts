@@ -19,7 +19,6 @@ export type CreatePlanningData = {
 };
 export type CreatePlanningResponse = {
   data: {
-    date: string;
     id: number;
   };
 };
@@ -29,7 +28,6 @@ export type GetPlanningActionsStatisticsParams = {
 };
 export type GetPlanningActionsStatisticsResponse = {
   data: {
-    date: string;
     id: number;
     metric: {
       id: number;

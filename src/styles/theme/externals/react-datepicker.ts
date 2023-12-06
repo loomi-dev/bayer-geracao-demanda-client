@@ -70,4 +70,14 @@ export const reactDatePickerStyles: SystemStyleObject = {
       borderRadius: '0',
     },
   },
+
+  '.react-datepicker__day--keyboard-selected, .react-datepicker__day.react-datepicker__day--in-selecting-range, .react-datepicker__day--selecting-range-start, .react-datepicker__day--selecting-range-end':
+    {
+      bg: 'red.danger_50',
+      color: 'greyscale.0',
+
+      _hover: {
+        bg: 'red.danger_50',
+      },
+    },
 };

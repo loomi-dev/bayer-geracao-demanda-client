@@ -8,10 +8,7 @@ export const planningActionFormSchema = z.object({
     .string()
     .trim()
     .min(1, { message: 'Digite o quanto de recurso será usado para esta ação.' }),
-  date: z.coerce.date({
-    invalid_type_error: 'Selecione uma data válida.',
-    required_error: 'Selecione uma data.',
-  }),
+  date: z.array(z.date(), z.date()).length(2, { message: 'Selecione a data de início e fim.' }),
 });
 
 export type PlanningActionFormSchemaType = z.infer<typeof planningActionFormSchema>;
