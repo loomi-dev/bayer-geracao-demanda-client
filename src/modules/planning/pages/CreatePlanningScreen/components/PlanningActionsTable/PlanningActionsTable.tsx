@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 
 import { useGetPlanningActions } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
-import { PAGINATION_PAGE_SIZE } from '@/config';
 import { usePagination } from '@/hooks';
 import { formatPrice } from '@/utils';
 
@@ -23,7 +22,7 @@ export const PlanningActionsTable = () => {
     isLoading: isLoadingDataPlanningActions,
     isFetching: isFetchingDataPlanningActions,
   } = useGetPlanningActions(
-    { planningId, pagination: { page: currentPage, pageSize: PAGINATION_PAGE_SIZE } },
+    { planningId, pagination: { page: currentPage, pageSize: 5 } },
     {
       enabled: Boolean(planningId),
     },
