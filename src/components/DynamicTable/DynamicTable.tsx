@@ -5,6 +5,8 @@ import {
   TextProps,
   SystemStyleObject,
   TableContainerProps,
+  Box,
+  BoxProps,
 } from '@chakra-ui/react';
 import { useReactTable, TableOptions, getCoreRowModel, Row } from '@tanstack/react-table';
 import { MouseEvent, ReactNode } from 'react';
@@ -22,8 +24,9 @@ type DynamicTableProps<TData> = {
   fallbackProps?: TextProps;
   hoverProps?: SystemStyleObject;
   variant?: 'primary' | 'secondary' | 'third';
+  tableContainerProps?: TableContainerProps;
   onRowClick?: (row: Row<TData>, event: MouseEvent<HTMLTableRowElement>) => void;
-} & TableContainerProps;
+} & BoxProps;
 
 export const DynamicTable = <TData extends Record<string, unknown>>({
   data = [],
@@ -34,7 +37,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   fallbackProps,
   hoverProps,
   children,
-
+  tableContainerProps,
   onRowClick,
   ...restProps
 }: DynamicTableProps<TData>) => {
@@ -70,40 +73,43 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   } as const;
 
   return (
-    <TableContainer
+    <Box
       layerStyle={tableContainerVariants[variant]?.layerStyle}
       borderRadius={tableContainerVariants[variant]?.borderRadius}
       pb={tableContainerVariants[variant]?.pb}
       boxShadow={tableContainerVariants[variant]?.boxShadow}
       bg="surface.secondary"
+      overflow="hidden"
       w="full"
       {...restProps}
     >
-      <Table variant={variant}>
-        <TableHeader<TData> headerGroups={headerGroups} />
+      <TableContainer w="full" {...tableContainerProps}>
+        <Table variant={variant}>
+          <TableHeader<TData> headerGroups={headerGroups} />
 
-        {rows.length > 0 && !isLoading && (
-          <TableBody<TData> hoverProps={hoverProps} rows={rows} onRowClick={onRowClick} />
+          {rows.length > 0 && !isLoading && (
+            <TableBody<TData> hoverProps={hoverProps} rows={rows} onRowClick={onRowClick} />
+          )}
+
+          {isLoading && <TableBodySkeleton headersAmount={headerColumnsAmount} />}
+        </Table>
+
+        {rows.length === 0 && !isLoading && (
+          <Text
+            w="full"
+            textStyle="action4"
+            color="text.secondary"
+            align="center"
+            lineHeight="6rem"
+            py="1.6rem"
+            {...fallbackProps}
+          >
+            {fallbackMessage}
+          </Text>
         )}
-
-        {isLoading && <TableBodySkeleton headersAmount={headerColumnsAmount} />}
-      </Table>
-
-      {rows.length === 0 && !isLoading && (
-        <Text
-          w="full"
-          textStyle="action4"
-          color="text.secondary"
-          align="center"
-          lineHeight="6rem"
-          py="1.6rem"
-          {...fallbackProps}
-        >
-          {fallbackMessage}
-        </Text>
-      )}
+      </TableContainer>
 
       {children}
-    </TableContainer>
+    </Box>
   );
 };

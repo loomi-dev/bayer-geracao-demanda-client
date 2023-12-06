@@ -1,4 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
+import { Row } from '@tanstack/react-table';
 import { useRouter } from 'next/router';
 
 import { useGetFarmerPlans } from '@/api';
@@ -9,10 +10,10 @@ import { CustomerPendingPlanningNotification } from './CustomerPendingPlanningNo
 import { customerPlanningColumns } from './CustomerPlanningTable.columns';
 
 export const CustomerPlanningTable = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const customerId = Number(query.customer_id);
-  const { data, isLoading } = useGetFarmerPlans({ farmerId: customerId });
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
+  const { data, isLoading } = useGetFarmerPlans({ page: currentPage, farmerId: customerId });
   const plannings = data?.data ?? [];
   const pendingPlans = plannings.reduce((pendingValue, planning) => {
     if (planning.historic?.at(-1)?.status === 'ready_for_evaluation') {
@@ -20,6 +21,8 @@ export const CustomerPlanningTable = () => {
     }
     return pendingValue;
   }, 0);
+
+  const onRowClick = (row: Row<Planning>) => push(`${customerId}/detalhes/${row.original.id}`);
 
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
@@ -32,6 +35,7 @@ export const CustomerPlanningTable = () => {
         fallbackMessage="Nenhum planejamento encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
         hoverProps={{ bgColor: 'opacity.green.0.10', cursor: 'pointer' }}
+        onRowClick={onRowClick}
       />
       <Pagination
         page={currentPage}

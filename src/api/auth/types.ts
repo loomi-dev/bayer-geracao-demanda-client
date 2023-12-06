@@ -2,20 +2,11 @@ export type Credentials = {
   identifier: string;
   password: string;
 };
-export type UserType = {
-  id: number;
-  username: string;
-  email: string;
-  provider: string;
-  confirmed: boolean;
-  blocked: boolean;
-  role: 'Farmer' | 'Manager';
-};
 
 export type LoginWithCredentialsData = Credentials;
 export type LoginWithCredentialsResponse = {
   jwt: string;
-  user: UserType;
+  user: User;
 };
 
 export type UpdateUserData = {
@@ -28,5 +19,5 @@ export type UpdateUserData = {
   confirmed: boolean;
 };
 export type UpdateUserResponse = {
-  data: UserType;
+  data: User;
 };

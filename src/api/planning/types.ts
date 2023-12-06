@@ -9,6 +9,7 @@ export type GetPlanningStatisticsResponse = GenericListResponseType<{
 }>;
 
 export type GetFarmerPlansParams = {
+  page: number;
   farmerId: number;
 };
 export type GetFarmerPlansResponse = GenericListResponseType<Planning>;
@@ -40,7 +41,7 @@ export type GetPlanningActionsStatisticsResponse = {
 };
 
 export type GetPlanningActionsParams = {
-  page: number;
+  pagination?: Pagination;
   planningId: number;
 };
 export type GetPlanningActionsResponse = GenericListResponseType<PlanningAction>;

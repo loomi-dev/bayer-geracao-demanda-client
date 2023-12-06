@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import qs from 'qs';
 
-import { PAGINATION_PAGE_SIZE } from '@/config';
 import axios from '@/lib/axios';
 
 import {
@@ -41,6 +40,7 @@ export const getPlanningStatistics = async ({
 };
 
 export const getFarmerPlans = async ({
+  page,
   farmerId,
 }: GetFarmerPlansParams): Promise<GetFarmerPlansResponse> => {
   const query = qs.stringify({
@@ -60,6 +60,10 @@ export const getFarmerPlans = async ({
           actions: true,
         },
       },
+    },
+    pagination: {
+      page,
+      pageSize: 5,
     },
   });
 
@@ -109,8 +113,8 @@ export const getPlanningActionsStatistics = async ({
 };
 
 export const getPlanningActions = async ({
-  page,
   planningId,
+  pagination,
 }: GetPlanningActionsParams): Promise<GetPlanningActionsResponse> => {
   const query = qs.stringify({
     filters: {
@@ -118,7 +122,7 @@ export const getPlanningActions = async ({
         id: planningId,
       },
     },
-    pagination: { page, pageSize: PAGINATION_PAGE_SIZE },
+    pagination,
   });
 
   const { data } = await axios.authorized().get(`/actions?${query}`);
