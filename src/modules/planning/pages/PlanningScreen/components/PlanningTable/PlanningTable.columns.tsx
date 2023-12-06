@@ -13,7 +13,7 @@ export const planningTableColumns = [
     header: () => <Text>Safra</Text>,
     cell: (info) => <Text textStyle="action2">{info.getValue()}</Text>,
   }),
-  columnHelper.accessor((data) => data?.date, {
+  columnHelper.accessor((data) => data?.createdAt, {
     id: 'datePlanning',
     header: () => <Text>Data do plan.</Text>,
     cell: (info) => <Text>{dayjs(info.getValue()).format('DD MMMM YYYY')}</Text>,
