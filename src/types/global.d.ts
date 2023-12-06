@@ -1,3 +1,13 @@
+type User = {
+  id: number;
+  username: string;
+  email: string;
+  provider: string;
+  confirmed: boolean;
+  blocked: boolean;
+  role: Roles;
+  lastAccess: Date;
+};
 type PlanningSummary = {
   id: number;
   farm_task_in_cents: number;
@@ -40,6 +50,7 @@ type Historic = {
 };
 
 type Planning = {
+  title: string;
   createdAt: Date;
   id: number;
   date?: string;
@@ -61,9 +72,18 @@ type Farmer = {
   name: string;
   wallet: Wallet;
   safra: Harvest;
+  users_permissions_user: User;
 };
 
 type Pagination = {
   pageSize: number;
   page: number;
+};
+
+type FinancialSummary = {
+  balance_in_cents: number;
+  final_resource_in_cents: number;
+  id: number;
+  initial_resource_in_cents: number;
+  utilized_in_cents: number;
 };

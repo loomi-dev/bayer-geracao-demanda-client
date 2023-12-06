@@ -1,34 +1,20 @@
+import { Box, Flex, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
 
-import { ImageViewing, MultipleFileInput } from '../../components';
+import { DocumentIcon, Header } from '@/components';
 
-export const ReceiptsScreen = () => {
-  const { control, watch } = useForm();
+import { DrawerExpenseReceipt, FinalizedTables, RunningTable, TableFilter } from './components';
 
-  const fieldArray = useFieldArray({
-    control,
-    name: 'files',
-  });
-
-  const { remove } = fieldArray;
-
-  const handleRemoveFile = (index: number) => {
-    remove(index);
-  };
-
-  return (
-    <>
-      <MultipleFileInput
-        fieldArray={fieldArray}
-        dropZoneOptions={{
-          accept: {
-            'image/png': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg', '.webp', '.ico'],
-          },
-        }}
-      />
-
-      <ImageViewing files={watch('files')} handleRemoveFile={handleRemoveFile} />
-    </>
-  );
-};
+export const ReceiptsScreen = () => (
+  <Flex boxSize="100%">
+    <DrawerExpenseReceipt />
+    <Box pl="6.4rem" pr="9.343rem" pt="3.8rem" pb="3.3rem" flex={1}>
+      <Header icon={<DocumentIcon />} label="Comprovantes" />
+      <TableFilter />
+      <VStack flex={1} mt="3.2rem" spacing="3.2rem" alignItems="flex-start">
+        <RunningTable />
+        <FinalizedTables />
+      </VStack>
+    </Box>
+  </Flex>
+);

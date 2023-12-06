@@ -5,7 +5,7 @@ export const semanticTokens = {
       secondary: 'greyscale.600',
       disabled: 'greyscale.400',
       footnote: 'greyscale.800',
-      brand: 'green.500',
+      brand: 'red.danger_50',
       invert: 'greyscale.0',
       copytext: 'greyscale.900',
     },
@@ -13,7 +13,7 @@ export const semanticTokens = {
       primary: 'greyscale.0',
       secondary: 'greyscale.150',
       disabled: 'greyscale.400',
-      brand: 'green.500',
+      brand: 'red.danger_50',
       invert: 'greyscale.1000',
     },
     border: {
@@ -25,7 +25,7 @@ export const semanticTokens = {
     },
     background: {
       primary: {
-        default: 'green.500',
+        default: 'red.danger_50',
         hover: 'green.700',
         focussed: 'green.800',
         pressed: 'green.700',
@@ -58,15 +58,16 @@ export const semanticTokens = {
         '1.40': 'rgba(217, 217, 217, 0.40)',
       },
       black: {
+        '0.08': 'rgba(0, 0, 0, 0.08)',
         '0.10': 'rgba(0, 0, 0, 0.10)',
         '0.12': 'rgba(0, 0, 0, 0.12)',
         '0.14': 'rgba(0, 0, 0, 0.14)',
         '0.20': 'rgba(0, 0, 0, 0.20)',
+        '0.39': 'rgba(33, 33, 33, 0.39)',
         '0.40': 'rgba(0, 0, 0, 0.40)',
       },
       gray: {
         '1.20': 'rgba(217, 217, 217, 0.20)',
-        '0.20': 'rgba(0, 0, 0, 0.20)',
         '0.30': 'rgba(33, 33, 33, 0.30)',
         '0.10': 'rgba(33, 33, 33, 0.10)',
       },
@@ -76,6 +77,7 @@ export const semanticTokens = {
         '1.30': 'rgba(243, 0, 0, 0.30)',
       },
       green: {
+        '0.05': 'rgba(0, 121, 58, 0.05)',
         '0.10': 'rgba(55, 199, 69, 0.10)',
         '0.30': 'rgba(55, 199, 69, 0.30)',
       },

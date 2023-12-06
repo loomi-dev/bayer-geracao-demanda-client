@@ -9,7 +9,7 @@ import { CustomerPlanningStatusColumn } from './CustomerPlanningStatusColumn';
 const columnHelper = createColumnHelper<Planning>();
 
 export const customerPlanningColumns = [
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.title, {
     id: 'tituloPlanejamento',
     header: () => <Text textStyle="footnote-bold">Título do planejamento</Text>,
     cell: (info) => <Text textStyle="footnote">{info.getValue()}</Text>,

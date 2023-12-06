@@ -22,15 +22,26 @@ const greyscale = {
   100: '#FAFAFA',
   150: '#F5F5F5',
   200: '#F1F1F1',
+  225: '#F0F0F0',
   250: '#EFEFEF',
   300: '#F7F7F7',
+  330: '#ECECEC',
   350: '#DBDBDB80',
   400: '#CCCCCC',
+  425: '#D4D4D4',
   450: '#D9D9D9',
+  500: '#ECECEC',
   600: '#AEAEAE',
+  650: '#666666',
+  700: '#7C7C7C',
   800: '#555555',
   900: '#333333',
+  // 950: 'rgba(33, 33, 33, 0.39)',
   1000: '#212121',
+};
+
+const black = {
+  50: 'rgba(0, 0, 0, 0.08)',
 };
 
 const yellow = {
@@ -46,6 +57,7 @@ const red = {
   danger_20: '#EB8989',
   danger_30: '#F30000',
   danger_40: '#DE3B3B',
+  danger_50: '#A10B30',
   danger_60: '#B22F2F',
   danger_80: '#852323',
 };
@@ -56,4 +68,5 @@ export const colors: ChakraTheme['colors'] = {
   greyscale,
   yellow,
   red,
+  black,
 };

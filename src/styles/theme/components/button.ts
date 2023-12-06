@@ -29,7 +29,7 @@ export const Button = defineStyleConfig({
       fontWeight: 'bold',
 
       _hover: {
-        bg: 'green.600',
+        bg: 'red.danger_60',
 
         _disabled: {
           bg: 'surface.brand',
@@ -95,6 +95,7 @@ export const Button = defineStyleConfig({
         _disabled: {
           bg: 'transparent',
         },
+        opacity: '0.6',
       },
     },
     sixth: {
@@ -155,10 +156,13 @@ export const Button = defineStyleConfig({
       },
     },
     unstyled: {
-      p: '0',
+      py: '0',
+      px: '0',
       border: '0',
       h: 'initial',
       w: 'initial',
+      minW: 'initial',
+      minH: 'initial',
 
       _hover: {
         _disabled: {
@@ -177,11 +181,11 @@ export const Button = defineStyleConfig({
       px: '0',
 
       _active: {
-        bg: 'green.600',
+        bg: 'red.danger_60',
       },
 
       _hover: {
-        bg: 'green.600',
+        bg: 'red.danger_60',
 
         _disabled: {
           bg: 'surface.brand',
