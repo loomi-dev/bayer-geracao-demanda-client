@@ -25,6 +25,7 @@ const greyscale = {
   225: '#F0F0F0',
   250: '#EFEFEF',
   300: '#F7F7F7',
+  330: '#ECECEC',
   350: '#DBDBDB80',
   400: '#CCCCCC',
   425: '#D4D4D4',
@@ -35,7 +36,12 @@ const greyscale = {
   700: '#7C7C7C',
   800: '#555555',
   900: '#333333',
+  // 950: 'rgba(33, 33, 33, 0.39)',
   1000: '#212121',
+};
+
+const black = {
+  50: 'rgba(0, 0, 0, 0.08)',
 };
 
 const yellow = {
@@ -61,4 +67,5 @@ export const colors: ChakraTheme['colors'] = {
   greyscale,
   yellow,
   red,
+  black,
 };
