@@ -27,7 +27,7 @@ export const CustomerTable = () => {
     { enabled: Boolean(userId) },
   );
   const customers = data?.data ?? [];
-
+  console.log(customers);
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
     debounce(() => setSearch(e.target.value), 250);
   const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);

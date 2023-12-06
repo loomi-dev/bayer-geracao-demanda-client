@@ -14,6 +14,7 @@ export type Customer = {
   date: Date;
   farmer: Farmer;
   historic: Historic[];
+  financial_summary: FinancialSummary;
 };
 
 export type GetCustomersResponse = GenericListResponseType<Customer>;

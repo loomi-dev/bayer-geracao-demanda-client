@@ -18,31 +18,31 @@ export const CustomerColumns = [
     header: () => <Text textStyle="action4">Razão Social</Text>,
     cell: (info) => <Text textStyle="body3">{info.getValue()}</Text>,
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((date) => date.financial_summary?.initial_resource_in_cents, {
     id: 'recursoGdInicial',
     header: () => <Text textStyle="action4">Recurso GD Inicial</Text>,
-    cell: () => <Text textStyle="caption3">{formatPrice(80000)}</Text>,
+    cell: (info) => <Text textStyle="caption3">{`$ ${formatPrice(info.getValue())}`}</Text>,
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.financial_summary?.final_resource_in_cents, {
     id: 'recursoGdFinal',
     header: () => <Text textStyle="action4">Recurso GD Final</Text>,
-    cell: () => <Text textStyle="caption3">{formatPrice(80000)}</Text>,
+    cell: (info) => <Text textStyle="caption3">{`$ ${formatPrice(info.getValue())}`}</Text>,
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.financial_summary?.balance_in_cents, {
     id: 'saldo',
     header: () => <Text textStyle="action4">Saldo</Text>,
-    cell: () => (
+    cell: (info) => (
       <Text textStyle="caption3" color="green.600">
-        {formatPrice(1000000)}
+        {`$ ${formatPrice(info.getValue())}`}
       </Text>
     ),
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.financial_summary?.utilized_in_cents, {
     id: 'utilizado',
     header: () => <Text textStyle="action4">Utilizado</Text>,
-    cell: () => (
+    cell: (info) => (
       <Text textStyle="caption3" color="green.600">
-        {formatPrice(1000000)}
+        {`$ ${formatPrice(info.getValue())}`}
       </Text>
     ),
   }),
@@ -63,9 +63,16 @@ export const CustomerColumns = [
       </HStack>
     ),
   }),
-  columnHelper.accessor(() => null, {
+  columnHelper.accessor((data) => data.farmer.users_permissions_user?.lastAccess, {
     id: 'ultimoAcesso',
     header: () => <Text textStyle="action4">Ultimo acesso</Text>,
-    cell: () => <Text textStyle="footnote">-</Text>,
+    cell: (info) => (
+      <HStack align="center" justify="center">
+        <Box mt="0.3rem">
+          <ClockIcon />
+        </Box>
+        <Text textStyle="footnote">{dayjs(info.getValue()).to(Date(), true)}</Text>
+      </HStack>
+    ),
   }),
 ];
