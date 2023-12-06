@@ -15,25 +15,57 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { Balance, BigCalendarIcon, CircleIcon } from '@/components';
 
-import { planningActionFormSchema } from './PlanningActionForm.schema';
+import { useCreatePlanningActionStore } from '../../stores';
+import { PlanningActionDetail } from '../PlanningActionDetail';
+
+import {
+  PlanningActionFormSchemaType,
+  planningActionFormSchema,
+} from './PlanningActionForm.schema';
 import { PlanningActionFormAccordion } from './PlanningActionFormAccordion';
 import { PlanningActionFormStepper } from './PlanningActionFormStepper';
 import { RecommendationsAccordion } from './RecommendationsAccordion';
 
 export const CreatePlanningActionDrawerButton = () => {
+  const [currentStep, setCurrentStep] = useCreatePlanningActionStore((state) => [
+    state.currentStep,
+    state.setCurrentStep,
+  ]);
+
   const {
     isOpen: isOpenCreatePlanningActionDrawer,
     onOpen: onOpenCreatePlanningActionDrawer,
     onClose: onCloseCreatePlanningActionDrawer,
   } = useDisclosure();
 
-  const methods = useForm({
+  const methods = useForm<PlanningActionFormSchemaType>({
     resolver: zodResolver(planningActionFormSchema),
   });
 
   const {
+    watch,
+    reset,
     formState: { isValid },
   } = methods;
+
+  const planningActionTitle = watch('title') ?? '-';
+  const planningActionType = watch('type') ?? '-';
+  const planningActionInvestment = watch('value') ?? '-';
+  const planningActionDescription = watch('description') ?? '-';
+
+  const handleBackStep = () => {
+    setCurrentStep(0);
+  };
+
+  const handleNextStep = () => {
+    setCurrentStep(1);
+  };
+
+  const handleCloseCreatePlanningActionDrawer = () => {
+    setCurrentStep(0);
+    reset();
+    onCloseCreatePlanningActionDrawer();
+  };
 
   return (
     <>
@@ -41,7 +73,10 @@ export const CreatePlanningActionDrawerButton = () => {
         Nova ação
       </Balance.Button>
 
-      <Drawer isOpen={isOpenCreatePlanningActionDrawer} onClose={onCloseCreatePlanningActionDrawer}>
+      <Drawer
+        isOpen={isOpenCreatePlanningActionDrawer}
+        onClose={handleCloseCreatePlanningActionDrawer}
+      >
         <DrawerOverlay onClick={onCloseCreatePlanningActionDrawer} />
         <DrawerContent>
           <FormProvider {...methods}>
@@ -57,9 +92,22 @@ export const CreatePlanningActionDrawerButton = () => {
               <PlanningActionFormStepper />
             </DrawerHeader>
 
-            <DrawerBody>
-              <RecommendationsAccordion />
-              <PlanningActionFormAccordion />
+            <DrawerBody justifyContent={currentStep === 1 ? 'space-between' : 'initial'}>
+              {currentStep === 0 && (
+                <>
+                  <RecommendationsAccordion />
+                  <PlanningActionFormAccordion />
+                </>
+              )}
+
+              {currentStep === 1 && (
+                <PlanningActionDetail
+                  title={planningActionTitle}
+                  type={planningActionType}
+                  investment={planningActionInvestment}
+                  description={planningActionDescription}
+                />
+              )}
 
               <HStack mt="1rem" justify="flex-end">
                 <Text
@@ -76,10 +124,14 @@ export const CreatePlanningActionDrawerButton = () => {
             </DrawerBody>
 
             <DrawerFooter>
-              <Button variant="secondary" w="18rem" onClick={onCloseCreatePlanningActionDrawer}>
-                Cancelar
+              <Button
+                variant="secondary"
+                w="18rem"
+                onClick={currentStep === 0 ? handleCloseCreatePlanningActionDrawer : handleBackStep}
+              >
+                {currentStep === 0 ? 'Cancelar' : 'Voltar'}
               </Button>
-              <Button w="18rem" isDisabled={!isValid}>
+              <Button w="18rem" isDisabled={!isValid} onClick={handleNextStep}>
                 Criar nova ação
               </Button>
             </DrawerFooter>

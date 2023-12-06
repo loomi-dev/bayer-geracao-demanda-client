@@ -1,28 +1,29 @@
 import {
   Center,
   Step,
-  StepIcon,
   StepIndicator,
   StepNumber,
   StepSeparator,
   StepStatus,
   StepTitle,
   Stepper,
-  useSteps,
 } from '@chakra-ui/react';
 
+import { useCreatePlanningActionStore } from '../../stores';
+
 export const PlanningActionFormStepper = () => {
-  const { activeStep } = useSteps({
-    index: 1,
-    count: 2,
-  });
+  const currentStep = useCreatePlanningActionStore((state) => state.currentStep);
 
   return (
     <Center>
-      <Stepper index={activeStep} py="1.6rem" mt="2.4rem" maxW="50rem" w="full">
+      <Stepper index={currentStep + 1} py="1.6rem" mt="2.4rem" maxW="50rem" w="full">
         <Step>
           <StepIndicator>
-            <StepStatus complete={<StepNumber />} />
+            <StepStatus
+              complete={<StepNumber />}
+              incomplete={<StepNumber />}
+              active={<StepNumber />}
+            />
 
             <StepTitle>Detalhe da ação</StepTitle>
           </StepIndicator>
@@ -33,7 +34,7 @@ export const PlanningActionFormStepper = () => {
         <Step>
           <StepIndicator>
             <StepStatus
-              complete={<StepIcon />}
+              complete={<StepNumber />}
               incomplete={<StepNumber />}
               active={<StepNumber />}
             />

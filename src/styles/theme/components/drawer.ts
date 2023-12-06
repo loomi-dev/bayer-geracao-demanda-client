@@ -11,6 +11,8 @@ export const Drawer = defineMultiStyleConfig({
       borderColor: 'opacity.black.0.20',
     },
     body: {
+      display: 'flex',
+      flexDirection: 'column',
       p: '1.4rem 2.4rem 3rem',
       bg: 'greyscale.500',
     },
