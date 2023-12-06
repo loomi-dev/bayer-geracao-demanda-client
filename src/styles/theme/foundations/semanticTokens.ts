@@ -20,7 +20,7 @@ export const semanticTokens = {
       primary: 'greyscale.1000',
       secondary: 'greyscale.800',
       divider: 'greyscale.100',
-      brand: 'green.600',
+      brand: 'red.danger_50',
       invert: 'greyscale.400',
     },
     background: {

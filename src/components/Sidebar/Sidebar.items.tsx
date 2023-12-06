@@ -3,11 +3,6 @@ import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon, UserGroupIcon } from '
 export const managerMenuItens = [
   { label: 'Clientes', src: '/clientes', leftIcon: <UserGroupIcon /> },
   {
-    label: 'Planejamento',
-    src: '/planejamento',
-    leftIcon: <CalendarIcon />,
-  },
-  {
     label: 'Comprovantes',
     src: '/comprovantes',
     leftIcon: <ImageIcon />,
