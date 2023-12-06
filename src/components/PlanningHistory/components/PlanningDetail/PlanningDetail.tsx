@@ -31,7 +31,7 @@ const mockData: PlanningAction[] = [
   },
 ];
 export const PlanningDetail = () => (
-  <Box mx="7.2rem" mt="1.6rem" mb="3.6rem" boxShadow="fifth" borderRadius="1.6rem">
+  <Box mx="7.2rem" mt="1.6rem" mb="3.6rem" boxShadow="datepicker" borderRadius="1.6rem">
     <Accordion border="none">
       <AccordionItem p="initial" boxShadow="none" border="none" borderBottomRadius="initial">
         {({ isExpanded }) => (
@@ -42,6 +42,7 @@ export const PlanningDetail = () => (
               pt="2rem"
               pb="2rem"
               borderTopRadius="full"
+              borderBottomColor="opacity.black.0.12"
               _hover={{ bgColor: 'none' }}
             >
               <VStack align="flex-start">
