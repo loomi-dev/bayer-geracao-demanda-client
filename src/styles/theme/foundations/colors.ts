@@ -33,6 +33,8 @@ const greyscale = {
   1000: '#212121',
 };
 
+const black = { 200: '#070101' };
+
 const yellow = {
   warning_10: '#FBF5D6',
   warning_20: '#F4E283',
@@ -56,4 +58,5 @@ export const colors: ChakraTheme['colors'] = {
   greyscale,
   yellow,
   red,
+  black,
 };
