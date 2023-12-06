@@ -41,7 +41,7 @@ export type GetPlanningActionsStatisticsResponse = {
 };
 
 export type GetPlanningActionsParams = {
-  page: number;
+  pagination?: Pagination;
   planningId: number;
 };
 export type GetPlanningActionsResponse = GenericListResponseType<PlanningAction>;

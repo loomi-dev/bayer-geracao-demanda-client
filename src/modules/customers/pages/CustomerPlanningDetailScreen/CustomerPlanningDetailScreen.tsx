@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { ChevronLeftIcon, Header } from '@/components';
 
-import { CustomerPlanningDetailCards } from './components';
+import { CustomerPlanningActionsTable, CustomerPlanningDetailCards } from './components';
 
 export const CustomerPlanningDetailScreen = () => {
   const { push, query } = useRouter();
@@ -16,6 +16,7 @@ export const CustomerPlanningDetailScreen = () => {
         icon={<ChevronLeftIcon fontSize={36} color="white" />}
       />
       <CustomerPlanningDetailCards />
+      <CustomerPlanningActionsTable />
     </>
   );
 };
