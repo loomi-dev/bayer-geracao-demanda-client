@@ -6,6 +6,7 @@ type User = {
   confirmed: boolean;
   blocked: boolean;
   role: Roles;
+  lastAccess: Date;
 };
 type PlanningSummary = {
   id: number;
@@ -49,6 +50,7 @@ type Historic = {
 };
 
 type Planning = {
+  title: string;
   createdAt: Date;
   id: number;
   date?: string;
@@ -76,4 +78,12 @@ type Farmer = {
 type Pagination = {
   pageSize: number;
   page: number;
+};
+
+type FinancialSummary = {
+  balance_in_cents: number;
+  final_resource_in_cents: number;
+  id: number;
+  initial_resource_in_cents: number;
+  utilized_in_cents: number;
 };
