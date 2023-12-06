@@ -12,19 +12,23 @@ import { PlanningActionResume } from './PlanningActionResume';
 export const CustomerPlanningActionsTable = () => {
   const { query } = useRouter();
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
-
   const planningId = Number(query.planning_id);
-  const { data: metricsData, isLoading: isLoadingMetrics } = useGetPlanningActionsStatistics({
-    planningId,
-  });
-  const { data: actionsData, isLoading: isLoadingActions } = useGetPlanningActions({ planningId });
+  const { data: metricsData, isLoading: isLoadingMetrics } = useGetPlanningActionsStatistics(
+    {
+      planningId,
+    },
+    { enabled: Boolean(planningId) },
+  );
+  const { data: actionsData, isLoading: isLoadingActions } = useGetPlanningActions(
+    { planningId },
+    { enabled: Boolean(planningId) },
+  );
 
   const metrics = metricsData?.data.metric;
   const actions = actionsData?.data ?? [];
-
-  const farmKitValue = Number(metrics?.farm_kit_in_cents) ?? 0;
-  const farmTaskValue = Number(metrics?.farm_task_in_cents) ?? 0;
-  const relationshipTaskValue = Number(metrics?.relationship_task_in_cent) ?? 0;
+  const farmKitValue = Number(metrics?.farm_kit_in_cents ?? 0);
+  const farmTaskValue = Number(metrics?.farm_task_in_cents ?? 0);
+  const relationshipTaskValue = Number(metrics?.relationship_task_in_cent ?? 0);
 
   const planningValue = farmKitValue + farmTaskValue + relationshipTaskValue;
 

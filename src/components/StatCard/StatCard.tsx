@@ -22,7 +22,7 @@ export const StatCard = ({
       <Skeleton h="3rem" w="10rem" {...skeletonStyles} />
     ) : (
       <Text textStyle="h4" textTransform="uppercase" whiteSpace="nowrap">
-        {value}
+        $ {value}
       </Text>
     )}
     <Text textStyle="body3" color="text.footnote" maxW="7.4rem" {...labelStyles}>
