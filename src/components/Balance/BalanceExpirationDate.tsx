@@ -9,7 +9,6 @@ type BalanceExpirationDateProps = {
 
 export const BalanceExpirationDate = ({ children, ...restProps }: BalanceExpirationDateProps) => {
   const context = useBalanceContext();
-
   return (
     <>
       {context?.isLoading ? (

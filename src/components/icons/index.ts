@@ -34,6 +34,7 @@ export { default as ChevronLeftIcon } from './ChevronLeftIcon';
 export { default as ChevronRightIcon } from './ChevronRightIcon';
 export { default as BigChevronLeftIcon } from './BigChevronLeft';
 export { default as ClockIcon } from './Clock';
+export { default as DocumentIcon } from './DocumentIcon';
+export { default as ExpandIcon } from './ExpandIcon';
 export { default as DiamondLevelIcon } from './DiamondLevel';
 export { default as InboxIcon } from './Inbox';
-export { default as DocumentIcon } from './Document';

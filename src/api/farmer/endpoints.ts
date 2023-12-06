@@ -16,6 +16,7 @@ export const getFarmer = async ({ farmerId }: GetFarmerParams): Promise<GetFarme
     populate: {
       wallet: true,
       safra: true,
+      users_permissions_user: true,
     },
   });
 
