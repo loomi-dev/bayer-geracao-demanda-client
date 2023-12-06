@@ -1,12 +1,14 @@
-import { HStack, Button, Text, Skeleton } from '@chakra-ui/react';
+import { HStack, Text, Skeleton } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
 
 import { useGetPlanningActions } from '@/api';
-import { AddInsideCircleIcon, CircleIcon, DynamicTable, Pagination } from '@/components';
+import { DynamicTable, Pagination } from '@/components';
 import { PAGINATION_PAGE_SIZE } from '@/config';
 import { usePagination } from '@/hooks';
 import { centsToInteger, formatPrice } from '@/utils';
+
+import { CreatePlanningActionDrawerButton } from '../CreatePlanningActionDrawerButton';
 
 import { planningActionsColumns } from './PlanningActionsTable.columns';
 
@@ -77,25 +79,7 @@ export const PlanningActionsTable = () => {
             </Text>
           )}
 
-          <Button
-            variant="third"
-            w="15.6rem"
-            pl="2.4rem"
-            pr="0"
-            transition="all 0.2s linear"
-            rightIcon={
-              <CircleIcon>
-                <AddInsideCircleIcon />
-              </CircleIcon>
-            }
-            _hover={{
-              pl: '1rem',
-            }}
-          >
-            <Text as="span" w="full" align="center">
-              Nova ação
-            </Text>
-          </Button>
+          <CreatePlanningActionDrawerButton />
         </HStack>
       </DynamicTable>
 

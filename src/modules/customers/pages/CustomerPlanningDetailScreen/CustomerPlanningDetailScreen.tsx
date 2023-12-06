@@ -6,13 +6,13 @@ import { CustomerPlanningActionsTable, CustomerPlanningDetailCards } from './com
 
 export const CustomerPlanningDetailScreen = () => {
   const { push, query } = useRouter();
-  const customer_id = Number(query.customer_id);
+  const customerId = Number(query.customer_id);
 
   return (
     <>
       <Header
         label="Detalhamento do planejamento"
-        onClick={() => push(`/clientes/${customer_id}`)}
+        onClick={() => push(`/clientes/${customerId}`)}
         icon={<ChevronLeftIcon fontSize={36} color="white" />}
       />
       <CustomerPlanningDetailCards />
