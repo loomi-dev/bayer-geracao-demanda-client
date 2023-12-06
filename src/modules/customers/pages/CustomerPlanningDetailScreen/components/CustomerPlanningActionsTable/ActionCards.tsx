@@ -32,7 +32,7 @@ export const ActionCards = ({
         <GridItem key={metric.label}>
           <StatCard
             label={metric.label}
-            value={centsToCompactValue(metric.value)}
+            value={`R$ ${centsToCompactValue(metric.value)}`}
             isLoading={isLoading}
             labelStyles={{ maxWidth: 'initial' }}
           />
