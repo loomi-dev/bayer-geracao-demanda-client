@@ -50,7 +50,7 @@ export type GetPlanningHistoricParams = { planningId: number };
 export type GetPlanningHistoricResponse = {
   data: {
     createdAt: string;
-    historic: Historic;
+    historic: Historic[];
     id: number;
     title: string;
   };

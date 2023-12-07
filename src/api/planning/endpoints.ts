@@ -140,6 +140,7 @@ export const getPlanningHistoric = async ({
       historic: {
         populate: {
           related: true,
+          actions: true,
         },
       },
     },

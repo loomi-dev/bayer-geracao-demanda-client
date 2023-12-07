@@ -22,6 +22,7 @@ export const PlanningHistoric = ({ planningId, ...props }: PlanningHistoricProps
     { enabled: props.isOpen },
   );
   const planningHistoric = getHistoricData?.data;
+
   return (
     <Drawer {...props}>
       <DrawerContent>
@@ -35,7 +36,7 @@ export const PlanningHistoric = ({ planningId, ...props }: PlanningHistoricProps
         </DrawerHeader>
         <DrawerBody p="initial" bgColor="surface.primary">
           <HistoricStepper />
-          <Historic historic={planningHistoric?.historic} />
+          <Historic historicList={planningHistoric?.historic ?? []} />
         </DrawerBody>
       </DrawerContent>
     </Drawer>
