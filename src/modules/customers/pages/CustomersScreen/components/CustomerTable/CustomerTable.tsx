@@ -27,8 +27,10 @@ export const CustomerTable = () => {
   );
   const customers = data?.data ?? [];
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
-    debounce(() => setSearch(e.target.value), 250);
+  const handleSearch = debounce(
+    (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
+    250,
+  );
   const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);
 
   return (
