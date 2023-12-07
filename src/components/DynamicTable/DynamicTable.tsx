@@ -23,6 +23,7 @@ type DynamicTableProps<TData> = {
   fallbackMessage?: string;
   fallbackProps?: TextProps;
   hoverProps?: SystemStyleObject;
+  tableOptions?: Omit<TableOptions<TData>, 'data' | 'columns' | 'getCoreRowModel'>;
   variant?: 'primary' | 'secondary' | 'third';
   tableContainerProps?: TableContainerProps;
   onRowClick?: (row: Row<TData>, event: MouseEvent<HTMLTableRowElement>) => void;
@@ -37,6 +38,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
   fallbackProps,
   hoverProps,
   children,
+  tableOptions,
   tableContainerProps,
   onRowClick,
   ...restProps
@@ -45,12 +47,11 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    ...tableOptions,
   });
-
   const headerGroups = getHeaderGroups();
   const headerColumnsAmount = headerGroups[0].headers.length ?? 1;
   const rows = getRowModel().rows;
-
   const tableContainerVariants = {
     primary: {
       layerStyle: 'card',
