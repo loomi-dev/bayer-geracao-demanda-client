@@ -29,7 +29,6 @@ export const DatePicker = <T extends FieldValues>({
     render={({ field }) => (
       <ReactDatePicker
         dateFormat="dd/MM/yyyy"
-        locale="pt-BR"
         maxDate={maxDate}
         wrapperClassName="react-datepicker-wrapper"
         selectsRange

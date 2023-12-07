@@ -1,4 +1,5 @@
 import { HStack, Text, Skeleton } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
 
@@ -7,13 +8,22 @@ import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 import { formatPrice } from '@/utils';
 
-import { CreatePlanningActionDrawerButton } from '../CreatePlanningActionDrawerButton';
-
 import { planningActionsColumns } from './PlanningActionsTable.columns';
 
-export const PlanningActionsTable = () => {
+type PlanningActionsTableProps = {
+  planningStatus: HistoricStatus | 'default';
+};
+
+const DynamicCreatePlanningActionDrawerButton = dynamic(async () => {
+  const { CreatePlanningActionDrawerButton } = await import('../CreatePlanningActionDrawerButton');
+
+  return CreatePlanningActionDrawerButton;
+});
+
+export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTableProps) => {
   const { query } = useRouter();
   const planningId = Number(query?.planning_id);
+  const isPlanningAccepted = planningStatus === 'accepted';
 
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('planning_actions');
 
@@ -76,7 +86,7 @@ export const PlanningActionsTable = () => {
             </Text>
           )}
 
-          <CreatePlanningActionDrawerButton />
+          {!isPlanningAccepted && <DynamicCreatePlanningActionDrawerButton />}
         </HStack>
       </DynamicTable>
 
