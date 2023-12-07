@@ -45,6 +45,7 @@ type Harvest = {
 type Historic = {
   id: number;
   actions: PlanningAction[];
+  related: User;
   creation_date: string;
   description: string;
   status: HistoricStatus;

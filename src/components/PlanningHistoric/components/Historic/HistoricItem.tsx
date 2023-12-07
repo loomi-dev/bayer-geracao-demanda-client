@@ -24,7 +24,7 @@ export const HistoricItem = ({ actions }: HistoricItemProps) => {
   }, 0);
 
   return (
-    <Box mx="7.2rem" mt="1.6rem" mb="3.6rem" boxShadow="datepicker" borderRadius="1.6rem">
+    <Box mb="3.6rem" boxShadow="datepicker" borderRadius="1.6rem">
       <Accordion border="none">
         <AccordionItem p="initial" boxShadow="none" border="none" borderBottomRadius="initial">
           {({ isExpanded }) => (

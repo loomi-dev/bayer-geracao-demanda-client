@@ -14,7 +14,9 @@ export const HistoricItemTableRow = ({ title, type, value, status }: HistoricIte
   <Grid w="full" templateRows={`repeat(1,1fr)`} templateColumns="repeat(4,1fr)">
     <GridItem>
       <Center h="100%">
-        <Text textStyle="caption3">{title}</Text>
+        <Text textStyle="caption3" textAlign="center">
+          {title}
+        </Text>
       </Center>
     </GridItem>
     <GridItem>
