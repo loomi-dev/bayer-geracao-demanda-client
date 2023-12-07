@@ -53,3 +53,13 @@ export type GetPlanningHistoricResponse = {
     title: string;
   };
 };
+
+export type GetPlanningStatusParams = {
+  planningId: number;
+};
+export type GetPlanningStatusResponse = {
+  data: {
+    createdAt: string;
+    historic: Historic[];
+  };
+};

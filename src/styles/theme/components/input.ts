@@ -8,7 +8,7 @@ export const Input = defineMultiStyleConfig({
     field: {
       _selection: {
         bg: 'surface.brand',
-        color: 'text.primary',
+        color: 'text.invert',
       },
 
       _invalid: {
