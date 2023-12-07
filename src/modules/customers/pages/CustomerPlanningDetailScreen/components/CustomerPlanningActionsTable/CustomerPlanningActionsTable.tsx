@@ -19,6 +19,7 @@ export const CustomerPlanningActionsTable = () => {
     onOpen: onOpenHistoricDrawer,
   } = useDisclosure();
   const [rowSelection, setRowSelection] = useState({});
+  const [isApproving, setIsApproving] = useState(false);
   const planningId = Number(query.planning_id);
   const { data: metricsData, isLoading: isLoadingMetrics } = useGetPlanningActionsStatistics(
     {
@@ -39,6 +40,18 @@ export const CustomerPlanningActionsTable = () => {
   const planningValue = farmKitValue + farmTaskValue + relationshipTaskValue;
 
   const selectedRows = Object.keys(rowSelection).map((key) => actions[key]);
+
+  const planningActionsToEvaluate = selectedRows.length ? selectedRows : actions;
+
+  const onApprovePlanning = () => {
+    setIsApproving(true);
+    onOpenHistoricDrawer();
+  };
+
+  const onRejectPlanning = () => {
+    setIsApproving(false);
+    onOpenHistoricDrawer();
+  };
 
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
@@ -70,7 +83,7 @@ export const CustomerPlanningActionsTable = () => {
             h="100%"
             bgColor="opacity.red.1.10"
             _hover={{ opacity: '0.7' }}
-            onClick={onOpenHistoricDrawer}
+            onClick={onRejectPlanning}
           >
             <Text
               textStyle="footnote-bold"
@@ -90,8 +103,14 @@ export const CustomerPlanningActionsTable = () => {
         onNextPage={handleNextPage}
         onPreviousPage={handlePreviousPage}
       />
-      <PlanningActionResume onClick={onOpenHistoricDrawer} planningValue={planningValue} />
+      <PlanningActionResume
+        onApprove={onApprovePlanning}
+        onReject={onRejectPlanning}
+        planningValue={planningValue}
+      />
       <PlanningHistoric
+        isAproving={isApproving}
+        actionsToEvaluate={planningActionsToEvaluate}
         planningId={planningId}
         isOpen={isOpenHistoricDrawer}
         onClose={onCloseHistoricDrawer}

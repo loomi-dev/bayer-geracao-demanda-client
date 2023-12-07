@@ -6,17 +6,25 @@ import {
   DrawerProps,
   VStack,
   Text,
+  Flex,
 } from '@chakra-ui/react';
 
 import { useGetPlanningHistoric } from '@/api';
 
-import { HistoricStepper, Historic } from './components';
+import { HistoricStepper, Historic, PlanningValidator } from './components';
 
 type PlanningHistoricProps = {
   planningId: number;
+  actionsToEvaluate?: PlanningAction[];
+  isAproving: boolean;
 } & Omit<DrawerProps, 'children'>;
 
-export const PlanningHistoric = ({ planningId, ...props }: PlanningHistoricProps) => {
+export const PlanningHistoric = ({
+  planningId,
+  actionsToEvaluate = [],
+  isAproving,
+  ...props
+}: PlanningHistoricProps) => {
   const { data: getHistoricData, isLoading } = useGetPlanningHistoric(
     { planningId },
     { enabled: props.isOpen },
@@ -36,7 +44,10 @@ export const PlanningHistoric = ({ planningId, ...props }: PlanningHistoricProps
         </DrawerHeader>
         <DrawerBody p="initial" bgColor="surface.primary">
           <HistoricStepper />
-          <Historic historicList={planningHistoric?.historic ?? []} />
+          <Flex flexDir="column" px="7.2rem" pt="1.6rem" gap="1.6rem">
+            <Historic historicList={planningHistoric?.historic ?? []} />
+            <PlanningValidator actionsToEvaluate={actionsToEvaluate} isApproving={isAproving} />
+          </Flex>
         </DrawerBody>
       </DrawerContent>
     </Drawer>
