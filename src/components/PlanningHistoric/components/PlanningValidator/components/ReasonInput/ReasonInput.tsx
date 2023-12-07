@@ -16,6 +16,6 @@ export const ReasonInput = () => (
     <Text textStyle="capiton3" color="greyscale.700">
       Insira uma mensagem para explicar o motivo das recusas
     </Text>
-    <TextInput w="80%" as="textarea" border="none" p="initial" />
+    <TextInput as="textarea" resize="none" border="none" p="initial" />
   </Flex>
 );
