@@ -34,3 +34,14 @@ export enum PlanningActionStatusValue {
   'rejected' = 'Recusado',
   'not_evaluated' = 'Em avaliação',
 }
+
+export enum HistoricValue {
+  'ready_for_evaluation' = 'Aguardando aprovação',
+  'accepted' = 'Aprovado',
+  'rejected' = 'Recusado',
+}
+export enum HistoricStatusValue {
+  'ready_for_evaluation' = 'table_primary',
+  'accepted' = 'table_success',
+  'rejected' = 'table_error',
+}

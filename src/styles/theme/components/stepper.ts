@@ -68,6 +68,10 @@ export const Stepper = defineMultiStyleConfig({
           bg: 'text.brand',
         },
       },
+      separator: {
+        top: '5.2rem !important',
+        left: '2.6rem !important',
+      },
     },
   },
   defaultProps: {

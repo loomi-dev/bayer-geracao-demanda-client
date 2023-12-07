@@ -45,3 +45,4 @@ export { default as EditIcon } from './EditIcon';
 export { default as EyeOpenIcon } from './EyeOpenIcon';
 export { default as TrashIcon } from './TrashIcon';
 export { default as PhoneIcon } from './PhoneIcon';
+export { default as ClockRegularIcon } from './ClockRegularIcon';

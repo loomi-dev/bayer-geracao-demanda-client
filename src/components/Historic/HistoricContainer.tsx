@@ -14,6 +14,7 @@ export const HistoricContainer = ({ children, ...restProps }: HistoricContainerP
     borderBottom="1px solid"
     borderColor="opacity.black.0.08"
     ml="1.6rem"
+    mb="1rem"
     {...restProps}
   >
     {children}

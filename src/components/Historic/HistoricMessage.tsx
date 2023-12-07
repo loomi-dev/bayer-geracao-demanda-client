@@ -1,6 +1,11 @@
 import { Text, VStack } from '@chakra-ui/react';
 
-export const HistoricMessage = () => (
+type HistoricMessageProps = {
+  author: string;
+  description: string;
+};
+
+export const HistoricMessage = ({ author, description }: HistoricMessageProps) => (
   <VStack
     w="full"
     align="flex-start"
@@ -12,12 +17,11 @@ export const HistoricMessage = () => (
     spacing="0.8rem"
   >
     <Text textStyle="caption3" color="greyscale.700" lineHeight="2rem">
-      Mensagem de Ricardo
+      Mensagem de {author}
     </Text>
 
     <Text textStyle="body3" color="text.copytext" lineHeight="2rem">
-      Mensagem enviada por Ricardo mensagem enviada por Ricardo mensagem enviada por Ricardo
-      mensagem enviada por Ricardo mensagem enviada por Ricardo mensagem enviada por Ricardo{' '}
+      {description}
     </Text>
   </VStack>
 );

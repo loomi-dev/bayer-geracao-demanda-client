@@ -11,8 +11,6 @@ import {
   Step,
   StepIndicator,
   StepStatus,
-  StepIcon,
-  StepNumber,
   StepSeparator,
   Box,
 } from '@chakra-ui/react';
@@ -20,6 +18,7 @@ import {
 import { useGetPlanningHistoric } from '@/api';
 
 import { Historic } from '../Historic';
+import { ClockRegularIcon } from '../icons';
 
 import { PlanningHistoricStatus } from './PlanningHistoricStatus';
 
@@ -41,6 +40,7 @@ export const PlanningHistoricDrawer = ({
     { enabled: isOpen },
   );
   const historic = dataGetPlanningHistoric?.data.historic ?? [];
+  const lastHistoricIndex = historic.length - 1;
 
   return (
     <Drawer isOpen={isOpen} {...props}>
@@ -58,26 +58,36 @@ export const PlanningHistoricDrawer = ({
           <PlanningHistoricStatus />
 
           <Box py="1.4rem" px="2.4rem">
-            <Stepper variant="secondary" index={0} orientation="vertical" gap="0">
-              <Step>
-                <StepIndicator>
-                  <StepStatus
-                    complete={<StepIcon />}
-                    incomplete={<StepNumber />}
-                    active={<StepNumber />}
-                  />
-                </StepIndicator>
+            <Stepper
+              variant="secondary"
+              size="secondary"
+              index={lastHistoricIndex}
+              orientation="vertical"
+              gap="0"
+            >
+              {historic?.map(({ id, status, creation_date, description, related }) => (
+                <Step key={id}>
+                  <StepIndicator>
+                    <StepStatus
+                      incomplete={<ClockRegularIcon />}
+                      active={<ClockRegularIcon />}
+                      complete={<ClockRegularIcon color="#fff" />}
+                    />
+                  </StepIndicator>
 
-                <Historic.Container>
-                  <Historic.Header />
+                  <Historic.Container>
+                    <Historic.Header status={status} date={creation_date} />
 
-                  <Historic.Title>Você enviou o planejamento para aprovação</Historic.Title>
+                    <Historic.Title>Você enviou o planejamento para aprovação</Historic.Title>
 
-                  <Historic.Message />
-                </Historic.Container>
+                    {description && (
+                      <Historic.Message author={related.username} description={description} />
+                    )}
+                  </Historic.Container>
 
-                <StepSeparator />
-              </Step>
+                  <StepSeparator />
+                </Step>
+              ))}
             </Stepper>
           </Box>
         </DrawerBody>
