@@ -83,7 +83,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
       w="full"
       {...restProps}
     >
-      <TableContainer w="full" {...tableContainerProps}>
+      <TableContainer minW="full" overflowX="auto" {...tableContainerProps}>
         <Table variant={variant}>
           <TableHeader<TData> headerGroups={headerGroups} />
 

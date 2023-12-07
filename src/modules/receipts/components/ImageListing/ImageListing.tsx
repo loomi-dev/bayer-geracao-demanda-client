@@ -1,7 +1,5 @@
 import { HStack } from '@chakra-ui/react';
 
-import { scrollbarStyle } from '@/styles/theme/components';
-
 import { CardImageViewing } from '../CardImageViewing';
 
 type ImageListingProps = {
@@ -21,7 +19,6 @@ export const ImageListing = ({ files, handleRemoveFile }: ImageListingProps) => 
     w="100%"
     h="13.2rem"
     spacing="0.8rem"
-    sx={{ ...scrollbarStyle }}
   >
     {files?.map(({ file, id }, index) => (
       <CardImageViewing key={id} file={file} handleRemoveFile={() => handleRemoveFile(index)} />
