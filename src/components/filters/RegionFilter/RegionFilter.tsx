@@ -27,9 +27,9 @@ export const RegionFilter = ({ options = [] }: RegionFilterProps) => {
         leftIcon={<MapMarkerIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
-      <FilterContent w="28rem" overflowY="scroll">
+      <FilterContent w="28rem" overflowY="auto">
         <FilterSearchInput placeholder="Pequisar por região" />
-        <FilterBody h="28rem" overflowY="scroll">
+        <FilterBody h="28rem" overflowY="auto">
           {options.map((option) => (
             <FilterOption
               key={option.value}

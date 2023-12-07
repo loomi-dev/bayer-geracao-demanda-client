@@ -27,7 +27,7 @@ export const ActionFilter = ({ options = [] }: ActionFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent w="28rem">
-        <FilterBody h="18rem" overflowY="scroll">
+        <FilterBody h="18rem" overflowY="auto">
           {options.map((option) => (
             <FilterOption key={option.value} label={option.label} value={option.value} />
           ))}

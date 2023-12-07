@@ -29,8 +29,8 @@ export const Filter = ({ options = [] }: FilterProps) => {
         onClick={onOpen}
         leftIcon={<SlidersIcon />}
       />
-      <FilterContent w="28rem" overflowY="scroll">
-        <FilterBody h="28rem" overflowY="scroll">
+      <FilterContent w="28rem" overflowY="auto">
+        <FilterBody h="28rem" overflowY="auto">
           {options.map((option) => (
             <FilterOption
               key={option.value}
