@@ -31,6 +31,7 @@ const greyscale = {
   425: '#D4D4D4',
   450: '#D9D9D9',
   500: '#ECECEC',
+  550: '#DCDCDC',
   600: '#AEAEAE',
   650: '#666666',
   700: '#7C7C7C',
