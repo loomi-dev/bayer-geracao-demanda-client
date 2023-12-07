@@ -27,6 +27,7 @@ const greyscale = {
   300: '#F7F7F7',
   330: '#ECECEC',
   350: '#DBDBDB80',
+  375: '#DCDCDC',
   400: '#CCCCCC',
   425: '#D4D4D4',
   450: '#D9D9D9',
@@ -39,9 +40,7 @@ const greyscale = {
   1000: '#212121',
 };
 
-const black = {
-  50: 'rgba(0, 0, 0, 0.08)',
-};
+const black = '#000000';
 
 const yellow = {
   warning_10: '#FBF5D6',

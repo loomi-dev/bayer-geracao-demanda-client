@@ -17,7 +17,7 @@ export const ActionDetailsItem = ({
     py="2rem"
     alignItems="flex-start"
     borderTop="1px solid"
-    borderColor="black.50"
+    borderColor="opacity.black.0.08"
     w="100%"
     {...rest}
   >

@@ -1,6 +1,7 @@
-import { Badge, Button, HStack, Text } from '@chakra-ui/react';
+import { Badge, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
-import { ArrowRightIcon } from '@/components';
+import { ArrowRightIcon, PlanningHistoricDrawer } from '@/components';
 import { PlanningStatus, PlanningValue } from '@/types';
 
 type CreatePlanningStatusSectionProps = {
@@ -10,6 +11,15 @@ type CreatePlanningStatusSectionProps = {
 export const CreatePlanningStatusSection = ({
   planningStatus,
 }: CreatePlanningStatusSectionProps) => {
+  const { query } = useRouter();
+  const planningId = Number(query?.planning_id);
+
+  const {
+    isOpen: isOpenPlanningHistoricDrawer,
+    onOpen: onOpenPlanningHistoricDrawer,
+    onClose: onClosePlanningHistoricDrawer,
+  } = useDisclosure();
+
   const isNewPlanning = planningStatus === 'default';
 
   return (
@@ -34,17 +44,25 @@ export const CreatePlanningStatusSection = ({
           {PlanningValue[planningStatus]}
         </Badge>
 
-        {isNewPlanning ? (
-          <Button w="18.5rem" size="sm">
-            <Text textStyle="action3" as="span">
-              Enviar para aprovação
-            </Text>
-          </Button>
-        ) : (
-          <Button variant="unstyled">
-            <ArrowRightIcon />
-          </Button>
-        )}
+        <>
+          {isNewPlanning ? (
+            <Button w="18.5rem" size="sm" onClick={onOpenPlanningHistoricDrawer}>
+              <Text textStyle="action3" as="span">
+                Enviar para aprovação
+              </Text>
+            </Button>
+          ) : (
+            <Button variant="unstyled" onClick={onOpenPlanningHistoricDrawer}>
+              <ArrowRightIcon />
+            </Button>
+          )}
+
+          <PlanningHistoricDrawer
+            isOpen={isOpenPlanningHistoricDrawer}
+            onClose={onClosePlanningHistoricDrawer}
+            planningId={planningId}
+          />
+        </>
       </HStack>
     </HStack>
   );

@@ -6,25 +6,40 @@ import {
   DrawerProps,
   VStack,
   Text,
+  DrawerOverlay,
+  Stepper,
+  Step,
+  StepIndicator,
+  StepStatus,
+  StepIcon,
+  StepNumber,
+  StepSeparator,
+  Box,
 } from '@chakra-ui/react';
 
 import { useGetPlanningHistoric } from '@/api';
 
-import { HistoricStepper, Historic } from './components';
+import { Historic } from './Historic';
+import { PlanningHistoricStatus } from './PlanningHistoricStatus';
 
 type PlanningHistoricDrawerProps = {
   planningId: number;
 } & Omit<DrawerProps, 'children'>;
 
-export const PlanningHistoricDrawer = ({ planningId, ...props }: PlanningHistoricDrawerProps) => {
-  const { data: getHistoricData, isLoading } = useGetPlanningHistoric(
+export const PlanningHistoricDrawer = ({
+  planningId,
+  isOpen,
+  ...props
+}: PlanningHistoricDrawerProps) => {
+  const { data: dataGetPlanningHistoric } = useGetPlanningHistoric(
     { planningId },
-    { enabled: props.isOpen },
+    { enabled: isOpen },
   );
-  const planningHistoric = getHistoricData?.data;
+  const historic = dataGetPlanningHistoric?.data.historic ?? [];
 
   return (
-    <Drawer {...props}>
+    <Drawer isOpen={isOpen} {...props}>
+      <DrawerOverlay />
       <DrawerContent>
         <DrawerHeader>
           <VStack align="flex-start">
@@ -35,8 +50,31 @@ export const PlanningHistoricDrawer = ({ planningId, ...props }: PlanningHistori
           </VStack>
         </DrawerHeader>
         <DrawerBody p="initial" bgColor="surface.primary">
-          <HistoricStepper />
-          <Historic historicList={planningHistoric?.historic ?? []} />
+          <PlanningHistoricStatus />
+
+          <Box py="1.4rem" px="2.4rem">
+            <Stepper variant="secondary" index={0} orientation="vertical" gap="0">
+              <Step>
+                <StepIndicator>
+                  <StepStatus
+                    complete={<StepIcon />}
+                    incomplete={<StepNumber />}
+                    active={<StepNumber />}
+                  />
+                </StepIndicator>
+
+                <Historic.Container>
+                  <Historic.Header />
+
+                  <Historic.Title>Você enviou o planejamento para aprovação</Historic.Title>
+
+                  <Historic.Message />
+                </Historic.Container>
+
+                <StepSeparator />
+              </Step>
+            </Stepper>
+          </Box>
         </DrawerBody>
       </DrawerContent>
     </Drawer>

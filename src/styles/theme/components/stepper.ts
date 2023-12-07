@@ -55,6 +55,20 @@ export const Stepper = defineMultiStyleConfig({
         },
       },
     },
+    secondary: {
+      step: {
+        width: '100%',
+      },
+      indicator: {
+        boxSize: '5.2rem',
+        bg: 'greyscale.225',
+        border: '0',
+
+        '&[data-status=complete]': {
+          bg: 'text.brand',
+        },
+      },
+    },
   },
   defaultProps: {
     variant: 'primary',

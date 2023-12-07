@@ -1,8 +1,9 @@
 import { Flex, HStack, Text } from '@chakra-ui/react';
+import { Fragment } from 'react';
 
 import { ArrowRightIcon } from '@/components/icons';
 
-export const HistoricStepper = () => {
+export const PlanningHistoricStatus = () => {
   const steps = [
     { title: 'Criação do planejamento' },
     { title: 'Aprovação do RTV' },
@@ -16,10 +17,10 @@ export const HistoricStepper = () => {
       </Text>
       <HStack gap="1.6rem">
         {steps.map((step, index) => (
-          <>
+          <Fragment key={index}>
             <Text textStyle="action3">{step.title}</Text>
             {index < lastStep && <ArrowRightIcon color="#333333" opacity={0.5} />}
-          </>
+          </Fragment>
         ))}
       </HStack>
     </Flex>
