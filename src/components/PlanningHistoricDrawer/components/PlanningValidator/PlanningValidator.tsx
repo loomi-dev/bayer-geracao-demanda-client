@@ -5,12 +5,9 @@ type PlanningValidatorProps = {
   actionsToEvaluate: PlanningAction[];
 };
 
-export const PlanningValidator = ({ actionsToEvaluate, isApproving }: PlanningValidatorProps) => {
-  console.log(actionsToEvaluate);
-  return (
-    <>
-      <ValidatorTable actions={actionsToEvaluate} isApproving={isApproving} />
-      <ReasonInput />
-    </>
-  );
-};
+export const PlanningValidator = ({ actionsToEvaluate, isApproving }: PlanningValidatorProps) => (
+  <>
+    <ValidatorTable actions={actionsToEvaluate} isApproving={isApproving} />
+    <ReasonInput />
+  </>
+);
