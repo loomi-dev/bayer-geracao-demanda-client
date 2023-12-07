@@ -18,6 +18,7 @@ import {
   GetPlanningStatisticsResponse,
   GetPlanningStatusParams,
   GetPlanningStatusResponse,
+  UpdatePlanningHistoricResponse,
 } from './types';
 
 export const getPlanningStatistics = async ({
@@ -164,5 +165,28 @@ export const getPlanningStatus = async ({
 
   const { data } = await axios.authorized().get(`/plannings/${planningId}?${query}`);
 
+  return data;
+};
+
+export const updatePlanningHistoric = async ({
+  planningId,
+  payload,
+}): Promise<UpdatePlanningHistoricResponse> => {
+  const query = qs.stringify({
+    data: {
+      historic: [
+        ...payload.historic,
+        {
+          description: payload.description,
+          status: payload.status,
+          related: {
+            connect: [{ id: payload.userId }],
+          },
+          actions: payload.actions,
+        },
+      ],
+    },
+  });
+  const { data } = await axios.authorized().get(`/plannings/${planningId}?${query}`);
   return data;
 };

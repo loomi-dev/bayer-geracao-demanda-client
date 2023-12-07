@@ -63,3 +63,22 @@ export type GetPlanningStatusResponse = {
     historic: Historic[];
   };
 };
+
+export type UpdatePlanningHistoricParams = {
+  planningId: number;
+  payload: {
+    historic: Historic[];
+    description: string;
+    status: string;
+    userId: number;
+    actions: PlanningAction[];
+  };
+};
+
+export type UpdatePlanningHistoricResponse = {
+  data: {
+    id: number;
+    date: Date;
+    status: string;
+  };
+};
