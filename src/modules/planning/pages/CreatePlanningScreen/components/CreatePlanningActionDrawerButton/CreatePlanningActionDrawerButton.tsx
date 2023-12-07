@@ -98,7 +98,7 @@ export const CreatePlanningActionDrawerButton = () => {
           amountInCents: brlToCents(value),
           status: 'not_evaluated',
           initialDate: dayjs(date[0]).format('YYYY-MM-DD'),
-          endDate: dayjs(date[1]).format('YYYY-MM-DD'),
+          finishDate: dayjs(date[1]).format('YYYY-MM-DD'),
         },
         {
           onSuccess: () => {

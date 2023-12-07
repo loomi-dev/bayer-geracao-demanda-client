@@ -26,7 +26,7 @@ export const CreatePlanningStatusSection = ({
       justify="space-between"
     >
       <Text textStyle="action4" textTransform="uppercase">
-        Envie a ação para aprovação do RTV
+        Envie o planejamento para aprovação do RTV
       </Text>
 
       <HStack spacing="1.6rem">
