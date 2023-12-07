@@ -1,7 +1,16 @@
-import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
+import ptBR from 'date-fns/locale/pt-BR';
+import ReactDatePicker, {
+  ReactDatePickerProps,
+  registerLocale,
+  setDefaultLocale,
+} from 'react-datepicker';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 
 import { DatePickerHeader } from './DatePickerHeader';
+
+registerLocale('ptBR', ptBR);
+
+setDefaultLocale('ptBR');
 
 type DatePickerProps<T extends FieldValues> = {
   control: Control<T>;

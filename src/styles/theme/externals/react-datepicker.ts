@@ -7,7 +7,7 @@ export const reactDatePickerStyles: SystemStyleObject = {
     boxShadow: 'datepicker',
     border: '1px solid',
     borderColor: 'opacity.black.0.20',
-    borderRadius: '0.8rem',
+    borderRadius: '1rem',
   },
 
   // Container
@@ -43,6 +43,7 @@ export const reactDatePickerStyles: SystemStyleObject = {
     color: 'text.brand',
     fontSize: '1.2rem',
     fontWeight: 'medium',
+    textTransform: 'uppercase',
   },
 
   // Datas do mes wrapper
@@ -55,10 +56,13 @@ export const reactDatePickerStyles: SystemStyleObject = {
     my: '0.16rem',
     borderRadius: '0',
     mx: '0',
-    boxSize: '3.3rem',
+    w: '3.3rem',
+    h: '3.9rem',
+    lineHeight: '3.9rem',
     color: 'text.primary',
     fontSize: '1.2rem',
     fontWeight: 'medium',
+    textAlign: 'center',
     verticalAlign: 'middle',
 
     _selected: {

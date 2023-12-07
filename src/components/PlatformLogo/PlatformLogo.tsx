@@ -9,7 +9,7 @@ export const PlatformLogo = ({ ...restProps }: PlatformLogoProps) => (
       Uma plataforma
     </Text>
     <Image
-      src="/assets/images/intacta-logo.webp"
+      src="/assets/images/bayer-logo.webp"
       width={91}
       height={64}
       quality={100}
