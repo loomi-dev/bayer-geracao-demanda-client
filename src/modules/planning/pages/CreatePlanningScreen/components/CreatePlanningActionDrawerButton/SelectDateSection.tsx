@@ -15,8 +15,10 @@ export const SelectDateSection = () => {
     setShowDatePicker((lastState) => !lastState);
   };
 
-  const hasDateSelected = Boolean(watch('date'));
-  const dateSelected = formatDate(watch('date')) || 'Sem data planejada';
+  const hasDateSelected = watch('date')?.length > 0;
+  const dateSelected = hasDateSelected
+    ? `${formatDate(watch('date')[0])} - ${formatDate(watch('date')[1])}`
+    : 'Sem data planejada';
 
   return (
     <HStack
@@ -53,7 +55,7 @@ export const SelectDateSection = () => {
               onClick={handleToggleShowDatePicker}
               userSelect={'none'}
             >
-              {hasDateSelected ? 'Selecionar outra data' : 'Selecione uma data'}
+              Selecionar data
             </Text>
           </HStack>
         </Box>

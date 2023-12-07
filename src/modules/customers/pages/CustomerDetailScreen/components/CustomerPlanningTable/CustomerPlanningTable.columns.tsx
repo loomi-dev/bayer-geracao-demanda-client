@@ -19,7 +19,7 @@ export const customerPlanningColumns = [
     header: () => <Text textStyle="footnote-bold">Safra</Text>,
     cell: (info) => <Text textStyle="action3">{info.getValue()}</Text>,
   }),
-  columnHelper.accessor((data) => data.date, {
+  columnHelper.accessor((data) => data.createdAt, {
     id: 'dataPlanejamento',
     header: () => <Text textStyle="footnote-bold">Data do planejamento</Text>,
     cell: (info) => <Text textStyle="action3">{formatDate(info.getValue())}</Text>,

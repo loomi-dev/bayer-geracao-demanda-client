@@ -11,6 +11,7 @@ type DatePickerProps<T extends FieldValues> = {
 export const DatePicker = <T extends FieldValues>({
   control,
   name,
+  maxDate,
   ...restProps
 }: DatePickerProps<T>) => (
   <Controller
@@ -20,11 +21,14 @@ export const DatePicker = <T extends FieldValues>({
       <ReactDatePicker
         dateFormat="dd/MM/yyyy"
         locale="pt-BR"
+        maxDate={maxDate}
         wrapperClassName="react-datepicker-wrapper"
+        selectsRange
         renderCustomHeader={(props) => <DatePickerHeader {...props} />}
         {...restProps}
         onChange={(date) => field.onChange(date)}
-        selected={field.value}
+        startDate={field.value?.[0]}
+        endDate={field.value?.[1]}
         inline
       />
     )}
