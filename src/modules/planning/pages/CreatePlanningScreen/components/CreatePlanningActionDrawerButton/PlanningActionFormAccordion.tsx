@@ -62,7 +62,7 @@ export const PlanningActionFormAccordion = () => {
             </h2>
 
             <AccordionPanel display="flex" flexDirection="column" gap="2.4rem">
-              <HStack w="full" spacing="2.4rem">
+              <HStack align="flex-start" w="full" spacing="2.4rem">
                 <FormWrapper label="Título da ação" error={errors.title}>
                   <TextInput {...inputStyles} {...register('title')} />
                 </FormWrapper>

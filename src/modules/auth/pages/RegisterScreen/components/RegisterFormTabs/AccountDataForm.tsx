@@ -40,7 +40,7 @@ export const AccountDataForm = () => {
   return (
     <>
       <VStack mt="5rem" spacing="1.2rem">
-        <FormWrapper error={errors.name} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.name}>
           <TextInput
             size="xl"
             placeholder="Seu nome"
@@ -49,7 +49,7 @@ export const AccountDataForm = () => {
             {...register('name')}
           />
         </FormWrapper>
-        <FormWrapper error={errors.email} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.email}>
           <TextInput
             size="xl"
             placeholder="E-mail"
@@ -58,7 +58,7 @@ export const AccountDataForm = () => {
             {...register('email')}
           />
         </FormWrapper>
-        <FormWrapper error={errors.phone} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.phone}>
           <TextInput
             size="xl"
             mask={Mask.formatPhone}
@@ -68,7 +68,7 @@ export const AccountDataForm = () => {
             {...register('phone')}
           />
         </FormWrapper>
-        <FormWrapper error={errors.role} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.role}>
           <TextInput
             size="xl"
             placeholder="Seu cargo na sua empresa"
