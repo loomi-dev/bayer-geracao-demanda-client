@@ -51,7 +51,7 @@ export const CustomerColumns = [
     header: () => <Text textStyle="action4">Status</Text>,
     cell: (cell) => <CustomerTableStatusColumn historic={cell.getValue()} />,
   }),
-  columnHelper.accessor((data) => data.date, {
+  columnHelper.accessor((data) => data.historic?.at(-1)?.creation_date, {
     id: 'tempoStatus',
     header: () => <Text textStyle="action4">Tempo no status</Text>,
     cell: (cell) => (

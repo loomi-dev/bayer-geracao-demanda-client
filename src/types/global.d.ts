@@ -55,6 +55,7 @@ type Planning = {
   title: string;
   createdAt: string;
   id: number;
+  createdAt?: string;
   safra?: Harvest;
   actions?: PlanningAction[];
   historic?: Historic[];
