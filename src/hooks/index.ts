@@ -1,1 +1,1 @@
-export * from './useSSRData';
+export * from './usePagination';

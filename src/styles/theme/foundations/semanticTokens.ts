@@ -1,84 +1,96 @@
 export const semanticTokens = {
   colors: {
     text: {
-      primary: {
-        default: 'gray.900',
-        _dark: 'gray.0',
-      },
-      secondary: {
-        default: 'gray.400',
-        _dark: 'gray.200',
-      },
-      disabled: {
-        default: 'gray.200',
-        _dark: 'gray.500',
-      },
-      brand: {
-        default: 'primary.500',
-        _dark: 'primary.300',
-      },
-      inverter: {
-        default: 'gray.0',
-        _dark: 'gray.900',
-      },
+      primary: 'greyscale.1000',
+      secondary: 'greyscale.600',
+      disabled: 'greyscale.400',
+      footnote: 'greyscale.800',
+      brand: 'red.danger_50',
+      invert: 'greyscale.0',
+      copytext: 'greyscale.900',
     },
     surface: {
-      primary: {
-        default: 'gray.0',
-        _dark: 'gray.900',
-      },
-      secondary: {
-        default: 'gray.50',
-        _dark: 'gray.800',
-      },
-      disabled: {
-        default: 'gray.200',
-        _dark: 'gray.400',
-      },
-      brand: {
-        default: 'primary.500',
-        _dark: 'primary.300',
-      },
-      inverter: {
-        default: 'gray.900',
-        _dark: 'gray.100',
-      },
+      primary: 'greyscale.0',
+      secondary: 'greyscale.150',
+      disabled: 'greyscale.400',
+      brand: 'red.danger_50',
+      invert: 'greyscale.1000',
     },
     border: {
+      primary: 'greyscale.1000',
+      secondary: 'greyscale.800',
+      divider: 'greyscale.100',
+      brand: 'red.danger_50',
+      invert: 'greyscale.400',
+    },
+    background: {
       primary: {
-        default: 'gray.50',
-        _dark: 'gray.700',
+        default: 'red.danger_50',
+        hover: 'green.700',
+        focussed: 'green.800',
+        pressed: 'green.700',
+        disabled: 'surface.disabled',
       },
-      disabled: {
-        default: 'gray.200',
-        _dark: 'gray.600',
+      success: {
+        primary: 'green.100',
+        hover: 'green.200',
+        focussed: 'green.200',
+        pressed: 'green.400',
       },
-      brand: {
-        default: 'primary.500',
-        _dark: 'primary.300',
+      warning: {
+        primary: 'yellow.warning_10',
+        hover: 'yellow.warning_20',
+        focussed: 'yellow.warning_20',
+        pressed: 'yellow.warning_40',
       },
-      inverter: {
-        default: 'gray.900',
-        _dark: 'gray.200',
+      error: {
+        primary: 'red.danger_10',
+        hover: 'red.danger_20',
+        focussed: 'red.danger_20',
+        pressed: 'red.danger_40',
+      },
+    },
+    opacity: {
+      white: {
+        '0.40': 'rgba(255, 255, 255, 0.40)',
+        '0.50': 'rgba(255, 255, 255, 0.50)',
+        '0.85': 'rgba(255, 255, 255, 0.85)',
+        '1.40': 'rgba(217, 217, 217, 0.40)',
+      },
+      black: {
+        '0.08': 'rgba(0, 0, 0, 0.08)',
+        '0.10': 'rgba(0, 0, 0, 0.10)',
+        '0.12': 'rgba(0, 0, 0, 0.12)',
+        '0.14': 'rgba(0, 0, 0, 0.14)',
+        '0.20': 'rgba(0, 0, 0, 0.20)',
+        '0.39': 'rgba(33, 33, 33, 0.39)',
+        '0.40': 'rgba(0, 0, 0, 0.40)',
+      },
+      gray: {
+        '1.20': 'rgba(217, 217, 217, 0.20)',
+        '0.30': 'rgba(33, 33, 33, 0.30)',
+        '0.10': 'rgba(33, 33, 33, 0.10)',
+      },
+      red: {
+        '0.10': 'rgba(243, 0, 0, 0.10)',
+        '0.30': 'rgba(222, 59, 59, 0.30)',
+        '1.30': 'rgba(243, 0, 0, 0.30)',
+      },
+      green: {
+        '0.05': 'rgba(0, 121, 58, 0.05)',
+        '0.10': 'rgba(55, 199, 69, 0.10)',
+        '0.30': 'rgba(55, 199, 69, 0.30)',
+      },
+      yellow: {
+        '0.30': 'rgba(243, 149, 0, 0.30)',
+        '0.10': 'rgba(243, 149, 0, 0.10)',
       },
     },
     code: {
-      success: {
-        default: 'green.500',
-        _dark: 'green.300',
-      },
-      danger: {
-        default: 'red.500',
-        _dark: 'red.300',
-      },
-      warning: {
-        default: 'yellow.500',
-        _dark: 'yellow.300',
-      },
-      info: {
-        default: 'primary.500',
-        _dark: 'primary.300',
-      },
+      success: 'green.500',
+      danger: 'red.danger_40',
+      warning: 'yellow.warning_40',
+      info: 'text.secondary',
     },
   },
 };

@@ -1,21 +1,30 @@
 import { ChakraTheme } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
+
+import { reactDatePickerStyles } from './externals';
 
 export const styles: ChakraTheme['styles'] = {
-  global: (props) => ({
+  global: () => ({
     '*': {
       boxSizing: 'border-box',
-    },
-    html: {
-      bg: mode('whiteAlpha.600', 'gray.800')(props),
-      minH: '100vh',
-    },
-    body: {
-      bg: mode('whiteAlpha.600', 'gray.800')(props),
-      h: '100%',
-      WebkitTapHighlightColor: 'transparent',
       padding: 0,
       margin: 0,
+    },
+    html: {
+      fontSize: '62.5%',
+      h: '100%',
+    },
+    body: {
+      h: '100%',
+      bg: 'greyscale.250',
+      fontSize: '1.6rem',
+      WebkitFontSmoothing: 'antialiased',
+      MozOsxFontSmoothing: 'antialiased',
+      color: 'text.primary',
+      WebkitTapHighlightColor: 'transparent',
+    },
+    '#__next': {
+      h: '100%',
+      w: '100%',
     },
     '#chakra-toast-portal > *': {
       pt: 'safe-top',
@@ -27,5 +36,22 @@ export const styles: ChakraTheme['styles'] = {
       color: 'inherit',
       textDecoration: 'none',
     },
+    '::-webkit-scrollbar': {
+      width: '0.8rem',
+      height: '0.8rem',
+      marginLeft: '3rem',
+    },
+    '::-webkit-scrollbar-track': {
+      boxShadow: 'inset 0 0 10px 10px #E2E8F0',
+      border: 'solid 1px transparent',
+      borderRadius: '2.4rem',
+    },
+    '::-webkit-scrollbar-thumb': {
+      boxShadow: 'inset 0 0 10px 10px red.danger_40',
+      background: 'surface.brand',
+      borderRadius: '2.4rem',
+    },
+    scrollbarColor: 'red.danger_40',
+    ...reactDatePickerStyles,
   }),
 };

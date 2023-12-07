@@ -1,14 +1,13 @@
-export const APP_NAME = 'Next Leap 🚀👨‍🚀';
+export const APP_NAME = 'Bayer - Geração de Demanda';
 
-export const API_URL = process.env.NEXT_PUBLIC_AUTH_URL as string;
-export const MOCK_API_URL = process.env.REACT_APP_MOCK_API_URL as string;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 export const ENVIRONMENT = process.env.NODE_ENV;
-export const MOCK_ENABLED = process.env.NEXT_PUBLIC_API_MOCKING as string;
 
 export const DEFAULT_PUBLIC_PAGE = '/entrar';
-
-export const DEFAULT_PRIVATE_PAGE = '/';
+export const DEFAULT_PRIVATE_MANAGER_PAGE = '/clientes';
+export const DEFAULT_PRIVATE_FARMER_PAGE = '/carteira';
+export const DEFAULT_ONBOARDING_PAGE = '/bem-vindo';
 
 export const ACCESS_TOKEN_ID = 'next-leap_access';
 export const REFRESH_TOKEN_ID = 'next-leap_refresh';
@@ -20,3 +19,8 @@ export const JWT_REFRESH_SECRET = '123456789' as string;
 export const JWT_REFRESH_EXPIRES_IN = 50;
 
 export const IS_CLIENT = typeof window !== 'undefined';
+
+export const LAYOUT_SIDEBAR_WIDTH = { lg: '22.5rem', xl: '25.5rem', '3xl': '28.7rem' };
+export const LAYOUT_NOTIFICATION_BAR_WIDTH = { lg: '28rem', xl: '32rem', '3xl': '35.8rem' };
+
+export const PAGINATION_PAGE_SIZE = 30;
