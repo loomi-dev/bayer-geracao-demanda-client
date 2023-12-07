@@ -1,2 +1,2 @@
-export * from './ActionStepper';
-export * from './PlanningDetail';
+export * from './HistoricStepper';
+export * from './Historic';

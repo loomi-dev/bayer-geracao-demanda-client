@@ -60,7 +60,7 @@ export const CustomerPlanningActionsTable = () => {
         onPreviousPage={handlePreviousPage}
       />
       <PlanningActionResume planningValue={planningValue} />
-      <PlanningHistoric planningId={planningId} isOpen={isOpen} onClose={onClose} />
+      <PlanningHistoric planningId={planningId} isOpen={true} onClose={onClose} />
     </Flex>
   );
 };

@@ -13,6 +13,7 @@ import {
   GetPlanningActionsStatisticsParams,
   GetPlanningActionsStatisticsResponse,
   GetPlanningHistoricParams,
+  GetPlanningHistoricResponse,
   GetPlanningStatisticsParams,
   GetPlanningStatisticsResponse,
 } from './types';
@@ -133,7 +134,7 @@ export const getPlanningActions = async ({
 
 export const getPlanningHistoric = async ({
   planningId,
-}: GetPlanningHistoricParams): Promise<Historic> => {
+}: GetPlanningHistoricParams): Promise<GetPlanningHistoricResponse> => {
   const query = qs.stringify({
     populate: {
       historic: {

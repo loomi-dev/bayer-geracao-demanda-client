@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryOpt } from '@/api';
 
 import { getPlanningHistoric } from '../endpoints';
-import { GetPlanningHistoricParams } from '../types';
+import { GetPlanningHistoricParams, GetPlanningHistoricResponse } from '../types';
 
 export const useGetPlanningHistoric = (
   params: GetPlanningHistoricParams,
-  options?: QueryOpt<Historic>,
+  options?: QueryOpt<GetPlanningHistoricResponse>,
 ) =>
   useQuery({
     ...options,

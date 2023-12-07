@@ -10,17 +10,18 @@ import {
 
 import { useGetPlanningHistoric } from '@/api';
 
-import { PlanningDetail, HistoricStepper } from './components';
+import { HistoricStepper, Historic } from './components';
 
 type PlanningHistoricProps = {
   planningId: number;
 } & Omit<DrawerProps, 'children'>;
 
 export const PlanningHistoric = ({ planningId, ...props }: PlanningHistoricProps) => {
-  const { data: historic, isLoading } = useGetPlanningHistoric(
+  const { data: getHistoricData, isLoading } = useGetPlanningHistoric(
     { planningId },
     { enabled: props.isOpen },
   );
+  const planningHistoric = getHistoricData?.data;
   return (
     <Drawer {...props}>
       <DrawerContent>
@@ -34,7 +35,7 @@ export const PlanningHistoric = ({ planningId, ...props }: PlanningHistoricProps
         </DrawerHeader>
         <DrawerBody p="initial" bgColor="surface.primary">
           <HistoricStepper />
-          <PlanningDetail />
+          <Historic historic={planningHistoric?.historic} />
         </DrawerBody>
       </DrawerContent>
     </Drawer>

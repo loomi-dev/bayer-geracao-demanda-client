@@ -30,7 +30,8 @@ const mockData: PlanningAction[] = [
     amountInCents: 100000,
   },
 ];
-export const PlanningDetail = () => (
+
+export const Historic = ({ historic }) => (
   <Box mx="7.2rem" mt="1.6rem" mb="3.6rem" boxShadow="datepicker" borderRadius="1.6rem">
     <Accordion border="none">
       <AccordionItem p="initial" boxShadow="none" border="none" borderBottomRadius="initial">
