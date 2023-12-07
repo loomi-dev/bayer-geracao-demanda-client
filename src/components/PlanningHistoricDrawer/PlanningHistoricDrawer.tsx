@@ -19,15 +19,20 @@ import {
 
 import { useGetPlanningHistoric } from '@/api';
 
-import { Historic } from './Historic';
+import { Historic } from '../Historic';
+
 import { PlanningHistoricStatus } from './PlanningHistoricStatus';
 
 type PlanningHistoricDrawerProps = {
   planningId: number;
+  actionsToEvaluate?: PlanningAction[];
+  isAproving?: boolean;
 } & Omit<DrawerProps, 'children'>;
 
 export const PlanningHistoricDrawer = ({
   planningId,
+  actionsToEvaluate = [],
+  isAproving,
   isOpen,
   ...props
 }: PlanningHistoricDrawerProps) => {
