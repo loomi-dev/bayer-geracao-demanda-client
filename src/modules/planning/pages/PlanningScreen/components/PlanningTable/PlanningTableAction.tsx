@@ -1,4 +1,4 @@
-import { Button, Center, Divider, HStack } from '@chakra-ui/react';
+import { Button, Center, Divider, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { EditIcon, EyeOpenIcon, TrashIcon } from '@/components';
@@ -25,33 +25,11 @@ export const PlanningTableAction = ({ planningId, historic }: PlanningTableActio
   return (
     <Center>
       {historicStatus === 'accepted' ? (
-        <Button
-          variant="unstyled"
-          h="3rem"
-          w="7rem"
-          borderRadius="full"
-          border="1px solid"
-          borderColor="opacity.black.0.10"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          p="0.8rem"
-          onClick={handleNavigateToCreatePlanningScreen}
-        >
+        <Button variant="fifth" h="3rem" w="7rem" onClick={handleNavigateToCreatePlanningScreen}>
           <EyeOpenIcon />
         </Button>
       ) : (
-        <HStack
-          h="3rem"
-          w="7rem"
-          borderRadius="full"
-          border="1px solid"
-          borderColor="opacity.black.0.10"
-          justify="center"
-          align="center"
-          spacing="1rem"
-          p="0.8rem"
-        >
+        <Flex layerStyle="actions">
           <Button variant="unstyled" onClick={handleNavigateToCreatePlanningScreen}>
             <EditIcon />
           </Button>
@@ -61,7 +39,7 @@ export const PlanningTableAction = ({ planningId, historic }: PlanningTableActio
           <Button variant="unstyled" isDisabled>
             <TrashIcon />
           </Button>
-        </HStack>
+        </Flex>
       )}
     </Center>
   );
