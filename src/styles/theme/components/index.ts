@@ -12,3 +12,4 @@ export * from './table';
 export * from './skeleton';
 export * from './drawer';
 export * from './stepper';
+export * from './tooltip';

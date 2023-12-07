@@ -1,13 +1,14 @@
-import { Flex, HStack, Skeleton, Text } from '@chakra-ui/react';
+import { Button, Flex, HStack, Skeleton, Text, Tooltip } from '@chakra-ui/react';
 
 import { formatPrice } from '@/utils';
 
 type PlanningActionResumeProps = {
   planningValue: number;
+  onClick: () => void;
 };
 
-export const PlanningActionResume = ({ planningValue }: PlanningActionResumeProps) => {
-  if (!planningValue) return;
+export const PlanningActionResume = ({ planningValue, onClick }: PlanningActionResumeProps) => {
+  const hasPlanningValue = Boolean(planningValue);
   return (
     <Flex px="2.4rem" justify="space-between">
       <HStack gap="2rem">
@@ -21,6 +22,18 @@ export const PlanningActionResume = ({ planningValue }: PlanningActionResumeProp
         ) : (
           <Skeleton w="10rem" h="2rem" />
         )}
+      </HStack>
+      <HStack>
+        <Tooltip label="Planejamento vazio" isOpen={!hasPlanningValue}>
+          <Button onClick={onClick} isDisabled={!hasPlanningValue} variant="fifth" size="sm">
+            Recusar planejamento
+          </Button>
+        </Tooltip>
+        <Tooltip label="Planejamento vazio" isOpen={!hasPlanningValue}>
+          <Button onClick={onClick} isDisabled={!hasPlanningValue} size="sm">
+            <Text textStyle="footnote-small-bold">Autorizar planejamento</Text>
+          </Button>
+        </Tooltip>
       </HStack>
     </Flex>
   );
