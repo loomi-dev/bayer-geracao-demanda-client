@@ -1,4 +1,4 @@
-import { ValidatorTable } from './components';
+import { ReasonInput, ValidatorTable } from './components';
 
 type PlanningValidatorProps = {
   isApproving: boolean;
@@ -7,5 +7,10 @@ type PlanningValidatorProps = {
 
 export const PlanningValidator = ({ actionsToEvaluate, isApproving }: PlanningValidatorProps) => {
   console.log(actionsToEvaluate);
-  return <ValidatorTable actions={actionsToEvaluate} isApproving={isApproving} />;
+  return (
+    <>
+      <ValidatorTable actions={actionsToEvaluate} isApproving={isApproving} />
+      <ReasonInput />
+    </>
+  );
 };
