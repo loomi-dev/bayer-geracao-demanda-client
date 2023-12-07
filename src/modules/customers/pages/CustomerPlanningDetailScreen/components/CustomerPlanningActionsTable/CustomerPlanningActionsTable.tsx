@@ -1,5 +1,6 @@
 import { Flex, Text, useDisclosure } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
 import { DynamicTable, Pagination, PlanningHistoric } from '@/components';
@@ -13,6 +14,7 @@ export const CustomerPlanningActionsTable = () => {
   const { query } = useRouter();
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
   const { isOpen, onClose } = useDisclosure();
+  const [rowSelection, setRowSelection] = useState({});
   const planningId = Number(query.planning_id);
   const { data: metricsData, isLoading: isLoadingMetrics } = useGetPlanningActionsStatistics(
     {
@@ -30,8 +32,9 @@ export const CustomerPlanningActionsTable = () => {
   const farmKitValue = Number(metrics?.farm_kit_in_cents ?? 0);
   const farmTaskValue = Number(metrics?.farm_task_in_cents ?? 0);
   const relationshipTaskValue = Number(metrics?.relationship_task_in_cent ?? 0);
-
   const planningValue = farmKitValue + farmTaskValue + relationshipTaskValue;
+
+  const selectedRows = Object.keys(rowSelection).map((key) => actions[key].id);
 
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
@@ -48,6 +51,11 @@ export const CustomerPlanningActionsTable = () => {
         data={actions}
         columns={CustomerPlanningActionsColumns}
         isLoading={isLoadingActions}
+        tableOptions={{
+          enableRowSelection: (row) => row.original.status !== 'rejected',
+          state: { rowSelection },
+          onRowSelectionChange: setRowSelection,
+        }}
         fallbackMessage="Nenhuma ação encontrada"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
         hoverProps={{ bgColor: 'opacity.green.0.10', cursor: 'pointer' }}
@@ -60,7 +68,7 @@ export const CustomerPlanningActionsTable = () => {
         onPreviousPage={handlePreviousPage}
       />
       <PlanningActionResume planningValue={planningValue} />
-      <PlanningHistoric planningId={planningId} isOpen={true} onClose={onClose} />
+      <PlanningHistoric planningId={planningId} isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };
