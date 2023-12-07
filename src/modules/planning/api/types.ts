@@ -7,6 +7,6 @@ export type CreatePlanningActionData = {
   detail?: string;
   status: PlanningActionStatus;
   initialDate: string;
-  endDate: string;
+  finishDate: string;
 };
 export type CreatePlanningActionResponse = void;

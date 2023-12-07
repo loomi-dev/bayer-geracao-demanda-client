@@ -13,18 +13,18 @@ import { useGetPlanningHistoric } from '@/api';
 
 import { HistoricStepper, Historic, PlanningValidator } from './components';
 
-type PlanningHistoricProps = {
+type PlanningHistoricDrawerProps = {
   planningId: number;
   actionsToEvaluate?: PlanningAction[];
   isAproving: boolean;
 } & Omit<DrawerProps, 'children'>;
 
-export const PlanningHistoric = ({
+export const PlanningHistoricDrawer = ({
   planningId,
   actionsToEvaluate = [],
   isAproving,
   ...props
-}: PlanningHistoricProps) => {
+}: PlanningHistoricDrawerProps) => {
   const { data: getHistoricData, isLoading } = useGetPlanningHistoric(
     { planningId },
     { enabled: props.isOpen },

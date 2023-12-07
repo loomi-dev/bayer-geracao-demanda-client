@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
-import { DynamicTable, Pagination, PlanningHistoric } from '@/components';
+import { DynamicTable, Pagination, PlanningHistoricDrawer } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { ActionCards } from './ActionCards';
@@ -108,7 +108,8 @@ export const CustomerPlanningActionsTable = () => {
         onReject={onRejectPlanning}
         planningValue={planningValue}
       />
-      <PlanningHistoric
+
+      <PlanningHistoricDrawer
         isAproving={isApproving}
         actionsToEvaluate={planningActionsToEvaluate}
         planningId={planningId}
