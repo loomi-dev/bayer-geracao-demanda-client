@@ -3,18 +3,20 @@ import { Badge, Button, Center, Grid, GridItem, Text } from '@chakra-ui/react';
 import { PlanningActionStatus, PlanningActionValues } from '@/types';
 import { formatPrice } from '@/utils';
 
-export type DetailTableRowProps = {
+export type HistoricItemTableRowProps = {
   title?: string;
   type: string;
   value: number;
   status: string;
 };
 
-export const DetailTableRow = ({ title, type, value, status }: DetailTableRowProps) => (
+export const HistoricItemTableRow = ({ title, type, value, status }: HistoricItemTableRowProps) => (
   <Grid w="full" templateRows={`repeat(1,1fr)`} templateColumns="repeat(4,1fr)">
     <GridItem>
       <Center h="100%">
-        <Text textStyle="caption3">{title}</Text>
+        <Text textStyle="caption3" textAlign="center">
+          {title}
+        </Text>
       </Center>
     </GridItem>
     <GridItem>

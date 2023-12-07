@@ -1,15 +1,15 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 
-import { DetailTableRow } from './DetailTableRow';
+import { HistoricItemTableRow } from './HistoricItemTableRow';
 
-type DetailTableProps = {
-  data: PlanningAction[];
+type HistoricItemTableProps = {
+  actions: PlanningAction[];
 };
-export const DetailTable = ({ data }: DetailTableProps) => (
+export const HistoricItemTable = ({ actions }: HistoricItemTableProps) => (
   <Grid w="full" gap="2rem" templateColumns="repeat(1,1fr)" templateRows="repeat(1,1fr)">
-    {data.map((action) => (
+    {actions.map((action) => (
       <GridItem key={action.id}>
-        <DetailTableRow
+        <HistoricItemTableRow
           title={action.title}
           value={action.amountInCents ?? 0}
           type={action.type ?? ''}

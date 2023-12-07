@@ -2,7 +2,10 @@ import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 
 import { formatPrice } from '@/utils';
 
-export const DetailSummary = () => (
+type HistoricItemSummaryProps = {
+  planningTotalValue: number;
+};
+export const HistoricItemSummary = ({ planningTotalValue }: HistoricItemSummaryProps) => (
   <Flex
     border="none"
     bgColor="surface.primary"
@@ -20,7 +23,7 @@ export const DetailSummary = () => (
         Total
       </Text>
       <Text textStyle={{ base: 'action2', '2xl': 'action2' }} color="text.brand">
-        R$ {formatPrice(10000000)}
+        R$ {formatPrice(planningTotalValue)}
       </Text>
     </HStack>
     <HStack>

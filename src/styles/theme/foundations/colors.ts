@@ -59,6 +59,7 @@ const red = {
   danger_50: '#A10B30',
   danger_60: '#B22F2F',
   danger_80: '#852323',
+  danger_100: '#C50022',
 };
 export const colors: ChakraTheme['colors'] = {
   ...theme.colors,
