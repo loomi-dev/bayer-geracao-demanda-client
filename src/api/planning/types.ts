@@ -45,3 +45,5 @@ export type GetPlanningActionsParams = {
   planningId: number;
 };
 export type GetPlanningActionsResponse = GenericListResponseType<PlanningAction>;
+
+export type GetPlanningHistoricParams = { planningId: number };

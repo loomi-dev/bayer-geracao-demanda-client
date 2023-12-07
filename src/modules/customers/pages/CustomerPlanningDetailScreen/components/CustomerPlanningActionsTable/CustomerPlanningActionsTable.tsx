@@ -2,7 +2,7 @@ import { Flex, Text, useDisclosure } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
-import { DynamicTable, Pagination, PlanningHistory } from '@/components';
+import { DynamicTable, Pagination, PlanningHistoric } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { ActionCards } from './ActionCards';
@@ -60,7 +60,7 @@ export const CustomerPlanningActionsTable = () => {
         onPreviousPage={handlePreviousPage}
       />
       <PlanningActionResume planningValue={planningValue} />
-      <PlanningHistory isOpen={isOpen} onClose={onClose} />
+      <PlanningHistoric planningId={planningId} isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };

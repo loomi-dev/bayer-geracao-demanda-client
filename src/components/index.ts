@@ -15,7 +15,7 @@ export * from './Pagination';
 export * from './StatCard';
 export * from './Balance';
 export * from './SelectInput';
-export * from './PlanningHistory';
+export * from './PlanningHistoric';
 export * from './AbsoluteNextImage';
 export * from './CustomAcordion';
 export * from './DatePicker';
