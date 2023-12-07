@@ -1,4 +1,4 @@
-import { Button, Divider, Flex, useDisclosure } from '@chakra-ui/react';
+import { Button, Center, Divider, Flex, useDisclosure } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 
 import { EditIcon, EyeOpenIcon, TrashIcon } from '@/components';
@@ -21,7 +21,7 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
   const isActionAccepted = data.status === 'accepted';
 
   return (
-    <>
+    <Center>
       {isActionAccepted ? (
         <>
           <Button variant="fifth" h="3rem" w="7rem" onClick={onOpenViewActionDetailsDrawer}>
@@ -49,6 +49,6 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
           </Button>
         </Flex>
       )}
-    </>
+    </Center>
   );
 };
