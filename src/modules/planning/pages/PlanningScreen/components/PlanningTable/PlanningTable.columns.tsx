@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 
 import { PlanningBudgetColumn } from './PlanningBudgetColumn';
 import { PlanningStatusColumn } from './PlanningStatusColumn';
+import { PlanningTableAction } from './PlanningTableAction';
 
 const columnHelper = createColumnHelper<Planning>();
 
@@ -28,4 +29,20 @@ export const planningTableColumns = [
     header: () => <Text>Orçamento</Text>,
     cell: (info) => <PlanningBudgetColumn planningActions={info.getValue() ?? []} />,
   }),
+  columnHelper.accessor(
+    (data) => ({
+      id: data.id,
+      historic: data.historic,
+    }),
+    {
+      id: 'acoes',
+      header: () => null,
+      cell: (info) => (
+        <PlanningTableAction
+          planningId={info.getValue().id}
+          historic={info.getValue().historic ?? []}
+        />
+      ),
+    },
+  ),
 ];

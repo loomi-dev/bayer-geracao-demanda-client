@@ -1,14 +1,14 @@
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import { MutOpt } from '@/api';
+import { queryClient } from '@/lib/react-query';
 
 import { createPlanning } from '../endpoints';
 import { CreatePlanningResponse } from '../types';
 
 export const useCreatePlanning = (options?: MutOpt<CreatePlanningResponse>) => {
   const { push } = useRouter();
-  const queryClient = new QueryClient();
 
   return useMutation({
     ...options,

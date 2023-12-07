@@ -25,7 +25,7 @@ export const CreatePasswordForm = ({ isLoadingSignInButton }: CreatePasswordForm
   return (
     <>
       <VStack mt="5rem" spacing="1.2rem">
-        <FormWrapper error={errors.password} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.password}>
           <PasswordInput
             size="xl"
             placeholder="Crie sua senha de 8 dígitos"
@@ -35,10 +35,7 @@ export const CreatePasswordForm = ({ isLoadingSignInButton }: CreatePasswordForm
           />
         </FormWrapper>
 
-        <FormWrapper
-          error={errors.confirmPassword}
-          errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}
-        >
+        <FormWrapper error={errors.confirmPassword}>
           <PasswordInput
             size="xl"
             placeholder="Confirme sua senha"
@@ -59,7 +56,7 @@ export const CreatePasswordForm = ({ isLoadingSignInButton }: CreatePasswordForm
         mx="auto"
         isDisabled={isLoadingSignInButton || !isValid}
         rightIcon={
-          <CircleIcon boxSize="3.9rem" bg="green.600">
+          <CircleIcon boxSize="3.9rem" bg="red.danger_50" color="greyscale.0">
             {isLoadingSignInButton ? (
               <Spinner color="#fff" fontSize={20} />
             ) : (

@@ -11,3 +11,5 @@ export * from './centsToCompactValue';
 export * from './getTotalPlanningBudgetValue';
 export * from './formatDate';
 export * from './formatMonth';
+export * from './brlToNumber';
+export * from './brlToCents';

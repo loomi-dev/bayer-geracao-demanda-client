@@ -11,9 +11,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import dayjs from 'dayjs';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Balance, BigCalendarIcon, CircleIcon } from '@/components';
+import { useCreatePlanningAction } from '@/modules/planning/api';
+import { PlanningActionValues } from '@/types';
+import { brlToCents } from '@/utils';
 
 import { useCreatePlanningActionStore } from '../../stores';
 import { PlanningActionDetail } from '../PlanningActionDetail';
@@ -27,6 +33,12 @@ import { PlanningActionFormStepper } from './PlanningActionFormStepper';
 import { RecommendationsAccordion } from './RecommendationsAccordion';
 
 export const CreatePlanningActionDrawerButton = () => {
+  const { query } = useRouter();
+  const session = useSession();
+
+  const planningId = Number(query?.planning_id);
+  const farmerId = session.data?.user.id as number;
+
   const [currentStep, setCurrentStep] = useCreatePlanningActionStore((state) => [
     state.currentStep,
     state.setCurrentStep,
@@ -38,8 +50,13 @@ export const CreatePlanningActionDrawerButton = () => {
     onClose: onCloseCreatePlanningActionDrawer,
   } = useDisclosure();
 
+  const { mutate: createPlanningAction, isLoading: isLoadingCreatePlanningAction } =
+    useCreatePlanningAction();
+
   const methods = useForm<PlanningActionFormSchemaType>({
     resolver: zodResolver(planningActionFormSchema),
+    mode: 'all',
+    criteriaMode: 'all',
   });
 
   const {
@@ -49,7 +66,7 @@ export const CreatePlanningActionDrawerButton = () => {
   } = methods;
 
   const planningActionTitle = watch('title') ?? '-';
-  const planningActionType = watch('type') ?? '-';
+  const planningActionType = PlanningActionValues[watch('type')];
   const planningActionInvestment = watch('value') ?? '-';
   const planningActionDescription = watch('description') ?? '-';
 
@@ -67,6 +84,31 @@ export const CreatePlanningActionDrawerButton = () => {
     onCloseCreatePlanningActionDrawer();
   };
 
+  const onSubmitCreatePlanningActionForm = () => {
+    if (isValid) {
+      const { title, type, description, value, date } = watch();
+
+      createPlanningAction(
+        {
+          farmerId,
+          planningId,
+          title,
+          type,
+          detail: description,
+          amountInCents: brlToCents(value),
+          status: 'not_evaluated',
+          initialDate: dayjs(date[0]).format('YYYY-MM-DD'),
+          endDate: dayjs(date[1]).format('YYYY-MM-DD'),
+        },
+        {
+          onSuccess: () => {
+            handleCloseCreatePlanningActionDrawer();
+          },
+        },
+      );
+    }
+  };
+
   return (
     <>
       <Balance.Button w="15.6rem" onClick={onOpenCreatePlanningActionDrawer}>
@@ -76,6 +118,7 @@ export const CreatePlanningActionDrawerButton = () => {
       <Drawer
         isOpen={isOpenCreatePlanningActionDrawer}
         onClose={handleCloseCreatePlanningActionDrawer}
+        placement="right"
       >
         <DrawerOverlay onClick={onCloseCreatePlanningActionDrawer} />
         <DrawerContent>
@@ -131,8 +174,13 @@ export const CreatePlanningActionDrawerButton = () => {
               >
                 {currentStep === 0 ? 'Cancelar' : 'Voltar'}
               </Button>
-              <Button w="18rem" isDisabled={!isValid} onClick={handleNextStep}>
-                Criar nova ação
+              <Button
+                w="18rem"
+                isDisabled={!isValid}
+                isLoading={isLoadingCreatePlanningAction}
+                onClick={currentStep === 1 ? onSubmitCreatePlanningActionForm : handleNextStep}
+              >
+                {currentStep === 0 ? 'Criar nova ação' : 'Confirmar ação'}
               </Button>
             </DrawerFooter>
           </FormProvider>

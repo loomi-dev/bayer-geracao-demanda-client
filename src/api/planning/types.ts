@@ -19,7 +19,6 @@ export type CreatePlanningData = {
 };
 export type CreatePlanningResponse = {
   data: {
-    date: string;
     id: number;
   };
 };
@@ -29,7 +28,6 @@ export type GetPlanningActionsStatisticsParams = {
 };
 export type GetPlanningActionsStatisticsResponse = {
   data: {
-    date: string;
     id: number;
     metric: {
       id: number;
@@ -45,3 +43,13 @@ export type GetPlanningActionsParams = {
   planningId: number;
 };
 export type GetPlanningActionsResponse = GenericListResponseType<PlanningAction>;
+
+export type GetPlanningHistoricParams = { planningId: number };
+export type GetPlanningHistoricResponse = {
+  data: {
+    createdAt: string;
+    historic: Historic[];
+    id: number;
+    title: string;
+  };
+};

@@ -1,22 +1,10 @@
 import { Badge, Center, Text } from '@chakra-ui/react';
 
+import { PlanningStatus, PlanningValue } from '@/types';
+
 type PlanningStatusColumnProps = {
   historic: Historic[];
 };
-
-enum EnumBadgeVariantStatus {
-  'accepted' = 'table_success',
-  'rejected' = 'table_error',
-  'ready_for_evaluation' = 'table_warning',
-  'default' = 'table_primary',
-}
-
-enum EnumBadgeValueStatus {
-  'accepted' = 'Aprovado',
-  'rejected' = 'Recusado',
-  'ready_for_evaluation' = 'A aprovar',
-  'default' = 'Em construção',
-}
 
 export const CustomerPlanningStatusColumn = ({ historic }: PlanningStatusColumnProps) => {
   const historicStatus = historic?.at(-1)?.status ?? 'default';
@@ -24,7 +12,7 @@ export const CustomerPlanningStatusColumn = ({ historic }: PlanningStatusColumnP
   return (
     <Center>
       <Badge
-        variant={EnumBadgeVariantStatus[historicStatus]}
+        variant={PlanningStatus[historicStatus]}
         w="15rem"
         h="3.4rem"
         py="0.8rem"
@@ -33,7 +21,7 @@ export const CustomerPlanningStatusColumn = ({ historic }: PlanningStatusColumnP
         justifyContent="center"
         gap="1rem"
       >
-        <Text as="span">{EnumBadgeValueStatus[historicStatus]}</Text>
+        <Text as="span">{PlanningValue[historicStatus]}</Text>
       </Badge>
     </Center>
   );

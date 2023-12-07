@@ -1,5 +1,7 @@
 import { ChakraTheme } from '@chakra-ui/react';
 
+import { reactDatePickerStyles } from './externals';
+
 export const styles: ChakraTheme['styles'] = {
   global: () => ({
     '*': {
@@ -34,5 +36,22 @@ export const styles: ChakraTheme['styles'] = {
       color: 'inherit',
       textDecoration: 'none',
     },
+    '::-webkit-scrollbar': {
+      width: '0.8rem',
+      height: '0.8rem',
+      marginLeft: '3rem',
+    },
+    '::-webkit-scrollbar-track': {
+      boxShadow: 'inset 0 0 10px 10px #E2E8F0',
+      border: 'solid 1px transparent',
+      borderRadius: '2.4rem',
+    },
+    '::-webkit-scrollbar-thumb': {
+      boxShadow: 'inset 0 0 10px 10px red.danger_40',
+      background: 'surface.brand',
+      borderRadius: '2.4rem',
+    },
+    scrollbarColor: 'red.danger_40',
+    ...reactDatePickerStyles,
   }),
 };

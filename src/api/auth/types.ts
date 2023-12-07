@@ -17,7 +17,9 @@ export type UpdateUserData = {
   password: string;
   confirmPassword: string;
   confirmed: boolean;
+  number: string;
 };
 export type UpdateUserResponse = {
-  data: User;
+  jwt: string;
+  user: User;
 };

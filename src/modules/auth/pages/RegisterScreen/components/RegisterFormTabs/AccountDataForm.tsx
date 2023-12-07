@@ -9,8 +9,10 @@ import {
   EmailIcon,
   FormWrapper,
   PersonIcon,
+  PhoneIcon,
   TextInput,
 } from '@/components';
+import { Mask } from '@/utils';
 
 import { PrivacyPoliciesModal } from './PrivacyPoliciesModal';
 import { AccountDataFormSchemaType, accountDataFormSchema } from './registerFormTabs.schemas';
@@ -32,12 +34,13 @@ export const AccountDataForm = () => {
     name: watch('name'),
     email: watch('email'),
     role: watch('role'),
+    phone: watch('phone'),
   }).success;
 
   return (
     <>
       <VStack mt="5rem" spacing="1.2rem">
-        <FormWrapper error={errors.name} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.name}>
           <TextInput
             size="xl"
             placeholder="Seu nome"
@@ -46,7 +49,7 @@ export const AccountDataForm = () => {
             {...register('name')}
           />
         </FormWrapper>
-        <FormWrapper error={errors.email} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.email}>
           <TextInput
             size="xl"
             placeholder="E-mail"
@@ -55,7 +58,17 @@ export const AccountDataForm = () => {
             {...register('email')}
           />
         </FormWrapper>
-        <FormWrapper error={errors.role} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.phone}>
+          <TextInput
+            size="xl"
+            mask={Mask.formatPhone}
+            placeholder="Telefone"
+            leftIcon={<PhoneIcon />}
+            borderRadius="2.1rem"
+            {...register('phone')}
+          />
+        </FormWrapper>
+        <FormWrapper error={errors.role}>
           <TextInput
             size="xl"
             placeholder="Seu cargo na sua empresa"
@@ -75,7 +88,7 @@ export const AccountDataForm = () => {
         mx="auto"
         isDisabled={!isValidAccountDataForm}
         rightIcon={
-          <CircleIcon boxSize="3.9rem" bg="green.600">
+          <CircleIcon boxSize="3.9rem" bg="red.danger_50" color="greyscale.0">
             <ArrowRightMediumIcon />
           </CircleIcon>
         }

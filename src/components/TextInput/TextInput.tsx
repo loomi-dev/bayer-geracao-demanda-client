@@ -1,6 +1,7 @@
 import {
   Input,
   InputGroup,
+  InputGroupProps,
   InputLeftElement,
   InputProps,
   InputRightElement,
@@ -14,10 +15,11 @@ export type TextInputProps = {
   mask?: (value: string, maskType?: MaskType) => string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  inputGroupProps?: InputGroupProps;
 } & InputProps;
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ mask, maskEnabled = true, leftIcon, rightIcon, ...props }, ref) => {
+  ({ mask, maskEnabled = true, leftIcon, rightIcon, inputGroupProps, ...props }, ref) => {
     const handleChangeInputValue = (event: ChangeEvent<HTMLInputElement>) => {
       if (maskEnabled && mask) {
         return (event.currentTarget.value = mask(event.currentTarget.value));
@@ -25,7 +27,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     };
 
     return (
-      <InputGroup>
+      <InputGroup {...inputGroupProps}>
         {leftIcon && <InputLeftElement pointerEvents="none">{leftIcon}</InputLeftElement>}
 
         <Input type="text" onChangeCapture={handleChangeInputValue} {...props} ref={ref} />

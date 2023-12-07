@@ -29,7 +29,7 @@ export const PartnerFilter = ({ options = [] }: PartnerFilterProps) => {
       />
       <FilterContent w="28rem">
         <FilterSearchInput placeholder="Pesquisar por nome ou CNPJ" />
-        <FilterBody h="28rem" overflowY="scroll">
+        <FilterBody h="28rem" overflowY="auto">
           {options.map((option) => (
             <FilterOption
               key={option.value}
