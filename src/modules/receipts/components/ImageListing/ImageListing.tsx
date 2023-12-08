@@ -17,9 +17,9 @@ export const ImageListing = ({ files, handleRemoveFile }: ImageListingProps) => 
     overflowX="auto"
     p="0.8rem"
     borderRadius="1.6rem"
-    bg="gray"
+    bg="greyscale.225"
     w="100%"
-    h="13.2rem"
+    h="14.5rem"
     spacing="0.8rem"
     sx={{ ...scrollbarStyle }}
   >

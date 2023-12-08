@@ -15,7 +15,7 @@ const conditionalValues = {
   receiptsSent: {
     text: 'Comprovantes enviados',
     conditionalTextProps: {
-      color: 'green.500',
+      color: 'red.danger_50',
     },
   },
 };

@@ -9,10 +9,8 @@ export type ActionType = {
   id: number;
   shareTitle: string;
   segment: 'relationshipAction';
-  harvest: string;
-  executionDate: string;
-  initialGD: number;
-  finalGD: number;
+  homeGdFeature: number;
+  finalGdFeature: number;
   status: string;
 };
 
@@ -29,24 +27,14 @@ export const columns = [
     header: () => <Header title="segmento" />,
     cell: (info) => <Segment status={info.getValue()} />,
   }),
-  columnHelper.accessor((data) => data.harvest, {
-    id: 'harvest',
-    header: () => <Header title="safra" />,
-    cell: (info) => <Cell value={info.getValue()} />,
-  }),
-  columnHelper.accessor((data) => data.executionDate, {
-    id: 'executionDate',
-    header: () => <Header title="Data de execução" />,
-    cell: (info) => <Cell value={info.getValue()} />,
-  }),
-  columnHelper.accessor((data) => data.initialGD, {
-    id: 'initialGD',
-    header: () => <Header title="GD INICIAL" />,
+  columnHelper.accessor((data) => data.homeGdFeature, {
+    id: 'homeGdFeature',
+    header: () => <Header title="recurso GD INICIAL" />,
     cell: (info) => <Cell value={toBRL(info.getValue())} />,
   }),
-  columnHelper.accessor((data) => data.finalGD, {
-    id: 'finalGD',
-    header: () => <Header title="GD FINAL" />,
+  columnHelper.accessor((data) => data.finalGdFeature, {
+    id: 'finalGdFeature',
+    header: () => <Header title="recurso GD FINAL" />,
     cell: (info) => <Cell value={toBRL(info.getValue())} />,
   }),
   columnHelper.accessor((data) => data.status, {

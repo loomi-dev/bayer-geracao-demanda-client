@@ -44,3 +44,4 @@ export { default as InboxIcon } from './Inbox';
 export { default as EditIcon } from './EditIcon';
 export { default as EyeOpenIcon } from './EyeOpenIcon';
 export { default as TrashIcon } from './TrashIcon';
+export { default as Add2Icon } from './Add2';

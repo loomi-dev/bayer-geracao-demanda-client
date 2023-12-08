@@ -4,9 +4,11 @@ import React from 'react';
 import { Header, ImageIcon } from '@/components';
 
 import {
+  DrawerExpenseReceipt,
   FilterButton,
   HowMuchDidYouEarn,
   HowToProve,
+  StockTable,
   TitleWithSubtitle,
   YourCurrentLevel,
 } from './components';
@@ -24,6 +26,9 @@ export const ProducerProofsScreen = () => (
       <FilterButton />
     </Flex>
 
+    <StockTable />
+
     <HowToProve />
+    <DrawerExpenseReceipt />
   </Box>
 );

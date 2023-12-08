@@ -1,7 +1,9 @@
 import {
+  Button,
   Drawer,
   DrawerBody,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Text,
@@ -42,6 +44,12 @@ export const DrawerExpenseReceipt = () => {
             <ActionDetails />
             <ProveYourExpenses />
           </DrawerBody>
+          <DrawerFooter>
+            <Button variant="secondary" w="18rem" onClick={onClose}>
+              Cancelar
+            </Button>
+            <Button w="18rem">Criar nova ação</Button>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

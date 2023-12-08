@@ -1,12 +1,9 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
+import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { toBRL } from '@/utils';
 
-import { Cell } from '../Cell';
 import { ActionType } from '../FinalizedTables/FinalizedTables.columns';
-import { Header } from '../Header';
-import { ReceiptStatus } from '../ReceiptStatus';
-import { Segment } from '../Segment/Segment';
 import { ViewButton } from '../ViewButton';
 
 const columnHelper = createColumnHelper<ActionType>();

@@ -2,3 +2,8 @@ export * from './MultipleFileInput';
 export * from './ImageListing';
 export * from './CardImageViewing';
 export * from './ProgressBar';
+export * from './Cell';
+export * from './Header';
+export * from './ReceiptStatus';
+export * from './Segment';
+export * from './ActionDetails';
