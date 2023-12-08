@@ -7,6 +7,7 @@ export const Badge = defineStyleConfig({
     fontSize: '1.2rem',
     fontWeight: 'normal',
     border: '1px solid',
+    textAlign: 'center',
   },
   variants: {
     table_primary: {

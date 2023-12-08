@@ -3,6 +3,7 @@ import { createColumnHelper } from '@tanstack/react-table';
 
 import { formatMonth, formatPrice } from '@/utils';
 
+import { PlanningActionsTableAction } from './PlanningActionsTableAction';
 import { PlanningActionTypeColumn } from './PlanningActionTypeColumn';
 
 const columnHelper = createColumnHelper<PlanningAction>();
@@ -22,14 +23,20 @@ export const planningActionsColumns = [
     id: 'execucao',
     header: () => <Text>Execução</Text>,
     cell: (info) => (
-      <Text textStyle="action3">{`${formatMonth(info.getValue().startDate)} - ${formatMonth(
-        info.getValue().endDate,
-      )}`}</Text>
+      <Text textStyle="action3">
+        {info.getValue().startDate && `${formatMonth(info.getValue().startDate)}`}
+        {info.getValue().endDate && ` - ${formatMonth(info.getValue().endDate)}`}
+      </Text>
     ),
   }),
   columnHelper.accessor((data) => data?.amountInCents, {
     id: 'orcamento',
     header: () => <Text>Orçamento</Text>,
     cell: (info) => <Text textStyle="action3">{`R$ ${formatPrice(info.getValue() ?? 0)}`}</Text>,
+  }),
+  columnHelper.accessor((data) => data, {
+    id: 'acoes',
+    header: () => null,
+    cell: (info) => <PlanningActionsTableAction {...info.getValue()} />,
   }),
 ];

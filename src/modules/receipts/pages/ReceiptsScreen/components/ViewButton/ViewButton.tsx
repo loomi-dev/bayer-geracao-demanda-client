@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Center } from '@chakra-ui/react';
 import { CellContext } from '@tanstack/react-table';
 
 import { EyeIcon } from '@/components';
@@ -14,8 +14,16 @@ export const ViewButton = ({ value }: ViewButtonProps) => {
   const onOpen = useDrawerExpenseReceipt((state) => state.onOpen);
 
   return (
-    <Button onClick={onOpen} leftIcon={<EyeIcon />} variant="primary-filter" h="3.4rem" px="1.3rem">
-      Visualizar
-    </Button>
+    <Center>
+      <Button
+        onClick={onOpen}
+        leftIcon={<EyeIcon />}
+        variant="primary-filter"
+        h="3.4rem"
+        px="1.3rem"
+      >
+        Visualizar
+      </Button>
+    </Center>
   );
 };

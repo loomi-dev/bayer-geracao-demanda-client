@@ -6,6 +6,7 @@ type User = {
   confirmed: boolean;
   blocked: boolean;
   role: Roles;
+  company_position: string;
   lastAccess: Date;
 };
 type PlanningSummary = {
@@ -44,6 +45,7 @@ type Harvest = {
 type Historic = {
   id: number;
   actions: PlanningAction[];
+  related: User;
   creation_date: string;
   description: string;
   status: HistoricStatus;
@@ -51,9 +53,9 @@ type Historic = {
 
 type Planning = {
   title: string;
-  createdAt: Date;
+  createdAt: string;
   id: number;
-  date?: string;
+  createdAt?: string;
   safra?: Harvest;
   actions?: PlanningAction[];
   historic?: Historic[];

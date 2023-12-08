@@ -12,8 +12,12 @@ import {
   GetPlanningActionsResponse,
   GetPlanningActionsStatisticsParams,
   GetPlanningActionsStatisticsResponse,
+  GetPlanningHistoricParams,
+  GetPlanningHistoricResponse,
   GetPlanningStatisticsParams,
   GetPlanningStatisticsResponse,
+  GetPlanningStatusParams,
+  GetPlanningStatusResponse,
 } from './types';
 
 export const getPlanningStatistics = async ({
@@ -126,6 +130,39 @@ export const getPlanningActions = async ({
   });
 
   const { data } = await axios.authorized().get(`/actions?${query}`);
+
+  return data;
+};
+
+export const getPlanningHistoric = async ({
+  planningId,
+}: GetPlanningHistoricParams): Promise<GetPlanningHistoricResponse> => {
+  const query = qs.stringify({
+    populate: {
+      historic: {
+        populate: {
+          related: true,
+          actions: true,
+        },
+      },
+    },
+  });
+
+  const { data } = await axios.authorized().get(`/plannings/${planningId}?${query}`);
+
+  return data;
+};
+
+export const getPlanningStatus = async ({
+  planningId,
+}: GetPlanningStatusParams): Promise<GetPlanningStatusResponse> => {
+  const query = qs.stringify({
+    populate: {
+      historic: true,
+    },
+  });
+
+  const { data } = await axios.authorized().get(`/plannings/${planningId}?${query}`);
 
   return data;
 };

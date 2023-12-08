@@ -52,4 +52,6 @@ export const Mask = {
       currency: 'BRL',
     });
   },
+  formatPhone: (value: string, maskType: MaskType = 'numbers') =>
+    applyMask(value, '(**) * ****-****', maskType),
 };

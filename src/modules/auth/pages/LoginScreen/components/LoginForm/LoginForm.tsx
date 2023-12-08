@@ -27,6 +27,8 @@ export const LoginForm = () => {
     formState: { errors, isValid },
   } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
+    mode: 'all',
+    criteriaMode: 'all',
   });
 
   const identifierValue = watch('identifier')?.replace(/[^a-zA-Z0-9]/g, '');
@@ -39,7 +41,7 @@ export const LoginForm = () => {
   return (
     <Box as="form" mt="5.4rem" maxW="48.5rem" w="full" onSubmit={handleSubmit(onSubmitLogin)}>
       <VStack spacing="2.4rem" mb="1rem">
-        <FormWrapper error={errors.identifier} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.identifier}>
           <TextInput
             placeholder="CNPJ ou E-mail"
             size="xl"
@@ -50,7 +52,7 @@ export const LoginForm = () => {
           />
         </FormWrapper>
 
-        <FormWrapper error={errors.password} errorStyles={{ fontSize: '1.6rem', pl: '1rem' }}>
+        <FormWrapper error={errors.password}>
           <PasswordInput
             placeholder="Senha"
             size="xl"

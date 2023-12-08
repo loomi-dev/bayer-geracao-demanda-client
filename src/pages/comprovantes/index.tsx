@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react';
 
+import { DocumentIcon, Header } from '@/components';
 import { LayoutWithoutNotifications } from '@/layouts';
 import { ProducerProofsScreen, ReceiptsScreen } from '@/modules/receipts';
 
@@ -20,6 +21,7 @@ const Page: NextPageWithLayout = () => {
 Page.getLayout = function getLayout(page) {
   return (
     <LayoutWithoutNotifications title="Comprovantes - Top Multiplicadores">
+      <Header icon={<DocumentIcon />} label="Comprovantes" />
       {page}
     </LayoutWithoutNotifications>
   );

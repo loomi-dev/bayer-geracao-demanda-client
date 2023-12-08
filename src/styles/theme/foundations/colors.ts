@@ -31,6 +31,7 @@ const greyscale = {
   425: '#D4D4D4',
   450: '#D9D9D9',
   500: '#ECECEC',
+  550: '#DCDCDC',
   600: '#AEAEAE',
   650: '#666666',
   700: '#7C7C7C',
@@ -60,6 +61,7 @@ const red = {
   danger_50: '#A10B30',
   danger_60: '#B22F2F',
   danger_80: '#852323',
+  danger_100: '#C50022',
 };
 export const colors: ChakraTheme['colors'] = {
   ...theme.colors,

@@ -36,7 +36,7 @@ export const FormWrapper = ({
     {children}
 
     <Collapse in={Boolean(error)}>
-      <FormErrorMessage color="code.danger" {...errorStyles}>
+      <FormErrorMessage color="code.danger" fontSize="1.4rem" pl="1rem" {...errorStyles}>
         {error?.message}
       </FormErrorMessage>
     </Collapse>

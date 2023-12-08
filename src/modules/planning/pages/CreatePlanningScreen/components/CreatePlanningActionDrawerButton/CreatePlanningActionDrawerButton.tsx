@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -54,6 +55,8 @@ export const CreatePlanningActionDrawerButton = () => {
 
   const methods = useForm<PlanningActionFormSchemaType>({
     resolver: zodResolver(planningActionFormSchema),
+    mode: 'all',
+    criteriaMode: 'all',
   });
 
   const {
@@ -83,7 +86,7 @@ export const CreatePlanningActionDrawerButton = () => {
 
   const onSubmitCreatePlanningActionForm = () => {
     if (isValid) {
-      const { title, type, description, value } = watch();
+      const { title, type, description, value, date } = watch();
 
       createPlanningAction(
         {
@@ -94,6 +97,8 @@ export const CreatePlanningActionDrawerButton = () => {
           detail: description,
           amountInCents: brlToCents(value),
           status: 'not_evaluated',
+          initialDate: dayjs(date[0]).format('YYYY-MM-DD'),
+          finishDate: dayjs(date[1]).format('YYYY-MM-DD'),
         },
         {
           onSuccess: () => {

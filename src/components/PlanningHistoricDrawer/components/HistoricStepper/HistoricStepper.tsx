@@ -2,7 +2,7 @@ import { Flex, HStack, Text } from '@chakra-ui/react';
 
 import { ArrowRightIcon } from '@/components/icons';
 
-export const ActionStepper = () => {
+export const HistoricStepper = () => {
   const steps = [
     { title: 'Criação do planejamento' },
     { title: 'Aprovação do RTV' },

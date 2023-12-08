@@ -39,10 +39,11 @@ export const RegisterFormTabs = () => {
 
   const onSubmitAccountDataForm = (data: RegisterFormSchemaType) => {
     updateUser({
+      id: userId,
       name: data.name,
       email: data.email,
       companyRole: data.role,
-      id: userId,
+      number: data.phone,
       password: data.password,
       confirmPassword: data.confirmPassword,
       confirmed: true,
