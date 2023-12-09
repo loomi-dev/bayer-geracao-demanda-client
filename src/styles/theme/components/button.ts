@@ -194,6 +194,9 @@ export const Button = defineStyleConfig({
     },
   },
   sizes: {
+    '2xs': {
+      h: '2.8rem',
+    },
     xs: {
       h: '3.4rem',
     },

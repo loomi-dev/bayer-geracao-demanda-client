@@ -1,4 +1,4 @@
-import { Flex, HStack, Text } from '@chakra-ui/react';
+import { HStack, Text, VStack } from '@chakra-ui/react';
 import { Fragment } from 'react';
 
 import { ArrowRightIcon } from '@/components/icons';
@@ -9,20 +9,36 @@ export const PlanningHistoricStatus = () => {
     { title: 'Aprovação do RTV' },
     { title: 'Comprovação das ações' },
   ];
-  const lastStep = steps.length - 1;
+
   return (
-    <Flex bgColor="opacity.green.0.05" px="3.2rem" py="2rem" flexDir="column" h="7.9rem">
+    <VStack
+      align="flex-start"
+      w="full"
+      spacing="1rem"
+      bg="opacity.green.0.05"
+      px="3.2rem"
+      py="2rem"
+    >
       <Text textStyle="footnote" color="text.copytext">
         Etapa atual
       </Text>
+
       <HStack gap="1.6rem">
-        {steps.map((step, index) => (
-          <Fragment key={index}>
-            <Text textStyle="action3">{step.title}</Text>
-            {index < lastStep && <ArrowRightIcon color="#333333" opacity={0.5} />}
-          </Fragment>
-        ))}
+        {steps.map((step, index) => {
+          const isLastStep = index === steps.length - 1;
+          const isActive = index === 0;
+
+          return (
+            <Fragment key={index}>
+              <Text textStyle="action3" color={isActive ? 'green.100' : 'text.secondary'}>
+                {step.title}
+              </Text>
+
+              {!isLastStep && <ArrowRightIcon color="#333333" opacity="0.5" />}
+            </Fragment>
+          );
+        })}
       </HStack>
-    </Flex>
+    </VStack>
   );
 };
