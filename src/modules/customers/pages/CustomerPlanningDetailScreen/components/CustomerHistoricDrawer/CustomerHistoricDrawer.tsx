@@ -1,6 +1,8 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 
-import { useGetPlanningHistoric } from '@/api';
+import { useGetPlanningHistoric, useUpdatePlanningHistoric } from '@/api';
 import { Historic, HistoricDrawer } from '@/components';
 
 import { CustomerHistoricTitle } from './CustomerHistoricTitle';
@@ -22,10 +24,16 @@ export const CustomerHistoricDrawer = ({
   isApproving,
   onClose,
 }: CustomerHistoricDrawerProps) => {
+  const session = useSession();
+  const userId = session.data?.user.id as number;
+  const [description, setDescription] = useState('');
+
   const { data: getPlanningHistoric } = useGetPlanningHistoric(
     { planningId },
     { enabled: Boolean(planningId && isOpen) },
   );
+  const { mutate: mutateUpdatePlanningHistoric, isLoading } = useUpdatePlanningHistoric();
+
   const historic = getPlanningHistoric?.data.historic ?? [];
 
   const getPlanningTotalValue = (actions: PlanningAction[]) =>
@@ -33,6 +41,21 @@ export const CustomerHistoricDrawer = ({
       acc += item.amountInCents ?? 0;
       return acc;
     }, 0);
+
+  const handleUpdateHistoric = () =>
+    mutateUpdatePlanningHistoric(
+      {
+        planningId,
+        payload: {
+          historic,
+          actions: selectedActions,
+          status: isApproving ? 'accepted' : 'rejected',
+          description,
+          userId,
+        },
+      },
+      { onSuccess: () => onClose() },
+    );
 
   return (
     <HistoricDrawer.Container isOpen={isOpen} onClose={onClose}>
@@ -75,12 +98,15 @@ export const CustomerHistoricDrawer = ({
             </Historic.Title>
             <Historic.Table isApproving={isApproving} data={selectedActions} />
             {!isApproving && (
-              <Historic.TextInput label="Insira uma mensagem para explicar o motivo das recusas" />
+              <Historic.TextInput
+                onChange={(e) => setDescription(e.target.value)}
+                label="Insira uma mensagem para explicar o motivo das recusas"
+              />
             )}
             <Historic.Footer totalValue={totalValue}>
               <HStack>
-                <Historic.CancelButton />
-                <Historic.DoneButton>
+                <Historic.CancelButton onClick={onClose} />
+                <Historic.DoneButton isLoading={isLoading} onClick={handleUpdateHistoric}>
                   <Text fontSize="1rem" fontWeight="bold" color="text.invert">
                     {isApproving ? 'Aprovar planejamento' : 'Recusar planejamento'}
                   </Text>
