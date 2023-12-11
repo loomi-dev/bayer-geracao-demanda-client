@@ -43,8 +43,6 @@ export const CustomerPlanningActionsTable = () => {
 
   const selectedRows = Object.keys(rowSelection).map((key) => actions[key]);
 
-  const planningActionsToEvaluate = selectedRows.length ? selectedRows : actions;
-
   const onApprovePlanning = () => {
     setIsApproving(true);
     onOpenHistoricDrawer();
@@ -111,8 +109,10 @@ export const CustomerPlanningActionsTable = () => {
         planningValue={planningValue}
       />
       <CustomerHistoricDrawer
+        totalValue={planningValue}
         planningId={planningId}
-        actions={planningActionsToEvaluate}
+        isApproving={isApproving}
+        selectedActions={selectedRows}
         isOpen={isOpenHistoricDrawer}
         onClose={onCloseHistoricDrawer}
       />
