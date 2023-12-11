@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { formatPrice } from '@/utils';
 
 type HistoricFooterProps = {
-  totalValue: string;
+  totalValue: string | number;
   children?: ReactNode;
 } & StackProps;
 

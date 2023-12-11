@@ -68,7 +68,7 @@ export const DynamicTable = <TData extends Record<string, unknown>>({
     third: {
       layerStyle: 'card',
       borderRadius: '3.2rem',
-      pb: '0',
+      pb: '2rem',
       boxShadow: 'primary',
     },
   } as const;

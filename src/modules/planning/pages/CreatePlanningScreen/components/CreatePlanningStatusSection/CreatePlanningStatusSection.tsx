@@ -1,4 +1,5 @@
 import { Badge, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { ArrowRightIcon } from '@/components';
@@ -7,6 +8,12 @@ import { PlanningStatus, PlanningValue } from '@/types';
 type CreatePlanningStatusSectionProps = {
   planningStatus: HistoricStatus | 'default';
 };
+
+const DynamicPlanningHistoricDrawer = dynamic(async () => {
+  const { PlanningHistoricDrawer } = await import('../PlanningHistoricDrawer');
+
+  return PlanningHistoricDrawer;
+});
 
 export const CreatePlanningStatusSection = ({
   planningStatus,
@@ -36,7 +43,9 @@ export const CreatePlanningStatusSection = ({
       justify="space-between"
     >
       <Text textStyle="action4" textTransform="uppercase">
-        Envie o planejamento para aprovação do RTV
+        {isNewPlanning
+          ? 'Envie o planejamento para aprovação do RTV'
+          : 'Ver histórico de atualizações'}
       </Text>
 
       <HStack spacing="1.6rem">
@@ -55,6 +64,15 @@ export const CreatePlanningStatusSection = ({
             <Button variant="unstyled" onClick={onOpenPlanningHistoricDrawer}>
               <ArrowRightIcon />
             </Button>
+          )}
+
+          {isOpenPlanningHistoricDrawer && (
+            <DynamicPlanningHistoricDrawer
+              isOpen={isOpenPlanningHistoricDrawer}
+              showSendPlanningForm={isNewPlanning}
+              onClose={onClosePlanningHistoricDrawer}
+              planningId={planningId}
+            />
           )}
         </>
       </HStack>
