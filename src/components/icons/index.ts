@@ -46,3 +46,5 @@ export { default as EyeOpenIcon } from './EyeOpenIcon';
 export { default as TrashIcon } from './TrashIcon';
 export { default as PhoneIcon } from './PhoneIcon';
 export { default as ClockRegularIcon } from './ClockRegularIcon';
+export { default as PackageIcon } from './Package';
+export { default as PackageSmallIcon } from './PackageSmall';

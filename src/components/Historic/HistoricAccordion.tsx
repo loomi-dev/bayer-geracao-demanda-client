@@ -21,7 +21,7 @@ type HistoricAccordionProps = {
 
 export const HistoricAccordion = ({ planningActions }: HistoricAccordionProps) => (
   <Accordion border="none" w="full" allowToggle>
-    <AccordionItem p="initial" boxShadow="none" border="none" borderRadius="initial" mb="0">
+    <AccordionItem p="initial" boxShadow="none" borderRadius="initial" border="none" mb="0">
       {({ isExpanded }) => (
         <>
           <h2>

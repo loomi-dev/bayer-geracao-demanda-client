@@ -1,15 +1,15 @@
 import { FieldError, Merge, UseFormRegisterReturn } from 'react-hook-form';
 
 import { FormWrapper } from '../FormWrapper';
-import { TextInput } from '../TextInput';
+import { TextInput, TextInputProps } from '../TextInput';
 
 type HistoricTextInputProps = {
   label: string;
   error?: FieldError | Merge<FieldError, unknown>;
-  register: UseFormRegisterReturn;
-};
+  register?: UseFormRegisterReturn;
+} & TextInputProps;
 
-export const HistoricTextInput = ({ label, error, register }: HistoricTextInputProps) => (
+export const HistoricTextInput = ({ label, error, register, ...props }: HistoricTextInputProps) => (
   <FormWrapper
     error={error}
     label={label}
@@ -30,6 +30,7 @@ export const HistoricTextInput = ({ label, error, register }: HistoricTextInputP
       border="none"
       borderRadius="initial"
       p="initial"
+      {...props}
       {...register}
     />
   </FormWrapper>
