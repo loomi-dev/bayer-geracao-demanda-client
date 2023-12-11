@@ -18,6 +18,7 @@ import {
   GetPlanningStatisticsResponse,
   GetPlanningStatusParams,
   GetPlanningStatusResponse,
+  UpdatePlanningHistoricParams,
   UpdatePlanningHistoricResponse,
 } from './types';
 
@@ -171,8 +172,8 @@ export const getPlanningStatus = async ({
 export const updatePlanningHistoric = async ({
   planningId,
   payload,
-}): Promise<UpdatePlanningHistoricResponse> => {
-  const query = qs.stringify({
+}: UpdatePlanningHistoricParams): Promise<UpdatePlanningHistoricResponse> => {
+  const data = {
     data: {
       historic: [
         ...payload.historic,
@@ -186,7 +187,7 @@ export const updatePlanningHistoric = async ({
         },
       ],
     },
-  });
-  const { data } = await axios.authorized().get(`/plannings/${planningId}?${query}`);
-  return data;
+  };
+  const { data: result } = await axios.authorized().put(`/plannings/${planningId}`, { data });
+  return result;
 };

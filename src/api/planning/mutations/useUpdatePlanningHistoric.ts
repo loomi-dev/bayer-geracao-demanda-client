@@ -6,7 +6,7 @@ import { queryClient } from '@/lib/react-query';
 
 import { updatePlanningHistoric } from '../endpoints';
 
-enum toastTitle {
+enum ToastTitle {
   'ready_for_evaluation' = 'enviado para avaliação',
   'accepted' = 'aceito',
   'rejected' = 'recusado',
@@ -14,7 +14,7 @@ enum toastTitle {
 
 export const useUpdatePlanningHistoric = (options?: MutOpt<UpdatePlanningHistoricResponse>) => {
   const toast = useToast();
-  useMutation({
+  return useMutation({
     ...options,
     mutationKey: ['update-historic'],
     mutationFn: updatePlanningHistoric,
@@ -22,7 +22,7 @@ export const useUpdatePlanningHistoric = (options?: MutOpt<UpdatePlanningHistori
       await Promise.all([
         queryClient.invalidateQueries(['planning-actions-statistics', 'planning-actions']),
       ]);
-      toast({ title: `O planejamento foi ${toastTitle[data.status]}  `, status: 'success' });
+      toast({ description: `O planejamento foi ${ToastTitle[data.status]}  `, status: 'success' });
     },
   });
 };

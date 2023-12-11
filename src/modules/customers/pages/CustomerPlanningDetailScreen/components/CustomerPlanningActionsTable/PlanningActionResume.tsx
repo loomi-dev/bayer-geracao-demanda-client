@@ -8,14 +8,14 @@ type PlanningActionResumeProps = {
 };
 
 export const PlanningActionResume = ({ planningValue, onClick }: PlanningActionResumeProps) => {
-  const hasPlanningValue = Boolean(planningValue);
+  const hasPlanningValue = Boolean(planningValue >= 0);
   return (
     <Flex px="2.4rem" justify="space-between">
       <HStack gap="2rem">
         <Text textStyle={{ base: 'action3', '2xl': 'h4' }} textTransform="uppercase">
           Total
         </Text>
-        {planningValue ? (
+        {hasPlanningValue ? (
           <Text textStyle={{ base: 'action2', '2xl': 'h4' }} color="text.brand">
             R$ {formatPrice(planningValue)}
           </Text>
