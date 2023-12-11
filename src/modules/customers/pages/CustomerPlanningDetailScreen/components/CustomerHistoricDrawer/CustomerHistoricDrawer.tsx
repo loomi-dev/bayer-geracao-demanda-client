@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -6,6 +6,7 @@ import { useGetPlanningHistoric, useUpdatePlanningHistoric } from '@/api';
 import { Historic, HistoricDrawer } from '@/components';
 
 import { CustomerHistoricTitle } from './CustomerHistoricTitle';
+import { CustomerHistoricResponse } from './CustumerHistoricResponse';
 
 type CustomerHistoricDrawerProps = {
   planningId: number;
@@ -30,7 +31,7 @@ export const CustomerHistoricDrawer = ({
 
   const { data: getPlanningHistoric } = useGetPlanningHistoric(
     { planningId },
-    { enabled: Boolean(planningId && isOpen) },
+    { enabled: Boolean(planningId) && isOpen },
   );
   const { mutate: mutateUpdatePlanningHistoric, isLoading } = useUpdatePlanningHistoric();
 
@@ -68,7 +69,7 @@ export const CustomerHistoricDrawer = ({
               <Historic.Title>
                 <CustomerHistoricTitle status={item.status} username={item.related?.username} />
               </Historic.Title>
-              <Box w="full" borderRadius="1.6rem" boxShadow="datepicker">
+              <Box overflow="hidden" w="full" borderRadius="1.6rem" boxShadow="datepicker">
                 <Historic.Accordion planningActions={item.actions} />
                 <Historic.Footer
                   border="none"
@@ -87,34 +88,15 @@ export const CustomerHistoricDrawer = ({
             </Historic.Container>
           </HistoricDrawer.Step>
         ))}
-        <HistoricDrawer.Step>
-          <Historic.Container border="none">
-            <Historic.Title lineHeight="5.2rem">
-              <Text>
-                {isApproving
-                  ? 'Ações a serem aprovadas'
-                  : 'Explique o motivo pelo qual você está recusando estas ações'}
-              </Text>
-            </Historic.Title>
-            <Historic.Table isApproving={isApproving} data={selectedActions} />
-            {!isApproving && (
-              <Historic.TextInput
-                onChange={(e) => setDescription(e.target.value)}
-                label="Insira uma mensagem para explicar o motivo das recusas"
-              />
-            )}
-            <Historic.Footer totalValue={totalValue}>
-              <HStack>
-                <Historic.CancelButton onClick={onClose} />
-                <Historic.DoneButton isLoading={isLoading} onClick={handleUpdateHistoric}>
-                  <Text fontSize="1rem" fontWeight="bold" color="text.invert">
-                    {isApproving ? 'Aprovar planejamento' : 'Recusar planejamento'}
-                  </Text>
-                </Historic.DoneButton>
-              </HStack>
-            </Historic.Footer>
-          </Historic.Container>
-        </HistoricDrawer.Step>
+        <CustomerHistoricResponse
+          totalValue={totalValue}
+          isApproving={isApproving}
+          selectedActions={selectedActions}
+          isLoading={isLoading}
+          onChange={(e) => setDescription(e.target.value)}
+          onClose={onClose}
+          onClick={handleUpdateHistoric}
+        />
       </HistoricDrawer.Body>
     </HistoricDrawer.Container>
   );
