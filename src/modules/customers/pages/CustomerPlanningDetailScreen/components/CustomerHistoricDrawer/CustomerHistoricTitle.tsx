@@ -6,7 +6,7 @@ type CustomerHistoricTitleProps = {
 };
 export const CustomerHistoricTitle = ({ username, status }: CustomerHistoricTitleProps) => {
   if (status === 'ready_for_evaluation')
-    return <Text textStyle="body1">Você enviou o planejamento para aprovação</Text>;
+    return <Text textStyle="body1">{`${username} enviou o planejamento para aprovação`}</Text>;
   if (status === 'rejected')
     return (
       <HStack textStyle="body1" lineHeight="initial" fontWeight="bold">
