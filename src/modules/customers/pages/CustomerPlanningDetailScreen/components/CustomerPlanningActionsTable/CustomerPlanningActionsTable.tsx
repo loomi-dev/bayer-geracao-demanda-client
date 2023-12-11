@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
-import { DynamicTable, Pagination, PlanningHistoricDrawer } from '@/components';
+import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { ActionCards } from './ActionCards';
@@ -107,14 +107,6 @@ export const CustomerPlanningActionsTable = () => {
         onApprove={onApprovePlanning}
         onReject={onRejectPlanning}
         planningValue={planningValue}
-      />
-
-      <PlanningHistoricDrawer
-        isAproving={isApproving}
-        actionsToEvaluate={planningActionsToEvaluate}
-        planningId={planningId}
-        isOpen={isOpenHistoricDrawer}
-        onClose={onCloseHistoricDrawer}
       />
     </Flex>
   );
