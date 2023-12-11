@@ -4,10 +4,15 @@ import { formatPrice } from '@/utils';
 
 type PlanningActionResumeProps = {
   planningValue: number;
-  onClick: () => void;
+  onApprove: () => void;
+  onReject: () => void;
 };
 
-export const PlanningActionResume = ({ planningValue, onClick }: PlanningActionResumeProps) => {
+export const PlanningActionResume = ({
+  planningValue,
+  onApprove,
+  onReject,
+}: PlanningActionResumeProps) => {
   const hasPlanningValue = Boolean(planningValue >= 0);
   return (
     <Flex px="2.4rem" justify="space-between">
@@ -24,10 +29,10 @@ export const PlanningActionResume = ({ planningValue, onClick }: PlanningActionR
         )}
       </HStack>
       <HStack>
-        <Button onClick={onClick} isDisabled={!hasPlanningValue} variant="fifth" size="sm">
+        <Button onClick={onReject} isDisabled={!hasPlanningValue} variant="fifth" size="sm">
           Recusar planejamento
         </Button>
-        <Button onClick={onClick} isDisabled={!hasPlanningValue} size="sm">
+        <Button onClick={onApprove} isDisabled={!hasPlanningValue} size="sm">
           <Text textStyle="footnote-small-bold">Autorizar planejamento</Text>
         </Button>
       </HStack>

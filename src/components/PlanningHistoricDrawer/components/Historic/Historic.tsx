@@ -7,7 +7,7 @@ type HistoricProps = {
 };
 
 export const Historic = ({ historicList }: HistoricProps) => (
-  <Flex flexDir="column" px="7.2rem" pt="1.6rem" gap="1.6rem">
+  <Flex flexDir="column" gap="1.6rem">
     {historicList.map(({ id, status, actions, related }) => (
       <>
         {status === 'ready_for_evaluation' && (
