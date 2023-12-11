@@ -4,7 +4,7 @@ import { semanticTokens } from './semanticTokens';
 
 const green = {
   50: '#EBF9EC',
-  100: '#D7F4DA',
+  100: '#00793A',
   150: '#2C9F36',
   200: '#AFE9B5',
   300: '#87DD8F',
@@ -27,11 +27,11 @@ const greyscale = {
   300: '#F7F7F7',
   330: '#ECECEC',
   350: '#DBDBDB80',
+  375: '#DCDCDC',
   400: '#CCCCCC',
   425: '#D4D4D4',
   450: '#D9D9D9',
   500: '#ECECEC',
-  550: '#DCDCDC',
   600: '#AEAEAE',
   650: '#666666',
   700: '#7C7C7C',
@@ -40,9 +40,7 @@ const greyscale = {
   1000: '#212121',
 };
 
-const black = {
-  50: 'rgba(0, 0, 0, 0.08)',
-};
+const black = '#000000';
 
 const yellow = {
   warning_10: '#FBF5D6',
