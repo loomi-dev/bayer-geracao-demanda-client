@@ -6,6 +6,8 @@ import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 
+import { CustomerHistoricDrawer } from '../CustomerHistoricDrawer';
+
 import { ActionCards } from './ActionCards';
 import { CustomerPlanningActionsColumns } from './CustomerPlanningActions.columns';
 import { PlanningActionResume } from './PlanningActionResume';
@@ -107,6 +109,12 @@ export const CustomerPlanningActionsTable = () => {
         onApprove={onApprovePlanning}
         onReject={onRejectPlanning}
         planningValue={planningValue}
+      />
+      <CustomerHistoricDrawer
+        planningId={planningId}
+        actions={planningActionsToEvaluate}
+        isOpen={isOpenHistoricDrawer}
+        onClose={onCloseHistoricDrawer}
       />
     </Flex>
   );
