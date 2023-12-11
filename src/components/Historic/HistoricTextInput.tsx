@@ -1,11 +1,11 @@
 import { FormWrapper } from '../FormWrapper';
-import { TextInput } from '../TextInput';
+import { TextInput, TextInputProps } from '../TextInput';
 
 type HistoricTextInputProps = {
   label: string;
-};
+} & TextInputProps;
 
-export const HistoricTextInput = ({ label }: HistoricTextInputProps) => (
+export const HistoricTextInput = ({ label, ...props }: HistoricTextInputProps) => (
   <FormWrapper
     label={label}
     labelStyles={{
@@ -19,6 +19,13 @@ export const HistoricTextInput = ({ label }: HistoricTextInputProps) => (
     borderRadius="1.6rem"
     borderColor="greyscale.375"
   >
-    <TextInput as="textarea" resize="none" border="none" borderRadius="initial" p="initial" />
+    <TextInput
+      as="textarea"
+      resize="none"
+      border="none"
+      borderRadius="initial"
+      p="initial"
+      {...props}
+    />
   </FormWrapper>
 );

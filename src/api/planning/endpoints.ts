@@ -183,7 +183,7 @@ export const updatePlanningHistoric = async ({
           related: {
             connect: [{ id: payload.userId }],
           },
-          actions: payload.actions,
+          ...(payload.actions.length ? { actions: payload.actions } : {}),
         },
       ],
     },
