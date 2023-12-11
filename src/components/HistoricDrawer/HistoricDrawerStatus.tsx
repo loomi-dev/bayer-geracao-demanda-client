@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 
 import { ArrowRightIcon } from '@/components/icons';
 
-export const PlanningHistoricStatus = () => {
+export const HistoricDrawerStatus = () => {
   const steps = [
     { title: 'Criação do planejamento' },
     { title: 'Aprovação do RTV' },

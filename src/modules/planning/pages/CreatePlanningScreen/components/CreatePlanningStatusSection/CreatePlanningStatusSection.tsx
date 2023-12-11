@@ -1,7 +1,7 @@
 import { Badge, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-import { ArrowRightIcon, PlanningHistoricDrawer } from '@/components';
+import { ArrowRightIcon } from '@/components';
 import { PlanningStatus, PlanningValue } from '@/types';
 
 type CreatePlanningStatusSectionProps = {
@@ -56,12 +56,6 @@ export const CreatePlanningStatusSection = ({
               <ArrowRightIcon />
             </Button>
           )}
-
-          <PlanningHistoricDrawer
-            isOpen={isOpenPlanningHistoricDrawer}
-            onClose={onClosePlanningHistoricDrawer}
-            planningId={planningId}
-          />
         </>
       </HStack>
     </HStack>
