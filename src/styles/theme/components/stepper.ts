@@ -65,7 +65,7 @@ export const Stepper = defineMultiStyleConfig({
         border: '0',
 
         '&[data-status=complete]': {
-          bg: 'text.brand',
+          bg: 'greyscale.225',
         },
       },
       separator: {
@@ -74,7 +74,7 @@ export const Stepper = defineMultiStyleConfig({
         left: '2.6rem !important',
 
         '&[data-status=complete]': {
-          bg: 'text.brand',
+          bg: 'greyscale.225',
         },
       },
     },
