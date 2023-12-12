@@ -1,8 +1,11 @@
-import { Divider, Flex, Text } from '@chakra-ui/react';
+import { Box, Divider, Flex, Text } from '@chakra-ui/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { TrousseauDownloadOption } from './TrousseauDownloadOption';
 import { TrousseauImageCard } from './TrousseauImageCard';
 import { TrousseauRecomendations } from './TrousseauRecomendations';
+
+import 'swiper/css';
 
 export const TrousseauOptionsSection = () => (
   <Flex
@@ -17,15 +20,28 @@ export const TrousseauOptionsSection = () => (
       Tipos de enxoval
     </Text>
     <Divider w="full" borderColor="opacity.black.0.20" />
-    <Flex gap="1.2rem" overflowX="auto">
-      <TrousseauImageCard label="Chapeu Bayer" />
-      <TrousseauImageCard label="Chapeu Bayer" />
-      <TrousseauImageCard label="Chapeu Bayer" />
-      <TrousseauImageCard label="Chapeu Bayer" />
-      <TrousseauImageCard label="Chapeu Bayer" />
-      <TrousseauImageCard label="Chapeu Bayer" />
-    </Flex>
-
+    <Box>
+      <Swiper slidesPerView="auto" spaceBetween={20}>
+        <SwiperSlide style={{ width: 'fit-content' }}>
+          <TrousseauImageCard label="Chapeu Bayer" />
+        </SwiperSlide>
+        <SwiperSlide style={{ width: 'fit-content' }}>
+          <TrousseauImageCard label="Chapeu Bayer" />
+        </SwiperSlide>
+        <SwiperSlide style={{ width: 'fit-content' }}>
+          <TrousseauImageCard label="Chapeu Bayer" />
+        </SwiperSlide>
+        <SwiperSlide style={{ width: 'fit-content' }}>
+          <TrousseauImageCard label="Chapeu Bayer" />
+        </SwiperSlide>
+        <SwiperSlide style={{ width: 'fit-content' }}>
+          <TrousseauImageCard label="Chapeu Bayer" />
+        </SwiperSlide>
+        <SwiperSlide style={{ width: 'fit-content' }}>
+          <TrousseauImageCard label="Chapeu Bayer" />
+        </SwiperSlide>
+      </Swiper>
+    </Box>
     <Flex gap="0.8rem" mt="2rem" flexDir="column">
       <TrousseauDownloadOption />
       <TrousseauDownloadOption />
