@@ -16,7 +16,7 @@ export const MinimumNumbersTableColumns = [
         X12I + XTD
       </Text>
     ),
-    cell: () => <Text textStyle="body2">{formatPrice(18000000)}</Text>,
+    cell: () => <Text textStyle="body2">R$ {formatPrice(18000000)}</Text>,
   }),
   columnHelper.accessor(() => null, {
     id: 'ipro',
@@ -25,7 +25,7 @@ export const MinimumNumbersTableColumns = [
         IPRO
       </Text>
     ),
-    cell: () => <Text textStyle="body2">{formatPrice(18000000)}</Text>,
+    cell: () => <Text textStyle="body2">R$ {formatPrice(18000000)}</Text>,
   }),
   columnHelper.accessor(() => null, {
     id: 'faixa',
