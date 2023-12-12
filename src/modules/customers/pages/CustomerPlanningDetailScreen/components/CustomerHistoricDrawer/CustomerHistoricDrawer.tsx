@@ -1,11 +1,9 @@
-import { Box } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import { useGetPlanningActions, useGetPlanningHistoric, useUpdatePlanningHistoric } from '@/api';
-import { Historic, HistoricDrawer } from '@/components';
+import { HistoricDrawer, PastPlanningHistoricSteps } from '@/components';
 
-import { CustomerHistoricTitle } from './CustomerHistoricTitle';
 import { CustomerHistoricResponse } from './CustumerHistoricResponse';
 
 type CustomerHistoricDrawerProps = {
@@ -64,36 +62,8 @@ export const CustomerHistoricDrawer = ({
   return (
     <HistoricDrawer.Container isOpen={isOpen} onClose={onClose}>
       <HistoricDrawer.Header />
-      <HistoricDrawer.Body index={0}>
-        {historic.map((item) => (
-          <HistoricDrawer.Step key={item.id}>
-            <Historic.Container border="none">
-              <Historic.Header status={item.status} date={item.creation_date} />
-              <Historic.Title>
-                <CustomerHistoricTitle status={item.status} username={item.related?.username} />
-              </Historic.Title>
-              <Box overflow="hidden" w="full" borderRadius="1.6rem" boxShadow="datepicker">
-                <Historic.Accordion planningActions={item.actions} />
-                <Historic.Footer
-                  border="none"
-                  bgColor="surface.primary"
-                  borderTopRadius="initial"
-                  borderTop="1px solid"
-                  borderTopColor="opacity.white.1.40"
-                  borderBottomRadius="1.6rem"
-                  py="2rem"
-                  mt="-0.1rem"
-                  justify="space-between"
-                  totalValue={getPlanningTotalValue(item.actions)}
-                />
-              </Box>
-              <Historic.Message
-                title={`${item.related.username} enviou o planejamento para aprovação`}
-                description={item.description}
-              />
-            </Historic.Container>
-          </HistoricDrawer.Step>
-        ))}
+      <HistoricDrawer.Body index={historic.length - 1}>
+        <PastPlanningHistoricSteps lastHistoric={historic} />
         <CustomerHistoricResponse
           totalValue={getPlanningTotalValue(actions)}
           isApproving={isApproving}

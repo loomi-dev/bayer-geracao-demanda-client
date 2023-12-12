@@ -33,7 +33,7 @@ export const CustomerPlanningActionsTable = () => {
     { enabled: Boolean(planningId) },
   );
   const { data: actionsData, isLoading: isLoadingActions } = useGetPlanningActions(
-    { planningId },
+    { planningId, pagination: { page: currentPage, pageSize: 10 } },
     { enabled: Boolean(planningId) },
   );
 
