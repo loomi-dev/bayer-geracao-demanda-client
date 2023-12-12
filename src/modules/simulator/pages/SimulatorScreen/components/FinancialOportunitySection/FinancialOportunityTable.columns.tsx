@@ -1,13 +1,10 @@
 import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { centsToCompactValue, formatPrice } from '@/utils';
 
 const columnHelper = createColumnHelper<any>();
 
-dayjs.extend(relativeTime);
 export const FinancialOportunityTableColumns = [
   columnHelper.accessor(() => null, {
     id: 'faixa',

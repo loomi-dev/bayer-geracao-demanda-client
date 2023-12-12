@@ -94,3 +94,10 @@ type FinancialSummary = {
   initial_resource_in_cents: number;
   utilized_in_cents: number;
 };
+
+type Trousseau = {
+  id: number;
+  label: string;
+  image: string;
+  isSelected?: boolean;
+};

@@ -31,6 +31,7 @@ import {
 import { PlanningActionFormAccordion } from './PlanningActionFormAccordion';
 import { PlanningActionFormStepper } from './PlanningActionFormStepper';
 import { RecommendationsAccordion } from './RecommendationsAccordion';
+import { TrousseauSelectAccordion } from './TrousseauSelectAccordion';
 
 export const CreatePlanningActionDrawerButton = () => {
   const { query } = useRouter();
@@ -65,8 +66,10 @@ export const CreatePlanningActionDrawerButton = () => {
     formState: { isValid },
   } = methods;
 
+  const planningActionTypeValue = watch('type');
+
   const planningActionTitle = watch('title') ?? '-';
-  const planningActionType = PlanningActionValues[watch('type')];
+  const planningActionType = PlanningActionValues[planningActionTypeValue];
   const planningActionInvestment = watch('value') ?? '-';
   const planningActionDescription = watch('description') ?? '-';
 
@@ -151,6 +154,8 @@ export const CreatePlanningActionDrawerButton = () => {
                   description={planningActionDescription}
                 />
               )}
+
+              {planningActionTypeValue === 'farm_kit' && <TrousseauSelectAccordion />}
 
               <HStack mt="1rem" justify="flex-end">
                 <Text
