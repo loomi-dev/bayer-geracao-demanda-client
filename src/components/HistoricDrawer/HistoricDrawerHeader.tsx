@@ -2,7 +2,11 @@ import { DrawerHeader, Text, VStack } from '@chakra-ui/react';
 
 import { HistoricDrawerStatus } from './HistoricDrawerStatus';
 
-export const HistoricDrawerHeader = () => (
+type HistoricDrawerHeaderProps = {
+  status?: HistoricStatus;
+};
+
+export const HistoricDrawerHeader = ({ status }: HistoricDrawerHeaderProps) => (
   <DrawerHeader p="initial">
     <VStack
       align="flex-start"
@@ -16,6 +20,6 @@ export const HistoricDrawerHeader = () => (
       </Text>
     </VStack>
 
-    <HistoricDrawerStatus />
+    <HistoricDrawerStatus status={status} />
   </DrawerHeader>
 );

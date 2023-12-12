@@ -1,13 +1,21 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import { Fragment } from 'react';
 
-import { ArrowRightIcon } from '@/components/icons';
+import { ArrowRightMediumIcon } from '@/components/icons';
 
-export const HistoricDrawerStatus = () => {
+type HistoricDrawerStatusProps = {
+  status?: HistoricStatus;
+};
+
+export const HistoricDrawerStatus = ({ status }: HistoricDrawerStatusProps) => {
   const steps = [
-    { title: 'Criação do planejamento' },
-    { title: 'Aprovação do RTV' },
-    { title: 'Comprovação das ações' },
+    { title: 'Criação do planejamento', isActive: true, colorActive: 'green.100' },
+    {
+      title: 'Aprovação do RTV',
+      isActive: status === 'accepted' || status === 'rejected',
+      colorActive: status === 'rejected' ? 'red.danger_40' : 'green.100',
+    },
+    { title: 'Comprovação das ações', isActive: status === 'accepted', colorActive: 'green.100' },
   ];
 
   return (
@@ -24,17 +32,16 @@ export const HistoricDrawerStatus = () => {
       </Text>
 
       <HStack gap="1.6rem">
-        {steps.map((step, index) => {
+        {steps.map(({ title, isActive, colorActive }, index) => {
           const isLastStep = index === steps.length - 1;
-          const isActive = index === 0;
 
           return (
             <Fragment key={index}>
-              <Text textStyle="action3" color={isActive ? 'green.100' : 'text.secondary'}>
-                {step.title}
+              <Text textStyle="action3" color={isActive ? colorActive : 'text.secondary'}>
+                {title}
               </Text>
 
-              {!isLastStep && <ArrowRightIcon color="#333333" opacity="0.5" />}
+              {!isLastStep && <ArrowRightMediumIcon color="#333333" opacity="0.5" />}
             </Fragment>
           );
         })}
