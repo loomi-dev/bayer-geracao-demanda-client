@@ -113,7 +113,6 @@ export const CustomerPlanningActionsTable = () => {
       />
       {isOpenHistoricDrawer && (
         <CustomerHistoricDynamicDrawer
-          totalValue={planningValue}
           planningId={planningId}
           isApproving={isApproving}
           selectedActions={selectedRows}
