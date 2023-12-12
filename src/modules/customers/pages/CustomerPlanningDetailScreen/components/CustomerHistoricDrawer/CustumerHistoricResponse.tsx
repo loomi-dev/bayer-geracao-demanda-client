@@ -30,7 +30,7 @@ export const CustomerHistoricResponse = ({
             : 'Explique o motivo pelo qual você está recusando estas ações'}
         </Text>
       </Historic.Title>
-      <Historic.Table isApproving={isApproving} data={selectedActions} isLoading={false} />
+      <Historic.Table isApproving={isApproving} data={selectedActions} />
       {!isApproving && (
         <Historic.TextInput
           onChange={onChange}
