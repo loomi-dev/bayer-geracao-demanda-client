@@ -1,4 +1,6 @@
 import { Box, Button, HStack, Skeleton, Spinner, Text } from '@chakra-ui/react';
+import { Row } from '@tanstack/react-table';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
@@ -10,6 +12,7 @@ import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 import { planningTableColumns } from './PlanningTable.columns';
 
 export const PlanningTable = () => {
+  const { push } = useRouter();
   const session = useSession();
   const userId = session.data?.user.id as number;
 
@@ -46,6 +49,15 @@ export const PlanningTable = () => {
     });
   };
 
+  const handleNavigateToCreatePlanningScreen = (row: Row<Planning>) => {
+    push({
+      pathname: '/planejamento/criar-novo-planejamento',
+      query: {
+        planning_id: row.original.id,
+      },
+    });
+  };
+
   return (
     <Box w="full">
       <Text textStyle="h4" mb="2rem">
@@ -57,6 +69,11 @@ export const PlanningTable = () => {
         data={plansList}
         columns={planningTableColumns}
         isLoading={isLoadingPlansList}
+        hoverProps={{
+          bg: 'greyscale.500',
+          cursor: 'pointer',
+        }}
+        onRowClick={handleNavigateToCreatePlanningScreen}
       >
         <HStack
           justify="space-between"

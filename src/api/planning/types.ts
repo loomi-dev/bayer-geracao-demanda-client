@@ -82,3 +82,8 @@ export type UpdatePlanningHistoricResponse = {
     status: string;
   };
 };
+
+export type DeletePlanningParams = {
+  planningId: number;
+};
+export type DeletePlanningResponse = void;

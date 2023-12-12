@@ -6,6 +6,8 @@ import axios from '@/lib/axios';
 import {
   CreatePlanningData,
   CreatePlanningResponse,
+  DeletePlanningParams,
+  DeletePlanningResponse,
   GetFarmerPlansParams,
   GetFarmerPlansResponse,
   GetPlanningActionsParams,
@@ -194,3 +196,8 @@ export const updatePlanningHistoric = async ({
   const { data: result } = await axios.authorized().put(`/plannings/${planningId}`, { data });
   return result;
 };
+
+export const deletePlanning = async ({
+  planningId,
+}: DeletePlanningParams): Promise<DeletePlanningResponse> =>
+  await axios.authorized().delete(`/plannings/${planningId}`);
