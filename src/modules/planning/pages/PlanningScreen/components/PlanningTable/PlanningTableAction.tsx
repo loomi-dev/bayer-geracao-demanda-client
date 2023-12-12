@@ -1,7 +1,9 @@
 import { Button, Center, Divider, Flex, useDisclosure } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
+import { useDeletePlanning } from '@/api';
 import { ConfirmationModal, EditIcon, EyeOpenIcon, TrashIcon } from '@/components';
+import { usePagination } from '@/hooks';
 
 type PlanningTableActionProps = {
   planningId: number;
@@ -10,6 +12,11 @@ type PlanningTableActionProps = {
 
 export const PlanningTableAction = ({ planningId, historic }: PlanningTableActionProps) => {
   const { push } = useRouter();
+
+  const { mutate: deletePlanning, isLoading: isLoadingDeletePlanning } = useDeletePlanning();
+
+  const { resetPage } = usePagination('planning_table');
+
   const {
     isOpen: isOpenDeletePlanningModal,
     onOpen: onOpenDeletePlanningModal,
@@ -25,6 +32,20 @@ export const PlanningTableAction = ({ planningId, historic }: PlanningTableActio
         planning_id: planningId,
       },
     });
+  };
+
+  const handleDeletePlanning = () => {
+    deletePlanning(
+      {
+        planningId,
+      },
+      {
+        onSuccess: () => {
+          onCloseDeletePlanningModal();
+          resetPage();
+        },
+      },
+    );
   };
 
   return (
@@ -51,7 +72,8 @@ export const PlanningTableAction = ({ planningId, historic }: PlanningTableActio
               onClose={onCloseDeletePlanningModal}
               title="Deseja excluir este planejamento?"
               description="Ao excluir o planejamento ele será perdido totalmente sem chance de recuperação, deseja continuar com esta ação?"
-              onConfirm={() => console.log('achou')}
+              onConfirm={handleDeletePlanning}
+              confirmButtonProps={{ isLoading: isLoadingDeletePlanning }}
               confirmText="Excluir"
             />
           </>

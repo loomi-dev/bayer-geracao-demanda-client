@@ -10,3 +10,8 @@ export type CreatePlanningActionData = {
   finishDate: string;
 };
 export type CreatePlanningActionResponse = void;
+
+export type DeletePlanningActionParams = {
+  actionId: number;
+};
+export type DeletePlanningActionResponse = void;

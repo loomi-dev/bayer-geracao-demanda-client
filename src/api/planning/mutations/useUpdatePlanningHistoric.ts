@@ -18,11 +18,14 @@ export const useUpdatePlanningHistoric = (options?: MutOpt<UpdatePlanningHistori
     ...options,
     mutationKey: ['update-historic'],
     mutationFn: updatePlanningHistoric,
-    onSuccess: async ({ data }) => {
-      await Promise.all([
-        queryClient.invalidateQueries(['planning-actions-statistics', 'planning-actions']),
-      ]);
-      toast({ description: `O planejamento foi ${ToastTitle[data.status]}  `, status: 'success' });
+    onSuccess: ({ data }) => {
+      queryClient.invalidateQueries(['planning-actions-statistics']);
+      queryClient.invalidateQueries(['planning-actions']);
+
+      toast({
+        description: `O planejamento foi ${ToastTitle[data.status]}`,
+        status: 'success',
+      });
     },
   });
 };

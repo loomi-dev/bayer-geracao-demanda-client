@@ -13,5 +13,7 @@ export const useCreatePlanningAction = (options?: MutOpt<CreatePlanningActionRes
     mutationFn: createPlanningAction,
     onSuccess: () => {
       queryClient.invalidateQueries(['planning-actions']);
+      queryClient.invalidateQueries(['planning-actions-statistics']);
+      queryClient.invalidateQueries(['planning-status']);
     },
   });

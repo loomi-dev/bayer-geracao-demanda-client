@@ -1,6 +1,11 @@
 import axios from '@/lib/axios';
 
-import { CreatePlanningActionData, CreatePlanningActionResponse } from './types';
+import {
+  CreatePlanningActionData,
+  CreatePlanningActionResponse,
+  DeletePlanningActionParams,
+  DeletePlanningActionResponse,
+} from './types';
 
 export const createPlanningAction = async ({
   farmerId,
@@ -26,3 +31,8 @@ export const createPlanningAction = async ({
       ...planningActionData,
     },
   });
+
+export const deletePlanningAction = async ({
+  actionId,
+}: DeletePlanningActionParams): Promise<DeletePlanningActionResponse> =>
+  await axios.authorized().delete(`/actions/${actionId}`);

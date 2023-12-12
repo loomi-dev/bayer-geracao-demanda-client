@@ -15,15 +15,14 @@ export const useCreatePlanning = (options?: MutOpt<CreatePlanningResponse>) => {
     mutationKey: ['create-planning'],
     mutationFn: createPlanning,
     onSuccess: async (data) => {
-      await Promise.all([
-        queryClient.invalidateQueries(['farmer-plans']),
-        push({
-          pathname: '/planejamento/criar-novo-planejamento',
-          query: {
-            planning_id: data?.data?.id,
-          },
-        }),
-      ]);
+      queryClient.invalidateQueries(['farmer-plans']);
+
+      push({
+        pathname: '/planejamento/criar-novo-planejamento',
+        query: {
+          planning_id: data?.data?.id,
+        },
+      });
     },
   });
 };
