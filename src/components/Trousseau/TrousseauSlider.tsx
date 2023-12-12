@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Swiper, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
+import 'swiper/css';
 
 type TrousseauSliderProps = {
   children: (props: Pick<Trousseau, 'label' | 'image'>) => ReactNode;

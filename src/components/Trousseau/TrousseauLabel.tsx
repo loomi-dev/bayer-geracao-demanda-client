@@ -6,7 +6,7 @@ type TrousseauLabelProps = {
 } & TextProps;
 
 export const TrousseauLabel = ({ children, ...restProps }: TrousseauLabelProps) => (
-  <Text textStyle="caption3" {...restProps}>
+  <Text textStyle="caption3" lineHeight="2rem" {...restProps}>
     {children}
   </Text>
 );
