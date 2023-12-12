@@ -16,9 +16,9 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
   return (
     <>
       {lastHistoric.map(({ id, creation_date, status, description, related, actions }, index) => {
-        const relatedUserIdIsCurrentSessionUserId = related.id === userSessionId;
+        const relatedUserIdIsCurrentSessionUserId = related?.id === userSessionId;
         const isLastHistoricItem = lastHistoricIndex === index;
-        const previousHistoryUsername = lastHistoric?.at(index - 1)?.related.username ?? '';
+        const previousHistoryUsername = lastHistoric?.at(index - 1)?.related?.username ?? '';
 
         return (
           <HistoricDrawer.Step key={id}>
@@ -31,7 +31,7 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
                 previousHistoryAuthor={previousHistoryUsername}
               />
 
-              {related.role?.name === 'Farmer' ? (
+              {related?.role?.name === 'Farmer' ? (
                 <Historic.AccordionContainer>
                   <Historic.Accordion planningActions={actions} />
                   <Historic.Footer totalValue="0" />
@@ -45,7 +45,7 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
                   title={
                     relatedUserIdIsCurrentSessionUserId
                       ? `Sua mensagem`
-                      : `Mensagem de ${related.username}`
+                      : `Mensagem de ${related?.username}`
                   }
                   description={description}
                 />
