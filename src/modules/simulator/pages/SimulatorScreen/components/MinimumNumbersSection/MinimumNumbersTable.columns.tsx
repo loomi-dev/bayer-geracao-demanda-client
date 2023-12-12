@@ -1,13 +1,10 @@
 import { Text } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { formatPrice } from '@/utils';
 
 const columnHelper = createColumnHelper<any>();
 
-dayjs.extend(relativeTime);
 export const MinimumNumbersTableColumns = [
   columnHelper.accessor(() => null, {
     id: 'x12l',
