@@ -1,7 +1,7 @@
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { DowloadIcon } from '@/components';
+import { DownloadIcon } from '@/components';
 
 export const TrousseauDownloadOption = () => (
   <Flex
@@ -26,7 +26,7 @@ export const TrousseauDownloadOption = () => (
     </HStack>
     <HStack gap="1rem" _hover={{ opacity: '0.7', cursor: 'pointer' }} color="red.danger_50">
       <Text textStyle="footnote">Download</Text>
-      <DowloadIcon />
+      <DownloadIcon />
     </HStack>
   </Flex>
 );

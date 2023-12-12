@@ -112,6 +112,21 @@ export const Button = defineStyleConfig({
         },
       },
     },
+    seventh: {
+      bg: 'surface.secondary',
+      color: 'text.primary',
+      borderRadius: 'full',
+      borderColor: 'opacity.black.0.10',
+
+      fontSize: '1.4rem',
+      fontWeight: 'bold',
+
+      _hover: {
+        _disabled: {
+          bg: 'surface.disabled',
+        },
+      },
+    },
     white: {
       bg: 'surface.primary',
       color: 'text.footnote',

@@ -11,10 +11,10 @@ export const PastPlanningHistoricTitle = ({
   userRelated,
   previousHistoryAuthor,
 }: PastPlanningHistoricTitleProps) => {
-  const authorIsUserSession = userRelated.id === userSessionId;
-  const authorIsFarmer = userRelated.role?.name === 'Farmer';
+  const authorIsUserSession = userRelated?.id === userSessionId;
+  const authorIsFarmer = userRelated?.role?.name === 'Farmer';
 
-  const author = userRelated.username;
+  const author = userRelated?.username;
 
   if (authorIsFarmer)
     return <Historic.TitleFarmer author={author} authorIsUserSession={authorIsUserSession} />;
