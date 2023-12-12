@@ -207,6 +207,24 @@ export const Button = defineStyleConfig({
         },
       },
     },
+    action: {
+      py: '0',
+      px: '0',
+      h: '100%',
+      minW: 'initial',
+      minH: 'initial',
+
+      flex: '1',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+      _hover: {
+        _disabled: {
+          bg: 'transparent',
+        },
+      },
+    },
   },
   sizes: {
     '2xs': {

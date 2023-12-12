@@ -76,14 +76,14 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
         </>
       ) : (
         <Flex layerStyle="actions">
-          <Button variant="unstyled" isDisabled>
+          <Button variant="action" isDisabled>
             <EditIcon />
           </Button>
 
           <Divider orientation="vertical" h="1rem" w="1px" borderColor="greyscale.450" />
 
           <>
-            <Button variant="unstyled" onClick={handleOpenDeletePlanningActionModal}>
+            <Button variant="action" onClick={handleOpenDeletePlanningActionModal}>
               <TrashIcon />
             </Button>
 

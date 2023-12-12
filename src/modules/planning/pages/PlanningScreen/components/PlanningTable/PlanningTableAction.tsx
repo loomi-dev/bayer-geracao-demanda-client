@@ -1,5 +1,6 @@
 import { Button, Center, Divider, Flex, useDisclosure } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { MouseEvent } from 'react';
 
 import { useDeletePlanning } from '@/api';
 import { ConfirmationModal, EditIcon, EyeOpenIcon, TrashIcon } from '@/components';
@@ -23,7 +24,8 @@ export const PlanningTableAction = ({ planningId, historic }: PlanningTableActio
     onClose: onCloseDeletePlanningModal,
   } = useDisclosure();
 
-  const historicStatus = historic?.at(-1)?.status ?? 'default';
+  const planningStatus = historic?.at(-1)?.status ?? 'default';
+  const isPlanningAccepted = planningStatus === 'accepted';
 
   const handleNavigateToCreatePlanningScreen = () => {
     push({
@@ -48,22 +50,27 @@ export const PlanningTableAction = ({ planningId, historic }: PlanningTableActio
     );
   };
 
+  const handleOpenDeletePlanningDrawer = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    onOpenDeletePlanningModal();
+  };
+
   return (
     <Center>
-      {historicStatus === 'accepted' ? (
+      {isPlanningAccepted ? (
         <Button variant="fifth" h="3rem" w="7rem" onClick={handleNavigateToCreatePlanningScreen}>
           <EyeOpenIcon />
         </Button>
       ) : (
         <Flex layerStyle="actions">
-          <Button variant="unstyled" onClick={handleNavigateToCreatePlanningScreen}>
+          <Button variant="action" onClick={handleNavigateToCreatePlanningScreen}>
             <EditIcon />
           </Button>
 
           <Divider orientation="vertical" h="1rem" w="1px" borderColor="greyscale.450" />
 
           <>
-            <Button variant="unstyled" onClick={onOpenDeletePlanningModal}>
+            <Button variant="action" onClick={handleOpenDeletePlanningDrawer}>
               <TrashIcon />
             </Button>
 

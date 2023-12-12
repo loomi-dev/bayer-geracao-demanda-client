@@ -17,7 +17,6 @@ export const layerStyles: ChakraTheme['layerStyles'] = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '1rem',
-    p: '0.8rem',
+    overflow: 'hidden',
   },
 };
