@@ -45,7 +45,11 @@ type Harvest = {
 type Historic = {
   id: number;
   actions: PlanningAction[];
-  related: User;
+  related: {
+    role: {
+      name: Roles;
+    };
+  } & Omit<User, 'role'>;
   creation_date: string;
   description: string;
   status: HistoricStatus;

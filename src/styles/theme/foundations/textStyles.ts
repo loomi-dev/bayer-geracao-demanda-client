@@ -35,7 +35,7 @@ export const textStyles: ChakraTheme['textStyles'] = {
   },
   body4: {
     fontSize: '2rem',
-    fontWeight: '700',
+    fontWeight: 'bold',
     lineHeight: '24px',
   },
   action1: {

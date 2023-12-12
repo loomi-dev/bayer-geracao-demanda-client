@@ -68,10 +68,10 @@ export type UpdatePlanningHistoricParams = {
   planningId: number;
   payload: {
     historic: Historic[];
-    description: string;
-    status: string;
+    description?: string;
+    status: HistoricStatus;
     userId: number;
-    actions: PlanningAction[];
+    actions?: PlanningAction[];
   };
 };
 
