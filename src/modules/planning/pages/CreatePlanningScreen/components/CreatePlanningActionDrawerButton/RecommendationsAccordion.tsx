@@ -19,7 +19,7 @@ export const RecommendationsAccordion = () => (
       {({ isExpanded }) => (
         <>
           <h2>
-            <AccordionButton _hover={{}}>
+            <AccordionButton borderColor="opacity.black.0.20" _hover={{}}>
               <Text textStyle="caption1" color="red.danger_50">
                 Nossas recomendações
               </Text>
