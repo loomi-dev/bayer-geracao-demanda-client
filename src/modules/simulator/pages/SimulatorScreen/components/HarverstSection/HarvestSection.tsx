@@ -1,6 +1,7 @@
 import { Flex, HStack } from '@chakra-ui/react';
 
 import { HarverstInformationItem } from './HarvestInformationItem';
+import { HarverstSlider } from './HarvestSlider';
 import { HarvestSwitch } from './HarvestSwitch';
 import { Pipe } from './Pipe';
 
@@ -17,7 +18,7 @@ export const HarverstSection = () => (
     bgColor="surface.primary"
     align="flex-start"
   >
-    <HStack gap="3rem">
+    <HStack w="100%" gap="3rem">
       <HarverstInformationItem
         label="quantos sacos bayer terão na safra 2024/2025?"
         value={100000000}
@@ -27,6 +28,10 @@ export const HarverstSection = () => (
       <Pipe />
       <HarverstInformationItem label="Sacos I2x?" value={100000000} />
     </HStack>
-    <HarvestSwitch />
+    <HStack w="100%" gap="10rem">
+      <HarvestSwitch />
+      <Pipe />
+      <HarverstSlider />
+    </HStack>
   </Flex>
 );

@@ -4,8 +4,8 @@ import { useState } from 'react';
 export const HarvestSwitch = () => {
   const [switchOn, setSwitchOn] = useState(true);
   return (
-    <VStack align="flex-start" gap="0.8rem">
-      <Text textStyle="action3" textTransform="uppercase">
+    <VStack align="flex-start" gap="1rem">
+      <Text textStyle="action3" w="20rem" textTransform="uppercase">
         Irá vender apenas Bayer na safra 24/25?
       </Text>
       <Flex
@@ -19,11 +19,10 @@ export const HarvestSwitch = () => {
         bgColor="greyscale.275"
         position="relative"
       >
-        <Button variant="unystiled" onClick={() => setSwitchOn(true)}>
+        <Button zIndex={1} variant="unystiled" onClick={() => setSwitchOn(true)}>
           <Text
             transitionDuration="1s"
             textColor={switchOn ? 'surface.primary' : 'greyscale.650'}
-            zIndex={1}
             fontSize="2rem"
             fontWeight="normal"
           >
@@ -40,11 +39,10 @@ export const HarvestSwitch = () => {
           transform={switchOn ? '' : 'translateX(5em)'}
           transitionDuration="1s"
         />
-        <Button variant="unystiled" onClick={() => setSwitchOn(false)}>
+        <Button zIndex={1} variant="unystiled" onClick={() => setSwitchOn(false)}>
           <Text
             transitionDuration="1s"
             textColor={!switchOn ? 'surface.primary' : 'greyscale.650'}
-            zIndex={1}
             fontWeight="normal"
             fontSize="2rem"
           >
