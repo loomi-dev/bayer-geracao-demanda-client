@@ -5,7 +5,7 @@ import { centsToCompactValue, formatPrice } from '@/utils';
 
 const columnHelper = createColumnHelper<any>();
 
-export const FinancialOportunityTableColumns = [
+export const FinancialOpportunityTableColumns = [
   columnHelper.accessor(() => null, {
     id: 'faixa',
     header: () => (

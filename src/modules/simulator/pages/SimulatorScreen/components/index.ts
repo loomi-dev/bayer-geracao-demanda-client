@@ -1,4 +1,4 @@
 export * from './ResultsSection';
 export * from './MinimumNumbersSection';
-export * from './FinancialOportunitySection';
-export * from './HarverstSection';
+export * from './FinancialOpportunitySection';
+export * from './HarvestSection';

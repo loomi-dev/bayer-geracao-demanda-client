@@ -7,7 +7,7 @@ const Page: NextPageWithLayout = () => <SimulatorScreen />;
 
 Page.getLayout = function getLayout(page) {
   return (
-    <LayoutWithNotifications title="Simulador - Top Multiplicadores">
+    <LayoutWithNotifications title="Simulador - Top Multiplicadores" gap="1.2rem">
       {page}
     </LayoutWithNotifications>
   );

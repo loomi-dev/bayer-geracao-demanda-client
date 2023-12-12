@@ -9,14 +9,15 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-export const HarverstSlider = () => {
+export const HarvestSlider = () => {
   const [step, setStep] = useState(0);
   return (
-    <VStack w="33.6rem" align="flex-start" justify="space-between" h="9.8rem" gap="1rem">
-      <Text textStyle="action3" w="20rem" textTransform="uppercase">
+    <VStack align="flex-start" justify="space-between" spacing="3rem">
+      <Text textStyle="action3" lineHeight="1.8rem" textTransform="uppercase">
         plantabilidade esperada
       </Text>
-      <HStack w="100%" gap="2rem">
+
+      <HStack w="33.6rem" gap="2rem">
         <Slider value={step} onChange={setStep} min={0} max={1} step={0.1}>
           <SliderTrack h="0.9rem" borderRadius="2rem" bgColor="greyscale.450">
             <SliderFilledTrack bgColor="surface.brand" />

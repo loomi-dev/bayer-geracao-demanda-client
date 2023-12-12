@@ -1,15 +1,15 @@
 import {
-  FinancialOportunitySection,
-  HarverstSection,
+  FinancialOpportunitySection,
+  HarvestSection,
   MinimumNumbersSection,
   ResultsSection,
 } from './components';
 
 export const SimulatorScreen = () => (
   <>
-    <HarverstSection />
+    <HarvestSection />
     <ResultsSection />
     <MinimumNumbersSection />
-    <FinancialOportunitySection />
+    <FinancialOpportunitySection />
   </>
 );

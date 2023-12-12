@@ -4,10 +4,11 @@ import { useState } from 'react';
 export const HarvestSwitch = () => {
   const [switchOn, setSwitchOn] = useState(true);
   return (
-    <VStack align="flex-start" gap="1rem">
-      <Text textStyle="action3" w="20rem" textTransform="uppercase">
+    <VStack align="flex-start" spacing="0.8rem">
+      <Text textStyle="action3" maxW="21rem" lineHeight="1.8rem" textTransform="uppercase">
         Irá vender apenas Bayer na safra 24/25?
       </Text>
+
       <Flex
         align="center"
         justify="space-between"

@@ -5,22 +5,14 @@ import { centsToCompactValue, formatPrice } from '@/utils';
 import { ResultCard } from './ResultCard';
 
 export const ResultsSection = () => (
-  <Flex
-    layerStyle="card"
-    px="4.4rem"
-    py="2.4rem"
-    border="1px solid"
-    borderColor="surface.primary"
-    flexDir="column"
-    w="100%"
-    bgColor="surface.primary"
-  >
-    <Text textStyle="action2" color="surface.brand">
+  <Flex layerStyle="card" px="4.4rem" py="2.4rem" flexDir="column" w="100%">
+    <Text textStyle="action2" color="surface.brand" lineHeight="1.8rem">
       Resultado
     </Text>
-    <Text textStyle="action2">
+    <Text textStyle="action2" lineHeight="2.4rem" mt="0.8rem">
       Parabéns! Com esses números você estaria na faixa <strong>com 40%!</strong>
     </Text>
+
     <Grid
       as="section"
       mt="3.2rem"
