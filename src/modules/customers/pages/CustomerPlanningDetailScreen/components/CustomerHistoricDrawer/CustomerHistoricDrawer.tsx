@@ -87,7 +87,10 @@ export const CustomerHistoricDrawer = ({
                   totalValue={getPlanningTotalValue(item.actions)}
                 />
               </Box>
-              <Historic.Message author={item.related.username} description={item.description} />
+              <Historic.Message
+                title={`${item.related.username} enviou o planejamento para aprovação`}
+                description={item.description}
+              />
             </Historic.Container>
           </HistoricDrawer.Step>
         ))}

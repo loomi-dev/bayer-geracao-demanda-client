@@ -42,9 +42,24 @@ export const usePagination = (namePage = 'table') => {
     });
   };
 
+  const resetPage = () => {
+    const urlObject: Url = {
+      pathname,
+      query: {
+        ...query,
+        [fullNamePage]: initialPage,
+      },
+    };
+
+    replace(urlObject, urlObject, {
+      scroll: false,
+    });
+  };
+
   return {
     currentPage,
     handleNextPage,
     handlePreviousPage,
+    resetPage,
   };
 };

@@ -7,6 +7,7 @@ import { useGetPlanningStatus } from '@/api';
 import {
   CreatePlanningBalance,
   CreatePlanningStatusSection,
+  CreatePlanningStatusSectionSkeleton,
   PlanningActionsStatistics,
   PlanningActionsTable,
 } from './components';
@@ -20,7 +21,8 @@ const DynamicCreatePlanningActionSection = dynamic(async () => {
 export const CreatePlanningScreen = () => {
   const { query } = useRouter();
   const planningId = Number(query?.planning_id);
-  const { data: dataPlanningStatus } = useGetPlanningStatus(
+
+  const { data: dataPlanningStatus, isLoading: isLoadingGetPlanningStatus } = useGetPlanningStatus(
     { planningId },
     {
       enabled: Boolean(planningId),
@@ -31,7 +33,11 @@ export const CreatePlanningScreen = () => {
 
   return (
     <>
-      <CreatePlanningStatusSection planningStatus={planningStatus} />
+      {isLoadingGetPlanningStatus ? (
+        <CreatePlanningStatusSectionSkeleton />
+      ) : (
+        <CreatePlanningStatusSection planningStatus={planningStatus} />
+      )}
 
       <CreatePlanningBalance planningStatus={planningStatus} />
 
@@ -42,7 +48,9 @@ export const CreatePlanningScreen = () => {
         <PlanningActionsTable planningStatus={planningStatus} />
       </VStack>
 
-      {planningStatus !== 'default' && <DynamicCreatePlanningActionSection />}
+      {planningStatus !== 'default' && !isLoadingGetPlanningStatus && (
+        <DynamicCreatePlanningActionSection />
+      )}
     </>
   );
 };

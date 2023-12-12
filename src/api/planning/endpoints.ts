@@ -143,7 +143,11 @@ export const getPlanningHistoric = async ({
     populate: {
       historic: {
         populate: {
-          related: true,
+          related: {
+            populate: {
+              role: true,
+            },
+          },
           actions: true,
         },
       },
@@ -174,19 +178,18 @@ export const updatePlanningHistoric = async ({
   payload,
 }: UpdatePlanningHistoricParams): Promise<UpdatePlanningHistoricResponse> => {
   const data = {
-    data: {
-      historic: [
-        ...payload.historic,
-        {
-          description: payload.description,
-          status: payload.status,
-          related: {
-            connect: [{ id: payload.userId }],
-          },
-          ...(payload.actions.length ? { actions: payload.actions } : {}),
+    historic: [
+      ...payload.historic,
+      {
+        description: payload.description,
+        status: payload.status,
+        creation_date: dayjs().toISOString(),
+        related: {
+          connect: [{ id: payload.userId }],
         },
-      ],
-    },
+        ...(payload.actions?.length ? { actions: payload.actions } : {}),
+      },
+    ],
   };
   const { data: result } = await axios.authorized().put(`/plannings/${planningId}`, { data });
   return result;
