@@ -1,9 +1,9 @@
 import axiosInstance, { AxiosError, AxiosRequestConfig } from 'axios';
 import { GetServerSidePropsContext } from 'next/types';
 import { Session } from 'next-auth';
-import { getSession } from 'next-auth/react';
+import { getSession, signOut } from 'next-auth/react';
 
-import { API_URL } from '@/config';
+import { API_URL, IS_CLIENT } from '@/config';
 
 const defaultOptions: AxiosRequestConfig = {
   baseURL: API_URL,
@@ -46,7 +46,13 @@ const axiosObject = {
 
     authenticatedInstance.interceptors.response.use(
       async (response) => response,
-      async (error: AxiosError) => Promise.reject(error?.response),
+      async (error: AxiosError) => {
+        if (error.response?.status === 401 && IS_CLIENT) {
+          await signOut();
+        }
+
+        return Promise.reject(error);
+      },
     );
 
     return authenticatedInstance;
