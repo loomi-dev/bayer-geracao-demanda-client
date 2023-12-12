@@ -15,6 +15,8 @@ export type Customer = {
   farmer: Farmer;
   historic: Historic[];
   financial_summary: FinancialSummary;
+  actions: PlanningAction[];
+  provenResourceAmountInCents: number;
 };
 
 export type GetCustomersResponse = GenericListResponseType<Customer>;

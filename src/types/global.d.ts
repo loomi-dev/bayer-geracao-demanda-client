@@ -67,6 +67,7 @@ type Planning = {
 
 type Wallet = {
   balance: number;
+  initialBalance: number;
   id: number;
 };
 

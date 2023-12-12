@@ -5,7 +5,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { Customer } from '@/api/customer';
 import { ClockIcon } from '@/components';
-import { formatPrice } from '@/utils';
+import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
 import { CustomerTableStatusColumn } from './CustomerTableStatusColumn';
 
@@ -18,26 +18,34 @@ export const CustomerColumns = [
     header: () => <Text textStyle="action4">Razão Social</Text>,
     cell: (info) => <Text textStyle="body3">{info.getValue()}</Text>,
   }),
-  columnHelper.accessor((date) => date.financial_summary?.initial_resource_in_cents, {
+  columnHelper.accessor((data) => data.farmer.wallet.initialBalance, {
     id: 'recursoGdInicial',
     header: () => <Text textStyle="action4">Recurso GD Inicial</Text>,
     cell: (info) => <Text textStyle="caption3">{`R$ ${formatPrice(info.getValue())}`}</Text>,
   }),
-  columnHelper.accessor((data) => data.financial_summary?.final_resource_in_cents, {
+  columnHelper.accessor((data) => data.actions, {
     id: 'recursoGdFinal',
     header: () => <Text textStyle="action4">Recurso GD Final</Text>,
-    cell: (info) => <Text textStyle="caption3">{`R$ ${formatPrice(info.getValue())}`}</Text>,
+    cell: (info) => {
+      const planningValue = getTotalPlanningBudgetValue(info.getValue());
+      return <Text textStyle="caption3">{`R$ ${formatPrice(planningValue)}`}</Text>;
+    },
   }),
-  columnHelper.accessor((data) => data.financial_summary?.balance_in_cents, {
+  columnHelper.accessor(() => null, {
     id: 'saldo',
     header: () => <Text textStyle="action4">Saldo</Text>,
-    cell: (info) => (
-      <Text textStyle="caption3" color="red.danger_50">
-        {`R$ ${formatPrice(info.getValue())}`}
-      </Text>
-    ),
+    cell: (info) => {
+      const initialResource: number = info.row.getValue('recursoGdInicial');
+      const actions: PlanningAction[] = info.row.getValue('recursoGdFinal');
+      const finalResource = getTotalPlanningBudgetValue(actions);
+      return (
+        <Text textStyle="caption3" color="red.danger_50">
+          {`R$ ${formatPrice(initialResource - finalResource)}`}
+        </Text>
+      );
+    },
   }),
-  columnHelper.accessor((data) => data.financial_summary?.utilized_in_cents, {
+  columnHelper.accessor((data) => data.provenResourceAmountInCents, {
     id: 'utilizado',
     header: () => <Text textStyle="action4">Utilizado</Text>,
     cell: (info) => (
