@@ -9,7 +9,7 @@ const DynamicPlanningHistoricDrawer = dynamic(async () => {
 });
 
 export const CreatePlanningActionSection = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const planningId = Number(query?.planning_id);
 
   const {
@@ -18,9 +18,19 @@ export const CreatePlanningActionSection = () => {
     onClose: onCloseSendPlanningDrawer,
   } = useDisclosure();
 
+  const handleNavigateToPlanningScreen = () => {
+    push('/planejamento');
+  };
+
   return (
     <HStack w="full" justify="center" spacing="1rem">
-      <Button variant="fifth" w="7.6rem" size="sm" fontSize="1rem">
+      <Button
+        variant="fifth"
+        w="7.6rem"
+        size="sm"
+        fontSize="1rem"
+        onClick={handleNavigateToPlanningScreen}
+      >
         Cancelar
       </Button>
 

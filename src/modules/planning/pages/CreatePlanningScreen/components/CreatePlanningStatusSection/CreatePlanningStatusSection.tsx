@@ -1,7 +1,8 @@
-import { Badge, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+import { Badge, Button, Center, HStack, Text, useDisclosure } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import { useGetPlanningHistoric } from '@/api';
 import { ArrowRightIcon } from '@/components';
 import { PlanningStatus, PlanningValue } from '@/types';
 
@@ -28,6 +29,19 @@ export const CreatePlanningStatusSection = ({
   } = useDisclosure();
 
   const isNewPlanning = planningStatus === 'default';
+  const isPlanningRejected = planningStatus === 'rejected';
+
+  const { data: dataGetPlanningHistoric } = useGetPlanningHistoric(
+    {
+      planningId,
+    },
+    {
+      enabled: Boolean(planningId) && isPlanningRejected,
+    },
+  );
+
+  const countActionsReadjustment =
+    dataGetPlanningHistoric?.data.historic?.at(-1)?.actions.length ?? 0;
 
   return (
     <HStack
@@ -49,9 +63,17 @@ export const CreatePlanningStatusSection = ({
       </Text>
 
       <HStack spacing="1.6rem">
-        <Badge variant={PlanningStatus['default']} w="15rem">
-          {PlanningValue[planningStatus]}
-        </Badge>
+        <HStack spacing="1.6rem">
+          {countActionsReadjustment && isPlanningRejected && (
+            <Center boxSize="2.8rem" borderRadius="full" bg="red.danger_40" color="greyscale.0">
+              {countActionsReadjustment}
+            </Center>
+          )}
+
+          <Badge variant={PlanningStatus[planningStatus]} w="15rem">
+            {PlanningValue[planningStatus]}
+          </Badge>
+        </HStack>
 
         <>
           {isNewPlanning ? (

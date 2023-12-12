@@ -45,6 +45,7 @@ export const PlanningHistoricDrawer = ({
   const lastHistoric = dataGetPlanningHistoric?.data.historic ?? [];
   const lastHistoricIndex = lastHistoric.length - 1;
   const hasLastHistoric = lastHistoric.length > 0;
+  const planningStatus = lastHistoric?.at(-1)?.status;
 
   const handleCloseSendPlanningDrawer = (callback?: () => void) => {
     reset();
@@ -54,7 +55,7 @@ export const PlanningHistoricDrawer = ({
 
   return (
     <HistoricDrawer.Container isOpen={isOpen} onClose={handleCloseSendPlanningDrawer}>
-      <HistoricDrawer.Header />
+      <HistoricDrawer.Header status={planningStatus} />
 
       <HistoricDrawer.Body index={lastHistoricIndex}>
         {hasLastHistoric && <DynamicPastPlanningHistoricSteps lastHistoric={lastHistoric} />}
