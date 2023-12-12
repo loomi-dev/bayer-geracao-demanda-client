@@ -1,7 +1,8 @@
-import { SuppliersSection } from './components';
+import { SuppliersSection, TrousseauOptionsSection } from './components';
 
 export const TrousseauScreen = () => (
   <>
+    <TrousseauOptionsSection />
     <SuppliersSection />
   </>
 );
