@@ -19,7 +19,7 @@ export const HarvestSwitch = () => {
         bgColor="greyscale.275"
         position="relative"
       >
-        <Button zIndex={1} variant="unystiled" onClick={() => setSwitchOn(true)}>
+        <Button zIndex={1} variant="unstyled" onClick={() => setSwitchOn(true)}>
           <Text
             transitionDuration="1s"
             textColor={switchOn ? 'surface.primary' : 'greyscale.650'}
@@ -39,7 +39,7 @@ export const HarvestSwitch = () => {
           transform={switchOn ? '' : 'translateX(5em)'}
           transitionDuration="1s"
         />
-        <Button zIndex={1} variant="unystiled" onClick={() => setSwitchOn(false)}>
+        <Button zIndex={1} variant="unstyled" onClick={() => setSwitchOn(false)}>
           <Text
             transitionDuration="1s"
             textColor={!switchOn ? 'surface.primary' : 'greyscale.650'}
