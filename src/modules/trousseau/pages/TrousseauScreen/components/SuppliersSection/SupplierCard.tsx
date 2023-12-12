@@ -4,7 +4,7 @@ import { EmailIcon, PhoneIcon } from '@/components';
 
 export const SupplierCard = () => (
   <Flex
-    bgColor="#F5F5F5"
+    bgColor="surface.secondary"
     borderRadius="1.6rem"
     gap="1.2rem"
     py="1.6rem"
