@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
-import { useGetPlanningHistoric, useUpdatePlanningHistoric } from '@/api';
+import { useGetPlanningActions, useGetPlanningHistoric, useUpdatePlanningHistoric } from '@/api';
 import { Historic, HistoricDrawer } from '@/components';
 
 import { CustomerHistoricTitle } from './CustomerHistoricTitle';
@@ -11,7 +11,6 @@ import { CustomerHistoricResponse } from './CustumerHistoricResponse';
 type CustomerHistoricDrawerProps = {
   planningId: number;
   isOpen: boolean;
-  totalValue: number | string;
   selectedActions: PlanningAction[];
   isApproving: boolean;
   onClose: () => void;
@@ -20,7 +19,6 @@ type CustomerHistoricDrawerProps = {
 export const CustomerHistoricDrawer = ({
   planningId,
   selectedActions,
-  totalValue,
   isOpen,
   isApproving,
   onClose,
@@ -34,8 +32,13 @@ export const CustomerHistoricDrawer = ({
     { enabled: Boolean(planningId) && isOpen },
   );
   const { mutate: mutateUpdatePlanningHistoric, isLoading } = useUpdatePlanningHistoric();
-
+  const { data: getPlanningActions } = useGetPlanningActions(
+    { planningId },
+    { enabled: Boolean(planningId) && selectedActions.length > 0 },
+  );
   const historic = getPlanningHistoric?.data.historic ?? [];
+  const planningActions = getPlanningActions?.data ?? [];
+  const actions = selectedActions.length ? selectedActions : planningActions;
 
   const getPlanningTotalValue = (actions: PlanningAction[]) =>
     actions.reduce((acc, item) => {
@@ -92,9 +95,9 @@ export const CustomerHistoricDrawer = ({
           </HistoricDrawer.Step>
         ))}
         <CustomerHistoricResponse
-          totalValue={totalValue}
+          totalValue={getPlanningTotalValue(actions)}
           isApproving={isApproving}
-          selectedActions={selectedActions}
+          selectedActions={actions}
           isLoading={isLoading}
           onChange={(e) => setDescription(e.target.value)}
           onClose={onClose}
