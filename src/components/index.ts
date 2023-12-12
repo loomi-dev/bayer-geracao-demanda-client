@@ -21,3 +21,4 @@ export * from './CustomAcordion';
 export * from './DatePicker';
 export * from './PlatformLogo';
 export * from './Historic';
+export * from './ModalDispatch';
