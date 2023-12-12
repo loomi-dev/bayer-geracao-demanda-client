@@ -54,6 +54,7 @@ export const getCustomers = async ({
       },
       financial_summary: true,
       historic: true,
+      actions: true,
     },
   });
 
