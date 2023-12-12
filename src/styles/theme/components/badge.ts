@@ -34,8 +34,8 @@ export const Badge = defineStyleConfig({
       color: 'yellow.warning_60',
     },
     filled_primary: {
-      color: 'surface.primary',
-      bgColor: 'text.footnote',
+      color: 'text.invert',
+      bgColor: 'red.danger_90',
     },
     filled_success: {
       color: 'surface.primary',
