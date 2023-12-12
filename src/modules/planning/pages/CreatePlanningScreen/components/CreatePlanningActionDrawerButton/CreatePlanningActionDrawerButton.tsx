@@ -143,6 +143,7 @@ export const CreatePlanningActionDrawerButton = () => {
                 <>
                   <RecommendationsAccordion />
                   <PlanningActionFormAccordion />
+                  {planningActionTypeValue === 'farm_kit' && <TrousseauSelectAccordion />}
                 </>
               )}
 
@@ -154,8 +155,6 @@ export const CreatePlanningActionDrawerButton = () => {
                   description={planningActionDescription}
                 />
               )}
-
-              {planningActionTypeValue === 'farm_kit' && <TrousseauSelectAccordion />}
 
               <HStack mt="1rem" justify="flex-end">
                 <Text
