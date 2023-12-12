@@ -15,7 +15,7 @@ import {
 
 import { WarningIcon } from '../icons';
 
-type ModalDispatchProps = {
+type ConfirmationModalProps = {
   title: string;
   description: string;
   onConfirm: () => void;
@@ -26,18 +26,18 @@ type ModalDispatchProps = {
   cancelButtonProps?: ButtonProps;
 } & Omit<ModalProps, 'children'>;
 
-export const ModalDispatch = ({
+export const ConfirmationModal = ({
   title,
   description,
   onConfirm,
-  confirmText = 'Excluir',
+  confirmText = 'Confirmar',
   confirmButtonProps,
   onCancel,
   cancelText = 'Cancelar',
   cancelButtonProps,
   onClose,
   ...restProps
-}: ModalDispatchProps) => (
+}: ConfirmationModalProps) => (
   <Modal isCentered onClose={onClose} {...restProps}>
     <ModalOverlay />
 

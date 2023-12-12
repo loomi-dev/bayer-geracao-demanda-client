@@ -1,7 +1,7 @@
 import { Button, Center, Divider, Flex, useDisclosure } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-import { EditIcon, EyeOpenIcon, ModalDispatch, TrashIcon } from '@/components';
+import { ConfirmationModal, EditIcon, EyeOpenIcon, TrashIcon } from '@/components';
 
 type PlanningTableActionProps = {
   planningId: number;
@@ -46,12 +46,13 @@ export const PlanningTableAction = ({ planningId, historic }: PlanningTableActio
               <TrashIcon />
             </Button>
 
-            <ModalDispatch
+            <ConfirmationModal
               isOpen={isOpenDeletePlanningModal}
               onClose={onCloseDeletePlanningModal}
               title="Deseja excluir este planejamento?"
               description="Ao excluir o planejamento ele será perdido totalmente sem chance de recuperação, deseja continuar com esta ação?"
               onConfirm={() => console.log('achou')}
+              confirmText="Excluir"
             />
           </>
         </Flex>
