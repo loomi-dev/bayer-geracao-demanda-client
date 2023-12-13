@@ -45,7 +45,11 @@ type Harvest = {
 type Historic = {
   id: number;
   actions: PlanningAction[];
-  related: User;
+  related: {
+    role: {
+      name: Roles;
+    };
+  } & Omit<User, 'role'>;
   creation_date: string;
   description: string;
   status: HistoricStatus;
@@ -63,6 +67,7 @@ type Planning = {
 
 type Wallet = {
   balance: number;
+  initialBalance: number;
   id: number;
 };
 
@@ -88,4 +93,11 @@ type FinancialSummary = {
   id: number;
   initial_resource_in_cents: number;
   utilized_in_cents: number;
+};
+
+type Trousseau = {
+  id: number;
+  label: string;
+  image: string;
+  isSelected?: boolean;
 };

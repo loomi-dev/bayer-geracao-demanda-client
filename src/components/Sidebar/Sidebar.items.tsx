@@ -1,7 +1,20 @@
-import { CalendarIcon, CardIcon, ComputerIcon, ImageIcon, UserGroupIcon } from '../icons';
+import {
+  CalendarIcon,
+  CardIcon,
+  ChartIcon,
+  ComputerIcon,
+  ImageIcon,
+  PackageSmallIcon,
+  UserGroupIcon,
+} from '../icons';
 
 export const managerMenuItens = [
   { label: 'Clientes', src: '/clientes', leftIcon: <UserGroupIcon /> },
+  {
+    label: 'Planejamento',
+    src: '/planejamento',
+    leftIcon: <CalendarIcon />,
+  },
   {
     label: 'Comprovantes',
     src: '/comprovantes',
@@ -12,7 +25,13 @@ export const managerMenuItens = [
     src: '/simulador',
     leftIcon: <ComputerIcon />,
   },
+  {
+    label: 'Dashboard',
+    src: '/dashboard',
+    leftIcon: <ChartIcon />,
+  },
 ];
+
 export const farmerMenuItens = [
   { label: 'Carteira', src: '/carteira', leftIcon: <CardIcon /> },
   {
@@ -30,4 +49,5 @@ export const farmerMenuItens = [
     src: '/simulador',
     leftIcon: <ComputerIcon />,
   },
+  { label: 'Enxoval', src: '/enxoval', leftIcon: <PackageSmallIcon /> },
 ];

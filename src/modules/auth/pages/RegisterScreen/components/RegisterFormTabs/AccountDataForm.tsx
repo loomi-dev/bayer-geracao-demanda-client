@@ -1,5 +1,4 @@
 import { Button, Text, VStack, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import {

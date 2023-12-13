@@ -6,7 +6,43 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers(modalAnatomy.ke
 export const Modal = defineMultiStyleConfig({
   baseStyle: {},
   variants: {
-    primary: {},
+    primary: {
+      dialog: {
+        maxW: '48.3rem',
+        w: '100%',
+        p: '3.2rem',
+        borderRadius: '1.6rem',
+        bg: 'surface.primary',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.6rem',
+      },
+      closeButton: {
+        position: 'relative',
+        right: 'initial',
+        top: 'initial',
+        fontSize: '1.4rem',
+      },
+      header: {
+        py: '0',
+        px: '0',
+      },
+      body: {
+        py: '0',
+        px: '0',
+      },
+      footer: {
+        py: '0',
+        pt: '1.6rem',
+        px: '0',
+        borderTop: '1px solid',
+        borderColor: 'greyscale.200',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '1.6rem',
+      },
+    },
     secondary: {
       dialog: {
         borderRadius: '3rem',

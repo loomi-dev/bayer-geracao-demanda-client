@@ -1,21 +1,48 @@
-import { HStack, Text, Skeleton } from '@chakra-ui/react';
+import { HStack, Text, Skeleton, useDisclosure } from '@chakra-ui/react';
+import { Row } from '@tanstack/react-table';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { useGetPlanningActions } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 import { formatPrice } from '@/utils';
 
-import { CreatePlanningActionDrawerButton } from '../CreatePlanningActionDrawerButton';
-
 import { planningActionsColumns } from './PlanningActionsTable.columns';
 
-export const PlanningActionsTable = () => {
+type PlanningActionsTableProps = {
+  planningStatus: HistoricStatus | 'default';
+};
+
+const DynamicCreatePlanningActionDrawerButton = dynamic(async () => {
+  const { CreatePlanningActionDrawerButton } = await import('../CreatePlanningActionDrawerButton');
+
+  return CreatePlanningActionDrawerButton;
+});
+
+const DynamicViewActionDetailsDrawer = dynamic(async () => {
+  const { ViewActionDetailsDrawer } = await import('../ViewActionDetailsDrawer');
+
+  return ViewActionDetailsDrawer;
+});
+
+export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTableProps) => {
+  const [planningActionSelected, setPlanningActionSelected] = useState<PlanningAction>(
+    {} as PlanningAction,
+  );
+
   const { query } = useRouter();
   const planningId = Number(query?.planning_id);
+  const isPlanningAccepted = planningStatus === 'accepted';
 
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('planning_actions');
+
+  const {
+    isOpen: isOpenViewActionDetailsDrawer,
+    onOpen: onOpenViewActionDetailsDrawer,
+    onClose: onCloseViewActionDetailsDrawer,
+  } = useDisclosure();
 
   const {
     data: dataPlanningActions,
@@ -49,6 +76,11 @@ export const PlanningActionsTable = () => {
     [planningActionsList],
   );
 
+  const handleSelectPlanningActionAndOpenViewerDrawer = (row: Row<PlanningAction>) => {
+    setPlanningActionSelected(row.original);
+    onOpenViewActionDetailsDrawer();
+  };
+
   return (
     <>
       <DynamicTable<PlanningAction>
@@ -56,6 +88,11 @@ export const PlanningActionsTable = () => {
         data={planningActionsList}
         isLoading={isLoadingPlanningActionsList}
         fallbackMessage="Ainda não possui ações criadas, crie sua primeira ação."
+        hoverProps={{
+          bg: 'greyscale.500',
+          cursor: 'pointer',
+        }}
+        onRowClick={handleSelectPlanningActionAndOpenViewerDrawer}
       >
         <HStack
           justify="space-between"
@@ -76,9 +113,17 @@ export const PlanningActionsTable = () => {
             </Text>
           )}
 
-          <CreatePlanningActionDrawerButton />
+          {!isPlanningAccepted && <DynamicCreatePlanningActionDrawerButton />}
         </HStack>
       </DynamicTable>
+
+      {isOpenViewActionDetailsDrawer && (
+        <DynamicViewActionDetailsDrawer
+          planningActionDetails={planningActionSelected}
+          isOpen={isOpenViewActionDetailsDrawer}
+          onClose={onCloseViewActionDetailsDrawer}
+        />
+      )}
 
       <Pagination
         page={currentPage}

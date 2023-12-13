@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 
@@ -8,10 +8,12 @@ import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 type LayoutWithoutNotificationsProps = {
   title?: string;
   children: ReactNode;
-};
+} & FlexProps;
+
 export const LayoutWithoutNotifications = ({
   title = 'Bayer - Top Multiplicadores',
   children,
+  ...restProps
 }: LayoutWithoutNotificationsProps) => (
   <>
     <Head>
@@ -36,6 +38,7 @@ export const LayoutWithoutNotifications = ({
         align="flex-start"
         flexDir="column"
         background="linear-gradient(110deg, #D9D9D9 11.1%, rgba(217, 217, 217, 0.00) 46.44%)"
+        {...restProps}
       >
         {children}
       </Flex>

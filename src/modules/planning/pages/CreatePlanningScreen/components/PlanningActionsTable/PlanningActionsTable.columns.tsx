@@ -23,9 +23,10 @@ export const planningActionsColumns = [
     id: 'execucao',
     header: () => <Text>Execução</Text>,
     cell: (info) => (
-      <Text textStyle="action3">{`${formatMonth(info.getValue().startDate)} - ${formatMonth(
-        info.getValue().endDate,
-      )}`}</Text>
+      <Text textStyle="action3">
+        {info.getValue().startDate && `${formatMonth(info.getValue().startDate)}`}
+        {info.getValue().endDate && ` - ${formatMonth(info.getValue().endDate)}`}
+      </Text>
     ),
   }),
   columnHelper.accessor((data) => data?.amountInCents, {

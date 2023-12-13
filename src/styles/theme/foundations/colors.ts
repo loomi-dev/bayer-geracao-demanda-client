@@ -4,7 +4,7 @@ import { semanticTokens } from './semanticTokens';
 
 const green = {
   50: '#EBF9EC',
-  100: '#D7F4DA',
+  100: '#00793A',
   150: '#2C9F36',
   200: '#AFE9B5',
   300: '#87DD8F',
@@ -24,9 +24,11 @@ const greyscale = {
   200: '#F1F1F1',
   225: '#F0F0F0',
   250: '#EFEFEF',
+  275: '#E0E0E0',
   300: '#F7F7F7',
   330: '#ECECEC',
   350: '#DBDBDB80',
+  375: '#DCDCDC',
   400: '#CCCCCC',
   425: '#D4D4D4',
   450: '#D9D9D9',
@@ -34,14 +36,14 @@ const greyscale = {
   600: '#AEAEAE',
   650: '#666666',
   700: '#7C7C7C',
+  750: '#E5E7EA',
   800: '#555555',
   900: '#333333',
+  950: '#626770',
   1000: '#212121',
 };
 
-const black = {
-  50: 'rgba(0, 0, 0, 0.08)',
-};
+const black = '#000000';
 
 const yellow = {
   warning_10: '#FBF5D6',
@@ -59,6 +61,7 @@ const red = {
   danger_50: '#A10B30',
   danger_60: '#B22F2F',
   danger_80: '#852323',
+  danger_90: '#810926',
   danger_100: '#C50022',
 };
 export const colors: ChakraTheme['colors'] = {

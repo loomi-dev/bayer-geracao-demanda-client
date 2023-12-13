@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 
@@ -8,11 +8,12 @@ import { LAYOUT_NOTIFICATION_BAR_WIDTH, LAYOUT_SIDEBAR_WIDTH } from '@/config';
 type LayoutWithNotificationsProps = {
   title?: string;
   children: ReactNode;
-};
+} & FlexProps;
 
 export const LayoutWithNotifications = ({
   title = 'Bayer - Top Multiplicadores',
   children,
+  ...restProps
 }: LayoutWithNotificationsProps) => (
   <>
     <Head>
@@ -37,6 +38,7 @@ export const LayoutWithNotifications = ({
         gap="5rem"
         align="flex-start"
         flexDir="column"
+        {...restProps}
       >
         {children}
       </Flex>

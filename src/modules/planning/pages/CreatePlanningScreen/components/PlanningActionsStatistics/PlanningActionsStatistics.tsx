@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import { useGetPlanningActionsStatistics } from '@/api';
 import { StatCard } from '@/components';
@@ -24,13 +23,13 @@ export const PlanningActionsStatistics = () => {
   );
 
   return (
-    <Flex w="full" gap="1.6rem">
+    <Flex w="full" flexWrap="wrap" gap="1.6rem">
       <StatCard
         value={`R$ ${actionsKit}`}
         label="Ações de enxoval"
         flex="1"
         justify="space-between"
-        labelStyles={{ maxW: '12rem' }}
+        labelStyles={{ maxW: '12rem', minW: '5.3rem' }}
         isLoading={isLoadingDataPlanningActionsStatistics}
       />
       <StatCard
@@ -46,7 +45,7 @@ export const PlanningActionsStatistics = () => {
         label="Ações de campo"
         flex="1"
         justify="space-between"
-        labelStyles={{ maxW: '12rem' }}
+        labelStyles={{ maxW: '12rem', minW: '5.3rem' }}
         isLoading={isLoadingDataPlanningActionsStatistics}
       />
     </Flex>

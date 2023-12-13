@@ -12,26 +12,52 @@ export const config = {
     '/',
     '/bem-vindo/:path*',
     '/carteira',
-    '/clientes',
-    '/comprovantes',
+    '/clientes/:path*',
+    '/comprovantes/:path*',
     '/planejamento/:path*',
+    '/simulador',
+    '/dashboard',
+    '/enxoval',
     '/simulador',
   ],
 };
 
+const ROLE_PAGES = {
+  Farmer: [
+    '/planejamento',
+    '/planejamento/criar-novo-planejamento',
+    '/comprovantes',
+    '/simulador',
+    '/enxoval',
+    '/carteira',
+    '/bem-vindo/:path*',
+  ],
+  Manager: ['/planejamento', '/comprovantes', '/simulador', '/dashboard', '/clientes/:path*'],
+};
+
 export default withAuth(
   function middleware({ url, nextUrl: { pathname }, nextauth: { token } }) {
-    const isNewUser = token?.user.confirmed === false;
-    const privatePage =
+    const userRole = token?.user.role as Roles;
+    const isNewUser = token?.user.confirmed === false && userRole !== 'Manager';
+    const defaultPrivatePageByRole =
       token?.user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+
+    const pathnameIsNotFromUserRole = !ROLE_PAGES[userRole].some((rolePage) => {
+      if (rolePage.includes(':path*')) {
+        const rolePageSplitted = rolePage.split('/:path*')[0];
+
+        return pathname.includes(rolePageSplitted);
+      }
+
+      return rolePage === pathname;
+    });
 
     const isOnboardingPage =
       pathname === '/bem-vindo' || pathname === '/bem-vindo/completar-cadastro';
+    const isRootPage = pathname === '/';
 
-    const isRoutePage = pathname === '/';
-
-    if (isRoutePage) {
-      return NextResponse.redirect(new URL(privatePage, url));
+    if (isRootPage) {
+      return NextResponse.redirect(new URL(defaultPrivatePageByRole, url));
     }
 
     if (isNewUser && !isOnboardingPage) {
@@ -39,7 +65,11 @@ export default withAuth(
     }
 
     if (!isNewUser && isOnboardingPage) {
-      return NextResponse.redirect(new URL(privatePage, url));
+      return NextResponse.redirect(new URL(defaultPrivatePageByRole, url));
+    }
+
+    if (pathnameIsNotFromUserRole) {
+      return NextResponse.redirect(new URL(defaultPrivatePageByRole, url));
     }
   },
   {

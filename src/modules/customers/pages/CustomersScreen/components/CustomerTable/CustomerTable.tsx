@@ -7,7 +7,6 @@ import { ChangeEvent, useState } from 'react';
 
 import { Customer, useGetCustomers } from '@/api/customer';
 import { DynamicTable, Pagination, SearchIcon, TextInput } from '@/components';
-import { PAGINATION_PAGE_SIZE } from '@/config';
 import { usePagination } from '@/hooks';
 
 import { CustomerColumns } from './CustomerTable.columns';
@@ -22,14 +21,16 @@ export const CustomerTable = () => {
     {
       id: userId,
       filter: { search },
-      pagination: { page: currentPage, pageSize: PAGINATION_PAGE_SIZE },
+      pagination: { page: currentPage, pageSize: 5 },
     },
     { enabled: Boolean(userId) },
   );
   const customers = data?.data ?? [];
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
-    debounce(() => setSearch(e.target.value), 250);
+  const handleSearch = debounce(
+    (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
+    250,
+  );
   const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);
 
   return (

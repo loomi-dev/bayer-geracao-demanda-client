@@ -6,6 +6,8 @@ import axios from '@/lib/axios';
 import {
   CreatePlanningData,
   CreatePlanningResponse,
+  DeletePlanningParams,
+  DeletePlanningResponse,
   GetFarmerPlansParams,
   GetFarmerPlansResponse,
   GetPlanningActionsParams,
@@ -16,6 +18,10 @@ import {
   GetPlanningHistoricResponse,
   GetPlanningStatisticsParams,
   GetPlanningStatisticsResponse,
+  GetPlanningStatusParams,
+  GetPlanningStatusResponse,
+  UpdatePlanningHistoricParams,
+  UpdatePlanningHistoricResponse,
 } from './types';
 
 export const getPlanningStatistics = async ({
@@ -139,7 +145,11 @@ export const getPlanningHistoric = async ({
     populate: {
       historic: {
         populate: {
-          related: true,
+          related: {
+            populate: {
+              role: true,
+            },
+          },
           actions: true,
         },
       },
@@ -150,3 +160,44 @@ export const getPlanningHistoric = async ({
 
   return data;
 };
+
+export const getPlanningStatus = async ({
+  planningId,
+}: GetPlanningStatusParams): Promise<GetPlanningStatusResponse> => {
+  const query = qs.stringify({
+    populate: {
+      historic: true,
+    },
+  });
+
+  const { data } = await axios.authorized().get(`/plannings/${planningId}?${query}`);
+
+  return data;
+};
+
+export const updatePlanningHistoric = async ({
+  planningId,
+  payload,
+}: UpdatePlanningHistoricParams): Promise<UpdatePlanningHistoricResponse> => {
+  const data = {
+    historic: [
+      ...payload.historic,
+      {
+        description: payload.description,
+        status: payload.status,
+        creation_date: dayjs().toISOString(),
+        related: {
+          connect: [{ id: payload.userId }],
+        },
+        ...(payload.actions?.length ? { actions: payload.actions } : {}),
+      },
+    ],
+  };
+  const { data: result } = await axios.authorized().put(`/plannings/${planningId}`, { data });
+  return result;
+};
+
+export const deletePlanning = async ({
+  planningId,
+}: DeletePlanningParams): Promise<DeletePlanningResponse> =>
+  await axios.authorized().delete(`/plannings/${planningId}`);

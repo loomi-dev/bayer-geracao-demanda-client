@@ -33,8 +33,10 @@ export const PlanningActionDetail = ({
       <DetailItem title="Investimento da ação" description={investment} />
     </GridItem>
 
-    <GridItem colSpan={2} borderTop="1px solid" borderColor="opacity.black.0.08">
-      <DetailItem title="Descrição" description={description} />
-    </GridItem>
+    {description && (
+      <GridItem colSpan={2} borderTop="1px solid" borderColor="opacity.black.0.08">
+        <DetailItem title="Descrição" description={description} />
+      </GridItem>
+    )}
   </Grid>
 );

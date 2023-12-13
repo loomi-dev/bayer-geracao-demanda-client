@@ -7,6 +7,7 @@ export const Badge = defineStyleConfig({
     fontSize: '1.2rem',
     fontWeight: 'normal',
     border: '1px solid',
+    textAlign: 'center',
   },
   variants: {
     table_primary: {
@@ -33,8 +34,12 @@ export const Badge = defineStyleConfig({
       color: 'yellow.warning_60',
     },
     filled_primary: {
-      color: 'surface.primary',
-      bgColor: 'text.footnote',
+      color: 'text.invert',
+      bgColor: 'red.danger_90',
+    },
+    filled_secundary: {
+      bgColor: 'opacity.gray.1.20',
+      borderColor: 'greyscale.450',
     },
     filled_success: {
       color: 'surface.primary',

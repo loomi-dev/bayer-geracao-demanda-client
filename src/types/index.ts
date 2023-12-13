@@ -23,3 +23,25 @@ export enum PlanningValue {
   'ready_for_evaluation' = 'Aguardando aprovação',
   'default' = 'Em construção',
 }
+
+export enum PlanningActionStatusVariant {
+  'accepted' = 'table_success',
+  'rejected' = 'table_error',
+  'not_evaluated' = 'table_primary',
+}
+export enum PlanningActionStatusValue {
+  'accepted' = 'Aprovado',
+  'rejected' = 'Recusado',
+  'not_evaluated' = 'Em avaliação',
+}
+
+export enum HistoricValue {
+  'ready_for_evaluation' = 'Aguardando aprovação',
+  'accepted' = 'Aprovado',
+  'rejected' = 'Recusado',
+}
+export enum HistoricStatusValue {
+  'ready_for_evaluation' = 'table_primary',
+  'accepted' = 'table_success',
+  'rejected' = 'table_error',
+}

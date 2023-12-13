@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { OnboardingScreen } from '@/modules/auth';
+import { OnboardingScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 

@@ -112,6 +112,21 @@ export const Button = defineStyleConfig({
         },
       },
     },
+    seventh: {
+      bg: 'surface.secondary',
+      color: 'text.primary',
+      borderRadius: 'full',
+      borderColor: 'opacity.black.0.10',
+
+      fontSize: '1.4rem',
+      fontWeight: 'bold',
+
+      _hover: {
+        _disabled: {
+          bg: 'surface.disabled',
+        },
+      },
+    },
     white: {
       bg: 'surface.primary',
       color: 'text.footnote',
@@ -192,8 +207,29 @@ export const Button = defineStyleConfig({
         },
       },
     },
+    action: {
+      py: '0',
+      px: '0',
+      h: '100%',
+      minW: 'initial',
+      minH: 'initial',
+
+      flex: '1',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+      _hover: {
+        _disabled: {
+          bg: 'transparent',
+        },
+      },
+    },
   },
   sizes: {
+    '2xs': {
+      h: '2.8rem',
+    },
     xs: {
       h: '3.4rem',
     },

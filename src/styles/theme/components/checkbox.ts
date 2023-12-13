@@ -20,10 +20,10 @@ export const Checkbox = defineMultiStyleConfig({
         borderRadius: '0.8rem',
         _checked: {
           color: 'surface.primary',
-          bg: 'green.300',
+          bg: 'red.danger_50',
           borderColor: 'surface.disabled',
           _hover: {
-            bg: 'green.400',
+            bg: 'red.danger_60',
             borderColor: 'surface.disabled',
           },
         },
@@ -44,10 +44,10 @@ export const Checkbox = defineMultiStyleConfig({
         borderColor: 'surface.disabled',
         _checked: {
           color: 'surface.primary',
-          bg: 'green.300',
+          bg: 'red.danger_50',
           borderColor: 'surface.disabled',
           _hover: {
-            bg: 'green.400',
+            bg: 'red.danger_60',
             borderColor: 'surface.disabled',
           },
         },

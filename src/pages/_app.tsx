@@ -7,12 +7,18 @@ import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import Head from 'next/head';
+import Router from 'next/router';
 import { SessionProvider } from 'next-auth/react';
+import NProgress from 'nprogress';
 import { useState, ReactNode, ReactElement } from 'react';
 
 import { CustomToast } from '@/components';
 import { queryClient as defaultQueryClient } from '@/lib/react-query';
 import { theme } from '@/styles';
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 dayjs.locale(ptBR);
 dayjs.extend(updateLocale);

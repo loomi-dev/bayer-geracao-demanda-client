@@ -1,6 +1,6 @@
 import { ChakraTheme } from '@chakra-ui/react';
 
-import { reactDatePickerStyles } from './externals';
+import { reactDatePickerStyles, nProgressStyles } from './externals';
 
 export const styles: ChakraTheme['styles'] = {
   global: () => ({
@@ -53,5 +53,6 @@ export const styles: ChakraTheme['styles'] = {
     },
     scrollbarColor: 'red.danger_40',
     ...reactDatePickerStyles,
+    ...nProgressStyles,
   }),
 };
