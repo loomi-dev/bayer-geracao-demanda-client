@@ -41,7 +41,7 @@ type UpdatePlanningActionInitialValues = {
   title: string;
   type: PlanningActionType;
   value: string;
-  date: Array<Date | string>;
+  date: Date[];
   description?: string | undefined;
 };
 

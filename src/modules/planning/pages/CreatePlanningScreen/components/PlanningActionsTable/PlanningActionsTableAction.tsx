@@ -103,7 +103,7 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
                 title: data.title ?? '',
                 description: data.detail,
                 type: data.type ?? 'relationship_task',
-                value: formatPrice(data.amountInCents),
+                value: `R$ ${formatPrice(data.amountInCents)}`,
               }}
               isOpen={isOpenUpdatePlanningActionModal}
               onClose={onCloseUpdatePlanningActionModal}
