@@ -22,19 +22,28 @@ export const config = {
   ],
 };
 
+const ROLE_PAGES = {
+  Farmer: ['/planejamento', '/comprovantes', '/simulador', '/enxoval', '/carteira'],
+  Manager: ['/planejamento', '/comprovantes', '/simulador', '/dashboard', '/clientes'],
+};
+
 export default withAuth(
   function middleware({ url, nextUrl: { pathname }, nextauth: { token } }) {
     const isNewUser = token?.user.confirmed === false;
-    const privatePage =
+    const userRole = token?.user.role as Roles;
+    const defaultPrivatePageByRole =
       token?.user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+
+    const pathnameIsNotFromUserRole = !ROLE_PAGES[userRole].some(
+      (rolePage) => rolePage === pathname,
+    );
 
     const isOnboardingPage =
       pathname === '/bem-vindo' || pathname === '/bem-vindo/completar-cadastro';
+    const isRootPage = pathname === '/';
 
-    const isRoutePage = pathname === '/';
-
-    if (isRoutePage) {
-      return NextResponse.redirect(new URL(privatePage, url));
+    if (isRootPage) {
+      return NextResponse.redirect(new URL(defaultPrivatePageByRole, url));
     }
 
     if (isNewUser && !isOnboardingPage) {
@@ -42,7 +51,11 @@ export default withAuth(
     }
 
     if (!isNewUser && isOnboardingPage) {
-      return NextResponse.redirect(new URL(privatePage, url));
+      return NextResponse.redirect(new URL(defaultPrivatePageByRole, url));
+    }
+
+    if (pathnameIsNotFromUserRole) {
+      return NextResponse.redirect(new URL(defaultPrivatePageByRole, url));
     }
   },
   {

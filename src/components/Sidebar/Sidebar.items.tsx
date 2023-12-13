@@ -31,6 +31,7 @@ export const managerMenuItens = [
     leftIcon: <ChartIcon />,
   },
 ];
+
 export const farmerMenuItens = [
   { label: 'Carteira', src: '/carteira', leftIcon: <CardIcon /> },
   {
