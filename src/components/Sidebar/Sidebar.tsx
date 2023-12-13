@@ -8,6 +8,7 @@ import { LAYOUT_SIDEBAR_WIDTH } from '@/config';
 import { PlatformLogo } from '../PlatformLogo';
 
 import { MenuItem } from './MenuItem';
+import { MenuItemSkeleton } from './MenuItemSkeleton';
 import { farmerMenuItens, managerMenuItens } from './Sidebar.items';
 
 type SidebarProps = {
@@ -17,8 +18,11 @@ type SidebarProps = {
 export const Sidebar = ({ containerProps }: SidebarProps) => {
   const user = useSession();
   const { pathname } = useRouter();
+
+  const isLoadingSession = user.status === 'loading';
   const isManager = user.data?.user.role === 'Manager';
   const menuItems = isManager ? managerMenuItens : farmerMenuItens;
+
   return (
     <Flex
       flexDir="column"
@@ -54,15 +58,17 @@ export const Sidebar = ({ containerProps }: SidebarProps) => {
         mt="5rem"
         mb="10rem"
       >
-        {menuItems.map((item) => (
-          <MenuItem
-            key={item.label}
-            label={item.label}
-            src={item.src}
-            isSelected={pathname.includes(item.src)}
-            leftIcon={item.leftIcon}
-          />
-        ))}
+        {isLoadingSession
+          ? Array.from({ length: 5 }).map((_, i) => <MenuItemSkeleton key={i} />)
+          : menuItems.map((item) => (
+              <MenuItem
+                key={item.label}
+                label={item.label}
+                src={item.src}
+                isSelected={pathname.includes(item.src)}
+                leftIcon={item.leftIcon}
+              />
+            ))}
       </Flex>
 
       <PlatformLogo />

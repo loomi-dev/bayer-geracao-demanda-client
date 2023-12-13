@@ -16,6 +16,9 @@ export const config = {
     '/comprovantes/:path*',
     '/planejamento/:path*',
     '/simulador',
+    '/dashboard',
+    '/enxoval',
+    '/simulador',
   ],
 };
 
