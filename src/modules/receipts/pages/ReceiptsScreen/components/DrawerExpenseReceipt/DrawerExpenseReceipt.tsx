@@ -8,9 +8,9 @@ import {
 } from '@chakra-ui/react';
 
 import { CircleIcon, DocumentIcon } from '@/components';
+import { ActionDetails } from '@/modules/receipts/components';
 
 import { useDrawerExpenseReceipt } from '../../stores';
-import { ActionDetails } from '../ActionDetails/ActionDetails';
 import { ProveYourExpenses } from '../ProveYourExpenses';
 
 export const DrawerExpenseReceipt = () => {

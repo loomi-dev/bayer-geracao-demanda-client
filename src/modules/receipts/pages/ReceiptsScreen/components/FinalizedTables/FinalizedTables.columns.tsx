@@ -1,11 +1,8 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
+import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { toBRL } from '@/utils';
 
-import { Cell } from '../Cell';
-import { Header } from '../Header';
-import { ReceiptStatus } from '../ReceiptStatus';
-import { Segment } from '../Segment/Segment';
 import { ViewButton } from '../ViewButton';
 
 export type ActionType = {
@@ -30,7 +27,7 @@ export const columns = [
   columnHelper.accessor((data) => data.segment, {
     id: 'segment',
     header: () => <Header title="segmento" />,
-    cell: (info) => <Segment status={info.getValue()} />,
+    cell: (info) => <Segment status="relationship_task" />,
   }),
   columnHelper.accessor((data) => data.harvest, {
     id: 'harvest',
