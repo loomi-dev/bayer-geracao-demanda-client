@@ -23,8 +23,15 @@ export const config = {
 };
 
 const ROLE_PAGES = {
-  Farmer: ['/planejamento', '/comprovantes', '/simulador', '/enxoval', '/carteira'],
-  Manager: ['/planejamento', '/comprovantes', '/simulador', '/dashboard', '/clientes'],
+  Farmer: [
+    '/planejamento',
+    '/planejamento/criar-novo-planejamento',
+    '/comprovantes',
+    '/simulador',
+    '/enxoval',
+    '/carteira',
+  ],
+  Manager: ['/planejamento', '/comprovantes', '/simulador', '/dashboard', '/clientes/:path*'],
 };
 
 export default withAuth(
@@ -34,9 +41,15 @@ export default withAuth(
     const defaultPrivatePageByRole =
       token?.user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
 
-    const pathnameIsNotFromUserRole = !ROLE_PAGES[userRole].some(
-      (rolePage) => rolePage === pathname,
-    );
+    const pathnameIsNotFromUserRole = !ROLE_PAGES[userRole].some((rolePage) => {
+      if (rolePage.includes(':path*')) {
+        const rolePageSplitted = rolePage.split('/:path*')[0];
+
+        return pathname.includes(rolePageSplitted);
+      }
+
+      return rolePage === pathname;
+    });
 
     const isOnboardingPage =
       pathname === '/bem-vindo' || pathname === '/bem-vindo/completar-cadastro';
