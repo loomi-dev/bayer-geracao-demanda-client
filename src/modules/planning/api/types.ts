@@ -1,4 +1,4 @@
-export type CreatePlanningActionData = {
+export type PatchPlanningActionData = {
   farmerId: number;
   planningId: number;
   title: string;
@@ -9,9 +9,14 @@ export type CreatePlanningActionData = {
   initialDate: string;
   finishDate: string;
 };
+
+export type CreatePlanningActionData = PatchPlanningActionData;
 export type CreatePlanningActionResponse = void;
 
 export type DeletePlanningActionParams = {
   actionId: number;
 };
 export type DeletePlanningActionResponse = void;
+
+export type UpdatePlanningActionData = PatchPlanningActionData;
+export type UpdatePlanningActionResponse = void;

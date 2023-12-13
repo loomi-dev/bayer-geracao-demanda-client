@@ -5,6 +5,8 @@ import {
   CreatePlanningActionResponse,
   DeletePlanningActionParams,
   DeletePlanningActionResponse,
+  UpdatePlanningActionData,
+  UpdatePlanningActionResponse,
 } from './types';
 
 export const createPlanningAction = async ({
@@ -36,3 +38,28 @@ export const deletePlanningAction = async ({
   actionId,
 }: DeletePlanningActionParams): Promise<DeletePlanningActionResponse> =>
   await axios.authorized().delete(`/actions/${actionId}`);
+
+export const updatePlanningAction = async ({
+  farmerId,
+  planningId,
+  ...planningActionData
+}: UpdatePlanningActionData): Promise<UpdatePlanningActionResponse> =>
+  await axios.authorized().put('/actions', {
+    data: {
+      planning: {
+        connect: [
+          {
+            id: planningId,
+          },
+        ],
+      },
+      farmer: {
+        connect: [
+          {
+            id: farmerId,
+          },
+        ],
+      },
+      ...planningActionData,
+    },
+  });
