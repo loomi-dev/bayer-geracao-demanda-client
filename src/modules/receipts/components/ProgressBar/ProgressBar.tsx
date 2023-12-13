@@ -28,39 +28,34 @@ export const ProgressBar = ({
 
   return (
     <Center position="relative" w={size} h={size}>
-      <svg style={{ width: size, height: size, transform: 'rotate(-90deg)' }}>
-        <circle
+      <svg style={{ width: size, height: size, transform: 'rotate(-90deg)', zIndex: 2 }}>
+        {/* <circle
           cx={center}
           cy={center}
           fill="transparent"
           r={radius}
           stroke={trackColor}
           strokeWidth={trackWidth}
-        />
+        /> */}
         <circle
           cx={center}
           cy={center}
           fill="transparent"
-          r={radius + 3.5}
+          r={radius}
           stroke={indicatorColor}
           strokeWidth={indicatorWidth}
-          strokeDasharray={dashArray + 20}
+          strokeDasharray={dashArray}
           strokeDashoffset={dashOffset}
           strokeLinecap={indicatorCap}
         />
       </svg>
 
-      <Center
-        position="absolute"
-        color={labelColor}
-        bg="white"
-        borderRadius="full"
-        boxSize="55%"
-        zIndex={1}
-      >
-        <Text fontSize="1.5rem" fontWeight="700">
-          {`${progress}%`}
-        </Text>
+      <Center position="absolute" bg={trackColor} borderRadius="full" boxSize="85%" zIndex={1}>
+        <Center color={labelColor} bg="white" borderRadius="full" boxSize="70%">
+          <Text fontSize="1.5rem" fontWeight="700">
+            {`${progress}%`}
+          </Text>
+        </Center>
       </Center>
     </Center>
   );

@@ -8,50 +8,102 @@ import {
   DrawerOverlay,
   Text,
 } from '@chakra-ui/react';
+import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 
 import { CircleIcon, DocumentIcon } from '@/components';
+import { useUploadFile } from '@/modules/receipts/api';
+import { usePutAction } from '@/modules/receipts/api/mutations/usePutAction';
 import { ActionDetails } from '@/modules/receipts/components';
 
-import { useDrawerExpenseReceipt } from '../../stores';
+import { useActionStore, useDrawerExpenseReceipt } from '../../stores';
 import { ProveYourExpenses } from '../ProveYourExpenses';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-export const DrawerExpenseReceipt = () => {
+import {
+  DrawerExpenseReceiptFormSchemaType,
+  drawerExpenseReceiptFormSchema,
+} from './DrawerExpenseReceipt.schema';
+
+export const Component = () => {
+  const { handleSubmit, getValues } = useFormContext<DrawerExpenseReceiptFormSchemaType>();
+
+  const { mutate: putActionMutation, isLoading: isLoadingPutAction } = usePutAction();
+
+  const { mutate: uploadFileMutate, isLoading: isLoadingUploadFile } = useUploadFile({
+    onSuccess: (uploadFilesReponse) => {
+      const { description } = getValues();
+
+      putActionMutation({
+        actionId: selectedAction?.id ?? 0,
+        body: {
+          data: {
+            receipts: { documents: uploadFilesReponse, approved: false, description },
+          },
+        },
+      });
+    },
+  });
+
+  const isLoadingButtons = isLoadingPutAction || isLoadingUploadFile;
+
   const isOpen = useDrawerExpenseReceipt((state) => state.isOpen);
   const onClose = useDrawerExpenseReceipt((state) => state.onClose);
 
+  const selectedAction = useActionStore((state) => state.selectedAction);
+
+  const handleSubmitData = async (data: DrawerExpenseReceiptFormSchemaType) => {
+    const { files } = data;
+
+    uploadFileMutate({ files: files.map(({ file }) => file) });
+  };
+
   return (
-    <>
-      <Drawer onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay />
-        <DrawerContent maxW="unset" w="81rem !important">
-          <DrawerHeader
-            display="flex"
-            alignItems="center"
-            px="3.2rem"
-            pt="6rem"
-            pb="2.4rem"
-            borderBottom="2px solid"
-            borderColor="opacity.black.0.20"
-          >
-            <CircleIcon>
-              <DocumentIcon />
-            </CircleIcon>
-            <Text ml="1.6rem" textStyle="h3">
-              Comprovante de gastos
-            </Text>
-          </DrawerHeader>
-          <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem">
-            <ActionDetails />
-            <ProveYourExpenses />
-          </DrawerBody>
-          <DrawerFooter>
-            <Button variant="secondary" w="18rem" onClick={onClose}>
-              Cancelar
-            </Button>
-            <Button w="18rem">Criar nova ação</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-    </>
+    <Drawer onClose={onClose} isOpen={isOpen}>
+      <DrawerOverlay />
+
+      <DrawerContent maxW="unset" w="81rem !important">
+        <DrawerHeader
+          display="flex"
+          alignItems="center"
+          px="3.2rem"
+          pt="6rem"
+          pb="2.4rem"
+          borderBottom="2px solid"
+          borderColor="opacity.black.0.20"
+        >
+          <CircleIcon>
+            <DocumentIcon />
+          </CircleIcon>
+          <Text ml="1.6rem" textStyle="h3">
+            Comprovante de gastos
+          </Text>
+        </DrawerHeader>
+        <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem">
+          <ActionDetails />
+          <ProveYourExpenses />
+        </DrawerBody>
+        <DrawerFooter>
+          <Button variant="secondary" w="18rem" onClick={onClose} isLoading={isLoadingButtons}>
+            Cancelar
+          </Button>
+          <Button w="18rem" onClick={handleSubmit(handleSubmitData)} isLoading={isLoadingButtons}>
+            Criar nova ação
+          </Button>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+export const DrawerExpenseReceipt = () => {
+  const methods = useForm({
+    resolver: zodResolver(drawerExpenseReceiptFormSchema),
+    mode: 'all',
+  });
+
+  return (
+    <FormProvider {...methods}>
+      <Component />
+    </FormProvider>
   );
 };

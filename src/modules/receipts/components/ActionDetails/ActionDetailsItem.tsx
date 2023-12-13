@@ -1,8 +1,9 @@
 import { StackProps, Text, TextProps, VStack } from '@chakra-ui/react';
+import { ReactNode } from 'react';
 
 type ActionDetailsItemProps = {
   label: string;
-  children: string;
+  children: ReactNode;
   valueProps?: TextProps;
 } & StackProps;
 

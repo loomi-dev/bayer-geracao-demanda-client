@@ -1,6 +1,7 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 
 import { DocumentIcon, ImageIcon, InboxIcon, UserGroupIcon } from '@/components';
+import { useGetExampleReceipts } from '@/modules/receipts/api';
 
 import { HowToProveCard } from '../HowToProveCard';
 
@@ -15,20 +16,24 @@ const items = [
   },
 ];
 
-export const HowToProve = () => (
-  <Box mt="4rem">
-    <Text
-      textTransform="uppercase"
-      textStyle="footnote-bold"
-      lineHeight="1.8rem"
-      color="greyscale.800"
-    >
-      Não sabe como comprovar?
-    </Text>
-    <HStack spacing="1.2rem" mt="1.2rem">
-      {items.map((item) => (
-        <HowToProveCard key={item.id} {...item} />
-      ))}
-    </HStack>
-  </Box>
-);
+export const HowToProve = () => {
+  const { data } = useGetExampleReceipts();
+
+  return (
+    <Box mt="4rem">
+      <Text
+        textTransform="uppercase"
+        textStyle="footnote-bold"
+        lineHeight="1.8rem"
+        color="greyscale.800"
+      >
+        Não sabe como comprovar?
+      </Text>
+      <HStack spacing="1.2rem" mt="1.2rem">
+        {items.map((item) => (
+          <HowToProveCard key={item.id} {...item} />
+        ))}
+      </HStack>
+    </Box>
+  );
+};

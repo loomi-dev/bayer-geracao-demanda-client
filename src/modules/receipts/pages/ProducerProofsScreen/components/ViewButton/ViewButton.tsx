@@ -3,19 +3,26 @@ import { CellContext } from '@tanstack/react-table';
 
 import { Add2Icon } from '@/components';
 
-import { useDrawerExpenseReceipt } from '../../stores';
-import { ActionType } from '../StockTable/StockTable.columns';
+import { ActionResponse, useActionStore, useDrawerExpenseReceipt } from '../../stores';
 
 type ViewButtonProps = {
-  value: CellContext<ActionType, ActionType>;
+  value: CellContext<ActionResponse, ActionResponse>;
 };
 
 export const ViewButton = ({ value }: ViewButtonProps) => {
   const onOpen = useDrawerExpenseReceipt((state) => state.onOpen);
 
+  const setSelectedAction = useActionStore((state) => state.setSelectedAction);
+
+  const handleClick = () => {
+    onOpen();
+
+    setSelectedAction(value.getValue());
+  };
+
   return (
     <Button
-      onClick={onOpen}
+      onClick={handleClick}
       leftIcon={<Add2Icon />}
       variant="primary-filter"
       h="3.4rem"

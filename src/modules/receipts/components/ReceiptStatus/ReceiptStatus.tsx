@@ -1,6 +1,7 @@
 import { Text, TextProps } from '@chakra-ui/react';
 
 type ReceiptStatusProps = {
+  // status: GetActionsResponse['data'][0]['status'];
   status: 'receiptsPending' | 'receiptsSent';
   textProps?: TextProps;
 };

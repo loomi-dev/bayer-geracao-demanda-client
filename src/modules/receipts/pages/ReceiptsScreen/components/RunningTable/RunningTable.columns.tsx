@@ -17,7 +17,7 @@ export const columns = [
   columnHelper.accessor((data) => data.segment, {
     id: 'segment',
     header: () => <Header title="segmento" />,
-    cell: (info) => <Segment status={info.getValue()} />,
+    cell: (info) => <Segment status="relationship_task" />,
   }),
   columnHelper.accessor((data) => data.harvest, {
     id: 'harvest',

@@ -1,7 +1,9 @@
 import { Box, Flex, HStack } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Header, ImageIcon } from '@/components';
+
+import { useCropsStore } from '../../store';
 
 import {
   DrawerExpenseReceipt,
@@ -13,22 +15,30 @@ import {
   YourCurrentLevel,
 } from './components';
 
-export const ProducerProofsScreen = () => (
-  <Box boxSize="100%">
-    <Header label="Comprovações" icon={<ImageIcon color="white" width="30" height="30" />} />
-    <TitleWithSubtitle />
-    <Flex w="100%" justifyContent="space-between">
-      <HStack spacing="1rem">
-        <YourCurrentLevel />
-        <HowMuchDidYouEarn earnedValue={320000} needToWin={450000} progress={56} />
-      </HStack>
+export const ProducerProofsScreen = () => {
+  const getCrops = useCropsStore((state) => state.getCrops);
 
-      <FilterButton />
-    </Flex>
+  useEffect(() => {
+    getCrops();
+  }, [getCrops]);
 
-    <StockTable />
+  return (
+    <Box boxSize="100%">
+      <Header label="Comprovações" icon={<ImageIcon color="white" width="30" height="30" />} />
+      <TitleWithSubtitle />
+      <Flex w="100%" justifyContent="space-between">
+        <HStack spacing="1rem">
+          <YourCurrentLevel />
+          <HowMuchDidYouEarn />
+        </HStack>
 
-    <HowToProve />
-    <DrawerExpenseReceipt />
-  </Box>
-);
+        <FilterButton />
+      </Flex>
+
+      <StockTable />
+
+      <HowToProve />
+      <DrawerExpenseReceipt />
+    </Box>
+  );
+};

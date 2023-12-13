@@ -3,39 +3,31 @@ import { createColumnHelper } from '@tanstack/react-table';
 import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { toBRL } from '@/utils';
 
+import { ActionResponse } from '../../stores';
 import { ViewButton } from '../ViewButton';
 
-export type ActionType = {
-  id: number;
-  shareTitle: string;
-  segment: 'relationshipAction';
-  homeGdFeature: number;
-  finalGdFeature: number;
-  status: string;
-};
-
-const columnHelper = createColumnHelper<ActionType>();
+const columnHelper = createColumnHelper<ActionResponse>();
 
 export const columns = [
-  columnHelper.accessor((data) => data.shareTitle, {
-    id: 'shareTitle',
+  columnHelper.accessor((data) => data.title, {
+    id: 'title',
     header: () => <Header title="Titulo da Ação" />,
     cell: (info) => <Cell value={info.getValue()} textProps={{ textStyle: 'caption7' }} />,
   }),
-  columnHelper.accessor((data) => data.segment, {
+  columnHelper.accessor((data) => data.type, {
     id: 'segment',
     header: () => <Header title="segmento" />,
     cell: (info) => <Segment status={info.getValue()} />,
   }),
-  columnHelper.accessor((data) => data.homeGdFeature, {
+  columnHelper.accessor((data) => data.farmer.wallet.initialBalance ?? 0, {
     id: 'homeGdFeature',
     header: () => <Header title="recurso GD INICIAL" />,
-    cell: (info) => <Cell value={toBRL(info.getValue())} />,
+    cell: (info) => <Cell value={toBRL(info.getValue() / 100)} />,
   }),
-  columnHelper.accessor((data) => data.finalGdFeature, {
+  columnHelper.accessor((data) => data.amountInCents, {
     id: 'finalGdFeature',
     header: () => <Header title="recurso GD FINAL" />,
-    cell: (info) => <Cell value={toBRL(info.getValue())} />,
+    cell: (info) => <Cell value={toBRL(info.getValue() / 100)} />,
   }),
   columnHelper.accessor((data) => data.status, {
     id: 'status',
