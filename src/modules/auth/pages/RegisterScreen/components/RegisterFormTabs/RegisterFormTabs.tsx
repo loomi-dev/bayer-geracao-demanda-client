@@ -1,7 +1,6 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
-import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useUpdateUser } from '@/api';

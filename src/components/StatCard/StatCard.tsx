@@ -1,5 +1,4 @@
 import { HStack, Skeleton, SkeletonProps, StackProps, Text, TextProps } from '@chakra-ui/react';
-import React from 'react';
 
 type StatCardProps = {
   value: number | string;

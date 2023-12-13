@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { ChevronLeftIcon, CircleIcon, Header } from '@/components';
 import { LayoutWithNotifications } from '@/layouts';
-import { CreatePlanningScreen } from '@/modules/planning';
+import { CreatePlanningScreen } from '@/modules';
 import { NextPageWithLayout } from '@/pages/_app';
 
 const Page: NextPageWithLayout = () => {

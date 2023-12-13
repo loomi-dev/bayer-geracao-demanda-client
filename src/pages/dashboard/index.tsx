@@ -1,6 +1,6 @@
 import { Header, PackageIcon } from '@/components';
 import { LayoutWithoutNotifications } from '@/layouts';
-import { DashboardScreen } from '@/modules/dashboard';
+import { DashboardScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 

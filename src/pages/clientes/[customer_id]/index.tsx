@@ -1,5 +1,5 @@
 import { LayoutWithoutNotifications } from '@/layouts';
-import { CustomerDetailScreen } from '@/modules/customers';
+import { CustomerDetailScreen } from '@/modules';
 import { NextPageWithLayout } from '@/pages/_app';
 
 const Page: NextPageWithLayout = () => <CustomerDetailScreen />;

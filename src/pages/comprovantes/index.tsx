@@ -1,5 +1,5 @@
 import { LayoutWithoutNotifications } from '@/layouts';
-import { ReceiptsScreen } from '@/modules/receipts';
+import { ReceiptsScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 

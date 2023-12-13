@@ -1,6 +1,5 @@
 import { HStack, VStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import {

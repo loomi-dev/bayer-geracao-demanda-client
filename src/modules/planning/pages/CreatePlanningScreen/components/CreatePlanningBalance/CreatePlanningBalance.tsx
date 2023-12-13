@@ -1,6 +1,5 @@
 import { HStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
-import React from 'react';
 
 import { Balance } from '@/components';
 
