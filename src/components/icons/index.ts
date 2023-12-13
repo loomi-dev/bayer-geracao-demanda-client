@@ -50,3 +50,4 @@ export { default as PackageIcon } from './Package';
 export { default as PackageSmallIcon } from './PackageSmall';
 export { default as DownloadIcon } from './Download';
 export { default as WarningIcon } from './WarningIcon';
+export { default as ChartIcon } from './ChartIcon';

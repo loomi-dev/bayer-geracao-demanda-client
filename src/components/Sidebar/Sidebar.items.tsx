@@ -1,6 +1,7 @@
 import {
   CalendarIcon,
   CardIcon,
+  ChartIcon,
   ComputerIcon,
   ImageIcon,
   PackageSmallIcon,
@@ -23,6 +24,11 @@ export const managerMenuItens = [
     label: 'Simulador',
     src: '/simulador',
     leftIcon: <ComputerIcon />,
+  },
+  {
+    label: 'Dashboard',
+    src: '/dashboard',
+    leftIcon: <ChartIcon />,
   },
 ];
 export const farmerMenuItens = [
