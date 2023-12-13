@@ -1,3 +1,7 @@
-import { Text } from '@chakra-ui/react';
+import { KanbanCard } from './components';
 
-export const KanbanScreen = () => <Text>Bem vindo ao Kanban!</Text>;
+export const KanbanScreen = () => (
+  <>
+    <KanbanCard />
+  </>
+);
