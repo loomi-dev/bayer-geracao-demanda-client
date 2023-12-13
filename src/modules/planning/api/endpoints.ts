@@ -42,9 +42,10 @@ export const deletePlanningAction = async ({
 export const updatePlanningAction = async ({
   farmerId,
   planningId,
+  planningActionId,
   ...planningActionData
 }: UpdatePlanningActionData): Promise<UpdatePlanningActionResponse> =>
-  await axios.authorized().put('/actions', {
+  await axios.authorized().put(`/actions/${planningActionId}`, {
     data: {
       planning: {
         connect: [

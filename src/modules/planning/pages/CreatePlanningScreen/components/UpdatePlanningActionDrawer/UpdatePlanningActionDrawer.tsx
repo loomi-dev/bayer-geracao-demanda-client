@@ -48,6 +48,7 @@ type UpdatePlanningActionInitialValues = {
 type UpdatePlanningActionDrawerProps =
   | ({
       mode: 'EDIT';
+      planningActionId: number;
       initialValues: UpdatePlanningActionInitialValues;
     } & Omit<DrawerProps, 'children'>)
   | ({
@@ -124,11 +125,17 @@ export const UpdatePlanningActionDrawer = (props: UpdatePlanningActionDrawerProp
       };
 
       if (props.mode === 'EDIT') {
-        updatePlanningAction(planningActionData, {
-          onSuccess: () => {
-            handleCloseUpdatePlanningActionDrawer();
+        updatePlanningAction(
+          {
+            planningActionId: props.planningActionId,
+            ...planningActionData,
           },
-        });
+          {
+            onSuccess: () => {
+              handleCloseUpdatePlanningActionDrawer();
+            },
+          },
+        );
       } else {
         createPlanningAction(planningActionData, {
           onSuccess: () => {

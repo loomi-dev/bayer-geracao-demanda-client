@@ -98,6 +98,7 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
 
             <UpdatePlanningActionDrawer
               mode="EDIT"
+              planningActionId={data.id}
               initialValues={{
                 date: [dayjs(data.initialDate).toDate(), dayjs(data.finishDate).toDate()],
                 title: data.title ?? '',

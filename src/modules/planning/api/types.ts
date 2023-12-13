@@ -18,5 +18,7 @@ export type DeletePlanningActionParams = {
 };
 export type DeletePlanningActionResponse = void;
 
-export type UpdatePlanningActionData = PatchPlanningActionData;
+export type UpdatePlanningActionData = {
+  planningActionId: number;
+} & PatchPlanningActionData;
 export type UpdatePlanningActionResponse = void;
