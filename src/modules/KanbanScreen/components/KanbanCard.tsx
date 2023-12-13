@@ -22,7 +22,7 @@ export const KanbanCard = () => (
     </Badge>
 
     <VStack align="flex-start" gap="initial">
-      <Text textStyle="footnote-small" color="greyscale.700">
+      <Text textStyle="caption5" color="greyscale.700">
         Última atualização
       </Text>
       <Text textStyle="action3" lineHeight="2rem">
@@ -30,7 +30,7 @@ export const KanbanCard = () => (
       </Text>
     </VStack>
     <VStack align="flex-start" gap="initial">
-      <Text textStyle="footnote-small" color="greyscale.700">
+      <Text textStyle="caption5" color="greyscale.700">
         Cliente
       </Text>
       <VStack gap="initial" align="flex-start">
@@ -57,7 +57,7 @@ export const KanbanCard = () => (
       </Text>
     </Flex>
     <VStack align="flex-start" gap="0.4rem">
-      <Text w="fit-content" textStyle="footnote-small" color="greyscale.700">
+      <Text w="fit-content" textStyle="caption5" color="greyscale.700">
         status
       </Text>
       <Badge w="full" variant="filled_secundary" lineHeight="1.8rem">
