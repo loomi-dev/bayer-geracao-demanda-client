@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
-type UseCreatePlanningActionStoreType = {
+type UseUpdatePlanningActionStoreType = {
   currentStep: number;
   setCurrentStep: (newCurrentStep: number) => void;
 };
 
-export const useCreatePlanningActionStore = create<UseCreatePlanningActionStoreType>((set) => ({
+export const useUpdatePlanningActionStore = create<UseUpdatePlanningActionStoreType>((set) => ({
   currentStep: 0,
   setCurrentStep: (newCurrentStep) => set(() => ({ currentStep: newCurrentStep })),
 }));

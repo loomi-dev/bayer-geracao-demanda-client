@@ -1,10 +1,14 @@
 import { Button, Center, Divider, Flex, useDisclosure } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import dynamic from 'next/dynamic';
 import { MouseEvent } from 'react';
 
 import { ConfirmationModal, EditIcon, EyeOpenIcon, TrashIcon } from '@/components';
 import { usePagination } from '@/hooks';
 import { useDeletePlanningAction } from '@/modules/planning/api';
+import { formatPrice } from '@/utils';
+
+import { UpdatePlanningActionDrawer } from '../UpdatePlanningActionDrawer';
 
 type PlanningActionsTableActionProps = PlanningAction;
 
@@ -32,6 +36,12 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
     onClose: onCloseDeletePlanningActionModal,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenUpdatePlanningActionModal,
+    onOpen: onOpenUpdatePlanningActionModal,
+    onClose: onCloseUpdatePlanningActionModal,
+  } = useDisclosure();
+
   const isActionAccepted = data.status === 'accepted';
 
   const handleDeletePlanningAction = () => {
@@ -46,6 +56,11 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
         },
       },
     );
+  };
+
+  const handleOpenUpdatePlanningActionModal = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    onOpenUpdatePlanningActionModal();
   };
 
   const handleOpenDeletePlanningActionModal = (e: MouseEvent<HTMLButtonElement>) => {
@@ -76,9 +91,24 @@ export const PlanningActionsTableAction = (data: PlanningActionsTableActionProps
         </>
       ) : (
         <Flex layerStyle="actions">
-          <Button variant="action" isDisabled>
-            <EditIcon />
-          </Button>
+          <>
+            <Button variant="action" onClick={handleOpenUpdatePlanningActionModal}>
+              <EditIcon />
+            </Button>
+
+            <UpdatePlanningActionDrawer
+              mode="EDIT"
+              initialValues={{
+                date: [dayjs(data.initialDate).toDate(), dayjs(data.finishDate).toDate()],
+                title: data.title ?? '',
+                description: data.detail,
+                type: data.type ?? 'relationship_task',
+                value: formatPrice(data.amountInCents),
+              }}
+              isOpen={isOpenUpdatePlanningActionModal}
+              onClose={onCloseUpdatePlanningActionModal}
+            />
+          </>
 
           <Divider orientation="vertical" h="1rem" w="1px" borderColor="greyscale.450" />
 

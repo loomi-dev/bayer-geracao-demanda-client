@@ -9,10 +9,14 @@ import {
   Stepper,
 } from '@chakra-ui/react';
 
-import { useCreatePlanningActionStore } from '../../stores';
+import { useUpdatePlanningActionStore } from '../../stores';
 
-export const PlanningActionFormStepper = () => {
-  const currentStep = useCreatePlanningActionStore((state) => state.currentStep);
+type PlanningActionFormStepperProps = {
+  mode: 'CREATE' | 'EDIT';
+};
+
+export const PlanningActionFormStepper = ({ mode }: PlanningActionFormStepperProps) => {
+  const currentStep = useUpdatePlanningActionStore((state) => state.currentStep);
 
   return (
     <Center>
@@ -39,7 +43,9 @@ export const PlanningActionFormStepper = () => {
               active={<StepNumber />}
             />
 
-            <StepTitle>Confirme a ação criada</StepTitle>
+            <StepTitle>
+              {mode === 'EDIT' ? 'Confirme a ação editada' : 'Confirme a ação criada'}
+            </StepTitle>
           </StepIndicator>
         </Step>
       </Stepper>
