@@ -79,7 +79,7 @@ export const OnboardingScreen = () => (
           w="31.5rem"
           rightIcon={
             <CircleIcon>
-              <ArrowRightIcon />
+              <ArrowRightIcon color="#fff" />
             </CircleIcon>
           }
         >
