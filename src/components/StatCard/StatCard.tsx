@@ -3,6 +3,7 @@ import React from 'react';
 
 type StatCardProps = {
   value: number | string;
+  valueStyles?: TextProps;
   label: string;
   labelStyles?: TextProps;
   isLoading?: boolean;
@@ -11,6 +12,7 @@ type StatCardProps = {
 
 export const StatCard = ({
   value,
+  valueStyles,
   label,
   labelStyles,
   isLoading = false,
@@ -21,7 +23,7 @@ export const StatCard = ({
     {isLoading ? (
       <Skeleton h="3rem" w="10rem" {...skeletonStyles} />
     ) : (
-      <Text textStyle="h4" textTransform="uppercase" whiteSpace="nowrap">
+      <Text textStyle="h4" textTransform="uppercase" whiteSpace="nowrap" {...valueStyles}>
         {value}
       </Text>
     )}
