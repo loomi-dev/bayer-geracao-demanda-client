@@ -37,6 +37,10 @@ export const Badge = defineStyleConfig({
       color: 'text.invert',
       bgColor: 'red.danger_90',
     },
+    filled_secundary: {
+      bgColor: 'opacity.gray.1.20',
+      borderColor: 'greyscale.450',
+    },
     filled_success: {
       color: 'surface.primary',
       bgColor: 'green.500',

@@ -4,8 +4,7 @@ import { getServerSession } from 'next-auth';
 import { BigCalendarIcon, CircleIcon, Header } from '@/components';
 import { LayoutWithNotifications, LayoutWithoutNotifications } from '@/layouts';
 import { authOptions } from '@/lib/next-auth';
-import { KanbanScreen } from '@/modules';
-import { PlanningScreen } from '@/modules/planning';
+import { KanbanScreen, PlanningScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 
