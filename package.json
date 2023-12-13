@@ -71,5 +71,6 @@
     "prettier": "^2.5.1",
     "tsargs": "^1.4.1",
     "typescript": "5.1.6"
-  }
+  },
+  "sideEffects": "false"
 }
