@@ -21,5 +21,5 @@ export type UpdateUserData = {
 };
 export type UpdateUserResponse = {
   jwt: string;
-  user: User;
+  data: User;
 };

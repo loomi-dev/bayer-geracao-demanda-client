@@ -23,24 +23,15 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (trigger === 'update' && session) {
-        token.user = session.user;
+        token.user = session;
       }
 
       return token;
     },
-    session: async ({ session, token: { user }, trigger, newSession }) => {
-      if (trigger === 'update' && newSession) {
-        session.user = {
-          ...newSession?.user,
-          accessToken: newSession?.jwt,
-        };
-      }
-
-      return {
-        ...session,
-        user,
-      };
-    },
+    session: async ({ session, token: { user } }) => ({
+      ...session,
+      user,
+    }),
   },
   pages: {
     signIn: DEFAULT_PUBLIC_PAGE,

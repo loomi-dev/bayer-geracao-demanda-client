@@ -1,6 +1,7 @@
 import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
 
 import { MutOpt } from '@/api/types';
@@ -19,13 +20,28 @@ export const useUpdateUser = (options?: MutOpt<UpdateUserResponse, UpdateUserDat
     mutationKey: ['update-user'],
     mutationFn: async (userData) => {
       const newUser = await updateUser(userData);
-      await updateSession(newUser);
+
+      const {
+        jwt: accessToken,
+        data: { email, username, role, id, confirmed },
+      } = newUser;
+
+      const newUserSession: User = {
+        accessToken,
+        email,
+        username,
+        role,
+        id,
+        confirmed,
+      };
+
+      await updateSession(newUserSession);
 
       return newUser;
     },
-    onSuccess: ({ user }) => {
+    onSuccess: ({ data }) => {
       const privatePage =
-        user?.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+        data?.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
 
       push(privatePage);
       toast({
