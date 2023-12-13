@@ -1,7 +1,6 @@
 import { Box, Button, Center, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import { ArrowRightIcon, CircleIcon } from '@/components';
 
