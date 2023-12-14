@@ -173,3 +173,34 @@ export type GetAchievementResponse = {
   }>;
   meta: Meta;
 };
+
+export type GetExampleReceiptsResponse = {
+  data: Array<{
+    id: number;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+    documents: Document[];
+  }>;
+  meta: Meta;
+};
+
+type Document = {
+  id: number;
+  name: string;
+  alternativeText?: any;
+  caption?: any;
+  width?: any;
+  height?: any;
+  formats?: any;
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl?: any;
+  provider: string;
+  provider_metadata?: any;
+  createdAt: string;
+  updatedAt: string;
+};

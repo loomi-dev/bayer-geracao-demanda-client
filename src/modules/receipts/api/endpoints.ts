@@ -8,6 +8,7 @@ import {
   GetActionsParams,
   GetActionsResponse,
   GetCropsResponse,
+  GetExampleReceiptsResponse,
   PutActionParams,
   UploadFileParams,
   UploadFileResponse,
@@ -72,7 +73,7 @@ export const getAchievement = async ({
   return response.data;
 };
 
-export const getExampleReceipts = async () => {
+export const getExampleReceipts = async (): Promise<GetExampleReceiptsResponse> => {
   const queryParams = qs.stringify({
     populate: {
       documents: true,

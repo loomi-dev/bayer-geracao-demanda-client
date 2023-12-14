@@ -30,9 +30,11 @@ export const HowToProve = () => {
         Não sabe como comprovar?
       </Text>
       <HStack spacing="1.2rem" mt="1.2rem">
-        {items.map((item) => (
-          <HowToProveCard key={item.id} {...item} />
-        ))}
+        {data?.data.map((receipt, index) => {
+          const item = items[index];
+
+          return <HowToProveCard key={item.id} {...item} documents={receipt.documents} />;
+        })}
       </HStack>
     </Box>
   );
