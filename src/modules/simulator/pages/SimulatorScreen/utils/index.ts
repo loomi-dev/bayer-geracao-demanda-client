@@ -1,47 +1,39 @@
-type TargetPercentage = 0.3 | 0.4 | 0.5;
-type TargetValue = number;
-type Target = Record<TargetPercentage, TargetValue>;
+export const TARGET_PERCENTAGE = [0.3, 0.4, 0.5];
 
-export const TARGET_PERCENTAGE: TargetPercentage[] = [0.3, 0.4, 0.5];
+export const calculateRebound = (bagsQuantity: number, percentage: number) => {
+  let reboundPercentValue = 0;
 
-const BIOTEC_INCENTIVE: Target = {
-  0.3: 8,
-  0.4: 8,
-  0.5: 8,
-};
+  if (percentage >= 0.3 && percentage < 0.4) reboundPercentValue = 5;
+  if (percentage >= 0.4 && percentage < 0.5) reboundPercentValue = 8;
+  if (percentage >= 0.5) reboundPercentValue = 15;
 
-const FINAL_GENERATION_DEMAND: Target = {
-  0.3: 1,
-  0.4: 1.5,
-  0.5: 2,
-};
-const REBOUND_VALUES: Target = {
-  0.3: 5,
-  0.4: 8,
-  0.5: 15,
-};
-
-export const calculateRebound = (bagsQuantity: number, percentage: TargetPercentage) => {
-  if (percentage < 0.3) return 0;
-  return bagsQuantity * REBOUND_VALUES[percentage];
+  return bagsQuantity * reboundPercentValue;
 };
 
 export const calculateFinalGenerationDemand = (
   bagsQuantity: number,
   plantability: number,
-  percentage: TargetPercentage,
+  percentage: number,
 ) => {
-  if (percentage < 0.3) return 0;
-  return (bagsQuantity / plantability) * FINAL_GENERATION_DEMAND[percentage];
+  let finalGenerationDemandPercentValue = 0;
+
+  if (percentage >= 0.3 && percentage < 0.4) finalGenerationDemandPercentValue = 1;
+  if (percentage >= 0.4 && percentage < 0.5) finalGenerationDemandPercentValue = 1.5;
+  if (percentage >= 0.5) finalGenerationDemandPercentValue = 2;
+
+  return (bagsQuantity / plantability) * finalGenerationDemandPercentValue;
 };
 
 export const calculateBiotecIncentive = (
   bagsQuantity: number,
   isBayerSellingOnly: boolean,
-  percentage: TargetPercentage,
+  percentage: number,
 ) => {
-  if (!isBayerSellingOnly) return 0;
-  return bagsQuantity * BIOTEC_INCENTIVE[percentage];
+  let biotecIncentivePercentValue = 0;
+
+  if (isBayerSellingOnly && percentage >= 0.3) biotecIncentivePercentValue = 8;
+
+  return bagsQuantity * biotecIncentivePercentValue;
 };
 
 export const calculatePenetration = (
