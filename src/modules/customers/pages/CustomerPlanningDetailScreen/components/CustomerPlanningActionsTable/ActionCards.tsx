@@ -24,8 +24,8 @@ export const ActionCards = ({
     <Grid
       as="section"
       w="full"
-      gridTemplateColumns="repeat(3,1fr)"
-      gridTemplateRows="repeat(1,1fr)"
+      gridTemplateColumns="repeat(3, 1fr)"
+      gridTemplateRows="repeat(1, 1fr)"
       gap="1rem"
     >
       {metrics.map((metric) => (
@@ -35,6 +35,7 @@ export const ActionCards = ({
             value={`R$ ${centsToCompactValue(metric.value)}`}
             isLoading={isLoading}
             labelStyles={{ maxWidth: 'initial' }}
+            h="100%"
           />
         </GridItem>
       ))}
