@@ -47,13 +47,13 @@ export const useUpdateUser = (options?: MutOpt<UpdateUserResponse, UpdateUserDat
 
       push(privatePage);
       toast({
-        description: 'Usuário atualizado!',
+        description: 'Seus dados foram atualizados!',
         status: 'success',
       });
     },
     onError: () => {
       toast({
-        description: 'Ocorreu um erro na atualização do usuário.',
+        description: 'Ocorreu um erro na atualização dos seus dados.',
         status: 'error',
       });
     },

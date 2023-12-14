@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -22,6 +23,7 @@ export const CustomerHistoricDrawer = ({
   onClose,
 }: CustomerHistoricDrawerProps) => {
   const session = useSession();
+  const toast = useToast();
   const userId = session.data?.user.id as number;
   const [description, setDescription] = useState('');
 
@@ -56,7 +58,25 @@ export const CustomerHistoricDrawer = ({
           userId,
         },
       },
-      { onSuccess: () => onClose() },
+      {
+        onSuccess: () => {
+          onClose();
+          toast({
+            description: isApproving
+              ? 'Você aprovou um planejamento.'
+              : 'Você recusou um planejamento.',
+            status: 'success',
+          });
+        },
+        onError: () => {
+          toast({
+            description: isApproving
+              ? 'Ocorreu um erro ao aprovar o planejamento.'
+              : 'Ocorreu um erro ao recusar o planejamento.',
+            status: 'error',
+          });
+        },
+      },
     );
 
   return (
