@@ -3,7 +3,13 @@ import Image from 'next/image';
 
 import { DownloadIcon } from '@/components';
 
-export const TrousseauDownloadOption = () => (
+type TrousseauDownloadOption = {
+  name: string;
+  description: string;
+  downloadUrl?: string;
+  imageUrl?: string;
+};
+export const TrousseauDownloadOption = ({ name, description, downloadUrl, imageUrl }) => (
   <Flex
     w="100%"
     borderRadius="1.6rem"
@@ -13,15 +19,10 @@ export const TrousseauDownloadOption = () => (
     p="0.8rem"
   >
     <HStack gap="1.6rem">
-      <Image
-        alt="Opção de download do enxoval"
-        src="https://images.dog.ceo/breeds/terrier-cairn/n02096177_2935.jpg"
-        width={55}
-        height={55}
-      />
+      <Image alt="Opção de download do enxoval" src={imageUrl} width={55} height={55} />
       <VStack align="flex-start" gap="0rem">
-        <Text textStyle="caption2">Kit marca bayer</Text>
-        <Text textStyle="footnote">Logos coloridas, preto e branco</Text>
+        <Text textStyle="caption2">{name}</Text>
+        <Text textStyle="footnote">{description}</Text>
       </VStack>
     </HStack>
     <HStack gap="1rem" _hover={{ opacity: '0.7', cursor: 'pointer' }} color="red.danger_50">

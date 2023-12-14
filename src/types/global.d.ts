@@ -109,7 +109,9 @@ type Trousseau = {
     id: number;
     name: string;
     description: string;
-    photo: string;
+    photo: {
+      url: string;
+    };
     document: {
       name: string;
       url: string;

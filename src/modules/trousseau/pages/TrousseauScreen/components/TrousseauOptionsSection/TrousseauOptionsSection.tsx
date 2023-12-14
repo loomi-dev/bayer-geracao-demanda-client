@@ -10,7 +10,7 @@ export const TrousseauOptionsSection = () => {
   const { data } = useGetTrousseau();
 
   const material_items = data?.data.material_items;
-
+  const catalogs = data?.data.catalogs;
   return (
     <Flex
       flexDir="column"
@@ -35,10 +35,15 @@ export const TrousseauOptionsSection = () => {
         </Trousseau.Slider>
       </Trousseau.Container>
       <Flex gap="0.8rem" mt="2rem" flexDir="column">
-        <TrousseauDownloadOption />
-        <TrousseauDownloadOption />
-        <TrousseauDownloadOption />
-        <TrousseauDownloadOption />
+        {catalogs?.map((catalog) => (
+          <TrousseauDownloadOption
+            key={catalog.id}
+            name={catalog.name}
+            description={catalog.description}
+            imageUrl={catalog.photo?.url}
+            downloadUrl={catalog.document?.url}
+          />
+        ))}
       </Flex>
 
       <TrousseauRecomendations />
