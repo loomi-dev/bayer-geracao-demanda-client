@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ExpandIcon, Minus2Icon } from '@/components';
 
 type AccordionIconProps = {

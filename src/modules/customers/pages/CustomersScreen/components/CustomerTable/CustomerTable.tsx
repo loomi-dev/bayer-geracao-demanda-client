@@ -41,6 +41,7 @@ export const CustomerTable = () => {
         <HStack gap="1.2rem">
           <TextInput
             w="32rem"
+            borderRadius="1.6rem"
             leftIcon={<SearchIcon />}
             bgColor="surface.primary"
             placeholder="Pesquisar por Nome ou CNPJ"
@@ -55,7 +56,10 @@ export const CustomerTable = () => {
         fallbackMessage="Nenhum cliente encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
         onRowClick={handleRowClick}
-        hoverProps={{ bgColor: 'opacity.green.0.10', cursor: 'pointer' }}
+        hoverProps={{
+          bg: 'greyscale.500',
+          cursor: 'pointer',
+        }}
       />
       <Pagination
         page={currentPage}

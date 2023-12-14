@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const LayerFormBox = () => (
   <svg style={{ position: 'absolute', width: 0, height: 0 }}>
     <clipPath id="layer-form-box">

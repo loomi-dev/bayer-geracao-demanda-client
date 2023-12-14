@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { getToken } from 'next-auth/jwt';
 
 import { DEFAULT_PRIVATE_FARMER_PAGE, DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
-import { LoginScreen } from '@/modules/auth';
+import { LoginScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 

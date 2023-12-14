@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 
 import { LayoutWithoutNotifications } from '@/layouts';
-import { ProducerProofsScreen, ReceiptsScreen } from '@/modules/receipts';
+import { ProducerProofsScreen, ReceiptsScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 

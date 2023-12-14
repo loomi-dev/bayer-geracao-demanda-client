@@ -22,7 +22,11 @@ export const CreatePlanningScreen = () => {
   const { query } = useRouter();
   const planningId = Number(query?.planning_id);
 
-  const { data: dataPlanningStatus, isLoading: isLoadingGetPlanningStatus } = useGetPlanningStatus(
+  const {
+    data: dataPlanningStatus,
+    isLoading: isLoadingGetPlanningStatus,
+    isFetching: isFetchingGetPlanningStatus,
+  } = useGetPlanningStatus(
     { planningId },
     {
       enabled: Boolean(planningId),
@@ -30,10 +34,11 @@ export const CreatePlanningScreen = () => {
   );
 
   const planningStatus = dataPlanningStatus?.data?.historic?.at(-1)?.status ?? 'default';
+  const isLoadingPlanningStatus = isLoadingGetPlanningStatus || isFetchingGetPlanningStatus;
 
   return (
     <>
-      {isLoadingGetPlanningStatus ? (
+      {isLoadingPlanningStatus ? (
         <CreatePlanningStatusSectionSkeleton />
       ) : (
         <CreatePlanningStatusSection planningStatus={planningStatus} />
@@ -48,9 +53,9 @@ export const CreatePlanningScreen = () => {
         <PlanningActionsTable planningStatus={planningStatus} />
       </VStack>
 
-      {planningStatus !== 'default' && !isLoadingGetPlanningStatus && (
-        <DynamicCreatePlanningActionSection />
-      )}
+      {planningStatus !== 'default' &&
+        planningStatus !== 'accepted' &&
+        !isLoadingGetPlanningStatus && <DynamicCreatePlanningActionSection />}
     </>
   );
 };
