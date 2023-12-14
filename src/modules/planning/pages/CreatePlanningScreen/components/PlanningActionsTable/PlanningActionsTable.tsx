@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
+import { STALE_TIME_CONFIG } from '@/config';
 import { usePagination } from '@/hooks';
 import { formatPrice } from '@/utils';
 
@@ -52,6 +53,7 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
     { planningId, pagination: { page: currentPage, pageSize: 5 } },
     {
       enabled: Boolean(planningId),
+      staleTime: STALE_TIME_CONFIG,
     },
   );
 
@@ -59,7 +61,13 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
     data: dataPlanningActionsStatistics,
     isLoading: isLoadingDataPlanningActionsStatistics,
     isFetching: isFetchingDataPlanningActionsStatistics,
-  } = useGetPlanningActionsStatistics({ planningId }, { enabled: Boolean(planningId) });
+  } = useGetPlanningActionsStatistics(
+    { planningId },
+    {
+      enabled: Boolean(planningId),
+      staleTime: STALE_TIME_CONFIG,
+    },
+  );
 
   const totalPlanningActionTablePages = dataPlanningActions?.meta.pagination.pageCount || 1;
 
