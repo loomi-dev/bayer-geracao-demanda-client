@@ -16,21 +16,16 @@ export const CustomerPlanningActionsColumns = [
     id: 'select',
     header: ({ table }) => (
       <Checkbox
-        {...{
-          checked: table.getIsAllRowsSelected(),
-          indeterminate: table.getIsSomeRowsSelected(),
-          onChange: table.getToggleAllRowsSelectedHandler(),
-        }}
+        isChecked={table.getIsAllRowsSelected()}
+        isIndeterminate={table.getIsSomeRowsSelected()}
+        onChange={table.getToggleAllRowsSelectedHandler()}
       />
     ),
     cell: ({ row }) => (
       <Checkbox
-        {...{
-          checked: row.getIsSelected(),
-          disabled: !row.getCanSelect(),
-          indeterminate: row.getIsSomeSelected(),
-          onChange: row.getToggleSelectedHandler(),
-        }}
+        isChecked={row.getIsSelected()}
+        isIndeterminate={row.getIsSomeSelected()}
+        onChange={row.getToggleSelectedHandler()}
       />
     ),
   }),

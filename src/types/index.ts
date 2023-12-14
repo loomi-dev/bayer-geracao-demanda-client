@@ -40,8 +40,12 @@ export enum HistoricValue {
   'accepted' = 'Aprovado',
   'rejected' = 'Recusado',
 }
-export enum HistoricStatusValue {
+export enum HistoricStatusVariant {
   'ready_for_evaluation' = 'table_primary',
   'accepted' = 'table_success',
   'rejected' = 'table_error',
+}
+export enum HistoricStatusValue {
+  'accepted' = 'aprovou',
+  'rejected' = 'recusou',
 }

@@ -26,6 +26,7 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
               <Historic.Header date={creation_date} status={status} />
 
               <PastPlanningHistoricTitle
+                status={status}
                 userRelated={related}
                 userSessionId={userSessionId}
                 previousHistoryAuthor={previousHistoryUsername}

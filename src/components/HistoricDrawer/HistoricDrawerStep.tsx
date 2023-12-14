@@ -14,7 +14,7 @@ export const HistoricDrawerStep = ({
   children,
   incomplete = <ClockRegularIcon />,
   active = <ClockRegularIcon />,
-  complete = <ClockRegularIcon color="#fff" />,
+  complete = <ClockRegularIcon />,
 }: HistoricDrawerStepProps) => (
   <Step>
     <StepIndicator>
