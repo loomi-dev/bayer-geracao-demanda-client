@@ -52,6 +52,14 @@ export const Mask = {
       currency: 'BRL',
     });
   },
+  formatValue: (value: string | number): string => {
+    if (!value && value !== 0) return '';
+    const valueWithoutMask = String(value)
+      .replace(/[^0-9]/g, '')
+      .trim();
+
+    return Number(valueWithoutMask).toLocaleString('pt-BR');
+  },
   formatPhone: (value: string, maskType: MaskType = 'numbers') =>
     applyMask(value, '(**) * ****-****', maskType),
 };
