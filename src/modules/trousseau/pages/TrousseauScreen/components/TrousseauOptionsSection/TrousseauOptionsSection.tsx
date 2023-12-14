@@ -3,7 +3,7 @@ import { Divider, Flex, Text } from '@chakra-ui/react';
 import { useGetTrousseau } from '@/api';
 import { Trousseau } from '@/components';
 
-import { TrousseauDownloadOption } from './TrousseauDownloadOption';
+import { TrousseauCatalogOption } from './TrousseauCatalogOption';
 import { TrousseauRecomendations } from './TrousseauRecomendations';
 
 export const TrousseauOptionsSection = () => {
@@ -36,7 +36,7 @@ export const TrousseauOptionsSection = () => {
       </Trousseau.Container>
       <Flex gap="0.8rem" mt="2rem" flexDir="column">
         {catalogs?.map((catalog) => (
-          <TrousseauDownloadOption
+          <TrousseauCatalogOption
             key={catalog.id}
             name={catalog.name}
             description={catalog.description}

@@ -3,13 +3,18 @@ import Image from 'next/image';
 
 import { DownloadIcon } from '@/components';
 
-type TrousseauDownloadOption = {
+type TrousseauCatalogOptionProps = {
   name: string;
   description: string;
   downloadUrl?: string;
-  imageUrl?: string;
+  imageUrl: string;
 };
-export const TrousseauDownloadOption = ({ name, description, downloadUrl, imageUrl }) => (
+export const TrousseauCatalogOption = ({
+  name,
+  description,
+  downloadUrl,
+  imageUrl,
+}: TrousseauCatalogOptionProps) => (
   <Flex
     w="100%"
     borderRadius="1.6rem"
