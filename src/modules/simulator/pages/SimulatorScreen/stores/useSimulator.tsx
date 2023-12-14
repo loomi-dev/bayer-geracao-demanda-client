@@ -2,9 +2,9 @@ import { create } from 'zustand';
 
 const formatValue = (value: string) => parseFloat(value.replaceAll('.', '').replaceAll(',', '.'));
 type UseSimulatorStore = {
-  bagsQuantity: number | string;
-  i2xBagsQuantity: number | string;
-  xtdBagsQuantity: number | string;
+  bagsQuantity: number;
+  i2xBagsQuantity: number;
+  xtdBagsQuantity: number;
   plantability: number;
   isBayerSellingOnly: boolean;
   setIsBayerSellingOnly: (value: boolean) => void;
