@@ -20,9 +20,9 @@ export const HarvestSection = () => {
           onChange={setBagsQuantity}
         />
         <Pipe />
-        <HarvestInformationItem label="Sacos I2x?" onChange={setI2xBagsQuantity} />
+        <HarvestInformationItem label="Sacos I2x" onChange={setI2xBagsQuantity} />
         <Pipe />
-        <HarvestInformationItem label="Sacos XTD?" onChange={setXtdBagsQuantity} />
+        <HarvestInformationItem label="Sacos XTD" onChange={setXtdBagsQuantity} />
       </HStack>
 
       <HStack w="100%" spacing="10rem">
