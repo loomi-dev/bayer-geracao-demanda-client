@@ -1,7 +1,5 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 
-import { HistoricStatusValue } from '@/types';
-
 import { HistoricTitle } from './HistoricTitle';
 
 type HistoricTitleManagerProps = {
@@ -21,8 +19,8 @@ export const HistoricTitleManager = ({
     {authorIsUserSession ? (
       <HistoricTitle textStyle="body4">
         Você{' '}
-        <Text as="span" color={status === 'accepted' ? 'green.100' : 'text.brand'}>
-          {HistoricStatusValue[status]}
+        <Text as="span" color={status === 'accepted' ? 'green.100' : 'red.danger_100'}>
+          {status === 'accepted' ? 'aprovou' : 'recusou'}
         </Text>{' '}
         ações do planejamento de {receiverFarmer}
       </HistoricTitle>
@@ -30,8 +28,8 @@ export const HistoricTitleManager = ({
       <>
         <HistoricTitle textStyle="body4">
           {author}{' '}
-          <Text as="span" color={status === 'accepted' ? 'green.100' : 'text.brand'}>
-            {HistoricStatusValue[status]}
+          <Text as="span" color={status === 'accepted' ? 'green.100' : 'red.danger_100'}>
+            {status === 'accepted' ? 'aprovou' : 'recusou'}
           </Text>{' '}
           seu planejamento
         </HistoricTitle>

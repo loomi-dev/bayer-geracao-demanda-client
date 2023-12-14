@@ -21,7 +21,16 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
         const previousHistoryUsername = lastHistoric?.at(index - 1)?.related?.username ?? '';
 
         return (
-          <HistoricDrawer.Step key={id}>
+          <HistoricDrawer.Step
+            key={id}
+            bg={
+              status !== 'ready_for_evaluation'
+                ? status === 'accepted'
+                  ? 'green.100'
+                  : 'red.danger_100'
+                : 'greyscale.225'
+            }
+          >
             <Historic.Container borderBottom={isLastHistoricItem ? 'none' : '1px solid'}>
               <Historic.Header date={creation_date} status={status} />
 

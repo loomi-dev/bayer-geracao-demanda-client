@@ -45,7 +45,3 @@ export enum HistoricStatusVariant {
   'accepted' = 'table_success',
   'rejected' = 'table_error',
 }
-export enum HistoricStatusValue {
-  'accepted' = 'aprovou',
-  'rejected' = 'recusou',
-}
