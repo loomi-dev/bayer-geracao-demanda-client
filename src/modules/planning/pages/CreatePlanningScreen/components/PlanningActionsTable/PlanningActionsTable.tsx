@@ -2,10 +2,11 @@ import { HStack, Text, Skeleton, useDisclosure } from '@chakra-ui/react';
 import { Row } from '@tanstack/react-table';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
-import { useGetPlanningActions } from '@/api';
+import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
+import { STALE_TIME_CONFIG } from '@/config';
 import { usePagination } from '@/hooks';
 import { formatPrice } from '@/utils';
 
@@ -52,6 +53,19 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
     { planningId, pagination: { page: currentPage, pageSize: 5 } },
     {
       enabled: Boolean(planningId),
+      staleTime: STALE_TIME_CONFIG,
+    },
+  );
+
+  const {
+    data: dataPlanningActionsStatistics,
+    isLoading: isLoadingDataPlanningActionsStatistics,
+    isFetching: isFetchingDataPlanningActionsStatistics,
+  } = useGetPlanningActionsStatistics(
+    { planningId },
+    {
+      enabled: Boolean(planningId),
+      staleTime: STALE_TIME_CONFIG,
     },
   );
 
@@ -59,22 +73,17 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
 
   const isLoadingPlanningActionsList =
     isLoadingDataPlanningActions || isFetchingDataPlanningActions;
-  const planningActionsList = useMemo(
-    () => dataPlanningActions?.data ?? [],
-    [dataPlanningActions?.data],
+  const planningActionsList = dataPlanningActions?.data ?? [];
+
+  const actionsKit = dataPlanningActionsStatistics?.data.metric?.farm_kit_in_cents ?? 0;
+  const actionsRelationship = Number(
+    dataPlanningActionsStatistics?.data.metric?.relationship_task_in_cent ?? 0,
   );
+  const actionsTask = Number(dataPlanningActionsStatistics?.data.metric?.farm_task_in_cents ?? 0);
 
-  const totalPlanningActionsBudgetValue = useMemo(
-    () =>
-      planningActionsList.reduce((totalValue, planningAction) => {
-        const planningActionValue = planningAction?.amountInCents ?? 0;
-
-        totalValue += planningActionValue;
-
-        return totalValue;
-      }, 0),
-    [planningActionsList],
-  );
+  const totalPlanningActionsBudgetValue = actionsKit + actionsRelationship + actionsTask;
+  const isLoadingTotalPlanningActionsBudgetValue =
+    isLoadingDataPlanningActionsStatistics || isFetchingDataPlanningActionsStatistics;
 
   const handleSelectPlanningActionAndOpenViewerDrawer = (row: Row<PlanningAction>) => {
     setPlanningActionSelected(row.original);
@@ -92,6 +101,7 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
           bg: 'greyscale.500',
           cursor: 'pointer',
         }}
+        pb="0"
         onRowClick={handleSelectPlanningActionAndOpenViewerDrawer}
       >
         <HStack
@@ -102,7 +112,7 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
           mb="2rem"
           pt="2rem"
         >
-          {isLoadingPlanningActionsList ? (
+          {isLoadingTotalPlanningActionsBudgetValue ? (
             <Skeleton w="17rem" h="3rem" />
           ) : (
             <Text textStyle="action3" textTransform="uppercase">

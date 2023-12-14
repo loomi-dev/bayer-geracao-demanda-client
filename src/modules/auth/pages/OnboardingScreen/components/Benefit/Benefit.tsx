@@ -1,5 +1,4 @@
 import { Box, Text, TextProps } from '@chakra-ui/react';
-import React from 'react';
 
 type BenefitProps = {
   title: string;

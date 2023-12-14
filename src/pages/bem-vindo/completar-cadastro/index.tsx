@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { RegisterScreen } from '@/modules/auth';
+import { RegisterScreen } from '@/modules';
 import { NextPageWithLayout } from '@/pages/_app';
 
 const Page: NextPageWithLayout = () => <RegisterScreen />;

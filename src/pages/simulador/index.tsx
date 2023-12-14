@@ -1,5 +1,5 @@
 import { LayoutWithNotifications } from '@/layouts';
-import { SimulatorScreen } from '@/modules/simulator';
+import { SimulatorScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 

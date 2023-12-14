@@ -34,6 +34,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           type="text"
           onChangeCapture={handleChangeInputValue}
           onFocusCapture={handleChangeInputValue}
+          onBlurCapture={handleChangeInputValue}
           {...props}
           ref={ref}
         />

@@ -1,6 +1,6 @@
 import { Header, UserGroupBigIcon } from '@/components';
 import { LayoutWithoutNotifications } from '@/layouts';
-import { CustomersScreen } from '@/modules/customers';
+import { CustomersScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 

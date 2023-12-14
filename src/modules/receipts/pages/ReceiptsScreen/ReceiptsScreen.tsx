@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DrawerExpenseReceipt, FinalizedTables, RunningTable, TableFilter } from './components';
 
 export const ReceiptsScreen = () => (

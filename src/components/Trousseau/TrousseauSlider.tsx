@@ -2,20 +2,24 @@ import { ReactNode } from 'react';
 import { Swiper, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react';
 import 'swiper/css';
 
+type Children = {
+  name: string;
+  url: string;
+};
 type TrousseauSliderProps = {
-  children: (props: Pick<Trousseau, 'label' | 'image'>) => ReactNode;
-  trousseauList: Trousseau[];
+  children: ({ name, url }: Children) => ReactNode;
+  trousseauList?: Trousseau['material_items'];
   swiperSlideProps?: SwiperSlideProps;
 } & Omit<SwiperProps, 'children'>;
 
 export const TrousseauSlider = ({
-  trousseauList,
+  trousseauList = [],
   children,
   swiperSlideProps,
   ...restProps
 }: TrousseauSliderProps) => (
   <Swiper slidesPerView="auto" spaceBetween={20} {...restProps}>
-    {trousseauList.map(({ id, label, image }) => (
+    {trousseauList.map(({ id, name, photo }) => (
       <SwiperSlide
         {...swiperSlideProps}
         style={{
@@ -29,7 +33,7 @@ export const TrousseauSlider = ({
         }}
         key={id}
       >
-        {children({ label, image })}
+        {children({ name, url: photo?.url })}
       </SwiperSlide>
     ))}
   </Swiper>

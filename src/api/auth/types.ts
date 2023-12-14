@@ -21,5 +21,14 @@ export type UpdateUserData = {
 };
 export type UpdateUserResponse = {
   jwt: string;
-  user: User;
+  data: {
+    id: number;
+    company_name: string;
+    user: {
+      role: {
+        id: number;
+        name: Roles;
+      };
+    } & Omit<User, 'role'>;
+  };
 };
