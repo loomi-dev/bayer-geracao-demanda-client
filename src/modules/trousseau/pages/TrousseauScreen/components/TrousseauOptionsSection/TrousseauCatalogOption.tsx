@@ -1,17 +1,20 @@
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { DownloadIcon } from '@/components';
 
 type TrousseauCatalogOptionProps = {
   name: string;
   description: string;
-  downloadUrl?: string;
+  downloadUrl: string;
   imageUrl: string;
+  filename?: string;
 };
 export const TrousseauCatalogOption = ({
   name,
   description,
+  filename,
   downloadUrl,
   imageUrl,
 }: TrousseauCatalogOptionProps) => (
@@ -20,6 +23,7 @@ export const TrousseauCatalogOption = ({
     borderRadius="1.6rem"
     border="1px solid"
     justify="space-between"
+    align="center"
     borderColor="opacity.black.0.10"
     p="0.8rem"
   >
@@ -30,9 +34,11 @@ export const TrousseauCatalogOption = ({
         <Text textStyle="footnote">{description}</Text>
       </VStack>
     </HStack>
-    <HStack gap="1rem" _hover={{ opacity: '0.7', cursor: 'pointer' }} color="red.danger_50">
-      <Text textStyle="footnote">Download</Text>
-      <DownloadIcon />
-    </HStack>
+    <Link href={downloadUrl} download={filename}>
+      <HStack gap="1rem" _hover={{ opacity: '0.7', cursor: 'pointer' }} color="red.danger_50">
+        <Text textStyle="footnote">Download</Text>
+        <DownloadIcon />
+      </HStack>
+    </Link>
   </Flex>
 );

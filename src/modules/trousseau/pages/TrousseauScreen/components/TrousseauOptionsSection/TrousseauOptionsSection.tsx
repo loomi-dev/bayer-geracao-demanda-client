@@ -48,6 +48,7 @@ export const TrousseauOptionsSection = () => {
               key={catalog.id}
               name={catalog.name}
               description={catalog.description}
+              filename={catalog.document.name}
               imageUrl={catalog.photo?.url}
               downloadUrl={catalog.document?.url}
             />
