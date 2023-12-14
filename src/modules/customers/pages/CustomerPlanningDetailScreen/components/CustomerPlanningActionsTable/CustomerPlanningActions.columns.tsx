@@ -24,6 +24,7 @@ export const CustomerPlanningActionsColumns = [
     cell: ({ row }) => (
       <Checkbox
         isChecked={row.getIsSelected()}
+        isDisabled={!row.getCanSelect()}
         isIndeterminate={row.getIsSomeSelected()}
         onChange={row.getToggleSelectedHandler()}
       />
