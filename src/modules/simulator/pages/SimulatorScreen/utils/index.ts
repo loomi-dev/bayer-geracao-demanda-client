@@ -2,7 +2,7 @@ type TargetPercentage = 0.3 | 0.4 | 0.5;
 type TargetValue = number;
 type Target = Record<TargetPercentage, TargetValue>;
 
-export const TARGET_PERCENTAGE = [0.3, 0.4, 0.5];
+export const TARGET_PERCENTAGE: TargetPercentage[] = [0.3, 0.4, 0.5];
 
 const BIOTEC_INCENTIVE: Target = {
   0.3: 8,
@@ -32,7 +32,7 @@ export const calculateFinalGenerationDemand = (
   percentage: TargetPercentage,
 ) => {
   if (percentage < 0.3) return 0;
-  return bagsQuantity / (plantability * FINAL_GENERATION_DEMAND[percentage]);
+  return (bagsQuantity / plantability) * FINAL_GENERATION_DEMAND[percentage];
 };
 
 export const calculateBiotecIncentive = (
@@ -41,7 +41,7 @@ export const calculateBiotecIncentive = (
   percentage: TargetPercentage,
 ) => {
   if (!isBayerSellingOnly) return 0;
-  bagsQuantity * BIOTEC_INCENTIVE[percentage];
+  return bagsQuantity * BIOTEC_INCENTIVE[percentage];
 };
 
 export const calculatePenetration = (

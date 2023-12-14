@@ -8,13 +8,7 @@ import { TARGET_PERCENTAGE } from '../../utils';
 import { MinimumNumbersTableColumns, MinimunNumbersTableType } from './MinimumNumbersTable.columns';
 
 export const MinimumNumbersTable = () => {
-  const [bagsQuantity] = useSimulatorStore((state) => [
-    state.bagsQuantity,
-    state.i2xBagsQuantity,
-    state.xtdBagsQuantity,
-    state.plantability,
-    state.isBayerSellingOnly,
-  ]);
+  const [bagsQuantity] = useSimulatorStore((state) => [state.bagsQuantity]);
 
   const data: MinimunNumbersTableType[] = TARGET_PERCENTAGE.map((percentageValue) => ({
     'X12I+XTD': bagsQuantity * percentageValue ?? 0,

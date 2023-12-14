@@ -22,7 +22,7 @@ export const HarvestSlider = () => {
       </Text>
 
       <HStack w="33.6rem" gap="2rem">
-        <Slider value={plantability} onChange={setPlantability} min={0} max={1} step={0.1}>
+        <Slider value={plantability} onChange={setPlantability} min={0} max={2} step={0.1}>
           <SliderTrack h="0.9rem" borderRadius="2rem" bgColor="greyscale.450">
             <SliderFilledTrack bgColor="surface.brand" />
           </SliderTrack>
