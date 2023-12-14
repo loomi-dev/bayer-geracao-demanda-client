@@ -4,10 +4,11 @@ import { useGetTrousseau } from '@/api';
 import { Trousseau } from '@/components';
 
 import { TrousseauCatalogOption } from './TrousseauCatalogOption';
+import { TrousseauCatalogSkeleton } from './TrousseauCatalogSkeleton';
 import { TrousseauRecomendations } from './TrousseauRecomendations';
 
 export const TrousseauOptionsSection = () => {
-  const { data } = useGetTrousseau();
+  const { data, isLoading } = useGetTrousseau();
 
   const material_items = data?.data.material_items;
   const catalogs = data?.data.catalogs;
@@ -25,25 +26,33 @@ export const TrousseauOptionsSection = () => {
       </Text>
       <Divider w="full" borderColor="opacity.black.0.20" />
       <Trousseau.Container>
-        <Trousseau.Slider trousseauList={material_items}>
-          {({ name, url }) => (
-            <>
-              <Trousseau.Image src={url} />
-              <Trousseau.Label>{name}</Trousseau.Label>
-            </>
-          )}
-        </Trousseau.Slider>
+        {isLoading ? (
+          <Trousseau.Skeleton />
+        ) : (
+          <Trousseau.Slider trousseauList={material_items}>
+            {({ name, url }) => (
+              <>
+                <Trousseau.Image src={url} />
+                <Trousseau.Label>{name}</Trousseau.Label>
+              </>
+            )}
+          </Trousseau.Slider>
+        )}
       </Trousseau.Container>
       <Flex gap="0.8rem" mt="2rem" flexDir="column">
-        {catalogs?.map((catalog) => (
-          <TrousseauCatalogOption
-            key={catalog.id}
-            name={catalog.name}
-            description={catalog.description}
-            imageUrl={catalog.photo?.url}
-            downloadUrl={catalog.document?.url}
-          />
-        ))}
+        {isLoading ? (
+          <TrousseauCatalogSkeleton />
+        ) : (
+          catalogs?.map((catalog) => (
+            <TrousseauCatalogOption
+              key={catalog.id}
+              name={catalog.name}
+              description={catalog.description}
+              imageUrl={catalog.photo?.url}
+              downloadUrl={catalog.document?.url}
+            />
+          ))
+        )}
       </Flex>
 
       <TrousseauRecomendations />
