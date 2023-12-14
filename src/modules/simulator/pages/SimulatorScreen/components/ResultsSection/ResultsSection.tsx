@@ -21,7 +21,7 @@ export const ResultsSection = () => {
       state.isBayerSellingOnly,
     ]);
 
-  const percentage = (i2xBagsQuantity + xtdBagsQuantity) / bagsQuantity;
+  const percentage = bagsQuantity ? (i2xBagsQuantity + xtdBagsQuantity) / bagsQuantity : 0;
   const rebound = calculateRebound(bagsQuantity, percentage);
   const finalGenerationValue = calculateFinalGenerationDemand(
     bagsQuantity,

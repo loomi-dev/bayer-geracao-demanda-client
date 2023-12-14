@@ -20,12 +20,12 @@ export const HarvestSlider = () => {
   const handleOnChange = debounce((value: number) => setPlantability(value), 300);
 
   return (
-    <VStack align="flex-start" justify="space-between" spacing="3rem">
+    <VStack w="100%" align="flex-start" justify="space-between" spacing="3rem">
       <Text textStyle="action3" lineHeight="1.8rem" textTransform="uppercase">
         plantabilidade esperada
       </Text>
 
-      <HStack w="33.6rem" gap="2rem">
+      <HStack w="70%" gap="2rem">
         <Slider onChange={handleOnChange} min={0} max={2} step={0.1}>
           <SliderTrack h="0.9rem" borderRadius="2rem" bgColor="greyscale.450">
             <SliderFilledTrack bgColor="surface.brand" />

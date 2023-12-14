@@ -30,7 +30,13 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <InputGroup {...inputGroupProps}>
         {leftIcon && <InputLeftElement pointerEvents="none">{leftIcon}</InputLeftElement>}
 
-        <Input type="text" onChangeCapture={handleChangeInputValue} {...props} ref={ref} />
+        <Input
+          type="text"
+          onChangeCapture={handleChangeInputValue}
+          onFocusCapture={handleChangeInputValue}
+          {...props}
+          ref={ref}
+        />
 
         {rightIcon && <InputRightElement pointerEvents="none">{rightIcon}</InputRightElement>}
       </InputGroup>

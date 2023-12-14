@@ -36,6 +36,7 @@ export const HarvestInformationItem = ({ label, onChange }: HarvestInformationIt
         fontWeight="normal"
         py="1rem"
         px="0rem"
+        defaultValue={0}
         border="none"
         bg="transparent"
         mask={(value) => Mask.formatValue(value)}

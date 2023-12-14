@@ -53,7 +53,7 @@ export const Mask = {
     });
   },
   formatValue: (value: string | number): string => {
-    if (!value && value !== 0) return '';
+    if (!value && value !== 0) return '0';
     const valueWithoutMask = String(value)
       .replace(/[^0-9]/g, '')
       .trim();
