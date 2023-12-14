@@ -6,19 +6,21 @@ type HistoricTitleManagerProps = {
   authorIsUserSession: boolean;
   author: string;
   receiverFarmer: string;
+  status: HistoricStatus;
 };
 
 export const HistoricTitleManager = ({
   authorIsUserSession,
   author,
   receiverFarmer,
+  status,
 }: HistoricTitleManagerProps) => (
   <HStack py="1.5rem" spacing="0.8rem">
     {authorIsUserSession ? (
       <HistoricTitle textStyle="body4">
         Você{' '}
-        <Text as="span" color="text.brand">
-          recusou
+        <Text as="span" color={status === 'accepted' ? 'green.100' : 'red.danger_100'}>
+          {status === 'accepted' ? 'aprovou' : 'recusou'}
         </Text>{' '}
         ações do planejamento de {receiverFarmer}
       </HistoricTitle>
@@ -26,8 +28,8 @@ export const HistoricTitleManager = ({
       <>
         <HistoricTitle textStyle="body4">
           {author}{' '}
-          <Text as="span" color="text.brand">
-            recusou
+          <Text as="span" color={status === 'accepted' ? 'green.100' : 'red.danger_100'}>
+            {status === 'accepted' ? 'aprovou' : 'recusou'}
           </Text>{' '}
           seu planejamento
         </HistoricTitle>

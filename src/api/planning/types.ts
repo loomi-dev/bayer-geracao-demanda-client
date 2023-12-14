@@ -12,7 +12,12 @@ export type GetFarmerPlansParams = {
   page: number;
   farmerId: number;
 };
-export type GetFarmerPlansResponse = GenericListResponseType<Planning>;
+export type GetFarmerPlansResponse = {
+  meta: {
+    plannedAmountAggregateInCents: number;
+  } & GenericListResponseType<Planning>['meta'];
+  data: GenericListResponseType<Planning>['data'];
+};
 
 export type CreatePlanningData = {
   farmerId: number;

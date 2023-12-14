@@ -8,6 +8,12 @@ type PastPlanningHistoricStepsProps = {
   lastHistoric: Historic[];
 };
 
+enum HistoricDrawerStepColor {
+  'ready_for_evaluation' = 'greyscale.225',
+  'accepted' = 'green.100',
+  'rejected' = 'red.danger_100',
+}
+
 export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoricStepsProps) => {
   const session = useSession();
   const userSessionId = session.data?.user.id as number;
@@ -21,11 +27,12 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
         const previousHistoryUsername = lastHistoric?.at(index - 1)?.related?.username ?? '';
 
         return (
-          <HistoricDrawer.Step key={id}>
+          <HistoricDrawer.Step key={id} bg={HistoricDrawerStepColor[status]}>
             <Historic.Container borderBottom={isLastHistoricItem ? 'none' : '1px solid'}>
               <Historic.Header date={creation_date} status={status} />
 
               <PastPlanningHistoricTitle
+                status={status}
                 userRelated={related}
                 userSessionId={userSessionId}
                 previousHistoryAuthor={previousHistoryUsername}

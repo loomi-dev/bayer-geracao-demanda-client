@@ -4,12 +4,14 @@ type PastPlanningHistoricTitleProps = {
   userSessionId: number;
   userRelated: Historic['related'];
   previousHistoryAuthor: string;
+  status: HistoricStatus;
 };
 
 export const PastPlanningHistoricTitle = ({
   userSessionId,
   userRelated,
   previousHistoryAuthor,
+  status,
 }: PastPlanningHistoricTitleProps) => {
   const authorIsUserSession = userRelated?.id === userSessionId;
   const authorIsFarmer = userRelated?.role?.name === 'Farmer';
@@ -21,6 +23,7 @@ export const PastPlanningHistoricTitle = ({
 
   return (
     <Historic.TitleManager
+      status={status}
       author={author}
       receiverFarmer={previousHistoryAuthor}
       authorIsUserSession={authorIsUserSession}

@@ -38,11 +38,11 @@ export const HistoricAccordion = ({ planningActions }: HistoricAccordionProps) =
 
                 <HStack spacing="1.2rem">
                   <Text textStyle="action4" color="greyscale.700" lineHeight="2rem">
-                    25 Março 2024
+                    2023
                   </Text>
                   <Box rounded="full" bgColor="greyscale.450" boxSize="0.4rem" />
                   <Text textStyle="action4" color="greyscale.700" lineHeight="2rem">
-                    25 janeiro 2025
+                    2024
                   </Text>
                 </HStack>
               </VStack>

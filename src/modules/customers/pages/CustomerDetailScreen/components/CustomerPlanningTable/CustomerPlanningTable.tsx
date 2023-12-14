@@ -29,12 +29,16 @@ export const CustomerPlanningTable = () => {
       <Text textStyle="h4">Planejamentos</Text>
       <CustomerPendingPlanningNotification quantity={pendingPlans} />
       <DynamicTable<Planning>
+        variant="third"
         data={plannings}
         isLoading={isLoading}
         columns={customerPlanningColumns}
         fallbackMessage="Nenhum planejamento encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
-        hoverProps={{ bgColor: 'opacity.green.0.10', cursor: 'pointer' }}
+        hoverProps={{
+          bg: 'greyscale.500',
+          cursor: 'pointer',
+        }}
         onRowClick={onRowClick}
       />
       <Pagination

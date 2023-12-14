@@ -24,10 +24,3 @@ export const LAYOUT_SIDEBAR_WIDTH = { lg: '22.5rem', xl: '25.5rem', '3xl': '28.7
 export const LAYOUT_NOTIFICATION_BAR_WIDTH = { lg: '28rem', xl: '32rem', '3xl': '35.8rem' };
 
 export const PAGINATION_PAGE_SIZE = 30;
-
-export const TROUSSEAU_LIST = [
-  { id: 1, label: 'Chapéu Bayer', image: '/assets/images/enxoval1.png' },
-  { id: 2, label: 'Camisa polo', image: '/assets/images/enxoval2.png' },
-  { id: 3, label: 'Barracas', image: '/assets/images/enxoval3.png' },
-  { id: 4, label: 'Outdoor', image: '/assets/images/enxoval4.png' },
-] as Trousseau[];

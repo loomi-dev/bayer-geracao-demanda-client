@@ -97,7 +97,24 @@ type FinancialSummary = {
 
 type Trousseau = {
   id: number;
-  label: string;
-  image: string;
-  isSelected?: boolean;
+  name: string;
+  material_items: {
+    id: number;
+    name: string;
+    photo: {
+      url: string;
+    };
+  }[];
+  catalogs: {
+    id: number;
+    name: string;
+    description: string;
+    photo: {
+      url: string;
+    };
+    document: {
+      name: string;
+      url: string;
+    };
+  }[];
 };
