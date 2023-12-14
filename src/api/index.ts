@@ -4,3 +4,4 @@ export * from './farmer';
 export * from './customer';
 export * from './manager';
 export * from './planning';
+export * from './trousseau';
