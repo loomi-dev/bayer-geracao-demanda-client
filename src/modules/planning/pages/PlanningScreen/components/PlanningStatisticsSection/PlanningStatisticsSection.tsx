@@ -9,18 +9,23 @@ export const PlanningStatisticsSection = () => {
   const session = useSession();
   const userId = session.data?.user.id as number;
 
-  const { data: dataGetPlanningStatistics, isLoading: isLoadingDataGetPlanningStatistics } =
-    useGetPlanningStatistics(
-      {
-        userId,
-      },
-      {
-        enabled: Boolean(userId),
-      },
-    );
+  const {
+    data: dataGetPlanningStatistics,
+    isLoading: isLoadingDataGetPlanningStatistics,
+    isFetching: isFetchingDataGetPlanningStatistics,
+  } = useGetPlanningStatistics(
+    {
+      userId,
+    },
+    {
+      enabled: Boolean(userId),
+    },
+  );
   const summary = dataGetPlanningStatistics?.data?.[0]?.planning_summary ?? null;
 
   const plannedActions = summary?.planned_actions ?? 0;
+  const isLoadingPlanningStatistics =
+    isLoadingDataGetPlanningStatistics || isFetchingDataGetPlanningStatistics;
 
   const plannedKit = centsToCompactValue(summary?.farmk_kit_in_cents ?? 0);
   const plannedRelationship = centsToCompactValue(summary?.relationship_action_in_cents ?? 0);
@@ -43,7 +48,7 @@ export const PlanningStatisticsSection = () => {
         value={plannedActions}
         label="Ações planejadas"
         gridArea="stat1"
-        isLoading={isLoadingDataGetPlanningStatistics}
+        isLoading={isLoadingPlanningStatistics}
         skeletonStyles={{ w: '4rem' }}
       />
 
@@ -52,7 +57,7 @@ export const PlanningStatisticsSection = () => {
           Planejado / total
         </Text>
 
-        {isLoadingDataGetPlanningStatistics ? (
+        {isLoadingPlanningStatistics ? (
           <HStack>
             <Skeleton h="3rem" w="10rem" />
             <Skeleton h="3rem" w="12rem" />
@@ -70,20 +75,20 @@ export const PlanningStatisticsSection = () => {
         value={`R$ ${plannedKit}`}
         label="Ações de enxoval"
         gridArea="stat3"
-        isLoading={isLoadingDataGetPlanningStatistics}
+        isLoading={isLoadingPlanningStatistics}
       />
       <StatCard
         value={`R$ ${plannedRelationship}`}
         label="Ações de relacionamento"
         gridArea="stat4"
         labelStyles={{ maxW: '12rem' }}
-        isLoading={isLoadingDataGetPlanningStatistics}
+        isLoading={isLoadingPlanningStatistics}
       />
       <StatCard
         value={`R$ ${plannedTask}`}
         label="Ações de campo"
         gridArea="stat5"
-        isLoading={isLoadingDataGetPlanningStatistics}
+        isLoading={isLoadingPlanningStatistics}
       />
     </Grid>
   );
