@@ -24,6 +24,8 @@ export const authOptions: NextAuthOptions = {
 
       if (trigger === 'update' && session) {
         token.user = session;
+
+        return token;
       }
 
       return token;

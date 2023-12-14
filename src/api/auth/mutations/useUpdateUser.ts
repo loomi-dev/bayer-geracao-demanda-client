@@ -23,14 +23,16 @@ export const useUpdateUser = (options?: MutOpt<UpdateUserResponse, UpdateUserDat
 
       const {
         jwt: accessToken,
-        data: { email, username, role, id, confirmed },
+        data: {
+          user: { email, username, role, id, confirmed },
+        },
       } = newUser;
 
       const newUserSession: User = {
         accessToken,
         email,
         username,
-        role,
+        role: role.name,
         id,
         confirmed,
       };
@@ -39,9 +41,9 @@ export const useUpdateUser = (options?: MutOpt<UpdateUserResponse, UpdateUserDat
 
       return newUser;
     },
-    onSuccess: ({ data }) => {
+    onSuccess: ({ data: { user } }) => {
       const privatePage =
-        data?.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+        user.role.name === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
 
       push(privatePage);
       toast({
