@@ -11,9 +11,11 @@ import { ActionCards } from './ActionCards';
 import { CustomerPlanningActionsColumns } from './CustomerPlanningActions.columns';
 import { PlanningActionResume } from './PlanningActionResume';
 
-const CustomerHistoricDynamicDrawer = dynamic(() =>
-  import('../CustomerHistoricDrawer').then(({ CustomerHistoricDrawer }) => CustomerHistoricDrawer),
-);
+const CustomerHistoricDynamicDrawer = dynamic(async () => {
+  const { CustomerHistoricDrawer } = await import('../CustomerHistoricDrawer');
+
+  return CustomerHistoricDrawer;
+});
 
 export const CustomerPlanningActionsTable = () => {
   const { query } = useRouter();
@@ -68,6 +70,7 @@ export const CustomerPlanningActionsTable = () => {
         isLoading={isLoadingMetrics}
       />
       <DynamicTable<PlanningAction>
+        variant="third"
         data={actions}
         columns={CustomerPlanningActionsColumns}
         isLoading={isLoadingActions}
@@ -78,7 +81,10 @@ export const CustomerPlanningActionsTable = () => {
         }}
         fallbackMessage="Nenhuma ação encontrada"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
-        hoverProps={{ bgColor: 'opacity.green.0.10', cursor: 'pointer' }}
+        hoverProps={{
+          bg: 'greyscale.500',
+          cursor: 'pointer',
+        }}
       >
         {selectedRows.length ? (
           <Flex
