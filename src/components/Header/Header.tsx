@@ -1,4 +1,4 @@
-import { Flex, HStack, SkeletonText, Text } from '@chakra-ui/react';
+import { Flex, FlexProps, HStack, SkeletonText, Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 import { CircleIcon } from '../CircleIcon';
@@ -10,9 +10,9 @@ type HeaderProps = {
   icon: ReactNode;
   isLoading?: boolean;
   onClick?: () => void;
-};
-export const Header = ({ label, subLabel, icon, onClick, isLoading }: HeaderProps) => (
-  <Flex justify="space-between" width="100%">
+} & FlexProps;
+export const Header = ({ label, subLabel, icon, onClick, isLoading, ...props }: HeaderProps) => (
+  <Flex justify="space-between" width="100%" {...props}>
     <HStack gap="1.6rem">
       <CircleIcon
         onClick={onClick}
