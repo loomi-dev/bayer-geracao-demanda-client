@@ -10,25 +10,29 @@ import { CustomerPlanningTypeColumn } from './CustomerPlanningTypeColumn';
 const columnHelper = createColumnHelper<PlanningAction>();
 
 dayjs.extend(relativeTime);
-export const CustomerPlanningActionsColumns = [
-  columnHelper.accessor((data) => data.id, {
-    id: 'select',
-    header: ({ table }) => (
-      <Checkbox
-        isChecked={table.getIsAllRowsSelected()}
-        isIndeterminate={table.getIsSomeRowsSelected()}
-        onChange={table.getToggleAllRowsSelectedHandler()}
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        isChecked={row.getIsSelected()}
-        isDisabled={!row.getCanSelect()}
-        isIndeterminate={row.getIsSomeSelected()}
-        onChange={row.getToggleSelectedHandler()}
-      />
-    ),
-  }),
+export const CustomerPlanningActionsColumns = (planningStatus?: string) => [
+  ...(planningStatus
+    ? [
+        columnHelper.accessor((data) => data.id, {
+          id: 'select',
+          header: ({ table }) => (
+            <Checkbox
+              isChecked={table.getIsAllRowsSelected()}
+              isIndeterminate={table.getIsSomeRowsSelected()}
+              onChange={table.getToggleAllRowsSelectedHandler()}
+            />
+          ),
+          cell: ({ row }) => (
+            <Checkbox
+              isChecked={row.getIsSelected()}
+              isDisabled={!row.getCanSelect()}
+              isIndeterminate={row.getIsSomeSelected()}
+              onChange={row.getToggleSelectedHandler()}
+            />
+          ),
+        }),
+      ]
+    : []),
   columnHelper.accessor((data) => data.title, {
     id: 'tituloAcao',
     header: () => <Text>Título da ação</Text>,
