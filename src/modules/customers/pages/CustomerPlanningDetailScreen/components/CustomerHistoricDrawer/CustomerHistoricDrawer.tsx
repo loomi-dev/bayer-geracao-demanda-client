@@ -34,7 +34,7 @@ export const CustomerHistoricDrawer = ({
   const { mutate: mutateUpdatePlanningHistoric, isLoading } = useUpdatePlanningHistoric();
   const { data: getPlanningActions } = useGetPlanningActions(
     { planningId },
-    { enabled: Boolean(planningId) && selectedActions.length > 0 },
+    { enabled: Boolean(planningId) && !selectedActions.length },
   );
   const historic = getPlanningHistoric?.data.historic ?? [];
   const planningActions = getPlanningActions?.data ?? [];
