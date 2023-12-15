@@ -117,4 +117,11 @@ type Trousseau = {
       url: string;
     };
   }[];
+  suppliers: {
+    email: string;
+    id: number;
+    name: string;
+    phoneNumber: string;
+    region: string;
+  }[];
 };
