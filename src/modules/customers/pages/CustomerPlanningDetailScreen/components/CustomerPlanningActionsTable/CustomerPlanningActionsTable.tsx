@@ -3,7 +3,11 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
+import {
+  useGetPlanningActions,
+  useGetPlanningActionsStatistics,
+  useGetPlanningStatus,
+} from '@/api';
 import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 
@@ -38,7 +42,9 @@ export const CustomerPlanningActionsTable = () => {
     { planningId, pagination: { page: currentPage, pageSize: 10 } },
     { enabled: Boolean(planningId) },
   );
-
+  const { data } = useGetPlanningStatus({ planningId }, { enabled: Boolean(planningId) });
+  const historic = data?.data.historic ?? [];
+  const planningStatus = historic[historic.length - 1].status;
   const metrics = metricsData?.data.metric;
   const actions = actionsData?.data ?? [];
   const farmKitValue = Number(metrics?.farm_kit_in_cents ?? 0);
@@ -110,6 +116,7 @@ export const CustomerPlanningActionsTable = () => {
       />
       <PlanningActionResume
         onApprove={onApprovePlanning}
+        planningStatus={planningStatus}
         onReject={onRejectPlanning}
         planningValue={planningValue}
       />
