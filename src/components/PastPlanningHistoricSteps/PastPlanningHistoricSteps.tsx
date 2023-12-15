@@ -8,6 +8,7 @@ import {
   RejectedIcon,
   SmallDoneIcon,
 } from '@/components';
+import { getTotalPlanningBudgetValue } from '@/utils';
 
 import { PastPlanningHistoricTitle } from './PastPlanningHistoricTitle';
 
@@ -44,6 +45,7 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
         const relatedUserIdIsCurrentSessionUserId = related?.id === userSessionId;
         const isLastHistoricItem = lastHistoricIndex === index;
         const previousHistoryUsername = lastHistoric?.at(index - 1)?.related?.username ?? '';
+        const planningTotalBudgetValue = getTotalPlanningBudgetValue(actions);
 
         return (
           <HistoricDrawer.Step
@@ -66,7 +68,7 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
               {related?.role?.name === 'Farmer' ? (
                 <Historic.AccordionContainer>
                   <Historic.Accordion planningActions={actions} />
-                  <Historic.Footer totalValue="0" />
+                  <Historic.Footer totalValue={planningTotalBudgetValue} />
                 </Historic.AccordionContainer>
               ) : (
                 <Historic.Table data={actions} isLoading={false} />
