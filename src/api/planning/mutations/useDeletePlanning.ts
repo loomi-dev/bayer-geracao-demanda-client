@@ -17,16 +17,17 @@ export const useDeletePlanning = (options?: MutOpt<DeletePlanningResponse>) => {
     onSuccess: async () => {
       queryClient.invalidateQueries(['farmer-plans']);
       queryClient.invalidateQueries(['planning-statistics']);
+      queryClient.invalidateQueries(['get-farmer']);
 
       toast({
-        description: 'Seu planejamento foi deletado.',
+        description: 'Você deletou um planejamento.',
         status: 'success',
       });
     },
     onError: () => {
       toast({
         description:
-          'Não foi possível deletar o planejamento, tente novamente ou contate o suporte.',
+          'Ocorreu um erro ao deletar o planejamento, tente novamente ou contate o suporte.',
         status: 'error',
       });
     },

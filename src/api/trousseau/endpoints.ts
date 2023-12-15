@@ -18,6 +18,7 @@ export const getTrousseau = async (): Promise<UseGetTrousseauResponse> => {
           document: true,
         },
       },
+      suppliers: true,
     },
   });
   const { data } = await axios.authorized().get(`/trousseau?${query}`);

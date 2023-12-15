@@ -16,9 +16,9 @@ export const CustomToast = ({
   ...restProps
 }: CustomToastProps) => {
   const toastStatusColors = {
-    success: 'opacity.green.0.30',
-    error: 'opacity.red.0.30',
-    info: 'opacity.gray.0.30',
+    success: 'opacity.green.0.65',
+    error: 'opacity.red.0.65',
+    info: 'opacity.gray.0.65',
   };
 
   return (

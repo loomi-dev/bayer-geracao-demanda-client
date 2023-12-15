@@ -81,10 +81,6 @@ export const CustomerPlanningActionsTable = () => {
         }}
         fallbackMessage="Nenhuma ação encontrada"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
-        hoverProps={{
-          bg: 'greyscale.500',
-          cursor: 'pointer',
-        }}
       >
         {selectedRows.length ? (
           <Flex

@@ -13,3 +13,4 @@ export * from './formatDate';
 export * from './formatMonth';
 export * from './brlToNumber';
 export * from './brlToCents';
+export * from './formatValue';

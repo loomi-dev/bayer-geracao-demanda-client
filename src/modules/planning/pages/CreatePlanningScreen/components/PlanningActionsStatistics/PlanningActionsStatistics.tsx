@@ -9,8 +9,11 @@ export const PlanningActionsStatistics = () => {
   const { query } = useRouter();
   const planningId = Number(query?.planning_id);
 
-  const { data: dataPlanningActionsStatistics, isLoading: isLoadingDataPlanningActionsStatistics } =
-    useGetPlanningActionsStatistics({ planningId }, { enabled: Boolean(planningId) });
+  const {
+    data: dataPlanningActionsStatistics,
+    isLoading: isLoadingDataPlanningActionsStatistics,
+    isFetching: isFetchingDataPlanningActionsStatistics,
+  } = useGetPlanningActionsStatistics({ planningId }, { enabled: Boolean(planningId) });
 
   const actionsKit = centsToCompactValue(
     dataPlanningActionsStatistics?.data.metric?.farm_kit_in_cents ?? 0,
@@ -22,6 +25,9 @@ export const PlanningActionsStatistics = () => {
     Number(dataPlanningActionsStatistics?.data.metric?.farm_task_in_cents ?? 0),
   );
 
+  const isLoadingPlanningActionsStatistics =
+    isLoadingDataPlanningActionsStatistics || isFetchingDataPlanningActionsStatistics;
+
   return (
     <Flex w="full" flexWrap="wrap" gap="1.6rem">
       <StatCard
@@ -30,7 +36,7 @@ export const PlanningActionsStatistics = () => {
         flex="1"
         justify="space-between"
         labelStyles={{ maxW: '12rem', minW: '5.3rem' }}
-        isLoading={isLoadingDataPlanningActionsStatistics}
+        isLoading={isLoadingPlanningActionsStatistics}
       />
       <StatCard
         value={`R$ ${actionsRelationship}`}
@@ -38,7 +44,7 @@ export const PlanningActionsStatistics = () => {
         flex="1"
         justify="space-between"
         labelStyles={{ maxW: '8rem' }}
-        isLoading={isLoadingDataPlanningActionsStatistics}
+        isLoading={isLoadingPlanningActionsStatistics}
       />
       <StatCard
         value={`R$ ${actionsTask}`}
@@ -46,7 +52,7 @@ export const PlanningActionsStatistics = () => {
         flex="1"
         justify="space-between"
         labelStyles={{ maxW: '12rem', minW: '5.3rem' }}
-        isLoading={isLoadingDataPlanningActionsStatistics}
+        isLoading={isLoadingPlanningActionsStatistics}
       />
     </Flex>
   );
