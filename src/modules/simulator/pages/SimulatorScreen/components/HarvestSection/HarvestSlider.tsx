@@ -26,7 +26,7 @@ export const HarvestSlider = () => {
       </Text>
 
       <HStack w="70%" gap="2rem">
-        <Slider onChange={handleOnChange} min={0} max={2} step={0.1}>
+        <Slider onChange={handleOnChange} defaultValue={0.1} min={0} max={2} step={0.1}>
           <SliderTrack h="0.9rem" borderRadius="2rem" bgColor="greyscale.450">
             <SliderFilledTrack bgColor="surface.brand" />
           </SliderTrack>

@@ -3,9 +3,11 @@ export const TARGET_PERCENTAGE = [0.3, 0.4, 0.5];
 export const calculateRebound = (bagsQuantity: number, percentage: number) => {
   let reboundPercentValue = 0;
 
-  if (percentage >= 0.3 && percentage < 0.4) reboundPercentValue = 5;
-  if (percentage >= 0.4 && percentage < 0.5) reboundPercentValue = 8;
-  if (percentage >= 0.5) reboundPercentValue = 15;
+  if (percentage >= TARGET_PERCENTAGE[0] && percentage < TARGET_PERCENTAGE[1])
+    reboundPercentValue = 5;
+  if (percentage >= TARGET_PERCENTAGE[1] && percentage < TARGET_PERCENTAGE[2])
+    reboundPercentValue = 8;
+  if (percentage >= TARGET_PERCENTAGE[2]) reboundPercentValue = 15;
 
   return bagsQuantity * reboundPercentValue;
 };
@@ -17,9 +19,11 @@ export const calculateFinalGenerationDemand = (
 ) => {
   let finalGenerationDemandPercentValue = 0;
 
-  if (percentage >= 0.3 && percentage < 0.4) finalGenerationDemandPercentValue = 1;
-  if (percentage >= 0.4 && percentage < 0.5) finalGenerationDemandPercentValue = 1.5;
-  if (percentage >= 0.5) finalGenerationDemandPercentValue = 2;
+  if (percentage >= TARGET_PERCENTAGE[0] && percentage < TARGET_PERCENTAGE[1])
+    finalGenerationDemandPercentValue = 1;
+  if (percentage >= TARGET_PERCENTAGE[1] && percentage < TARGET_PERCENTAGE[2])
+    finalGenerationDemandPercentValue = 1.5;
+  if (percentage >= TARGET_PERCENTAGE[2]) finalGenerationDemandPercentValue = 2;
 
   return (bagsQuantity / plantability) * finalGenerationDemandPercentValue;
 };
@@ -31,7 +35,7 @@ export const calculateBiotecIncentive = (
 ) => {
   let biotecIncentivePercentValue = 0;
 
-  if (isBayerSellingOnly && percentage >= 0.3) biotecIncentivePercentValue = 8;
+  if (isBayerSellingOnly && percentage >= TARGET_PERCENTAGE[0]) biotecIncentivePercentValue = 8;
 
   return bagsQuantity * biotecIncentivePercentValue;
 };
