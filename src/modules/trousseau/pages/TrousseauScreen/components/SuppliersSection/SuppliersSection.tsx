@@ -4,7 +4,7 @@ import { SupplierCard } from './SupplierCard';
 import { SuppliersSectionSkeleton } from './SuppliersSectionSkeleton';
 
 type SuppliersSectionProps = {
-  suppliers?: TrousseauSuppliers[];
+  suppliers?: TrousseauSupplier[];
   isLoading: boolean;
 };
 export const SuppliersSection = ({ suppliers = [], isLoading }: SuppliersSectionProps) => (

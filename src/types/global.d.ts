@@ -107,7 +107,7 @@ type TrousseauCatalog = {
     url: string;
   };
 };
-type TrousseauItems = {
+type TrousseauItem = {
   id: number;
   name: string;
   photo: {
@@ -115,7 +115,7 @@ type TrousseauItems = {
   };
 };
 
-type TrousseauSuppliers = {
+type TrousseauSupplier = {
   email: string;
   id: number;
   name: string;
@@ -125,7 +125,7 @@ type TrousseauSuppliers = {
 type Trousseau = {
   id: number;
   name: string;
-  material_items: TrousseauItems[];
+  material_items: TrousseauItem[];
   catalogs: TrousseauCatalog[];
-  suppliers: TrousseauSuppliers[];
+  suppliers: TrousseauSupplier[];
 };
