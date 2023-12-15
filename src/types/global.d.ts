@@ -6,7 +6,6 @@ type User = {
   confirmed: boolean;
   blocked: boolean;
   role: Roles;
-  company_position: string;
   lastAccess: Date;
 };
 type PlanningSummary = {
