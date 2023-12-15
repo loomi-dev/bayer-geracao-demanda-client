@@ -95,26 +95,37 @@ type FinancialSummary = {
   utilized_in_cents: number;
 };
 
+type TrousseauCatalog = {
+  id: number;
+  name: string;
+  description: string;
+  photo: {
+    url: string;
+  };
+  document: {
+    name: string;
+    url: string;
+  };
+};
+type TrousseauItem = {
+  id: number;
+  name: string;
+  photo: {
+    url: string;
+  };
+};
+
+type TrousseauSupplier = {
+  email: string;
+  id: number;
+  name: string;
+  phoneNumber: string;
+  region: string;
+};
 type Trousseau = {
   id: number;
   name: string;
-  material_items: {
-    id: number;
-    name: string;
-    photo: {
-      url: string;
-    };
-  }[];
-  catalogs: {
-    id: number;
-    name: string;
-    description: string;
-    photo: {
-      url: string;
-    };
-    document: {
-      name: string;
-      url: string;
-    };
-  }[];
+  material_items: TrousseauItem[];
+  catalogs: TrousseauCatalog[];
+  suppliers: TrousseauSupplier[];
 };
