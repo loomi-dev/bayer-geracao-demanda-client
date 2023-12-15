@@ -9,9 +9,12 @@ import { CustomerPlanningTable, CustomerStatisticsSection } from './components';
 export const CustomerDetailScreen = () => {
   const { push, query } = useRouter();
   const customerId = Number(query.customer_id);
-  const { data: getCustomerData, isLoading: isLoadingCustomer } = useGetFarmer({
-    farmerId: customerId,
-  });
+  const { data: getCustomerData, isLoading: isLoadingCustomer } = useGetFarmer(
+    {
+      farmerId: customerId,
+    },
+    { enabled: Boolean(customerId) },
+  );
   const {
     data: getPlanningData,
     isLoading: isLoadingPlanning,

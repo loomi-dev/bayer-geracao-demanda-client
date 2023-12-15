@@ -22,7 +22,7 @@ export const Header = ({ label, subLabel, icon, onClick, isLoading, ...props }: 
         {icon}
       </CircleIcon>
       {isLoading ? (
-        <SkeletonText noOfLines={2} skeletonHeight="4rem" w="25rem" />
+        <SkeletonText noOfLines={2} skeletonHeight="2.5rem" w="25rem" />
       ) : (
         <Flex flexDir="column" align="flex-start">
           <Text textStyle={{ lg: 'h4', xl: 'h3' }} fontWeight={{ lg: 'normal' }}>
