@@ -7,8 +7,8 @@ import { TrousseauCatalogSkeleton } from './TrousseauCatalogSkeleton';
 import { TrousseauRecomendations } from './TrousseauRecomendations';
 
 type TrousseauOptionsSectionProps = {
-  materialItems?: Trousseau['material_items'];
-  catalogs?: Trousseau['catalogs'];
+  materialItems?: TrousseauItems[];
+  catalogs?: TrousseauCatalog[];
   isLoading: boolean;
 };
 export const TrousseauOptionsSection = ({
