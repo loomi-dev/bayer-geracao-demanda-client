@@ -7,7 +7,9 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Text,
+  useToast,
 } from '@chakra-ui/react';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 
 import { CircleIcon, DocumentIcon } from '@/components';
@@ -17,7 +19,6 @@ import { ActionDetails } from '@/modules/receipts/components';
 
 import { useActionStore, useDrawerExpenseReceipt } from '../../stores';
 import { ProveYourExpenses } from '../ProveYourExpenses';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   DrawerExpenseReceiptFormSchemaType,
@@ -27,7 +28,20 @@ import {
 export const Component = () => {
   const { handleSubmit, getValues } = useFormContext<DrawerExpenseReceiptFormSchemaType>();
 
-  const { mutate: putActionMutation, isLoading: isLoadingPutAction } = usePutAction();
+  const isOpen = useDrawerExpenseReceipt((state) => state.isOpen);
+  const onClose = useDrawerExpenseReceipt((state) => state.onClose);
+
+  const toast = useToast();
+
+  const { mutate: putActionMutation, isLoading: isLoadingPutAction } = usePutAction({
+    onSuccess: () => {
+      toast({ description: 'Ação criada com sucesso !', status: 'success' });
+      onClose();
+    },
+    onError: () => {
+      toast({ description: 'Não foi possivel criar com sucesso !', status: 'error' });
+    },
+  });
 
   const { mutate: uploadFileMutate, isLoading: isLoadingUploadFile } = useUploadFile({
     onSuccess: (uploadFilesReponse) => {
@@ -45,9 +59,6 @@ export const Component = () => {
   });
 
   const isLoadingButtons = isLoadingPutAction || isLoadingUploadFile;
-
-  const isOpen = useDrawerExpenseReceipt((state) => state.isOpen);
-  const onClose = useDrawerExpenseReceipt((state) => state.onClose);
 
   const selectedAction = useActionStore((state) => state.selectedAction);
 
