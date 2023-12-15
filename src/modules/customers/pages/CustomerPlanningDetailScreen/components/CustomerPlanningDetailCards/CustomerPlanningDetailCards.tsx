@@ -8,7 +8,7 @@ import { Mask } from '@/utils';
 export const CustomerPlanningDetailCards = () => {
   const { query } = useRouter();
   const customerId = Number(query.customer_id);
-  const { data, isLoading } = useGetFarmer(
+  const { data, isLoading, isFetching } = useGetFarmer(
     { farmerId: customerId },
     { enabled: Boolean(customerId) },
   );
@@ -35,7 +35,7 @@ export const CustomerPlanningDetailCards = () => {
             <Text textStyle="footnote" color="text.footnote">
               Nome
             </Text>
-            {isLoading ? (
+            {isLoading || isFetching ? (
               <Skeleton noOfLines={1} h="3rem" w="23rem" />
             ) : (
               <Text textStyle="h4">{farmer?.users_permissions_user.username}</Text>
@@ -45,7 +45,7 @@ export const CustomerPlanningDetailCards = () => {
             <Text textStyle="footnote" color="text.footnote">
               CNPJ
             </Text>
-            {isLoading ? (
+            {isLoading || isFetching ? (
               <Skeleton noOfLines={1} h="3rem" w="23rem" />
             ) : (
               <Text textStyle="h4">{Mask.formatCNPJ(farmer?.company_identifier ?? '')}</Text>

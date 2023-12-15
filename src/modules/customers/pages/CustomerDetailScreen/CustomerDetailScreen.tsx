@@ -9,8 +9,14 @@ import { CustomerPlanningTable, CustomerStatisticsSection } from './components';
 export const CustomerDetailScreen = () => {
   const { push, query } = useRouter();
   const customerId = Number(query.customer_id);
-  const { data: getCustomerData } = useGetFarmer({ farmerId: customerId });
-  const { data: getPlanningData, isLoading } = useGetPlanningStatistics(
+  const { data: getCustomerData, isLoading: isLoadingCustomer } = useGetFarmer({
+    farmerId: customerId,
+  });
+  const {
+    data: getPlanningData,
+    isLoading: isLoadingPlanning,
+    isFetching: isFetchingPlanning,
+  } = useGetPlanningStatistics(
     {
       userId: customerId,
     },
@@ -27,11 +33,11 @@ export const CustomerDetailScreen = () => {
         subLabel={Mask.formatCNPJ(customer?.company_identifier ?? '')}
         onClick={() => push('/clientes')}
         icon={<ChevronLeftIcon fontSize={36} color="white" />}
-        isLoading={isLoading}
+        isLoading={isLoadingCustomer}
       />
       <CustomerStatisticsSection
         summary={customerPlannings?.planning_summary}
-        isLoading={isLoading}
+        isLoading={isLoadingPlanning || isFetchingPlanning}
       />
       <CustomerPlanningTable />
     </>
