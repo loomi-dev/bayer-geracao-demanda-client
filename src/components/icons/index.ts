@@ -52,3 +52,5 @@ export { default as DownloadIcon } from './Download';
 export { default as WarningIcon } from './WarningIcon';
 export { default as ChartIcon } from './ChartIcon';
 export { default as ComputerBigIcon } from './ComputerBig';
+export { default as RejectedIcon } from './RejectedIcon';
+export { default as SmallDoneIcon } from './SmallDoneIcon';

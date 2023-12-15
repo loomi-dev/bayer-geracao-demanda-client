@@ -1,6 +1,13 @@
+import { useToken } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
-import { Historic, HistoricDrawer } from '@/components';
+import {
+  ClockRegularIcon,
+  Historic,
+  HistoricDrawer,
+  RejectedIcon,
+  SmallDoneIcon,
+} from '@/components';
 
 import { PastPlanningHistoricTitle } from './PastPlanningHistoricTitle';
 
@@ -8,16 +15,28 @@ type PastPlanningHistoricStepsProps = {
   lastHistoric: Historic[];
 };
 
-enum HistoricDrawerStepColor {
-  'ready_for_evaluation' = 'greyscale.225',
-  'accepted' = 'green.100',
-  'rejected' = 'red.danger_100',
-}
+const HISTORIC_STEP_STATUS_COMPONENTS = {
+  ready_for_evaluation: <ClockRegularIcon />,
+  accepted: <SmallDoneIcon />,
+  rejected: <RejectedIcon />,
+};
 
 export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoricStepsProps) => {
+  const [normal, error, success] = useToken('colors', [
+    'greyscale.225',
+    'red.danger_100',
+    'text.brand',
+  ]);
+
   const session = useSession();
   const userSessionId = session.data?.user.id as number;
   const lastHistoricIndex = lastHistoric.length - 1;
+
+  const historicDrawerStepColors = {
+    ready_for_evaluation: normal,
+    rejected: error,
+    accepted: success,
+  };
 
   return (
     <>
@@ -27,7 +46,13 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
         const previousHistoryUsername = lastHistoric?.at(index - 1)?.related?.username ?? '';
 
         return (
-          <HistoricDrawer.Step key={id} bg={HistoricDrawerStepColor[status]}>
+          <HistoricDrawer.Step
+            key={id}
+            complete={HISTORIC_STEP_STATUS_COMPONENTS[status]}
+            style={{
+              background: historicDrawerStepColors[status],
+            }}
+          >
             <Historic.Container borderBottom={isLastHistoricItem ? 'none' : '1px solid'}>
               <Historic.Header date={creation_date} status={status} />
 
