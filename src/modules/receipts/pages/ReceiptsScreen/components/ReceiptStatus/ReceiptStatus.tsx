@@ -1,29 +1,21 @@
 import { Text, TextProps } from '@chakra-ui/react';
 
-import { GetActionsResponse } from '../../api';
-
 type ReceiptStatusProps = {
-  status: GetActionsResponse['data'][0]['status'];
+  status: 'receiptsPending' | 'receiptsSent';
   textProps?: TextProps;
 };
 
 const conditionalValues = {
-  rejected: {
+  receiptsPending: {
     text: 'Comprovantes pendentes',
     conditionalTextProps: {
       color: 'greyscale.600',
     },
   },
-  not_evaluated: {
-    text: 'Comprovantes pendentes',
-    conditionalTextProps: {
-      color: 'greyscale.600',
-    },
-  },
-  accepted: {
+  receiptsSent: {
     text: 'Comprovantes enviados',
     conditionalTextProps: {
-      color: 'red.danger_50',
+      color: 'green.500',
     },
   },
 };

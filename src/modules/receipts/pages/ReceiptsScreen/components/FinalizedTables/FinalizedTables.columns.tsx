@@ -1,10 +1,12 @@
 import { createColumnHelper } from '@tanstack/react-table';
-import dayjs from 'dayjs';
 
-import { ActionResponse } from '@/modules/receipts/api';
-import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
+import { GetActionsResponse } from '@/modules/api';
 import { toBRL } from '@/utils';
 
+import { Cell } from '../Cell';
+import { Header } from '../Header';
+import { ReceiptStatus } from '../ReceiptStatus';
+import { Segment } from '../Segment/Segment';
 import { ViewButton } from '../ViewButton';
 
 export type ActionType = {
@@ -18,7 +20,7 @@ export type ActionType = {
   status: string;
 };
 
-const columnHelper = createColumnHelper<ActionResponse>();
+const columnHelper = createColumnHelper<GetActionsResponse['data'][0]>();
 
 export const columns = [
   columnHelper.accessor((data) => data.title, {
@@ -36,22 +38,15 @@ export const columns = [
     header: () => <Header title="safra" />,
     cell: (info) => <Cell value={info.getValue()} />,
   }),
-  columnHelper.accessor(
-    (data) => {
-      const formatedDate = dayjs(data.createdAt).format('DD/MM/YYYY');
-
-      return formatedDate;
-    },
-    {
-      id: 'executionDate',
-      header: () => <Header title="Data de execução" />,
-      cell: (info) => <Cell value={info.getValue()} />,
-    },
-  ),
+  columnHelper.accessor((data) => '10/12/2023', {
+    id: 'executionDate',
+    header: () => <Header title="Data de execução" />,
+    cell: (info) => <Cell value={info.getValue()} />,
+  }),
   columnHelper.accessor((data) => data.farmer.wallet.initialBalance ?? 0, {
     id: 'initialGD',
     header: () => <Header title="GD INICIAL" />,
-    cell: (info) => <Cell value={toBRL(info.getValue() / 100)} />,
+    cell: (info) => <Cell value={toBRL(info.getValue())} />,
   }),
   columnHelper.accessor((data) => data.amountInCents, {
     id: 'finalGD',
@@ -61,7 +56,7 @@ export const columns = [
   columnHelper.accessor((data) => data.status, {
     id: 'status',
     header: () => <Header title="STATUS" />,
-    cell: (info) => <ReceiptStatus status={info.getValue()} />,
+    cell: () => <ReceiptStatus status="receiptsPending" />,
   }),
   columnHelper.accessor((data) => data, {
     id: 'action',

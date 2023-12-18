@@ -2,16 +2,16 @@ import { Flex, Text } from '@chakra-ui/react';
 
 import { toBRL } from '@/utils';
 
-import { ActionResponse } from '../../api';
+import { useActionStore } from '../../stores';
 
 import { ActionDetailsItem } from './ActionDetailsItem';
 import { typesInPortuguese } from './typesInPortuguese';
 
-type ActionDetailsProps = {
-  selectedAction: ActionResponse;
-};
+export const ActionDetails = () => {
+  const selectedAction = useActionStore((state) => state.selectedAction);
 
-export const ActionDetails = ({ selectedAction }: ActionDetailsProps) => {
+  if (!selectedAction) return null;
+
   const shareInvestment = toBRL(selectedAction.amountInCents);
 
   const typeInPortuguese = typesInPortuguese[selectedAction.type];
@@ -35,7 +35,7 @@ export const ActionDetails = ({ selectedAction }: ActionDetailsProps) => {
       </Flex>
 
       <ActionDetailsItem label="Detalhamento" borderRightWidth="1px">
-        {selectedAction.detail}
+        {selectedAction?.detail ?? ''}
       </ActionDetailsItem>
     </Flex>
   );

@@ -8,16 +8,14 @@ import {
 } from '@chakra-ui/react';
 
 import { CircleIcon, DocumentIcon } from '@/components';
-import { ActionDetails } from '@/modules/receipts/components';
 
-import { useActionStore, useDrawerExpenseReceipt } from '../../stores';
+import { useDrawerExpenseReceipt } from '../../stores';
+import { ActionDetails } from '../ActionDetails/ActionDetails';
 import { ProveYourExpenses } from '../ProveYourExpenses';
 
 export const DrawerExpenseReceipt = () => {
   const isOpen = useDrawerExpenseReceipt((state) => state.isOpen);
   const onClose = useDrawerExpenseReceipt((state) => state.onClose);
-
-  const selectedAction = useActionStore((state) => state.selectedAction);
 
   return (
     <>
@@ -41,7 +39,7 @@ export const DrawerExpenseReceipt = () => {
             </Text>
           </DrawerHeader>
           <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem">
-            {selectedAction && <ActionDetails selectedAction={selectedAction} />}
+            <ActionDetails />
             <ProveYourExpenses />
           </DrawerBody>
         </DrawerContent>

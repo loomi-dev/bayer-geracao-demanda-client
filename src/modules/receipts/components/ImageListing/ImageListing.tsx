@@ -15,9 +15,9 @@ export const ImageListing = ({ files, handleRemoveFile }: ImageListingProps) => 
     overflowX="auto"
     p="0.8rem"
     borderRadius="1.6rem"
-    bg="greyscale.225"
+    bg="gray"
     w="100%"
-    h="14.5rem"
+    h="13.2rem"
     spacing="0.8rem"
   >
     {files?.map(({ file, id }, index) => (

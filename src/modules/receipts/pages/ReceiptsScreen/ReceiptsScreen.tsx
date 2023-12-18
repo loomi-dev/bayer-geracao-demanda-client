@@ -3,8 +3,7 @@ import React from 'react';
 
 import { DocumentIcon, Header, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
-
-import { ActionResponse, useGetActions } from '../../api';
+import { GetActionsResponse, useGetActions } from '@/modules/api';
 
 import { DrawerExpenseReceipt, FinalizedTables, RunningTable, TableFilter } from './components';
 
@@ -29,8 +28,8 @@ export const ReceiptsScreen = () => {
       return prev;
     },
     {
-      finished: [] as ActionResponse[],
-      running: [] as ActionResponse[],
+      finished: [] as GetActionsResponse['data'][0][],
+      running: [] as GetActionsResponse['data'][0][],
     },
   );
 

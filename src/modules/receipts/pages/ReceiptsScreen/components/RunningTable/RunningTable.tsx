@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react';
 
 import { DynamicTable } from '@/components';
-import { GetActionsResponse } from '@/modules/receipts/api';
+import { GetActionsResponse } from '@/modules/api';
 
 import { columns } from './RunningTable.columns';
 

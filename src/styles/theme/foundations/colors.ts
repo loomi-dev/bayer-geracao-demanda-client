@@ -43,10 +43,7 @@ const greyscale = {
   1000: '#212121',
 };
 
-const black = {
-  50: 'rgba(0, 0, 0, 0.08)',
-  200: '#070101',
-};
+const black = '#000000';
 
 const yellow = {
   warning_10: '#FBF5D6',
