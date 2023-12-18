@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react';
 
+import { useGetActions } from '@/api';
 import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
-import { useGetActions } from '@/modules/receipts/api';
 
 import { columns } from './StockTable.columns';
 

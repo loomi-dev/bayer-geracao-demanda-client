@@ -1,8 +1,8 @@
 import { HStack, Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
+import { GetExampleReceiptsResponse } from '@/api';
 import { CircleIcon } from '@/components';
-import { GetExampleReceiptsResponse } from '@/modules/receipts/api';
 
 import { downloadFile } from './helper';
 
