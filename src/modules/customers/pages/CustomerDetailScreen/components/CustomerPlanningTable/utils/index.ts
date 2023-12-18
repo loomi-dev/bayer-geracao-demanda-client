@@ -12,18 +12,18 @@ export const getPendingPlanningsSummary = (plannings: Planning[]) => {
 
   return plannings.reduce(
     ({ quantity, mostRecentPendingPlanningId }, planning) => {
-      if (!currentMostRecentPlanningDate) currentMostRecentPlanningDate = planning.createdAt;
-
       if (planning.historic?.at(-1)?.status === 'ready_for_evaluation') {
+        if (!currentMostRecentPlanningDate) currentMostRecentPlanningDate = planning.updatedAt;
+
+        const mostRecentDate = getMostRecentDate(currentMostRecentPlanningDate, planning.updatedAt);
+
+        mostRecentPendingPlanningId =
+          mostRecentDate === currentMostRecentPlanningDate
+            ? mostRecentPendingPlanningId
+            : planning.id;
+
         quantity++;
       }
-
-      const mostRecentDate = getMostRecentDate(currentMostRecentPlanningDate, planning.createdAt);
-
-      mostRecentPendingPlanningId =
-        mostRecentDate === currentMostRecentPlanningDate
-          ? mostRecentPendingPlanningId
-          : planning.id;
 
       return { quantity, mostRecentPendingPlanningId };
     },
