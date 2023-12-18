@@ -74,7 +74,7 @@ export const OnboardingScreen = () => {
                   description={benefit}
                   descriptionStyles={{ maxW: '18rem' }}
                 />
-                {index < arr.length && <DividerBenefit />}
+                {index < arr.length - 1 && <DividerBenefit />}
               </>
             ))}
           </HStack>
