@@ -15,17 +15,20 @@ import { signOut, useSession } from 'next-auth/react';
 import { Avatar } from '@/components/Avatar';
 import { CircleChevronDownIcon, LogoutIcon, UserIcon } from '@/components/icons';
 
-const menuItem = [
-  { icon: <UserIcon />, onClick: () => {}, label: 'Meu perfil' },
-  { icon: <LogoutIcon />, onClick: signOut, label: 'Sair da plataforma' },
-];
-export const UserMenu = () => {
+type UserMenuProps = {
+  handleOpenUserProfile: () => void;
+};
+export const UserMenu = ({ handleOpenUserProfile }: UserMenuProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const session = useSession();
 
   const isLoadingSession = session.status === 'loading';
   const username = session.data?.user.username;
 
+  const menuItem = [
+    { icon: <UserIcon />, onClick: handleOpenUserProfile, label: 'Meu perfil' },
+    { icon: <LogoutIcon />, onClick: signOut, label: 'Sair da plataforma' },
+  ];
   return (
     <Flex gap="1.8rem" align="center" justify="center">
       <Avatar
