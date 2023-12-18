@@ -8,6 +8,9 @@ declare module 'next-auth' {
     confirmed: boolean;
     accessToken: string;
     role: Roles;
+    phone?: string;
+    company_identifier?: string;
+    company_position?: string;
   }
 
   interface Session extends DefaultSession {
@@ -24,6 +27,10 @@ declare module 'next-auth/jwt' {
       confirmed: boolean;
       accessToken: string;
       role: Roles;
+      phone?: string;
+      cnpj?: string;
+      company_identifier?: string;
+      company_position?: string;
     };
   }
 }
