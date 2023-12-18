@@ -8,9 +8,9 @@ export const HarvestSwitch = () => {
     state.setIsBayerSellingOnly,
   ]);
   return (
-    <VStack align="flex-start" spacing="0.8rem">
-      <Text textStyle="action3" maxW="21rem" lineHeight="1.8rem" textTransform="uppercase">
-        Irá vender apenas Bayer na safra 24/25?
+    <VStack align="flex-start" spacing="0.8rem" w="60%">
+      <Text textStyle="action3" lineHeight="1.8rem" textTransform="uppercase">
+        Terá foco em vendas e alinhamento com biotecnologias Bayer?
       </Text>
 
       <Flex
