@@ -1,6 +1,6 @@
 import { Badge } from '@chakra-ui/react';
 
-import { GetActionsResponse } from '@/modules/api';
+import { GetActionsResponse } from '../../api';
 
 type SegmentProps = {
   status: GetActionsResponse['data'][0]['type'];
@@ -17,13 +17,13 @@ const conditionalValues = {
     badgeProps: {
       variant: 'table_success',
     },
-    text: 'Ação de relacionamento',
+    text: 'Tarefa agrícola',
   },
   farm_kit: {
     badgeProps: {
       variant: 'table_success',
     },
-    text: 'Ação de relacionamento',
+    text: 'Kit fazenda',
   },
 };
 

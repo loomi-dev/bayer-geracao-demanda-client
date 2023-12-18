@@ -1,9 +1,21 @@
+import { useSession } from 'next-auth/react';
+
 import { LayoutWithoutNotifications } from '@/layouts';
-import { ReceiptsScreen } from '@/modules';
+import { ProducerProofsScreen, ReceiptsScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 
-const Page: NextPageWithLayout = () => <ReceiptsScreen />;
+const Page: NextPageWithLayout = () => {
+  const user = useSession();
+
+  const role = user.data?.user.role;
+
+  if (role === 'Manager') {
+    return <ReceiptsScreen />;
+  }
+
+  return <ProducerProofsScreen />;
+};
 
 Page.getLayout = function getLayout(page) {
   return (
