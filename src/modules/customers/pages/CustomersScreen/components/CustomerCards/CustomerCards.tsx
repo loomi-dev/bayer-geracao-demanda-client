@@ -7,7 +7,7 @@ import { formatPrice } from '@/utils';
 export const CustomerCards = () => {
   const session = useSession();
   const userId = session.data?.user.id as number;
-  const { data, isLoading } = useGetManager(
+  const { data, isLoading, isFetching } = useGetManager(
     {
       id: userId,
     },
@@ -32,7 +32,7 @@ export const CustomerCards = () => {
       </Flex>
 
       <Flex layerStyle="card" align="center" p="2.4rem" gap="0.8rem" h="10rem">
-        {isLoading ? (
+        {isLoading || isFetching ? (
           <Skeleton w="15rem" h="4.8rem" />
         ) : (
           <Text textStyle="h2">{manager?.safra?.year}</Text>
@@ -43,7 +43,7 @@ export const CustomerCards = () => {
       </Flex>
 
       <Flex layerStyle="card" align="center" p="2.4rem" gap="0.8rem" h="10rem">
-        {isLoading ? (
+        {isLoading || isFetching ? (
           <Skeleton h="4.8rem" w="8rem" />
         ) : (
           <Text textStyle="h2">{manager?.farmers?.length}</Text>

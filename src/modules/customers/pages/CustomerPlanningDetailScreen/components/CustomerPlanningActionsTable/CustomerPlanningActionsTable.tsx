@@ -3,7 +3,11 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import { useGetPlanningActions, useGetPlanningActionsStatistics } from '@/api';
+import {
+  useGetPlanningActions,
+  useGetPlanningActionsStatistics,
+  useGetPlanningStatus,
+} from '@/api';
 import { DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 
@@ -28,17 +32,27 @@ export const CustomerPlanningActionsTable = () => {
   const [rowSelection, setRowSelection] = useState({});
   const [isApproving, setIsApproving] = useState(false);
   const planningId = Number(query.planning_id);
-  const { data: metricsData, isLoading: isLoadingMetrics } = useGetPlanningActionsStatistics(
+  const {
+    data: metricsData,
+    isLoading: isLoadingMetrics,
+    isFetching: isFetchingMetrics,
+  } = useGetPlanningActionsStatistics(
     {
       planningId,
     },
     { enabled: Boolean(planningId) },
   );
-  const { data: actionsData, isLoading: isLoadingActions } = useGetPlanningActions(
+  const {
+    data: actionsData,
+    isLoading: isLoadingActions,
+    isFetching: isFetchingActions,
+  } = useGetPlanningActions(
     { planningId, pagination: { page: currentPage, pageSize: 10 } },
     { enabled: Boolean(planningId) },
   );
-
+  const { data } = useGetPlanningStatus({ planningId }, { enabled: Boolean(planningId) });
+  const historic = data?.data.historic ?? [];
+  const planningStatus = historic[historic.length - 1]?.status;
   const metrics = metricsData?.data.metric;
   const actions = actionsData?.data ?? [];
   const farmKitValue = Number(metrics?.farm_kit_in_cents ?? 0);
@@ -67,13 +81,13 @@ export const CustomerPlanningActionsTable = () => {
         farmKitValue={farmKitValue}
         farmTaskValue={farmTaskValue}
         relationshipTaskValue={relationshipTaskValue}
-        isLoading={isLoadingMetrics}
+        isLoading={isLoadingMetrics || isFetchingMetrics}
       />
       <DynamicTable<PlanningAction>
         variant="third"
         data={actions}
-        columns={CustomerPlanningActionsColumns}
-        isLoading={isLoadingActions}
+        columns={CustomerPlanningActionsColumns(planningStatus)}
+        isLoading={isLoadingActions || isFetchingActions}
         tableOptions={{
           enableRowSelection: (row) => row.original.status !== 'rejected',
           state: { rowSelection },
@@ -110,6 +124,7 @@ export const CustomerPlanningActionsTable = () => {
       />
       <PlanningActionResume
         onApprove={onApprovePlanning}
+        planningStatus={planningStatus}
         onReject={onRejectPlanning}
         planningValue={planningValue}
       />

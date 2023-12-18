@@ -13,7 +13,10 @@ export const CustomerPlanningTable = () => {
   const { query, push } = useRouter();
   const customerId = Number(query.customer_id);
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
-  const { data, isLoading } = useGetFarmerPlans({ page: currentPage, farmerId: customerId });
+  const { data, isLoading, isFetching } = useGetFarmerPlans({
+    page: currentPage,
+    farmerId: customerId,
+  });
   const plannings = data?.data ?? [];
   const pendingPlans = plannings.reduce((pendingValue, planning) => {
     if (planning.historic?.at(-1)?.status === 'ready_for_evaluation') {
@@ -31,7 +34,7 @@ export const CustomerPlanningTable = () => {
       <DynamicTable<Planning>
         variant="third"
         data={plannings}
-        isLoading={isLoading}
+        isLoading={isLoading || isFetching}
         columns={customerPlanningColumns}
         fallbackMessage="Nenhum planejamento encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
