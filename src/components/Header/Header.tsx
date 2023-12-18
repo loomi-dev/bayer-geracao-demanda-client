@@ -2,7 +2,8 @@ import { Flex, FlexProps, HStack, SkeletonText, Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 import { CircleIcon } from '../CircleIcon';
-import { UserProfile } from '../UserProfile';
+
+import { UserMenu } from './components';
 
 type HeaderProps = {
   label: string;
@@ -32,6 +33,6 @@ export const Header = ({ label, subLabel, icon, onClick, isLoading, ...props }: 
         </Flex>
       )}
     </HStack>
-    <UserProfile />
+    <UserMenu />
   </Flex>
 );

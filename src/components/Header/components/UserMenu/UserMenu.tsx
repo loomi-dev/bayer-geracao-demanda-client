@@ -12,14 +12,14 @@ import {
 } from '@chakra-ui/react';
 import { signOut, useSession } from 'next-auth/react';
 
-import { Avatar } from '../Avatar';
-import { CircleChevronDownIcon, LogoutIcon, UserIcon } from '../icons';
+import { Avatar } from '@/components/Avatar';
+import { CircleChevronDownIcon, LogoutIcon, UserIcon } from '@/components/icons';
 
 const menuItem = [
   { icon: <UserIcon />, onClick: () => {}, label: 'Meu perfil' },
   { icon: <LogoutIcon />, onClick: signOut, label: 'Sair da plataforma' },
 ];
-export const UserProfile = () => {
+export const UserMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const session = useSession();
 
