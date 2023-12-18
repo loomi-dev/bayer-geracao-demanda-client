@@ -1,8 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import { CellContext } from '@tanstack/react-table';
 
+import { ActionResponse } from '@/api';
 import { Add2Icon } from '@/components';
-import { ActionResponse } from '@/modules/receipts/api';
 
 import { useActionStore, useDrawerExpenseReceipt } from '../../stores';
 

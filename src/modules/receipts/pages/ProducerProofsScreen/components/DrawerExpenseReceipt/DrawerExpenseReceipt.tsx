@@ -12,9 +12,8 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 
+import { usePutAction, useUploadFile } from '@/api';
 import { CircleIcon, DocumentIcon } from '@/components';
-import { useUploadFile } from '@/modules/receipts/api';
-import { usePutAction } from '@/modules/receipts/api/mutations/usePutAction';
 import { ActionDetails } from '@/modules/receipts/components';
 
 import { useActionStore, useDrawerExpenseReceipt } from '../../stores';

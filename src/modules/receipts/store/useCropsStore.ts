@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { GetCropsResponse, getCrops } from '@/modules/receipts/api';
+import { GetCropsResponse, getCrops } from '@/api';
 
 type UseCropsStore = {
   getCrops: () => void;

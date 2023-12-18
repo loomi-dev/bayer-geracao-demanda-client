@@ -1,6 +1,6 @@
 import { HStack, Skeleton, SkeletonCircle, Text, VStack } from '@chakra-ui/react';
 
-import { useGetAchievement } from '@/modules/receipts/api';
+import { useGetAchievement } from '@/api';
 import { ProgressBar } from '@/modules/receipts/components';
 import { useCropsStore } from '@/modules/receipts/store';
 import { toBRL } from '@/utils';
