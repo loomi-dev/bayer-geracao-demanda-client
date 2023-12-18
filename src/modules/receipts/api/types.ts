@@ -29,6 +29,8 @@ export type GetActionsResponse = {
   meta: Meta;
 };
 
+export type ActionResponse = GetActionsResponse['data'][0];
+
 type Farmer = {
   id: number;
   cpf: string;

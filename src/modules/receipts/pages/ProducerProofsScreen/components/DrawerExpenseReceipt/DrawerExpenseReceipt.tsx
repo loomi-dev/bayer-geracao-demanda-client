@@ -33,6 +33,8 @@ export const Component = () => {
 
   const toast = useToast();
 
+  const selectedAction = useActionStore((state) => state.selectedAction);
+
   const { mutate: putActionMutation, isLoading: isLoadingPutAction } = usePutAction({
     onSuccess: () => {
       toast({ description: 'Ação criada com sucesso !', status: 'success' });
@@ -59,8 +61,6 @@ export const Component = () => {
   });
 
   const isLoadingButtons = isLoadingPutAction || isLoadingUploadFile;
-
-  const selectedAction = useActionStore((state) => state.selectedAction);
 
   const handleSubmitData = async (data: DrawerExpenseReceiptFormSchemaType) => {
     const { files } = data;
@@ -90,7 +90,7 @@ export const Component = () => {
           </Text>
         </DrawerHeader>
         <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem">
-          <ActionDetails />
+          {selectedAction && <ActionDetails selectedAction={selectedAction} />}
           <ProveYourExpenses />
         </DrawerBody>
         <DrawerFooter>
