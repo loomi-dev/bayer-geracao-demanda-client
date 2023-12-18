@@ -17,7 +17,7 @@ export const ReceiptsScreen = () => {
     },
   });
 
-  const separateData = (data as GetActionsResponse)?.data?.reduce(
+  const separateData = data?.data?.reduce(
     (prev, action) => {
       if (action.status === 'accepted') {
         prev.finished.push(action);
@@ -40,12 +40,12 @@ export const ReceiptsScreen = () => {
 
       <TableFilter />
 
-      <RunningTable actions={separateData?.running} isLoading={isLoading} />
-      <FinalizedTables actions={separateData?.finished} isLoading={isLoading} />
+      <RunningTable actions={separateData?.running ?? []} isLoading={isLoading} />
+      <FinalizedTables actions={separateData?.finished ?? []} isLoading={isLoading} />
 
       <Pagination
         page={currentPage}
-        countItems={data?.data.length}
+        countItems={data?.data.length ?? 0}
         totalPages={data?.meta.pagination.pageCount ?? 1}
         onPreviousPage={handlePreviousPage}
         onNextPage={handleNextPage}
