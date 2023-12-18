@@ -18,7 +18,7 @@ export const useSimulatorStore = create<UseSimulatorStore>((set) => ({
   bagsQuantity: 0,
   i2xBagsQuantity: 0,
   xtdBagsQuantity: 0,
-  plantability: 0.1,
+  plantability: 0.8,
   isBayerSellingOnly: true,
   setPlantability: (value) => set(() => ({ plantability: value })),
   setIsBayerSellingOnly: (value) => set(() => ({ isBayerSellingOnly: value })),
