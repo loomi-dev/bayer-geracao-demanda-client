@@ -25,7 +25,7 @@ export const TrousseauOptionsSection = ({
     p="2.4rem"
   >
     <Text textStyle="caption1" color="red.danger_90">
-      Tipos de enxoval
+      Arquivos de enxoval
     </Text>
     <Divider w="full" borderColor="opacity.black.0.20" />
     <Trousseau.Container>

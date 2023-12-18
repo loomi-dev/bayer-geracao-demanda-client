@@ -1,9 +1,10 @@
 import { HStack, Skeleton, SkeletonCircle, Text, VStack } from '@chakra-ui/react';
 
-import { ProgressBar } from '@/modules/receipts/components';
-import { toBRL } from '@/utils';
-import { useCropsStore } from '@/modules/receipts/store';
 import { useGetAchievement } from '@/modules/receipts/api';
+import { ProgressBar } from '@/modules/receipts/components';
+import { useCropsStore } from '@/modules/receipts/store';
+import { toBRL } from '@/utils';
+
 import { calculatePercentageObtained, convertToReais } from './helpers';
 
 export const HowMuchDidYouEarn = () => {
