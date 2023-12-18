@@ -33,6 +33,13 @@ export const CustomerTable = () => {
   );
   const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);
 
+  const rowProps = (row: Row<Customer>) => {
+    const planningStatus = row.original.historic?.at(-1)?.status;
+    const style =
+      planningStatus === 'ready_for_evaluation' ? { background: 'rgba(55, 199, 69, 0.1)' } : {};
+    return style;
+  };
+
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
@@ -50,6 +57,7 @@ export const CustomerTable = () => {
         </HStack>
       </Flex>
       <DynamicTable<Customer>
+        rowProps={rowProps}
         data={customers}
         columns={CustomerColumns}
         isLoading={isLoading || isFetching}
