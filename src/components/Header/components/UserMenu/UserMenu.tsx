@@ -12,16 +12,22 @@ import {
 } from '@chakra-ui/react';
 import { signOut, useSession } from 'next-auth/react';
 
-import { Avatar } from '../Avatar';
-import { CircleChevronDownIcon, LogoutIcon, UserIcon } from '../icons';
+import { Avatar, CircleChevronDownIcon, LogoutIcon, UserIcon } from '@/components';
 
-export const UserProfile = () => {
+type UserMenuProps = {
+  handleOpenUserProfile: () => void;
+};
+export const UserMenu = ({ handleOpenUserProfile }: UserMenuProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const session = useSession();
 
   const isLoadingSession = session.status === 'loading';
   const username = session.data?.user.username;
 
+  const menuItem = [
+    { icon: <UserIcon />, onClick: handleOpenUserProfile, label: 'Meu perfil' },
+    { icon: <LogoutIcon />, onClick: signOut, label: 'Sair da plataforma' },
+  ];
   return (
     <Flex gap="1.8rem" align="center" justify="center">
       <Avatar
@@ -59,36 +65,29 @@ export const UserProfile = () => {
             <MenuList
               w="24rem"
               borderRadius="1.6rem"
-              border="1px solid"
               borderColor="greyscale.150"
               boxShadow="card"
               bg="surface.primary"
               p="1.6rem"
               mt="1.4rem"
             >
-              <MenuItem
-                hidden
-                _hover={{ opacity: '0.7' }}
-                bg="surface.primary"
-                color="text.footnote"
-                gap="1rem"
-              >
-                <UserIcon />
-                <Text textStyle="footnote">Meu perfil</Text>
-              </MenuItem>
-
-              <Divider w="full" borderColor="greyscale.150" my="1rem" hidden />
-
-              <MenuItem
-                bg="surface.primary"
-                onClick={() => signOut()}
-                color="text.footnote"
-                gap="1rem"
-                _hover={{ opacity: '0.7' }}
-              >
-                <LogoutIcon />
-                <Text textStyle="footnote">Sair da plataforma</Text>
-              </MenuItem>
+              {menuItem.map((item, index, array) => (
+                <>
+                  <MenuItem
+                    _hover={{ opacity: '0.7' }}
+                    bg="surface.primary"
+                    color="text.footnote"
+                    onClick={() => item.onClick()}
+                    key={item.label}
+                  >
+                    {item.icon}
+                    <Text textStyle="footnote">{item.label}</Text>
+                  </MenuItem>
+                  {index < array.length - 1 && (
+                    <Divider w="full" borderColor="greyscale.150" my="1rem" />
+                  )}
+                </>
+              ))}
             </MenuList>
           </Menu>
         )}
