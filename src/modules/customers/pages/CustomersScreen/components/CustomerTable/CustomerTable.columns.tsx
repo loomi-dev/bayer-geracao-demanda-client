@@ -46,8 +46,8 @@ export const CustomerColumns = [
     },
   }),
   columnHelper.accessor((data) => data.provenResourceAmountInCents, {
-    id: 'utilizado',
-    header: () => <Text textStyle="action4">Utilizado</Text>,
+    id: 'comprovado',
+    header: () => <Text textStyle="action4">Comprovado</Text>,
     cell: (info) => (
       <Text textStyle="caption3" color="red.danger_50">
         {`R$ ${formatPrice(info.getValue())}`}
