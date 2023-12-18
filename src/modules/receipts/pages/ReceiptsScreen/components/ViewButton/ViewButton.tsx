@@ -2,12 +2,12 @@ import { Button } from '@chakra-ui/react';
 import { CellContext } from '@tanstack/react-table';
 
 import { EyeIcon } from '@/components';
-import { GetActionsResponse } from '@/modules/api';
+import { ActionResponse } from '@/modules/receipts/api';
 
 import { useActionStore, useDrawerExpenseReceipt } from '../../stores';
 
 type ViewButtonProps = {
-  value: CellContext<GetActionsResponse['data'][0], GetActionsResponse['data'][0]>;
+  value: CellContext<ActionResponse, ActionResponse>;
 };
 
 export const ViewButton = ({ value }: ViewButtonProps) => {
@@ -17,6 +17,7 @@ export const ViewButton = ({ value }: ViewButtonProps) => {
 
   const handleClick = () => {
     onOpen();
+
     setSelectedAction(value.getValue());
   };
 

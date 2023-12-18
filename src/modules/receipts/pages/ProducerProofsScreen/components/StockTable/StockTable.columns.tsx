@@ -1,9 +1,9 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
+import { ActionResponse } from '@/modules/receipts/api';
 import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { toBRL } from '@/utils';
 
-import { ActionResponse } from '../../stores';
 import { ViewButton } from '../ViewButton';
 
 const columnHelper = createColumnHelper<ActionResponse>();
@@ -32,7 +32,7 @@ export const columns = [
   columnHelper.accessor((data) => data.status, {
     id: 'status',
     header: () => <Header title="STATUS" />,
-    cell: () => <ReceiptStatus status="receiptsSent" />,
+    cell: (info) => <ReceiptStatus status={info.getValue()} />,
   }),
   columnHelper.accessor((data) => data, {
     id: 'action',

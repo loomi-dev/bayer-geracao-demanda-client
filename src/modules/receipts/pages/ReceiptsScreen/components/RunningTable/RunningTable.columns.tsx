@@ -1,15 +1,13 @@
 import { createColumnHelper } from '@tanstack/react-table';
+import dayjs from 'dayjs';
 
-import { GetActionsResponse } from '@/modules/api';
+import { ActionResponse } from '@/modules/receipts/api';
+import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { toBRL } from '@/utils';
 
-import { Cell } from '../Cell';
-import { Header } from '../Header';
-import { ReceiptStatus } from '../ReceiptStatus';
-import { Segment } from '../Segment/Segment';
 import { ViewButton } from '../ViewButton';
 
-const columnHelper = createColumnHelper<GetActionsResponse['data'][0]>();
+const columnHelper = createColumnHelper<ActionResponse>();
 
 export const columns = [
   columnHelper.accessor((data) => data.title, {
@@ -20,22 +18,29 @@ export const columns = [
   columnHelper.accessor((data) => data.type, {
     id: 'segment',
     header: () => <Header title="segmento" />,
-    cell: (info) => <Segment status="relationship_task" />,
+    cell: (info) => <Segment status={info.getValue()} />,
   }),
   columnHelper.accessor((data) => '2023/2024', {
     id: 'harvest',
     header: () => <Header title="safra" />,
     cell: (info) => <Cell value={info.getValue()} />,
   }),
-  columnHelper.accessor((data) => '10/12/2023', {
-    id: 'executionDate',
-    header: () => <Header title="Data de execução" />,
-    cell: (info) => <Cell value={info.getValue()} />,
-  }),
+  columnHelper.accessor(
+    (data) => {
+      const formatedDate = dayjs(data.createdAt).format('DD/MM/YYYY');
+
+      return formatedDate;
+    },
+    {
+      id: 'executionDate',
+      header: () => <Header title="Data de execução" />,
+      cell: (info) => <Cell value={info.getValue()} />,
+    },
+  ),
   columnHelper.accessor((data) => data.farmer.wallet.initialBalance ?? 0, {
     id: 'initialGD',
     header: () => <Header title="GD INICIAL" />,
-    cell: (info) => <Cell value={toBRL(info.getValue())} />,
+    cell: (info) => <Cell value={toBRL(info.getValue() / 100)} />,
   }),
   columnHelper.accessor((data) => data.amountInCents, {
     id: 'finalGD',
@@ -45,7 +50,7 @@ export const columns = [
   columnHelper.accessor((data) => data.status, {
     id: 'status',
     header: () => <Header title="STATUS" />,
-    cell: () => <ReceiptStatus status="receiptsPending" />,
+    cell: (info) => <ReceiptStatus status={info.getValue()} />,
   }),
   columnHelper.accessor((data) => data, {
     id: 'action',

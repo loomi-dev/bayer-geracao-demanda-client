@@ -2,8 +2,9 @@ import { Button } from '@chakra-ui/react';
 import { CellContext } from '@tanstack/react-table';
 
 import { Add2Icon } from '@/components';
+import { ActionResponse } from '@/modules/receipts/api';
 
-import { ActionResponse, useActionStore, useDrawerExpenseReceipt } from '../../stores';
+import { useActionStore, useDrawerExpenseReceipt } from '../../stores';
 
 type ViewButtonProps = {
   value: CellContext<ActionResponse, ActionResponse>;
