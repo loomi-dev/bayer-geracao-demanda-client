@@ -10,8 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { CircleIcon } from '@/components/CircleIcon';
-import { CloseIcon, PersonIcon } from '@/components/icons';
+import { CircleIcon, CloseIcon, PersonIcon } from '@/components';
 
 type UserProfileProps = {
   isOpen: boolean;
