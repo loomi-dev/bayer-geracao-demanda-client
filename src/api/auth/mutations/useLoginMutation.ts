@@ -60,7 +60,9 @@ export const useLoginMutation = (
     },
     onError: (error) => {
       toast({
-        description: CUSTOM_MESSAGES_ERROR[error?.message] ?? 'Ocorreu um erro durante o login.',
+        description:
+          CUSTOM_MESSAGES_ERROR[error?.message] ??
+          'Ocorreu um erro durante o login, tente novamente ou contate o suporte.',
         status: 'error',
       });
     },

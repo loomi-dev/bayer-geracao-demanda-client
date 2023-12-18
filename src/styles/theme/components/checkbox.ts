@@ -27,6 +27,15 @@ export const Checkbox = defineMultiStyleConfig({
             borderColor: 'surface.disabled',
           },
         },
+        _indeterminate: {
+          color: 'surface.primary',
+          bg: 'red.danger_50',
+          borderColor: 'surface.disabled',
+          _hover: {
+            bg: 'red.danger_60',
+            borderColor: 'surface.disabled',
+          },
+        },
       },
       label: {
         fontSize: '1.6rem',

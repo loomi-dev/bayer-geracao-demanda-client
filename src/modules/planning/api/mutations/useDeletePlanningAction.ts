@@ -18,16 +18,17 @@ export const useDeletePlanningAction = (options?: MutOpt<DeletePlanningActionRes
       queryClient.invalidateQueries(['planning-actions']);
       queryClient.invalidateQueries(['planning-actions-statistics']);
       queryClient.invalidateQueries(['planning-status']);
+      queryClient.invalidateQueries(['get-farmer']);
 
       toast({
-        description: 'Sua ação foi deletada.',
+        description: 'Você excluiu uma ação do seu planejamento.',
         status: 'success',
       });
     },
     onError: () => {
       toast({
         description:
-          'Não foi possível deletar a ação do planejamento, tente novamente ou contate o suporte.',
+          'Não foi possível excluir a ação do planejamento, tente novamente ou contate o suporte.',
         status: 'error',
       });
     },

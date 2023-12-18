@@ -1,14 +1,18 @@
-import { Grid, GridItem, HStack } from '@chakra-ui/react';
+import { Grid, GridItem, HStack, Text } from '@chakra-ui/react';
 
 import { Balance, StatCard } from '@/components';
+import { centsToCompactValue } from '@/utils';
 
 export const DashboardScreen = () => (
-  <HStack w="full" alignItems="flex-start" spacing="4rem">
-    <Balance.Container farmerId={1} flex="1" h="100%" justify="center">
+  <HStack w="full" flexWrap="wrap" alignItems="flex-start" spacing="4rem">
+    <Balance.Container farmerId={1} flex="1" h="100%" maxH="25rem" justify="center" minW="30rem">
       <Balance.Label>você ainda possui</Balance.Label>
-      <Balance.Value>$ 20.000,00</Balance.Value>
+      <Balance.Value>R$ 0,00</Balance.Value>
       <Balance.ExpirationDate>
-        Em recursos para solicitar ações Válido até 20/10/2024
+        Em recursos para solicitar ações <br /> Válido{' '}
+        <Text as="strong" color="text.primary">
+          até 20/10/2024
+        </Text>
       </Balance.ExpirationDate>
     </Balance.Container>
 
@@ -16,7 +20,7 @@ export const DashboardScreen = () => (
       <GridItem>
         <StatCard
           label="Ações planejadas"
-          value={12}
+          value={0}
           valueStyles={{
             fontSize: '4rem',
           }}
@@ -26,7 +30,7 @@ export const DashboardScreen = () => (
       <GridItem colSpan={2}>
         <StatCard
           label="Planejado / total"
-          value="$1.2M"
+          value={`R$ ${centsToCompactValue(0)} / R$ ${centsToCompactValue(0)}`}
           justify="space-between"
           valueStyles={{
             fontSize: '4rem',
@@ -42,7 +46,7 @@ export const DashboardScreen = () => (
       <GridItem>
         <StatCard
           label="Ações de enxoval"
-          value="$1.2M"
+          value={`R$ ${centsToCompactValue(0)}`}
           valueStyles={{
             fontSize: '4rem',
           }}
@@ -52,7 +56,7 @@ export const DashboardScreen = () => (
       <GridItem>
         <StatCard
           label="Ações de relacionamento"
-          value="$ 4.3M"
+          value={`R$ ${centsToCompactValue(0)}`}
           labelStyles={{ maxW: '8rem' }}
           valueStyles={{
             fontSize: '4rem',
@@ -63,7 +67,7 @@ export const DashboardScreen = () => (
       <GridItem>
         <StatCard
           label="Ações de campo"
-          value="$ 4.3M"
+          value={`R$ ${centsToCompactValue(0)}`}
           valueStyles={{
             fontSize: '4rem',
           }}

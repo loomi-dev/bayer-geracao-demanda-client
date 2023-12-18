@@ -17,7 +17,7 @@ export const CustomerTable = () => {
   const userId = session.data?.user.id as number;
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
-  const { data, isLoading } = useGetCustomers(
+  const { data, isLoading, isFetching } = useGetCustomers(
     {
       id: userId,
       filter: { search },
@@ -52,7 +52,7 @@ export const CustomerTable = () => {
       <DynamicTable<Customer>
         data={customers}
         columns={CustomerColumns}
-        isLoading={isLoading}
+        isLoading={isLoading || isFetching}
         fallbackMessage="Nenhum cliente encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
         onRowClick={handleRowClick}

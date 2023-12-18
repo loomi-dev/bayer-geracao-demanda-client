@@ -13,7 +13,7 @@ export const BalanceValue = ({ children, ...restProps }: BalanceValueProps) => {
   return (
     <>
       {context?.isLoading ? (
-        <Skeleton w="18rem" h="6rem" />
+        <Skeleton w="25rem" h="6rem" />
       ) : (
         <Text fontSize="4rem" fontWeight="bold" color="surface.invert" {...restProps}>
           {children ? (
