@@ -71,6 +71,7 @@ export const CustomerPlanningActionsTable = () => {
     setIsApproving(false);
     onOpenHistoricDrawer();
   };
+
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h3" fontWeight="bold">
@@ -95,14 +96,8 @@ export const CustomerPlanningActionsTable = () => {
         fallbackMessage="Nenhuma ação encontrada"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
       >
-        {selectedRows.length ? (
-          <Flex
-            justify="center"
-            h="100%"
-            bgColor="opacity.red.1.10"
-            _hover={{ opacity: '0.7' }}
-            onClick={onRejectPlanning}
-          >
+        {selectedRows.length && planningStatus === 'ready_for_evaluation' ? (
+          <Flex justify="center" h="100%" bgColor="opacity.red.1.10">
             <Text
               textStyle="footnote-bold"
               mt="1rem"
@@ -122,6 +117,7 @@ export const CustomerPlanningActionsTable = () => {
         onPreviousPage={handlePreviousPage}
       />
       <PlanningActionResume
+        hasSelectedActions={Boolean(selectedRows.length)}
         onApprove={onApprovePlanning}
         planningStatus={planningStatus}
         onReject={onRejectPlanning}
