@@ -48,7 +48,8 @@ export const SendPlanningFormStep = ({
     formState: { errors, isValid },
   } = useFormContext<SendPlanningFormStepSchemaType>();
 
-  const farmKitValue = dataGetPlanningActionsStatistics?.data.metric?.farm_kit_in_cents ?? 0;
+  const farmKitValue =
+    Number(dataGetPlanningActionsStatistics?.data.metric?.farm_kit_in_cents) ?? 0;
   const farmTaskValue =
     Number(dataGetPlanningActionsStatistics?.data.metric?.farm_task_in_cents) || 0;
   const relationshipTaskValue =
