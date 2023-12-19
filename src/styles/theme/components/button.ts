@@ -14,7 +14,9 @@ export const Button = defineStyleConfig({
     alignItems: 'center',
     justifyContent: 'center',
     gap: '1rem',
-
+    _hover: {
+      opacity: 0.7,
+    },
     _disabled: {
       opacity: 0.65,
     },

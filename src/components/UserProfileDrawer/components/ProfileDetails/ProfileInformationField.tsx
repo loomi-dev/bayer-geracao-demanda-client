@@ -5,7 +5,7 @@ type ProfileInformationFieldProps = {
   value?: string;
 };
 export const ProfileInformationField = ({ label, value }: ProfileInformationFieldProps) => (
-  <Flex flexDir="column" align="start" w="45%" minW="25rem">
+  <Flex flexDir="column" h="100%" align="start" w="45%" minW="25rem">
     <Text textTransform="uppercase" textStyle="footnote-bold" color="text.footnote">
       {label}
     </Text>

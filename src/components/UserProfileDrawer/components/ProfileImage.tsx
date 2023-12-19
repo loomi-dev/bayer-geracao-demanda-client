@@ -1,8 +1,12 @@
-import { Button, VStack } from '@chakra-ui/react';
+import { StackProps, VStack } from '@chakra-ui/react';
+import { ReactNode } from 'react';
 
 import { Avatar } from '@/components';
 
-export const ProfileImage = () => (
+type ProfileImageProps = {
+  children?: ReactNode;
+} & StackProps;
+export const ProfileImage = ({ children, ...props }: ProfileImageProps) => (
   <VStack
     borderBottom="1px solid"
     borderBottomColor="greyscale.600"
@@ -10,10 +14,9 @@ export const ProfileImage = () => (
     align="center"
     w="100%"
     pb="1.2rem"
+    {...props}
   >
     <Avatar imageFallbackSize={70} bg="white" p="3rem" />
-    <Button w="18rem" size="md">
-      Editar perfil
-    </Button>
+    {children}
   </VStack>
 );
