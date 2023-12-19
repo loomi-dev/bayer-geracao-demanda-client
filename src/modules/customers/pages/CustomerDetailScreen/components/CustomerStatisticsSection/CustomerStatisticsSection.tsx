@@ -4,10 +4,12 @@ import { Balance, StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
 
 type CustomerStatisticsSectionProps = {
+  customerId: number;
   isLoading: boolean;
   summary?: PlanningSummary;
 };
 export const CustomerStatisticsSection = ({
+  customerId,
   summary,
   isLoading,
 }: CustomerStatisticsSectionProps) => {
@@ -33,7 +35,7 @@ export const CustomerStatisticsSection = ({
       gap="1.6rem"
     >
       <GridItem rowSpan={2} colSpan={{ base: 3, '3xl': 2 }}>
-        <Balance.Container h="100%" maxH="25rem" farmerId={summary?.id ?? 0} justify="center">
+        <Balance.Container h="100%" maxH="25rem" farmerId={customerId} justify="center">
           <Balance.Label>O parceiro ainda possui</Balance.Label>
           <Balance.Value />
           <HStack w="full" align="center" justify="space-between">

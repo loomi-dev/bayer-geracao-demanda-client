@@ -29,6 +29,7 @@ export const CustomerDetailScreen = () => {
   );
   const customer = getCustomerData?.data[0];
   const customerPlannings = getPlanningData?.data[0];
+
   return (
     <>
       <Header
@@ -39,6 +40,7 @@ export const CustomerDetailScreen = () => {
         isLoading={isLoadingCustomer}
       />
       <CustomerStatisticsSection
+        customerId={customerId}
         summary={customerPlannings?.planning_summary}
         isLoading={isLoadingPlanning || isFetchingPlanning}
       />
