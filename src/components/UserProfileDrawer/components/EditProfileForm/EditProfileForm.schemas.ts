@@ -7,7 +7,7 @@ export const editProfileFormSchema = z.object({
     .trim()
     .min(1, { message: 'Digite seu e-mail.' })
     .email({ message: 'Digite um email válido.' }),
-  role: z.string().trim().min(1, { message: 'Digite seu cargo na sua empresa.' }),
+  company_role: z.string().trim().min(1, { message: 'Digite seu cargo na sua empresa.' }),
   phone: z
     .string()
     .trim()

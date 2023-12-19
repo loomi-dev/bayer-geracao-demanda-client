@@ -1,6 +1,6 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { CircleIcon } from '@/components/CircleIcon';
 import { EditIcon } from '@/components/icons';
@@ -21,10 +21,20 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
     criteriaMode: 'all',
   });
 
-  const { handleSubmit, watch } = methods;
+  const { handleSubmit } = methods;
 
+  const onSubmitEditProfileForm = (data: EditProfileFormSchemaType) => {
+    console.log(data);
+  };
   return (
-    <Flex as="form" w="100%" h="100%" flexDir="column" justify="space-between">
+    <Flex
+      as="form"
+      w="100%"
+      h="100%"
+      onSubmit={handleSubmit(onSubmitEditProfileForm)}
+      flexDir="column"
+      justify="space-between"
+    >
       <Flex
         py="2rem"
         px="2.4rem"
@@ -46,7 +56,9 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
               </CircleIcon>
             </ProfileImage>
           </Flex>
-          <ProfileForm />
+          <FormProvider {...methods}>
+            <ProfileForm />
+          </FormProvider>
         </Flex>
       </Flex>
       <ProfileDrawerFooter>
@@ -54,7 +66,9 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           <Button variant="sixth" bgColor="surface.secondary" minW="18rem" onClick={onCancel}>
             Voltar
           </Button>
-          <Button minW="18rem">Salvar Alterações</Button>
+          <Button type="submit" minW="18rem">
+            Salvar Alterações
+          </Button>
         </HStack>
       </ProfileDrawerFooter>
     </Flex>
