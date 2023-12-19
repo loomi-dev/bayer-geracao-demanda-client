@@ -7,7 +7,6 @@ import { useCropsStore } from '../../store';
 
 import {
   DrawerExpenseReceipt,
-  FilterButton,
   HowMuchDidYouEarn,
   HowToProve,
   StockTable,
@@ -29,8 +28,6 @@ export const ProducerProofsScreen = () => {
         <HStack spacing="1rem">
           <HowMuchDidYouEarn />
         </HStack>
-
-        <FilterButton />
       </Flex>
 
       <StockTable />
