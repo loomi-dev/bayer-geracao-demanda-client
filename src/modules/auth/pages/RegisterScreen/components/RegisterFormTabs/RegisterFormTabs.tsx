@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { useUpdateUser } from '@/api';
+import { useUpdateFarmer } from '@/api';
 import { ArrowRightSmallIcon } from '@/components';
 
 import { useRegisterFormTabs } from '../../stores';
@@ -26,7 +26,7 @@ export const RegisterFormTabs = () => {
     state.setCurrentTabForm,
   ]);
 
-  const { mutate: updateUser, isLoading: isUpdatingUser } = useUpdateUser();
+  const { mutate: updateFarmer, isLoading: isUpdatingFarmer } = useUpdateFarmer();
 
   const methods = useForm<RegisterFormSchemaType>({
     resolver: zodResolver(registerFormSchema),
@@ -37,7 +37,7 @@ export const RegisterFormTabs = () => {
   const { handleSubmit, watch } = methods;
 
   const onSubmitAccountDataForm = (data: RegisterFormSchemaType) => {
-    updateUser({
+    updateFarmer({
       id: userId,
       name: data.name,
       email: data.email,
@@ -95,7 +95,7 @@ export const RegisterFormTabs = () => {
 
       <FormProvider {...methods}>
         {currentTabForm === 0 && <AccountDataForm />}
-        {currentTabForm === 1 && <CreatePasswordForm isLoadingSignInButton={isUpdatingUser} />}
+        {currentTabForm === 1 && <CreatePasswordForm isLoadingSignInButton={isUpdatingFarmer} />}
       </FormProvider>
     </Box>
   );

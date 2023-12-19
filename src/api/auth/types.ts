@@ -14,10 +14,7 @@ export type UpdateUserData = {
   name: string;
   email: string;
   companyRole: string;
-  password: string;
-  confirmPassword: string;
-  confirmed: boolean;
-  number: string;
+  phone: string;
 };
 export type UpdateUserResponse = {
   data: {

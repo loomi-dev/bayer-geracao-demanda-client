@@ -1,7 +1,9 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { useUpdateUser } from '@/api';
 import { CircleIcon } from '@/components/CircleIcon';
 import { EditIcon } from '@/components/icons';
 
@@ -15,6 +17,11 @@ type EditProfileFormProps = {
   onCancel: () => void;
 };
 export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
+  const session = useSession();
+  const user = session.data?.user;
+
+  const { mutate: updateUser, isLoading: isUpdatingUser } = useUpdateUser();
+
   const methods = useForm<EditProfileFormSchemaType>({
     resolver: zodResolver(editProfileFormSchema),
     mode: 'all',
@@ -23,9 +30,15 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const { handleSubmit } = methods;
 
-  const onSubmitEditProfileForm = (data: EditProfileFormSchemaType) => {
-    console.log(data);
-  };
+  const onSubmitEditProfileForm = (data: EditProfileFormSchemaType) =>
+    updateUser({
+      id: Number(user?.id),
+      name: data.name,
+      email: data.email,
+      companyRole: data.company_role,
+      phone: data.phone,
+    });
+
   return (
     <Flex
       as="form"
@@ -66,7 +79,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           <Button variant="sixth" bgColor="surface.secondary" minW="18rem" onClick={onCancel}>
             Voltar
           </Button>
-          <Button type="submit" minW="18rem">
+          <Button isLoading={isUpdatingUser} type="submit" minW="18rem">
             Salvar Alterações
           </Button>
         </HStack>
