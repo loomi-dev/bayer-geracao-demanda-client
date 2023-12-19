@@ -1,7 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import { User } from 'next-auth';
 
-import { ProfileImage } from './ProfileImage';
+import { ProfileImage } from '../ProfileImage';
+
 import { ProfileInformationField } from './ProfileInformationField';
 import { ProfileInformationFieldContainer } from './ProfileInformationFieldContainer';
 
