@@ -1,14 +1,14 @@
 import { HStack, StackProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-type ProfileInformationContainerProps = {
+type ProfileInformationFieldContainerProps = {
   children: ReactNode;
 } & StackProps;
 
-export const ProfileInformationContainer = ({
+export const ProfileInformationFieldContainer = ({
   children,
   ...props
-}: ProfileInformationContainerProps) => (
+}: ProfileInformationFieldContainerProps) => (
   <HStack
     py="1.6rem"
     borderBottom="1px solid"

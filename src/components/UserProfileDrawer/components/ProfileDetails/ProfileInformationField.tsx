@@ -1,10 +1,10 @@
 import { Flex, Text } from '@chakra-ui/react';
 
-type ProfileInformationProps = {
+type ProfileInformationFieldProps = {
   label: string;
   value?: string;
 };
-export const ProfileInformation = ({ label, value }: ProfileInformationProps) => (
+export const ProfileInformationField = ({ label, value }: ProfileInformationFieldProps) => (
   <Flex flexDir="column" align="start" w="45%" minW="25rem">
     <Text textTransform="uppercase" textStyle="footnote-bold" color="text.footnote">
       {label}

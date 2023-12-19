@@ -2,10 +2,10 @@ import { Box, DrawerHeader, HStack, Text } from '@chakra-ui/react';
 
 import { CloseIcon, CircleIcon, PersonIcon } from '@/components';
 
-type UserProfileProps = {
+type ProfileDrawerHeaderProps = {
   onClose: () => void;
 };
-export const UserProfileHeader = ({ onClose }: UserProfileProps) => (
+export const ProfileDrawerHeader = ({ onClose }: ProfileDrawerHeaderProps) => (
   <DrawerHeader
     display="flex"
     alignItems="center"

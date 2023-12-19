@@ -1,10 +1,10 @@
 import { DrawerFooter } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-type UserProfileFooterProps = {
+type ProfileDrawerFooterProps = {
   children?: ReactNode;
 };
-export const UserProfileFooter = ({ children }: UserProfileFooterProps) => (
+export const ProfileDrawerFooter = ({ children }: ProfileDrawerFooterProps) => (
   <DrawerFooter px="2.4rem" py="1.6rem" h="8.4rem">
     {children}
   </DrawerFooter>

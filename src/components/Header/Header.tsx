@@ -2,8 +2,9 @@ import { Flex, FlexProps, HStack, SkeletonText, Text, useDisclosure } from '@cha
 import { ReactNode } from 'react';
 
 import { CircleIcon } from '../CircleIcon';
+import { UserProfileDrawer } from '../UserProfileDrawer';
 
-import { UserMenu, UserProfile } from './components';
+import { UserMenu } from './components';
 
 type HeaderProps = {
   label: string;
@@ -41,7 +42,7 @@ export const Header = ({ label, subLabel, icon, onClick, isLoading, ...props }: 
           )}
         </HStack>
         <UserMenu handleOpenUserProfile={onOpenUserProfile} />
-        <UserProfile isOpen={isUserProfileOpen} onClose={onCloseUserProfile} />
+        <UserProfileDrawer isOpen={isUserProfileOpen} onClose={onCloseUserProfile} />
       </Flex>
     </>
   );
