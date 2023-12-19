@@ -1,14 +1,23 @@
 import { Badge, Button, Center, Flex, HStack, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
-type CustomerPendingPlanningNotificationProps = {
-  onClick: () => void;
-  quantity: number;
-};
-export const CustomerPendingPlanningNotification = ({
-  onClick,
-  quantity,
-}: CustomerPendingPlanningNotificationProps) => {
-  if (!quantity) return;
+import { useGetFarmerPendingPlannings } from '@/api';
+
+import { getPendingPlanningsSummary } from './utils';
+
+export const CustomerPendingPlanningNotification = () => {
+  const { query, push } = useRouter();
+  const customerId = Number(query.customer_id);
+  const { data } = useGetFarmerPendingPlannings(
+    { farmerId: customerId },
+    { enabled: Boolean(customerId) },
+  );
+  const plannings = data?.data.plannings ?? [];
+  const pendingPlannings = getPendingPlanningsSummary(plannings);
+  if (!pendingPlannings.quantity) return;
+
+  const onClickPendingNotification = () =>
+    push(`${customerId}/detalhes/${pendingPlannings.mostRecentPendingPlanningId}`);
   return (
     <Flex
       align="center"
@@ -46,11 +55,11 @@ export const CustomerPendingPlanningNotification = ({
             borderColor="opacity.yellow.0.30"
           >
             <Text textStyle="footnote" color="surface.primary" lineHeight="0">
-              {quantity}
+              {pendingPlannings.quantity}
             </Text>
           </Center>
         </Badge>
-        <Button onClick={onClick} size="xs" px="1.6rem">
+        <Button onClick={onClickPendingNotification} size="xs" px="1.6rem">
           <Text textStyle="action3">Visualizar planejamento</Text>
         </Button>
       </HStack>
