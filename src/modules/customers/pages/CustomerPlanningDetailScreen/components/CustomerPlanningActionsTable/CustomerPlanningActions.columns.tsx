@@ -11,7 +11,7 @@ const columnHelper = createColumnHelper<PlanningAction>();
 
 dayjs.extend(relativeTime);
 export const CustomerPlanningActionsColumns = (planningStatus?: string) => [
-  ...(planningStatus
+  ...(planningStatus === 'ready_for_evaluation'
     ? [
         columnHelper.accessor((data) => data.id, {
           id: 'select',

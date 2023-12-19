@@ -30,7 +30,7 @@ export const PlanningActionResume = ({
           <Skeleton w="10rem" h="2rem" />
         )}
       </HStack>
-      {planningStatus && (
+      {planningStatus === 'ready_for_evaluation' && (
         <HStack>
           <Button onClick={onReject} isDisabled={!hasPlanningValue} variant="fifth" size="sm">
             Recusar planejamento
