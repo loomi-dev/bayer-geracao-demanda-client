@@ -11,13 +11,13 @@ export const useUpdatePlanningHistoric = (options?: MutOpt<UpdatePlanningHistori
     mutationKey: ['update-historic'],
     mutationFn: updatePlanningHistoric,
     onSuccess: () => {
-      invalidateQueries([
+      invalidateQueries(
         'get-customers',
         'farmer-plans',
         'planning-historic',
         'planning-status',
         'planning-actions-statistics',
         'planning-actions',
-      ]);
+      );
     },
   });
