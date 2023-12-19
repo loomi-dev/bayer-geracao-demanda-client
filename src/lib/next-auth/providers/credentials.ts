@@ -18,6 +18,9 @@ export const credentialsProvider = CredentialsProvider({
         email: user.email,
         confirmed: user.confirmed,
         accessToken: jwt,
+        phone: user.phone ?? '',
+        company_identifier: user.company_identifier ?? '',
+        company_position: user.company_position ?? '',
         role: user.role,
       };
     } catch (err) {
