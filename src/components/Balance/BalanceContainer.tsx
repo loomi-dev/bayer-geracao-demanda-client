@@ -26,7 +26,6 @@ export const BalanceContainer = ({ farmerId, children, ...restProps }: BalancePr
   const expirationDateValue = formatDate(
     dataGetFarmer?.data?.[0]?.safra?.deadline_to_add_plannings,
   );
-
   return (
     <BalanceContext.Provider
       value={{

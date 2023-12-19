@@ -8,7 +8,6 @@ import { usePagination } from '@/hooks';
 
 import { CustomerPendingPlanningNotification } from './CustomerPendingPlanningNotification';
 import { customerPlanningColumns } from './CustomerPlanningTable.columns';
-import { getPendingPlanningsSummary } from './utils';
 
 export const CustomerPlanningTable = () => {
   const { query, push } = useRouter();
@@ -19,21 +18,12 @@ export const CustomerPlanningTable = () => {
     farmerId: customerId,
   });
   const plannings = data?.data ?? [];
-
-  const pendingPlannings = getPendingPlanningsSummary(plannings);
-
   const onRowClick = (row: Row<Planning>) => push(`${customerId}/detalhes/${row.original.id}`);
-
-  const onClickPendingNotification = () =>
-    push(`${customerId}/detalhes/${pendingPlannings.mostRecentPendingPlanningId}`);
 
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
-      <CustomerPendingPlanningNotification
-        onClick={onClickPendingNotification}
-        quantity={pendingPlannings.quantity}
-      />
+      <CustomerPendingPlanningNotification />
       <DynamicTable<Planning>
         variant="third"
         data={plannings}

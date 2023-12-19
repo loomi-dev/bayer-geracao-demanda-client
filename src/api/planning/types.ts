@@ -92,3 +92,12 @@ export type DeletePlanningParams = {
   planningId: number;
 };
 export type DeletePlanningResponse = void;
+
+export type GetFarmerPendingPlanningsParams = {
+  farmerId: number;
+};
+export type GetFarmerPendingPlanningsResponse = {
+  data: {
+    plannings: Planning[];
+  };
+};
