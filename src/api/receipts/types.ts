@@ -9,8 +9,6 @@ export type GetFaqsResponse = GenericListResponseType<Faq>;
 
 export type GetFarmerData = { id: number | string };
 
-export type GetFarmerResponse = GenericListResponseType<Farmer>;
-
 export type GetActionsResponse = {
   data: Array<{
     id: number;
@@ -30,28 +28,6 @@ export type GetActionsResponse = {
 };
 
 export type ActionResponse = GetActionsResponse['data'][0];
-
-type Farmer = {
-  id: number;
-  cpf: string;
-  createdAt: string;
-  updatedAt: string;
-  company_identifier: string;
-  company_name: string;
-  region?: any;
-  district?: any;
-  company_position: string;
-  wallet: Wallet;
-};
-
-type Wallet = {
-  id: number;
-  balance: string;
-  fakeBalance: string;
-  createdAt: string;
-  updatedAt: string;
-  initialBalance?: any;
-};
 
 type Planning = {
   id: number;

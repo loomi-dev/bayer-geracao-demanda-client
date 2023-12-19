@@ -1,7 +1,7 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 
+import { useGetExampleReceipts } from '@/api';
 import { DocumentIcon, ImageIcon, InboxIcon, UserGroupIcon } from '@/components';
-import { useGetExampleReceipts } from '@/modules/receipts/api';
 
 import { HowToProveCard } from '../HowToProveCard';
 

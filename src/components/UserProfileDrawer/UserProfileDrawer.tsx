@@ -1,5 +1,4 @@
 import { Drawer, DrawerContent, DrawerOverlay } from '@chakra-ui/react';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import {
@@ -19,19 +18,16 @@ enum ProfileMode {
   'EDIT' = 'edit',
   'PREVIEW' = 'preview',
 }
+
 export const UserProfileDrawer = ({ isOpen, onClose }: UserProfileDrawerProps) => {
-  const session = useSession();
   const [mode, setMode] = useState<ProfileMode>(ProfileMode.PREVIEW);
-
-  const user = session.data?.user;
-
   return (
     <Drawer placement="right" isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent>
         <ProfileDrawerHeader onClose={onClose} />
         <ProfileDrawerBody>
-          {mode === ProfileMode.PREVIEW && <ProfileDetails user={user} />}
+          {mode === ProfileMode.PREVIEW && <ProfileDetails />}
           {mode === ProfileMode.EDIT && <EditProfileForm />}
         </ProfileDrawerBody>
         <ProfileDrawerFooter />

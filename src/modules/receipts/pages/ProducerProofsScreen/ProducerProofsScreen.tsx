@@ -7,12 +7,10 @@ import { useCropsStore } from '../../store';
 
 import {
   DrawerExpenseReceipt,
-  FilterButton,
   HowMuchDidYouEarn,
   HowToProve,
   StockTable,
   TitleWithSubtitle,
-  YourCurrentLevel,
 } from './components';
 
 export const ProducerProofsScreen = () => {
@@ -28,11 +26,8 @@ export const ProducerProofsScreen = () => {
       <TitleWithSubtitle />
       <Flex w="100%" justifyContent="space-between">
         <HStack spacing="1rem">
-          <YourCurrentLevel />
           <HowMuchDidYouEarn />
         </HStack>
-
-        <FilterButton />
       </Flex>
 
       <StockTable />

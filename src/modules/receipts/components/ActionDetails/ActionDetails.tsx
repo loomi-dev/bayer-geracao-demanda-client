@@ -1,8 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 
+import { ActionResponse } from '@/api';
 import { toBRL } from '@/utils';
-
-import { ActionResponse } from '../../api';
 
 import { ActionDetailsItem } from './ActionDetailsItem';
 import { typesInPortuguese } from './typesInPortuguese';

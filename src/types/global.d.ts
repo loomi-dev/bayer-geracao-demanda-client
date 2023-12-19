@@ -7,6 +7,9 @@ type User = {
   blocked: boolean;
   role: Roles;
   lastAccess: Date;
+  phone?: string;
+  company_identifier?: string;
+  company_position?: string;
 };
 type PlanningSummary = {
   id: number;
@@ -58,7 +61,7 @@ type Planning = {
   title: string;
   createdAt: string;
   id: number;
-  createdAt?: string;
+  updatedAt: string;
   safra?: Harvest;
   actions?: PlanningAction[];
   historic?: Historic[];

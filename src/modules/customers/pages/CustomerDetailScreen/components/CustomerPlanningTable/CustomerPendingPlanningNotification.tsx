@@ -1,9 +1,11 @@
 import { Badge, Button, Center, Flex, HStack, Text } from '@chakra-ui/react';
 
 type CustomerPendingPlanningNotificationProps = {
+  onClick: () => void;
   quantity: number;
 };
 export const CustomerPendingPlanningNotification = ({
+  onClick,
   quantity,
 }: CustomerPendingPlanningNotificationProps) => {
   if (!quantity) return;
@@ -48,7 +50,7 @@ export const CustomerPendingPlanningNotification = ({
             </Text>
           </Center>
         </Badge>
-        <Button size="xs" px="1.6rem">
+        <Button onClick={onClick} size="xs" px="1.6rem">
           <Text textStyle="action3">Visualizar planejamento</Text>
         </Button>
       </HStack>

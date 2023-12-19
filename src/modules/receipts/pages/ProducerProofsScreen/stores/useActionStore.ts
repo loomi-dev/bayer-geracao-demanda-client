@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { ActionResponse } from '@/modules/receipts/api';
+import { ActionResponse } from '@/api';
 
 type UseActionStore = {
   selectedAction: ActionResponse | null;

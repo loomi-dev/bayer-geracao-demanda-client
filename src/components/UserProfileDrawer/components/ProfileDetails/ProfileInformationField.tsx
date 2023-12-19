@@ -10,7 +10,7 @@ export const ProfileInformationField = ({ label, value }: ProfileInformationFiel
       {label}
     </Text>
     <Text fontSize="2.2rem" maxW="95%">
-      {value}aaaaaaaaaaaa
+      {value}
     </Text>
   </Flex>
 );

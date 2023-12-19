@@ -5,3 +5,4 @@ export * from './customer';
 export * from './manager';
 export * from './planning';
 export * from './trousseau';
+export * from './receipts';

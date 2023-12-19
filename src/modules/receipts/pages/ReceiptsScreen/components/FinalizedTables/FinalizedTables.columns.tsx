@@ -1,22 +1,11 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 
-import { ActionResponse } from '@/modules/receipts/api';
+import { ActionResponse } from '@/api';
 import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { toBRL } from '@/utils';
 
 import { ViewButton } from '../ViewButton';
-
-export type ActionType = {
-  id: number;
-  shareTitle: string;
-  segment: 'relationshipAction';
-  harvest: string;
-  executionDate: string;
-  initialGD: number;
-  finalGD: number;
-  status: string;
-};
 
 const columnHelper = createColumnHelper<ActionResponse>();
 

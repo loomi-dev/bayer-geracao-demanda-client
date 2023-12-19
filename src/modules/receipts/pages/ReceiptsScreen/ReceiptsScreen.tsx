@@ -1,10 +1,9 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 
+import { ActionResponse, useGetActions } from '@/api';
 import { DocumentIcon, Header, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
-
-import { ActionResponse, useGetActions } from '../../api';
 
 import { DrawerExpenseReceipt, FinalizedTables, RunningTable, TableFilter } from './components';
 

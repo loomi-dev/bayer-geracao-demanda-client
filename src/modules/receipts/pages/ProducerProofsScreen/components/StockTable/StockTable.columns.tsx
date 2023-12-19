@@ -1,6 +1,6 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { ActionResponse } from '@/modules/receipts/api';
+import { ActionResponse } from '@/api';
 import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { toBRL } from '@/utils';
 
