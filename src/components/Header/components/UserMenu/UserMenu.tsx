@@ -12,8 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { signOut, useSession } from 'next-auth/react';
 
-import { Avatar } from '@/components/Avatar';
-import { CircleChevronDownIcon, LogoutIcon, UserIcon } from '@/components/icons';
+import { Avatar, CircleChevronDownIcon, LogoutIcon, UserIcon } from '@/components';
 
 type UserMenuProps = {
   handleOpenUserProfile: () => void;
