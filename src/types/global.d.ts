@@ -7,6 +7,9 @@ type User = {
   blocked: boolean;
   role: Roles;
   lastAccess: Date;
+  phone?: string;
+  company_identifier?: string;
+  company_position?: string;
 };
 type PlanningSummary = {
   id: number;

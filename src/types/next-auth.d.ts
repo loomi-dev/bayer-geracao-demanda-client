@@ -28,7 +28,6 @@ declare module 'next-auth/jwt' {
       accessToken: string;
       role: Roles;
       phone?: string;
-      cnpj?: string;
       company_identifier?: string;
       company_position?: string;
     };
