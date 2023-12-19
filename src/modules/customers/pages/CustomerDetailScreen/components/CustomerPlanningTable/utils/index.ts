@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
 const getMostRecentDate = (date1: string, date2: string) => {
-  const differenceFromTodayToDate1 = dayjs().diff((dayjs(date1), 'day'));
-  const differenteFromTodayToDate2 = dayjs().diff((dayjs(date2), 'day'));
+  const differenceFromTodayToDate1 = dayjs().diff((dayjs(date1), 'second'));
+  const differenteFromTodayToDate2 = dayjs().diff((dayjs(date2), 'second'));
   const mostRecentDate = differenceFromTodayToDate1 < differenteFromTodayToDate2 ? date1 : date2;
   return mostRecentDate;
 };
@@ -13,7 +13,10 @@ export const getPendingPlanningsSummary = (plannings: Planning[]) => {
   return plannings.reduce(
     ({ quantity, mostRecentPendingPlanningId }, planning) => {
       if (planning.historic?.at(-1)?.status === 'ready_for_evaluation') {
-        if (!currentMostRecentPlanningDate) currentMostRecentPlanningDate = planning.updatedAt;
+        if (!currentMostRecentPlanningDate) {
+          currentMostRecentPlanningDate = planning.updatedAt;
+          mostRecentPendingPlanningId = planning.id;
+        }
 
         const mostRecentDate = getMostRecentDate(currentMostRecentPlanningDate, planning.updatedAt);
 
