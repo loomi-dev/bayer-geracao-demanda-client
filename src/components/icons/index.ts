@@ -57,3 +57,4 @@ export { default as Add2Icon } from './Add2';
 export { default as ComputerBigIcon } from './ComputerBig';
 export { default as RejectedIcon } from './RejectedIcon';
 export { default as SmallDoneIcon } from './SmallDoneIcon';
+export { default as HouseIcon } from './House';

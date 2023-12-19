@@ -1,17 +1,25 @@
 import { Button } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
-import { ProfileImage } from './ProfileImage';
+import { ProfileImage } from '../ProfileImage';
+
 import { ProfileInformationField } from './ProfileInformationField';
 import { ProfileInformationFieldContainer } from './ProfileInformationFieldContainer';
 
-export const ProfileDetails = () => {
+type ProfileDetailProps = {
+  onEdit: () => void;
+};
+export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
   const session = useSession();
   const user = session.data?.user;
 
   return (
     <>
-      <ProfileImage />
+      <ProfileImage>
+        <Button onClick={onEdit} w="18rem" size="md">
+          Editar perfil
+        </Button>
+      </ProfileImage>
       <ProfileInformationFieldContainer>
         <ProfileInformationField label="Nome" value={user?.name ?? ''} />
         <ProfileInformationField label="E-mail" value={user?.email} />

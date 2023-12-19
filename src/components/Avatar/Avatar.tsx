@@ -15,7 +15,7 @@ export const Avatar = ({ url = '', imageFallbackSize = 30, ...props }: AvatarPro
       <Image src={url} fill alt="Imagem do perfil do usuario" quality={100} />
     </Box>
   ) : (
-    <Flex rounded="full" align="center" justify="center" {...props}>
+    <Flex rounded="full" align="center" justify="center" p="3rem" {...props}>
       <UserIcon fontSize={imageFallbackSize} />
     </Flex>
   );
