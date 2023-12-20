@@ -32,23 +32,23 @@ export const ProfileForm = () => {
           {...register('email')}
         />
       </FormWrapper>
-      <FormWrapper error={errors.phone}>
+      <FormWrapper error={errors.phoneNumber}>
         <TextInput
           mask={Mask.formatPhone}
           size="xl"
           placeholder="Telefone"
           leftIcon={<PhoneIcon />}
           borderRadius="2.1rem"
-          {...register('phone')}
+          {...register('phoneNumber')}
         />
       </FormWrapper>
-      <FormWrapper error={errors.company_role}>
+      <FormWrapper error={errors.company_position}>
         <TextInput
           size="xl"
           placeholder="Seu cargo na sua empresa"
           leftIcon={<HouseIcon />}
           borderRadius="2.1rem"
-          {...register('company_role')}
+          {...register('company_position')}
         />
       </FormWrapper>
     </VStack>

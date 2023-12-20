@@ -19,16 +19,14 @@ export const loginWithCredentials = async (
 
 export const updateUser = async ({
   id: userId,
-  name,
+  username,
   email,
-  phone,
-  companyRole,
+  phoneNumber,
 }: UpdateUserData): Promise<UpdateUserResponse> => {
   const { data } = await axios.authorized().put(`/users/${userId}`, {
-    data: {
-      username: name,
-      email,
-    },
+    username,
+    email,
+    phoneNumber,
   });
 
   return data;

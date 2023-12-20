@@ -17,9 +17,7 @@ export const useUpdateUser = (options?: MutOpt<UpdateUserResponse, UpdateUserDat
     mutationKey: ['update-user'],
     mutationFn: async (userData) => {
       const newUser = await updateUser(userData);
-      const {
-        data: { jwt: accessToken, user },
-      } = newUser;
+      const { user, jwt: accessToken } = newUser;
 
       const newUserSession: User = {
         ...user,

@@ -33,10 +33,10 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const onSubmitEditProfileForm = (data: EditProfileFormSchemaType) =>
     updateUser({
       id: Number(user?.id),
-      name: data.name,
+      username: data.name,
       email: data.email,
-      companyRole: data.company_role,
-      phone: data.phone,
+      company_position: data.company_position,
+      phoneNumber: data.phoneNumber,
     });
 
   return (

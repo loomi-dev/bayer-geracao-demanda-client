@@ -8,7 +8,7 @@ declare module 'next-auth' {
     confirmed: boolean;
     accessToken: string;
     role: Roles;
-    phone?: string;
+    phoneNumber?: string;
     company_identifier?: string;
     company_position?: string;
   }
@@ -27,7 +27,7 @@ declare module 'next-auth/jwt' {
       confirmed: boolean;
       accessToken: string;
       role: Roles;
-      phone?: string;
+      phoneNumber?: string;
       company_identifier?: string;
       company_position?: string;
     };

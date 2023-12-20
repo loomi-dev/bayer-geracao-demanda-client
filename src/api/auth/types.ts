@@ -11,15 +11,13 @@ export type LoginWithCredentialsResponse = {
 
 export type UpdateUserData = {
   id: number;
-  name: string;
+  username: string;
   email: string;
-  companyRole: string;
-  phone: string;
+  company_position: string;
+  phoneNumber: string;
 };
 export type UpdateUserResponse = {
-  data: {
-    farmer: Farmer;
-    jwt: string;
-    user: User;
-  };
+  farmer: Farmer;
+  jwt: string;
+  user: User;
 };

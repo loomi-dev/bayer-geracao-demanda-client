@@ -7,7 +7,7 @@ type User = {
   blocked: boolean;
   role: Roles;
   lastAccess: Date;
-  phone?: string;
+  phoneNumber?: string;
   company_identifier?: string;
   company_position?: string;
 };
