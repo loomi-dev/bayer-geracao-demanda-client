@@ -13,7 +13,7 @@ import { planningTableColumns } from './PlanningTable.columns';
 export const PlanningTable = () => {
   const { push } = useRouter();
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const farmerId = session.data?.user?.farmer?.id as number;
 
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('planning_table');
 
@@ -21,7 +21,7 @@ export const PlanningTable = () => {
     data: dataGetFarmerPlans,
     isLoading: isLoadingDataGetFarmerPlans,
     isFetching: isFetchingDataGetFarmerPlans,
-  } = useGetFarmerPlans({ page: currentPage, farmerId: userId }, { enabled: Boolean(userId) });
+  } = useGetFarmerPlans({ page: currentPage, farmerId }, { enabled: Boolean(farmerId) });
 
   const { mutate: createPlanning, isLoading: isLoadingCreatePlanning } = useCreatePlanning();
 
@@ -33,7 +33,7 @@ export const PlanningTable = () => {
 
   const handleCreatePlanning = () => {
     createPlanning({
-      farmerId: userId,
+      farmerId,
     });
   };
 

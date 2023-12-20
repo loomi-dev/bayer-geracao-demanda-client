@@ -10,7 +10,7 @@ export type LoginWithCredentialsResponse = {
 };
 
 export type UpdateUserData = {
-  id: number;
+  farmerId: number;
   name: string;
   email: string;
   companyRole: string;
