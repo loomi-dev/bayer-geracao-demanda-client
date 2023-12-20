@@ -19,4 +19,19 @@ export const layerStyles: ChakraTheme['layerStyles'] = {
     alignItems: 'center',
     overflow: 'hidden',
   },
+  boxVinho: {
+    position: 'fixed',
+    opacity: '0.3',
+    bg: 'red.danger_05',
+    filter: 'blur(97px)',
+  },
+  boxGlass: {
+    position: 'absolute',
+    borderRadius: 'full',
+    bg: 'linear-gradient(180deg, rgba(161, 11, 48, 0.41) 0%, rgba(161, 11, 48, 0.00) 100%)',
+    boxShadow: 'glass',
+    backdropFilter: 'blur(6px)',
+    border: '1px solid',
+    borderColor: 'opacity.white.0.87',
+  },
 };

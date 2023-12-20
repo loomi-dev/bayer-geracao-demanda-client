@@ -6,3 +6,4 @@ export * from './customers';
 export * from './dashboard';
 export * from './receipts';
 export * from './simulator';
+export * from './errors';
