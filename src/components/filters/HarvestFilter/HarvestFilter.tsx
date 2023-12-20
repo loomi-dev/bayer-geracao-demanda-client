@@ -31,9 +31,9 @@ export const HarvestFilter = () => {
         leftIcon={<CalendarIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
-      <FilterContent w="28rem" overflowY="auto">
+      <FilterContent w="28rem" h="25rem" overflowY="auto">
         <FilterSearchInput onChange={handleSearch} placeholder="Pesquisar por safra" />
-        <FilterBody h="28rem" overflowY="auto">
+        <FilterBody h="25rem" overflowY="auto">
           {harvestOptions.map((option) => (
             <FilterOption key={option.value} label={option.label} value={option.value} />
           ))}
