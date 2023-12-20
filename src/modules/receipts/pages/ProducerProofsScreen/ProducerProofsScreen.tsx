@@ -1,7 +1,7 @@
 import { Box, Flex, HStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 
-import { Header, ImageIcon } from '@/components';
+import { HarvestFilter, Header, ImageIcon } from '@/components';
 
 import { useCropsStore } from '../../store';
 
@@ -27,6 +27,7 @@ export const ProducerProofsScreen = () => {
       <Flex w="100%" justifyContent="space-between">
         <HStack spacing="1rem">
           <HowMuchDidYouEarn />
+          <HarvestFilter />
         </HStack>
       </Flex>
 
