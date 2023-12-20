@@ -30,6 +30,7 @@ export const KanbanScreen = () => {
       {sections.map((section) => (
         <SwiperSlide key={section.title} style={{ width: 'fit-content', height: 'fit-content' }}>
           <KanbanSection
+            isLoading={isLoading || isFetching}
             plannings={section.plannings}
             titleColor={section.titleColor}
             title={section.title}

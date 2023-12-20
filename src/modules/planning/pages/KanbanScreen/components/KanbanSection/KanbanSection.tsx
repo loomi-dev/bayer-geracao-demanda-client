@@ -1,16 +1,19 @@
 import { StackProps, Text, VStack } from '@chakra-ui/react';
 
 import { KanbanCard } from './KanbanCard';
+import { KanbanCardSkeleton } from './KanbanCardSkeleton';
 
 type KanbanSectionProps = {
   title: string;
   plannings?: Planning[];
   titleColor?: string;
+  isLoading: boolean;
 } & StackProps;
 export const KanbanSection = ({
   title,
   titleColor,
   plannings = [],
+  isLoading,
   ...props
 }: KanbanSectionProps) => (
   <VStack
@@ -24,8 +27,8 @@ export const KanbanSection = ({
     <Text textStyle="h5" color={titleColor}>
       {title}
     </Text>
-    {plannings.map((planning) => (
-      <KanbanCard planning={planning} key={planning.id} />
-    ))}
+    {isLoading
+      ? Array.from({ length: 4 }).map((_, index) => <KanbanCardSkeleton key={index} />)
+      : plannings.map((planning) => <KanbanCard planning={planning} key={planning.id} />)}
   </VStack>
 );
