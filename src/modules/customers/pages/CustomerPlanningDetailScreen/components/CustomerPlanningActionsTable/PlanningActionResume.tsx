@@ -7,9 +7,11 @@ type PlanningActionResumeProps = {
   onApprove: () => void;
   onReject: () => void;
   planningStatus?: string;
+  hasSelectedActions: boolean;
 };
 
 export const PlanningActionResume = ({
+  hasSelectedActions,
   planningStatus,
   planningValue,
   onApprove,
@@ -30,14 +32,16 @@ export const PlanningActionResume = ({
           <Skeleton w="10rem" h="2rem" />
         )}
       </HStack>
-      {planningStatus && (
+      {planningStatus === 'ready_for_evaluation' && (
         <HStack>
           <Button onClick={onReject} isDisabled={!hasPlanningValue} variant="fifth" size="sm">
-            Recusar planejamento
+            {hasSelectedActions ? 'Recusar ações selecionadas' : 'Recusar planejamento'}
           </Button>
-          <Button onClick={onApprove} isDisabled={!hasPlanningValue} size="sm">
-            <Text textStyle="footnote-small-bold">Autorizar planejamento</Text>
-          </Button>
+          {!hasSelectedActions && (
+            <Button onClick={onApprove} isDisabled={!hasPlanningValue} size="sm">
+              <Text textStyle="footnote-small-bold">Autorizar planejamento</Text>
+            </Button>
+          )}
         </HStack>
       )}
     </Flex>

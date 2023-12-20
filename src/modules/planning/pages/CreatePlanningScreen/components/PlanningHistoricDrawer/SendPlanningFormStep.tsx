@@ -9,7 +9,6 @@ import {
 } from '@/api';
 import { Historic, HistoricDrawer, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
-import { queryClient } from '@/lib/react-query';
 
 import { SendPlanningFormStepSchemaType } from './SendPlanningFormStep.schema';
 
@@ -49,7 +48,8 @@ export const SendPlanningFormStep = ({
     formState: { errors, isValid },
   } = useFormContext<SendPlanningFormStepSchemaType>();
 
-  const farmKitValue = dataGetPlanningActionsStatistics?.data.metric?.farm_kit_in_cents ?? 0;
+  const farmKitValue =
+    Number(dataGetPlanningActionsStatistics?.data.metric?.farm_kit_in_cents) ?? 0;
   const farmTaskValue =
     Number(dataGetPlanningActionsStatistics?.data.metric?.farm_task_in_cents) || 0;
   const relationshipTaskValue =
@@ -75,11 +75,6 @@ export const SendPlanningFormStep = ({
       },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(['planning-historic']);
-          queryClient.invalidateQueries(['planning-status']);
-          queryClient.invalidateQueries(['planning-actions-statistics']);
-          queryClient.invalidateQueries(['planning-actions']);
-
           handleCloseSendPlanningDrawer(resetPage);
           toast({
             description: 'O planejamento foi enviado para aprovação.',

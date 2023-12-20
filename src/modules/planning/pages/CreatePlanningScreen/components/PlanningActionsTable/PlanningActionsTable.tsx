@@ -75,11 +75,10 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
     isLoadingDataPlanningActions || isFetchingDataPlanningActions;
   const planningActionsList = dataPlanningActions?.data ?? [];
 
-  const actionsKit = dataPlanningActionsStatistics?.data.metric?.farm_kit_in_cents ?? 0;
-  const actionsRelationship = Number(
-    dataPlanningActionsStatistics?.data.metric?.relationship_task_in_cent ?? 0,
-  );
-  const actionsTask = Number(dataPlanningActionsStatistics?.data.metric?.farm_task_in_cents ?? 0);
+  const actionsKit = Number(dataPlanningActionsStatistics?.data.metric?.farm_kit_in_cents) ?? 0;
+  const actionsRelationship =
+    Number(dataPlanningActionsStatistics?.data.metric?.relationship_task_in_cent) ?? 0;
+  const actionsTask = Number(dataPlanningActionsStatistics?.data.metric?.farm_task_in_cents) ?? 0;
 
   const totalPlanningActionsBudgetValue = actionsKit + actionsRelationship + actionsTask;
   const isLoadingTotalPlanningActionsBudgetValue =
