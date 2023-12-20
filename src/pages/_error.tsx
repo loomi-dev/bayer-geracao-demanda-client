@@ -25,7 +25,7 @@ Error.getLayout = function getLayout(page) {
 };
 
 Error.getInitialProps = ({ pathname, query, err, res }): InitialPropsResponse => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  const statusCode = res?.statusCode ?? err?.statusCode ?? 400;
 
   return {
     statusCode,
