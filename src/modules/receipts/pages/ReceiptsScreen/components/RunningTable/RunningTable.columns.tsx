@@ -20,10 +20,10 @@ export const columns = [
     header: () => <Header title="segmento" />,
     cell: (info) => <Segment status={info.getValue()} />,
   }),
-  columnHelper.accessor((data) => '2023/2024', {
+  columnHelper.accessor((data) => data.farmer?.safra?.year, {
     id: 'harvest',
     header: () => <Header title="safra" />,
-    cell: (info) => <Cell value={info.getValue()} />,
+    cell: (info) => <Cell value={info.getValue() ?? ''} />,
   }),
   columnHelper.accessor(
     (data) => {
@@ -37,7 +37,7 @@ export const columns = [
       cell: (info) => <Cell value={info.getValue()} />,
     },
   ),
-  columnHelper.accessor((data) => data.farmer.wallet.initialBalance ?? 0, {
+  columnHelper.accessor((data) => data.farmer?.wallet?.initialBalance ?? 0, {
     id: 'initialGD',
     header: () => <Header title="GD INICIAL" />,
     cell: (info) => <Cell value={toBRL(info.getValue() / 100)} />,
