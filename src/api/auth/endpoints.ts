@@ -22,11 +22,13 @@ export const updateUser = async ({
   username,
   email,
   phoneNumber,
+  company_position,
 }: UpdateUserData): Promise<UpdateUserResponse> => {
   const { data } = await axios.authorized().put(`/users/${userId}`, {
     username,
     email,
     phoneNumber,
+    company_position,
   });
 
   return data;

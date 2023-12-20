@@ -66,7 +66,7 @@ export const OnboardingScreen = () => {
           </Text>
 
           <HStack align="flex-start">
-            {benefits[session.data?.user.role ?? 'Farmer'].map((benefit, index, arr) => (
+            {benefits[session.data?.user.role.name ?? 'Farmer'].map((benefit, index, arr) => (
               <>
                 <Benefit
                   key={index}

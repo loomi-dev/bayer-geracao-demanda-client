@@ -1,4 +1,5 @@
 import { VStack } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
 import { useFormContext } from 'react-hook-form';
 
 import { TextInput, PersonIcon, EmailIcon, PhoneIcon, HouseIcon, FormWrapper } from '@/components';
@@ -7,6 +8,8 @@ import { Mask } from '@/utils';
 import { EditProfileFormSchemaType } from './EditProfileForm.schemas';
 
 export const ProfileForm = () => {
+  const session = useSession();
+  const user = session.data?.user;
   const {
     register,
     formState: { errors },
@@ -14,13 +17,14 @@ export const ProfileForm = () => {
 
   return (
     <VStack w="100%" align="start" gap="1.2rem" mt="1.2rem">
-      <FormWrapper error={errors.name}>
+      <FormWrapper error={errors.username}>
         <TextInput
           size="xl"
           placeholder="Seu nome"
           leftIcon={<PersonIcon />}
           borderRadius="2.1rem"
-          {...register('name')}
+          defaultValue={user?.username}
+          {...register('username')}
         />
       </FormWrapper>
       <FormWrapper error={errors.email}>
@@ -29,6 +33,7 @@ export const ProfileForm = () => {
           placeholder="E-mail"
           leftIcon={<EmailIcon />}
           borderRadius="2.1rem"
+          defaultValue={user?.email}
           {...register('email')}
         />
       </FormWrapper>
@@ -39,6 +44,7 @@ export const ProfileForm = () => {
           placeholder="Telefone"
           leftIcon={<PhoneIcon />}
           borderRadius="2.1rem"
+          defaultValue={user?.phoneNumber}
           {...register('phoneNumber')}
         />
       </FormWrapper>
@@ -48,6 +54,7 @@ export const ProfileForm = () => {
           placeholder="Seu cargo na sua empresa"
           leftIcon={<HouseIcon />}
           borderRadius="2.1rem"
+          defaultValue={user?.company_position}
           {...register('company_position')}
         />
       </FormWrapper>

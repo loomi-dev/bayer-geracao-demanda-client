@@ -37,10 +37,10 @@ const ROLE_PAGES = {
 
 export default withAuth(
   function middleware({ url, nextUrl: { pathname }, nextauth: { token } }) {
-    const userRole = token?.user.role as Roles;
+    const { name: userRole } = token?.user.role as Roles;
     const isNewUser = token?.user.confirmed === false && userRole !== 'Manager';
     const defaultPrivatePageByRole =
-      token?.user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+      userRole === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
 
     const pathnameIsNotFromUserRole = !ROLE_PAGES[userRole].some((rolePage) => {
       if (rolePage.includes(':path*')) {

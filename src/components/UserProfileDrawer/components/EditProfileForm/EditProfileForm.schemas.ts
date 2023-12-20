@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const editProfileFormSchema = z.object({
-  name: z.string().trim().min(1, { message: 'Digite seu nome.' }),
+  username: z.string().trim().min(1, { message: 'Digite seu nome.' }),
   email: z
     .string()
     .trim()

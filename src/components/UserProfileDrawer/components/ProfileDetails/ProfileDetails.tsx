@@ -1,6 +1,8 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
+import { Mask } from '@/utils';
+
 import { ProfileDrawerFooter } from '../ProfileDrawer';
 import { ProfileImage } from '../ProfileImage';
 
@@ -35,11 +37,15 @@ export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
           </Button>
         </ProfileImage>
         <ProfileInformationFieldContainer>
-          <ProfileInformationField label="Nome" value={user?.name ?? ''} />
+          <ProfileInformationField label="Nome" value={user?.username ?? ''} />
           <ProfileInformationField label="E-mail" value={user?.email} />
         </ProfileInformationFieldContainer>
         <ProfileInformationFieldContainer>
-          <ProfileInformationField label="Telefone" value={user?.phone} />
+          <ProfileInformationField
+            label="Telefone"
+            value={user?.phoneNumber}
+            mask={Mask.formatPhone}
+          />
           <ProfileInformationField label="Cargo na sua empresa" value={user?.company_position} />
         </ProfileInformationFieldContainer>
         <ProfileInformationFieldContainer border="initial">

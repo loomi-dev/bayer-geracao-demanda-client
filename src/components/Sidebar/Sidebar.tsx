@@ -20,7 +20,7 @@ export const Sidebar = ({ containerProps }: SidebarProps) => {
   const { pathname } = useRouter();
 
   const isLoadingSession = user.status === 'loading';
-  const isManager = user.data?.user.role === 'Manager';
+  const isManager = user.data?.user.role.name === 'Manager';
   const menuItems = isManager ? managerMenuItens : farmerMenuItens;
 
   return (

@@ -65,7 +65,7 @@ export const PastPlanningHistoricSteps = ({ lastHistoric }: PastPlanningHistoric
                 previousHistoryAuthor={previousHistoryUsername}
               />
 
-              {related?.role?.name === 'Farmer' ? (
+              {related?.role.name === 'Farmer' ? (
                 <Historic.AccordionContainer>
                   <Historic.Accordion planningActions={actions} />
                   <Historic.Footer totalValue={planningTotalBudgetValue} />

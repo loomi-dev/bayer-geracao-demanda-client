@@ -8,7 +8,7 @@ import { NextPageWithLayout } from '../_app';
 const Page: NextPageWithLayout = () => {
   const user = useSession();
 
-  const role = user.data?.user.role;
+  const role = user.data?.user.role.name;
 
   if (role === 'Manager') {
     return <ReceiptsScreen />;
