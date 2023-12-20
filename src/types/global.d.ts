@@ -25,14 +25,7 @@ type PlanningActionType = 'farm_task' | 'farm_kit' | 'relationship_task';
 
 type HistoricStatus = 'ready_for_evaluation' | 'accepted' | 'rejected';
 
-type Roles = {
-  id: number;
-  name: 'Farmer' | 'Manager';
-  description: string;
-  type: string;
-  createdAt: Date;
-  updateAt: Date;
-};
+type Roles = 'Farmer' | 'Manager';
 
 type PlanningAction = {
   id: number;
@@ -56,7 +49,7 @@ type Historic = {
   actions: PlanningAction[];
   related: {
     role: {
-      name: Roles['name'];
+      name: Roles;
     };
   } & Omit<User, 'role'>;
   creation_date: string;
