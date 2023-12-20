@@ -1,7 +1,7 @@
 import { Text, VStack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
-import { UseFieldArrayReturn, FieldValues } from 'react-hook-form';
+import { UseFieldArrayReturn } from 'react-hook-form';
 import { v4 } from 'uuid';
 
 import { UploadIcon } from '@/components';
@@ -10,7 +10,7 @@ import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from '@/styles/them
 export type MultipleFileInputProps = {
   multiple?: boolean;
   dropZoneOptions?: DropzoneOptions;
-  fieldArray: UseFieldArrayReturn<FieldValues, any, any>;
+  fieldArray: UseFieldArrayReturn<any, any, any>;
 };
 
 export type SelectedFile = { id?: string; file?: File };
@@ -59,28 +59,20 @@ export const MultipleFileInput = ({
       h="12rem"
       {...getRootProps({
         className: 'dropzone',
-        onClick: (event) => event.stopPropagation(),
         style,
       })}
       spacing="1rem"
       color="red.danger_50"
+      cursor="pointer"
     >
       <UploadIcon />
       <Text textStyle="footnote-400-2" maxW="25rem" textAlign="center">
-        <Text
-          textStyle="footnote-700"
-          as="a"
-          cursor="pointer"
-          textDecor="underline"
-          {...getRootProps({
-            className: 'dropzone',
-          })}
-        >
+        <Text textStyle="footnote-700" as="a" cursor="pointer" textDecor="underline">
           Clique aqui
-          <input {...getInputProps()} />
         </Text>{' '}
         ou arraste as fotos para inserir as evidências da ação
       </Text>
+      <input {...getInputProps()} />
     </VStack>
   );
 };

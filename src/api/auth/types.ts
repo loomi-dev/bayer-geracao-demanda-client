@@ -20,6 +20,9 @@ export type UpdateUserData = {
   number: string;
 };
 export type UpdateUserResponse = {
-  jwt: string;
-  user: User;
+  data: {
+    farmer: Farmer;
+    jwt: string;
+    user: User;
+  };
 };

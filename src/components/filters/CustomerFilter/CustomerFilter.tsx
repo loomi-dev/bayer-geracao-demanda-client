@@ -1,5 +1,7 @@
 import { useDisclosure } from '@chakra-ui/react';
+import { ChangeEvent, useState } from 'react';
 
+import { Customer } from '@/api';
 import {
   BaseFilter,
   FilterBody,
@@ -7,17 +9,26 @@ import {
   FilterFooter,
   FilterSearchInput,
   FilterOption,
-  FilterOptionProps,
   FilterTrigger,
 } from '@/components/BaseFilter';
 import { ChevronDownIcon, ChevronTopIcon, UserIcon } from '@/components/icons';
+import { Mask } from '@/utils';
 
 type CustomerFilterProps = {
-  options?: FilterOptionProps[];
+  customers?: Customer[];
 };
-export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
+export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [search, setSearch] = useState('');
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
+
+  const filteredCustomers = customers.filter(
+    (customer) =>
+      customer.farmer.name?.includes(search) ||
+      Mask.formatCNPJ(customer.farmer.company_identifier).includes(search),
+  );
   return (
     <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
@@ -28,18 +39,21 @@ export const CustomerFilter = ({ options = [] }: CustomerFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent w="28rem">
-        <FilterSearchInput placeholder="Pesquisar por nome ou CNPJ" />
+        <FilterSearchInput onChange={handleSearch} placeholder="Pesquisar por nome ou CNPJ" />
         <FilterBody h="28rem" overflowY="auto">
-          {options.map((option) => (
+          {filteredCustomers.map((customer) => (
             <FilterOption
-              key={option.value}
-              label={option.label}
-              subLabel={option.subLabel}
-              value={option.value}
+              key={customer.farmer.id}
+              label={customer.farmer.name}
+              subLabel={Mask.formatCNPJ(customer.farmer.company_identifier)}
+              value={customer.farmer.company_identifier}
             />
           ))}
         </FilterBody>
-        <FilterFooter label={options.length > 1 ? 'Clientes' : 'Cliente'} value={options.length} />
+        <FilterFooter
+          label={customers.length > 1 ? 'Clientes' : 'Cliente'}
+          value={customers.length}
+        />
       </FilterContent>
     </BaseFilter>
   );

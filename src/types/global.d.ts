@@ -6,8 +6,10 @@ type User = {
   confirmed: boolean;
   blocked: boolean;
   role: Roles;
-  company_position: string;
   lastAccess: Date;
+  phone?: string;
+  company_identifier?: string;
+  company_position?: string;
 };
 type PlanningSummary = {
   id: number;
@@ -59,7 +61,7 @@ type Planning = {
   title: string;
   createdAt: string;
   id: number;
-  createdAt?: string;
+  updatedAt: string;
   safra?: Harvest;
   actions?: PlanningAction[];
   historic?: Historic[];
@@ -95,9 +97,37 @@ type FinancialSummary = {
   utilized_in_cents: number;
 };
 
+type TrousseauCatalog = {
+  id: number;
+  name: string;
+  description: string;
+  photo: {
+    url: string;
+  };
+  document: {
+    name: string;
+    url: string;
+  };
+};
+type TrousseauItem = {
+  id: number;
+  name: string;
+  photo: {
+    url: string;
+  };
+};
+
+type TrousseauSupplier = {
+  email: string;
+  id: number;
+  name: string;
+  phoneNumber: string;
+  region: string;
+};
 type Trousseau = {
   id: number;
-  label: string;
-  image: string;
-  isSelected?: boolean;
+  name: string;
+  material_items: TrousseauItem[];
+  catalogs: TrousseauCatalog[];
+  suppliers: TrousseauSupplier[];
 };

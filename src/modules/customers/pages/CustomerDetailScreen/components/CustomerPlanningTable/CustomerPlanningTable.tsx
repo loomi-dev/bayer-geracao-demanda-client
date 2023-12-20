@@ -13,28 +13,28 @@ export const CustomerPlanningTable = () => {
   const { query, push } = useRouter();
   const customerId = Number(query.customer_id);
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination();
-  const { data, isLoading } = useGetFarmerPlans({ page: currentPage, farmerId: customerId });
+  const { data, isLoading, isFetching } = useGetFarmerPlans({
+    page: currentPage,
+    farmerId: customerId,
+  });
   const plannings = data?.data ?? [];
-  const pendingPlans = plannings.reduce((pendingValue, planning) => {
-    if (planning.historic?.at(-1)?.status === 'ready_for_evaluation') {
-      pendingValue++;
-    }
-    return pendingValue;
-  }, 0);
-
   const onRowClick = (row: Row<Planning>) => push(`${customerId}/detalhes/${row.original.id}`);
 
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
-      <CustomerPendingPlanningNotification quantity={pendingPlans} />
+      <CustomerPendingPlanningNotification />
       <DynamicTable<Planning>
+        variant="third"
         data={plannings}
-        isLoading={isLoading}
+        isLoading={isLoading || isFetching}
         columns={customerPlanningColumns}
         fallbackMessage="Nenhum planejamento encontrado"
         fallbackProps={{ fontSize: { base: '1.2rem', '3xl': '1.6rem' } }}
-        hoverProps={{ bgColor: 'opacity.green.0.10', cursor: 'pointer' }}
+        hoverProps={{
+          bg: 'greyscale.500',
+          cursor: 'pointer',
+        }}
         onRowClick={onRowClick}
       />
       <Pagination

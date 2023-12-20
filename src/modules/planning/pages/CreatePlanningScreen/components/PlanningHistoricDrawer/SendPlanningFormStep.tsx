@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@chakra-ui/react';
+import { HStack, Tooltip, VStack, useToast } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useFormContext } from 'react-hook-form';
 
@@ -26,6 +26,8 @@ export const SendPlanningFormStep = ({
   const session = useSession();
   const userId = session.data?.user.id as number;
 
+  const toast = useToast();
+
   const { currentPage, handleNextPage, handlePreviousPage, resetPage } = usePagination(
     'send-planning-actions-table',
   );
@@ -46,7 +48,8 @@ export const SendPlanningFormStep = ({
     formState: { errors, isValid },
   } = useFormContext<SendPlanningFormStepSchemaType>();
 
-  const farmKitValue = dataGetPlanningActionsStatistics?.data.metric?.farm_kit_in_cents ?? 0;
+  const farmKitValue =
+    Number(dataGetPlanningActionsStatistics?.data.metric?.farm_kit_in_cents) ?? 0;
   const farmTaskValue =
     Number(dataGetPlanningActionsStatistics?.data.metric?.farm_task_in_cents) || 0;
   const relationshipTaskValue =
@@ -56,6 +59,8 @@ export const SendPlanningFormStep = ({
   const plansList = dataGetPlanningActions?.data ?? [];
   const countPlans = plansList.length;
   const totalPlansListPage = dataGetPlanningActions?.meta.pagination.pageCount || 1;
+
+  const isDisabledCreateActionButton = plansList.length <= 0 || !isValid;
 
   const onSubmitSendPlanningDrawerForm = ({ description }: SendPlanningFormStepSchemaType) => {
     updatePlanningHistoric(
@@ -71,6 +76,16 @@ export const SendPlanningFormStep = ({
       {
         onSuccess: () => {
           handleCloseSendPlanningDrawer(resetPage);
+          toast({
+            description: 'O planejamento foi enviado para aprovação.',
+            status: 'success',
+          });
+        },
+        onError: () => {
+          toast({
+            description: 'Ocorreu um erro ao enviar seu planejamento para aprovação.',
+            status: 'error',
+          });
         },
       },
     );
@@ -106,11 +121,19 @@ export const SendPlanningFormStep = ({
         <Historic.Footer totalValue={totalPlanningActionsValue}>
           <HStack spacing="1rem">
             <Historic.CancelButton onClick={() => handleCloseSendPlanningDrawer(resetPage)} />
-            <Historic.DoneButton
-              type="submit"
-              isDisabled={!isValid}
-              isLoading={isLoadingUpdatePlanningHistoric}
-            />
+            <Tooltip
+              label={
+                isDisabledCreateActionButton
+                  ? 'Você deve possuir ações antes de enviar um planejamento para aprovação.'
+                  : ''
+              }
+            >
+              <Historic.DoneButton
+                type="submit"
+                isDisabled={isDisabledCreateActionButton}
+                isLoading={isLoadingUpdatePlanningHistoric}
+              />
+            </Tooltip>
           </HStack>
         </Historic.Footer>
       </Historic.Container>

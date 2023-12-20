@@ -19,8 +19,8 @@ export const BalanceExpirationDate = ({ children, ...restProps }: BalanceExpirat
             children
           ) : (
             <>
-              em ações para solicitar os recursos <br /> Válido{' '}
-              <Text as="strong">até {context?.expirationDate}</Text>
+              para a realização de ações de geração de demanda <br />
+              Válido <Text as="strong">até {context?.expirationDate}</Text>
             </>
           )}
         </Text>

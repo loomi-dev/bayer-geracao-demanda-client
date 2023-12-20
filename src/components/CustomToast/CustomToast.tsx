@@ -16,9 +16,9 @@ export const CustomToast = ({
   ...restProps
 }: CustomToastProps) => {
   const toastStatusColors = {
-    success: 'opacity.green.0.30',
-    error: 'opacity.red.0.30',
-    info: 'opacity.gray.0.30',
+    success: 'opacity.green.0.65',
+    error: 'opacity.red.0.65',
+    info: 'opacity.gray.0.65',
   };
 
   return (
@@ -33,6 +33,7 @@ export const CustomToast = ({
       align="center"
       justify="space-between"
       minW="35rem"
+      gap="0.5rem"
       {...restProps}
     >
       <HStack spacing="3rem">
@@ -42,7 +43,7 @@ export const CustomToast = ({
         </Text>
       </HStack>
 
-      <Button variant="unstyled" onClick={onClose}>
+      <Button variant="unstyled" onClick={onClose} color="greyscale.0">
         <CloseIcon fontSize={20} />
       </Button>
     </Flex>

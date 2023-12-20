@@ -1,12 +1,16 @@
 import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+
+import { useSimulatorStore } from '../../stores';
 
 export const HarvestSwitch = () => {
-  const [switchOn, setSwitchOn] = useState(true);
+  const [isBayerSellingOnly, setIsBayerSeelingOnly] = useSimulatorStore((state) => [
+    state.isBayerSellingOnly,
+    state.setIsBayerSellingOnly,
+  ]);
   return (
-    <VStack align="flex-start" spacing="0.8rem">
-      <Text textStyle="action3" maxW="21rem" lineHeight="1.8rem" textTransform="uppercase">
-        Irá vender apenas Bayer na safra 24/25?
+    <VStack align="flex-start" spacing="0.8rem" w="60%">
+      <Text textStyle="action3" lineHeight="1.8rem" textTransform="uppercase">
+        Terá foco em vendas e alinhamento com biotecnologias Bayer?
       </Text>
 
       <Flex
@@ -20,10 +24,10 @@ export const HarvestSwitch = () => {
         bgColor="greyscale.275"
         position="relative"
       >
-        <Button zIndex={1} variant="unstyled" onClick={() => setSwitchOn(true)}>
+        <Button zIndex={1} variant="unstyled" onClick={() => setIsBayerSeelingOnly(true)}>
           <Text
             transitionDuration="1s"
-            textColor={switchOn ? 'surface.primary' : 'greyscale.650'}
+            textColor={isBayerSellingOnly ? 'surface.primary' : 'greyscale.650'}
             fontSize="2rem"
             fontWeight="normal"
           >
@@ -37,13 +41,13 @@ export const HarvestSwitch = () => {
           w="11rem"
           h="4rem"
           left={2}
-          transform={switchOn ? '' : 'translateX(5em)'}
+          transform={isBayerSellingOnly ? '' : 'translateX(5em)'}
           transitionDuration="1s"
         />
-        <Button zIndex={1} variant="unstyled" onClick={() => setSwitchOn(false)}>
+        <Button zIndex={1} variant="unstyled" onClick={() => setIsBayerSeelingOnly(false)}>
           <Text
             transitionDuration="1s"
-            textColor={!switchOn ? 'surface.primary' : 'greyscale.650'}
+            textColor={!isBayerSellingOnly ? 'surface.primary' : 'greyscale.650'}
             fontWeight="normal"
             fontSize="2rem"
           >

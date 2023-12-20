@@ -2,12 +2,11 @@ import { Box, Button, HStack, Skeleton, Spinner, Text } from '@chakra-ui/react';
 import { Row } from '@tanstack/react-table';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useMemo } from 'react';
 
 import { useGetFarmerPlans, useCreatePlanning } from '@/api';
 import { AddInsideCircleIcon, CircleIcon, DynamicTable, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
-import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
+import { formatPrice } from '@/utils';
 
 import { planningTableColumns } from './PlanningTable.columns';
 
@@ -29,19 +28,8 @@ export const PlanningTable = () => {
   const totalPlanningTablePages = dataGetFarmerPlans?.meta.pagination.pageCount || 1;
 
   const isLoadingPlansList = isLoadingDataGetFarmerPlans || isFetchingDataGetFarmerPlans;
-  const plansList = useMemo(() => dataGetFarmerPlans?.data ?? [], [dataGetFarmerPlans?.data]);
-
-  const totalPlansBudgetValue = useMemo(
-    () =>
-      plansList.reduce((totalPlansValue, planning) => {
-        const totalPlanningBudgeValue = getTotalPlanningBudgetValue(planning?.actions ?? []);
-
-        totalPlansValue += totalPlanningBudgeValue;
-
-        return totalPlansValue;
-      }, 0),
-    [plansList],
-  );
+  const plansList = dataGetFarmerPlans?.data ?? [];
+  const totalPlansBudgetValue = dataGetFarmerPlans?.meta.plannedAmountAggregateInCents;
 
   const handleCreatePlanning = () => {
     createPlanning({
@@ -73,6 +61,7 @@ export const PlanningTable = () => {
           bg: 'greyscale.500',
           cursor: 'pointer',
         }}
+        pb="0"
         onRowClick={handleNavigateToCreatePlanningScreen}
       >
         <HStack

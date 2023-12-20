@@ -25,9 +25,4 @@ export const LAYOUT_NOTIFICATION_BAR_WIDTH = { lg: '28rem', xl: '32rem', '3xl': 
 
 export const PAGINATION_PAGE_SIZE = 30;
 
-export const TROUSSEAU_LIST = [
-  { id: 1, label: 'Chapéu Bayer', image: '/assets/images/enxoval1.png' },
-  { id: 2, label: 'Camisa polo', image: '/assets/images/enxoval2.png' },
-  { id: 3, label: 'Barracas', image: '/assets/images/enxoval3.png' },
-  { id: 4, label: 'Outdoor', image: '/assets/images/enxoval4.png' },
-] as Trousseau[];
+export const STALE_TIME_CONFIG = 1000 * 60 * 5; // 5 minutes

@@ -1,12 +1,12 @@
 import { HStack } from '@chakra-ui/react';
 
-import { CustomerFilter, DistrictFilter, RegionFilter, SearchIcon, TextInput } from '@/components';
+import { SearchIcon, TextInput } from '@/components';
 
 export const TableFilter = () => (
   <HStack mt="6.2rem" w="100%" justifyContent="flex-end" spacing="1.2rem">
-    <CustomerFilter />
+    {/* <CustomerFilter />
     <DistrictFilter />
-    <RegionFilter />
+    <RegionFilter /> */}
     <TextInput
       placeholder="Pesquisar por ação"
       leftIcon={<SearchIcon />}

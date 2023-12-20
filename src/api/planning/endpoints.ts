@@ -8,6 +8,8 @@ import {
   CreatePlanningResponse,
   DeletePlanningParams,
   DeletePlanningResponse,
+  GetFarmerPendingPlanningsParams,
+  GetFarmerPendingPlanningsResponse,
   GetFarmerPlansParams,
   GetFarmerPlansResponse,
   GetPlanningActionsParams,
@@ -76,6 +78,24 @@ export const getFarmerPlans = async ({
   });
 
   const { data } = await axios.authorized().get(`/plannings?${query}`);
+
+  return data;
+};
+
+export const getFarmerPendingPlannings = async ({
+  farmerId,
+}: GetFarmerPendingPlanningsParams): Promise<GetFarmerPendingPlanningsResponse> => {
+  const query = qs.stringify({
+    populate: {
+      plannings: {
+        populate: {
+          historic: true,
+        },
+      },
+    },
+  });
+
+  const { data } = await axios.authorized().get(`/farmers/${farmerId}?${query}`);
 
   return data;
 };

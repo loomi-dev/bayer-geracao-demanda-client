@@ -1,12 +1,23 @@
-import { Badge, Center, Flex, HStack, Text } from '@chakra-ui/react';
+import { Badge, Button, Center, Flex, HStack, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
-type CustomerPendingPlanningNotificationProps = {
-  quantity: number;
-};
-export const CustomerPendingPlanningNotification = ({
-  quantity,
-}: CustomerPendingPlanningNotificationProps) => {
-  if (!quantity) return;
+import { useGetFarmerPendingPlannings } from '@/api';
+
+import { getPendingPlanningsSummary } from './utils';
+
+export const CustomerPendingPlanningNotification = () => {
+  const { query, push } = useRouter();
+  const customerId = Number(query.customer_id);
+  const { data } = useGetFarmerPendingPlannings(
+    { farmerId: customerId },
+    { enabled: Boolean(customerId) },
+  );
+  const plannings = data?.data.plannings ?? [];
+  const pendingPlannings = getPendingPlanningsSummary(plannings);
+  if (!pendingPlannings.quantity) return;
+
+  const onClickPendingNotification = () =>
+    push(`${customerId}/detalhes/${pendingPlannings.mostRecentPendingPlanningId}`);
   return (
     <Flex
       align="center"
@@ -27,9 +38,8 @@ export const CustomerPendingPlanningNotification = ({
       <HStack gap="1.6rem">
         <Badge
           variant="table_warning"
-          w="15rem"
+          w="16.7rem"
           h="3.4rem"
-          py="0.8rem"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -37,33 +47,21 @@ export const CustomerPendingPlanningNotification = ({
         >
           <Text as="span">Aguardando aprovação</Text>
           <Center
+            minW="1.8rem"
             boxSize="1.8rem"
             borderRadius="full"
-            bg="opacity.yellow.0.10"
+            bg="yellow.warning_60"
             border="1px solid"
             borderColor="opacity.yellow.0.30"
           >
-            <Text textStyle="footnote" color="yellow.warning_60" lineHeight="0">
-              {quantity}
+            <Text textStyle="footnote" color="surface.primary" lineHeight="0">
+              {pendingPlannings.quantity}
             </Text>
           </Center>
         </Badge>
-        <Badge
-          variant="filled_primary"
-          color="text.primary"
-          w="15rem"
-          h="3.4rem"
-          py="0.8rem"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          gap="1rem"
-          _hover={{ opacity: '0.7', cursor: 'pointer' }}
-        >
-          <Text as="span" fontWeight="bold">
-            Visualizar planejamento
-          </Text>
-        </Badge>
+        <Button onClick={onClickPendingNotification} size="xs" px="1.6rem">
+          <Text textStyle="action3">Visualizar planejamento</Text>
+        </Button>
       </HStack>
     </Flex>
   );

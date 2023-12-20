@@ -4,10 +4,12 @@ import { Balance, StatCard } from '@/components';
 import { centsToCompactValue } from '@/utils';
 
 type CustomerStatisticsSectionProps = {
+  customerId: number;
   isLoading: boolean;
   summary?: PlanningSummary;
 };
 export const CustomerStatisticsSection = ({
+  customerId,
   summary,
   isLoading,
 }: CustomerStatisticsSectionProps) => {
@@ -22,12 +24,18 @@ export const CustomerStatisticsSection = ({
     <Grid
       as="section"
       w="full"
-      gridTemplateColumns="repeat(5,1fr)"
-      gridTemplateRows="repeat(2,1fr)"
+      gridTemplateColumns={{
+        base: 'repeat(3, 1fr)',
+        '3xl': 'repeat(5, 1fr)',
+      }}
+      gridTemplateRows={{
+        base: 'repeat(3, 1fr)',
+        '3xl': 'repeat(2, 1fr)',
+      }}
       gap="1.6rem"
     >
-      <GridItem rowSpan={2} colSpan={2}>
-        <Balance.Container h="100%" farmerId={summary?.id ?? 0}>
+      <GridItem rowSpan={2} colSpan={{ base: 3, '3xl': 2 }}>
+        <Balance.Container h="100%" maxH="25rem" farmerId={customerId} justify="center">
           <Balance.Label>O parceiro ainda possui</Balance.Label>
           <Balance.Value />
           <HStack w="full" align="center" justify="space-between">
@@ -42,10 +50,20 @@ export const CustomerStatisticsSection = ({
           label="Ações planejadas"
           skeletonStyles={{ w: '4rem' }}
           isLoading={isLoading}
+          h="100%"
+          maxH="12rem"
         />
       </GridItem>
       <GridItem colSpan={2}>
-        <Flex layerStyle="card" p="2.4rem" align="center" justify="space-between" gridArea="stat2">
+        <Flex
+          layerStyle="card"
+          p="2.4rem"
+          align="center"
+          justify="space-between"
+          gridArea="stat2"
+          h="100%"
+          maxH="12rem"
+        >
           <Text textStyle="body3" color="text.footnote">
             Planejado / total
           </Text>
@@ -66,15 +84,29 @@ export const CustomerStatisticsSection = ({
         </Flex>
       </GridItem>
       <GridItem>
-        <StatCard value={`R$ ${plannedKit}`} label="Ações de enxoval" isLoading={isLoading} />
+        <StatCard
+          value={`R$ ${plannedKit}`}
+          label="Ações de enxoval"
+          isLoading={isLoading}
+          h="100%"
+          maxH="12rem"
+        />
       </GridItem>
       <StatCard
         value={`R$ ${plannedRelationship}`}
         label="Ações de relacionamento"
         labelStyles={{ maxW: '12rem' }}
         isLoading={isLoading}
+        h="100%"
+        maxH="12rem"
       />
-      <StatCard value={`R$ ${plannedTask}`} label="Ações de campo" isLoading={isLoading} />
+      <StatCard
+        value={`R$ ${plannedTask}`}
+        label="Ações de campo"
+        isLoading={isLoading}
+        h="100%"
+        maxH="12rem"
+      />
     </Grid>
   );
 };

@@ -2,7 +2,7 @@ import { Badge, Box, HStack, StackProps, Text } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { ReactNode } from 'react';
 
-import { HistoricStatusValue, HistoricValue } from '@/types';
+import { HistoricStatusVariant, HistoricValue } from '@/types';
 import { formatDate } from '@/utils';
 
 type HistoricHeaderProps = {
@@ -19,7 +19,7 @@ export const HistoricHeader = ({
 }: HistoricHeaderProps) => {
   const isTodayDate = formatDate(date) === formatDate(dayjs().toDate());
   const dateFormatted = isTodayDate ? 'Hoje' : formatDate(date);
-  const timeFormatted = dayjs(date).format('mm:ss');
+  const timeFormatted = dayjs(date).format('HH:mm');
 
   return (
     <HStack h="5.2rem" w="full" justify="space-between" {...restProps}>
@@ -37,7 +37,7 @@ export const HistoricHeader = ({
             </Text>
           </HStack>
 
-          <Badge variant={HistoricStatusValue[status]} borderRadius="1.2rem" px="1.6rem">
+          <Badge variant={HistoricStatusVariant[status]} borderRadius="1.2rem" px="1.6rem">
             {HistoricValue[status]}
           </Badge>
         </>

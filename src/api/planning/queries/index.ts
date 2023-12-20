@@ -4,3 +4,4 @@ export * from './useGetPlanningActionsStatistics';
 export * from './useGetPlanningActions';
 export * from './useGetPlanningHistoric';
 export * from './useGetPlanningStatus';
+export * from './useGetFarmerPendingPlannings';
