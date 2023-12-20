@@ -6,17 +6,19 @@ import { Balance } from '@/components';
 
 export const PlanningBalance = () => {
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const farmerId = session.data?.user?.farmer?.id as number;
+  const harvestId = session.data?.user?.farmer?.safra?.id as number;
   const { mutate: createPlanning, isLoading: isLoadingCreatePlanning } = useCreatePlanning();
 
   const handleCreatePlanning = () => {
     createPlanning({
-      farmerId: userId,
+      farmerId,
+      harvestId,
     });
   };
 
   return (
-    <Balance.Container farmerId={userId}>
+    <Balance.Container farmerId={farmerId}>
       <Balance.Label />
       <Balance.Value />
 
