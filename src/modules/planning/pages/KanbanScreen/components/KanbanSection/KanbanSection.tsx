@@ -1,14 +1,14 @@
 import { StackProps, Text, VStack } from '@chakra-ui/react';
 
-import { KanbanCard } from '../KanbanCard';
+import { KanbanCard } from './KanbanCard';
 
 type KanbanSectionProps = {
-  label: string;
+  title: string;
   plannings?: Planning[];
   titleColor?: string;
 } & StackProps;
 export const KanbanSection = ({
-  label,
+  title,
   titleColor,
   plannings = [],
   ...props
@@ -22,7 +22,7 @@ export const KanbanSection = ({
     {...props}
   >
     <Text textStyle="h5" color={titleColor}>
-      {label}
+      {title}
     </Text>
     {plannings.map((planning) => (
       <KanbanCard planning={planning} key={planning.id} />
