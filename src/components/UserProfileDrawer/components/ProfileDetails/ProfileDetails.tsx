@@ -51,19 +51,6 @@ export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
         <ProfileInformationFieldContainer border="initial">
           <ProfileInformationField label="cnpj" value={user?.company_identifier} />
         </ProfileInformationFieldContainer>
-        <Button
-          w="100%"
-          lineHeight="1.8rem"
-          size="sm"
-          variant="third"
-          textStyle="action2"
-          textColor="greyscale.900"
-          fontWeight="bold"
-          _hover={{ opacity: '0.7' }}
-          mt="2rem"
-        >
-          Alterar minha senha
-        </Button>
       </Flex>
       <ProfileDrawerFooter />
     </Flex>

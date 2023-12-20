@@ -11,10 +11,10 @@ export const getCustomers = async ({
 }: GetCustomerParams): Promise<GetCustomersResponse> => {
   const filters = {
     farmer: {
-      manager: {
+      managers: {
         users_permissions_user: {
           id: {
-            $eq: id,
+            $in: [id],
           },
         },
       },
