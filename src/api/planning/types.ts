@@ -101,3 +101,5 @@ export type GetFarmerPendingPlanningsResponse = {
     plannings: Planning[];
   };
 };
+
+export type GetPlanningsResponse = GenericListResponseType<Planning>;
