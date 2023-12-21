@@ -53,7 +53,10 @@ export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
         </ProfileInformationFieldContainer>
         {user?.role === 'Farmer' && (
           <ProfileInformationFieldContainer border="initial">
-            <ProfileInformationField label="cnpj" value={user?.farmer?.company_identifier} />
+            <ProfileInformationField
+              label="cnpj"
+              value={Mask.formatCNPJ(user?.farmer?.company_identifier ?? '')}
+            />
           </ProfileInformationFieldContainer>
         )}
       </Flex>
