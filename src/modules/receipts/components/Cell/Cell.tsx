@@ -1,7 +1,7 @@
 import { Text, TextProps } from '@chakra-ui/react';
 
 type CellProps = {
-  value: string | number | null;
+  value: string;
   textProps?: TextProps;
 };
 export const Cell = ({ value, textProps }: CellProps) => (

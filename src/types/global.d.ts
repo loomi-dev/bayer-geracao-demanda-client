@@ -143,3 +143,7 @@ type Trousseau = {
   catalogs: TrousseauCatalog[];
   suppliers: TrousseauSupplier[];
 };
+
+type ReceiptAction = {
+  farmer: Farmer;
+} & PlanningAction;

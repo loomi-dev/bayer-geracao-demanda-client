@@ -9,42 +9,11 @@ export type GetFaqsResponse = GenericListResponseType<Faq>;
 
 export type GetFarmerData = { id: number | string };
 
-export type GetActionsResponse = {
-  data: Array<{
-    id: number;
-    title: string;
-    type: 'relationship_task' | 'farm_task' | 'farm_kit';
-    amountInCents: number;
-    detail: string;
-    initialDate?: string;
-    finishDate?: string;
-    status: 'rejected' | 'accepted' | 'not_evaluated';
-    createdAt: string;
-    updatedAt: string;
-    planning: Planning;
-    farmer: Farmer;
-  }>;
-  meta: Meta;
+export type GetReceiptsActionsParams = {
+  farmerId: number;
+  pagination: Pick<Pagination, 'page' | 'pageSize'>;
 };
-
-export type ActionResponse = GetActionsResponse['data'][0];
-
-type Planning = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  title?: any;
-  safra: Safra;
-};
-
-type Safra = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  year: string;
-  deadline_to_add_plannings?: any;
-  current: boolean;
-};
+export type GetReceiptsActionsResponse = GenericListResponseType<ReceiptAction>;
 
 export type UploadFileParams = {
   files: File[];
@@ -108,38 +77,10 @@ type Datum = {
   current: boolean;
 };
 
-export type PutActionParams = {
-  actionId: number;
-  body: PutActionBody;
-};
-
-type PutActionBody = {
-  data: Data;
-};
-
-type Data = {
-  receipts: Receipt;
-};
-
-type Receipt = {
-  approved: boolean;
-  documents: UploadFileResponse[];
-  description: string;
-};
-
-export type GetActionsParams = {
-  farmerId?: number;
-  pagination?: {
-    page: number;
-    pageSize: number;
-  };
-};
-
 export type GetAchievementParams = {
   farmerId: number;
-  safraId: number;
+  harvestId: number;
 };
-
 export type GetAchievementResponse = {
   data: Array<{
     id: number;
@@ -147,7 +88,7 @@ export type GetAchievementResponse = {
     amount_to_be_won_in_cent: string;
     createdAt: string;
     updatedAt: string;
-    safra: Safra;
+    safra: Harvest;
   }>;
   meta: Meta;
 };
@@ -162,6 +103,8 @@ export type GetExampleReceiptsResponse = {
   }>;
   meta: Meta;
 };
+
+export type SendReceiptActionResponse = void;
 
 type Document = {
   id: number;
