@@ -32,23 +32,23 @@ export const getFarmer = async ({ farmerId }: GetFarmerParams): Promise<GetFarme
 
 export const updateFarmer = async ({
   farmerId,
-  name,
+  username,
   email,
-  number,
-  companyRole,
+  phoneNumber,
+  company_position,
   password,
   confirmPassword,
   confirmed,
 }: UpdateFarmerData): Promise<UpdateFarmerResponse> => {
   const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
     data: {
-      company_position: companyRole,
-      username: name,
+      company_position,
+      username,
       email,
       password,
       passwordConfirmation: confirmPassword,
       confirmed,
-      number,
+      phoneNumber,
     },
   });
 

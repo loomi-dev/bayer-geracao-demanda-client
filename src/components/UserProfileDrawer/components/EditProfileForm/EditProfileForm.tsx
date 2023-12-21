@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { useUpdateUser } from '@/api';
+import { useUpdateFarmer, useUpdateManager } from '@/api';
 import { CircleIcon } from '@/components/CircleIcon';
 import { EditIcon } from '@/components/icons';
 
@@ -19,9 +19,9 @@ type EditProfileFormProps = {
 export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const session = useSession();
   const user = session.data?.user;
-
-  const { mutate: updateUser, isLoading: isUpdatingUser } = useUpdateUser();
-
+  const role = user?.role.toLowerCase();
+  const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
+  const { mutate: updateManager, isLoading: isUpdatingManager } = useUpdateManager();
   const methods = useForm<EditProfileFormSchemaType>({
     resolver: zodResolver(editProfileFormSchema),
     mode: 'all',
@@ -30,14 +30,24 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const { handleSubmit } = methods;
 
-  const onSubmitEditProfileForm = (data: EditProfileFormSchemaType) =>
-    updateUser({
-      id: Number(user?.id),
+  const onSubmitEditProfileForm = (data: EditProfileFormSchemaType) => {
+    if (role === 'manager') {
+      updateManager({
+        managerId: Number(user?.manager?.id),
+        username: data.username,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+      });
+      return;
+    }
+    updateFarmer({
+      farmerId: Number(user?.farmer?.id),
       username: data.username,
       email: data.email,
       company_position: data.company_position,
       phoneNumber: data.phoneNumber,
     });
+  };
 
   return (
     <Flex
@@ -79,7 +89,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           <Button variant="sixth" bgColor="surface.secondary" minW="18rem" onClick={onCancel}>
             Voltar
           </Button>
-          <Button isLoading={isUpdatingUser} type="submit" minW="18rem">
+          <Button isLoading={isUpdatingUser || isUpdatingManager} type="submit" minW="18rem">
             Salvar Alterações
           </Button>
         </HStack>

@@ -7,13 +7,13 @@ export type GetFarmerResponse = GenericListResponseType<Farmer>;
 
 export type UpdateFarmerData = {
   farmerId: number;
-  name: string;
+  username: string;
   email: string;
-  companyRole: string;
-  password: string;
-  confirmPassword: string;
-  confirmed: boolean;
-  number: string;
+  company_position: string;
+  password?: string;
+  confirmPassword?: string;
+  confirmed?: boolean;
+  phoneNumber?: string;
 };
 export type UpdateFarmerResponse = {
   data: {

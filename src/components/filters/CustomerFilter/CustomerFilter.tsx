@@ -26,7 +26,7 @@ export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
 
   const filteredCustomers = customers.filter(
     (customer) =>
-      customer.farmer?.name?.includes(search) ||
+      customer.farmer.users_permissions_user?.username?.includes(search) ||
       Mask.formatCNPJ(customer.farmer?.company_identifier).includes(search),
   );
   return (
@@ -44,7 +44,7 @@ export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
           {filteredCustomers.map((customer) => (
             <FilterOption
               key={customer?.farmer?.id}
-              label={customer?.farmer?.name ?? ''}
+              label={customer.farmer.users_permissions_user?.username ?? ''}
               subLabel={Mask.formatCNPJ(customer.farmer?.company_identifier)}
               value={customer.farmer?.company_identifier}
             />

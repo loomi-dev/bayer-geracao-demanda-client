@@ -16,8 +16,6 @@ export const credentialsProvider = CredentialsProvider({
         ...user,
         accessToken: jwt,
         phoneNumber: user.phoneNumber ?? '',
-        company_identifier: user.company_identifier ?? '',
-        company_role: user.company_position ?? '',
         role: user.role,
       };
     } catch (err) {

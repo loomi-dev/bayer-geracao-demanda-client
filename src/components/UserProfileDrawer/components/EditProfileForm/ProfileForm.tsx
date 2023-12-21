@@ -10,7 +10,7 @@ import { EditProfileFormSchemaType } from './EditProfileForm.schemas';
 export const ProfileForm = () => {
   const session = useSession();
   const user = session.data?.user;
-  const role = user?.role.toLocaleLowerCase();
+
   const {
     register,
     formState: { errors },
@@ -49,16 +49,18 @@ export const ProfileForm = () => {
           {...register('phoneNumber')}
         />
       </FormWrapper>
-      <FormWrapper error={errors.company_position}>
-        <TextInput
-          size="xl"
-          placeholder="Seu cargo na sua empresa"
-          leftIcon={<HouseIcon />}
-          borderRadius="2.1rem"
-          defaultValue={user?.[role ?? '']?.company_position}
-          {...register('company_position')}
-        />
-      </FormWrapper>
+      {user?.role === 'Farmer' && (
+        <FormWrapper error={errors.company_position}>
+          <TextInput
+            size="xl"
+            placeholder="Seu cargo na sua empresa"
+            leftIcon={<HouseIcon />}
+            borderRadius="2.1rem"
+            defaultValue={user?.farmer?.company_position}
+            {...register('company_position')}
+          />
+        </FormWrapper>
+      )}
     </VStack>
   );
 };
