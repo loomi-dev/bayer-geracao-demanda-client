@@ -7,9 +7,7 @@ type User = {
   blocked: boolean;
   role: Roles;
   lastAccess: string;
-  phone?: string;
-  company_identifier?: string;
-  company_position?: string;
+  phoneNumber?: string;
   farmer?: Farmer;
   manager?: Manager;
   safra: Harvest;
@@ -82,6 +80,8 @@ type Manager = {
   current_planned_amount_in_cents: string;
   region?: string;
   district?: string;
+  farmers: Farmer[];
+  safra: Harvest;
 };
 
 type Farmer = {
@@ -90,7 +90,6 @@ type Farmer = {
   company_position?: string;
   cpf: string;
   id: number;
-  name?: string;
   wallet?: Wallet;
   safra?: Harvest;
   users_permissions_user?: User;

@@ -2,7 +2,12 @@ import qs from 'qs';
 
 import axios from '@/lib/axios';
 
-import { GetFarmerParams, GetFarmerResponse } from './types';
+import {
+  GetFarmerParams,
+  GetFarmerResponse,
+  UpdateFarmerData,
+  UpdateFarmerResponse,
+} from './types';
 
 export const getFarmer = async ({ farmerId }: GetFarmerParams): Promise<GetFarmerResponse> => {
   const query = qs.stringify({
@@ -19,6 +24,31 @@ export const getFarmer = async ({ farmerId }: GetFarmerParams): Promise<GetFarme
   });
 
   const { data } = await axios.authorized().get(`/farmers?${query}`);
+
+  return data;
+};
+
+export const updateFarmer = async ({
+  farmerId,
+  username,
+  email,
+  phoneNumber,
+  companyPosition,
+  password,
+  confirmPassword,
+  confirmed,
+}: UpdateFarmerData): Promise<UpdateFarmerResponse> => {
+  const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
+    data: {
+      company_position: companyPosition,
+      username,
+      email,
+      password,
+      passwordConfirmation: confirmPassword,
+      confirmed,
+      phoneNumber,
+    },
+  });
 
   return data;
 };

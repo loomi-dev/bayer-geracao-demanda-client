@@ -1,10 +1,12 @@
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack, Text, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { useUpdateUser } from '@/api';
+import { useUpdateFarmer } from '@/api';
 import { ArrowRightSmallIcon } from '@/components';
+import { DEFAULT_PRIVATE_FARMER_PAGE, DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 
 import { useRegisterFormTabs } from '../../stores';
 
@@ -18,6 +20,8 @@ import {
 
 export const RegisterFormTabs = () => {
   const session = useSession();
+  const toast = useToast();
+  const { push } = useRouter();
   const farmerId = session.data?.user?.farmer?.id as number;
 
   const [agreePrivacyPolicies, currentTabForm, setCurrentTabForm] = useRegisterFormTabs((state) => [
@@ -26,7 +30,7 @@ export const RegisterFormTabs = () => {
     state.setCurrentTabForm,
   ]);
 
-  const { mutate: updateUser, isLoading: isUpdatingUser } = useUpdateUser();
+  const { mutate: updateFarmer, isLoading: isUpdatingFarmer } = useUpdateFarmer();
 
   const methods = useForm<RegisterFormSchemaType>({
     resolver: zodResolver(registerFormSchema),
@@ -37,16 +41,29 @@ export const RegisterFormTabs = () => {
   const { handleSubmit, watch } = methods;
 
   const onSubmitAccountDataForm = (data: RegisterFormSchemaType) => {
-    updateUser({
-      farmerId,
-      name: data.name,
-      email: data.email,
-      companyRole: data.role,
-      number: data.phone,
-      password: data.password,
-      confirmPassword: data.confirmPassword,
-      confirmed: true,
-    });
+    updateFarmer(
+      {
+        farmerId,
+        username: data.name,
+        email: data.email,
+        companyPosition: data.role,
+        phoneNumber: data.phone,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        confirmed: true,
+      },
+      {
+        onSuccess: ({ data: { user } }) => {
+          const privatePage =
+            user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
+          push(privatePage);
+          toast({
+            description: 'Seus dados foram atualizados!',
+            status: 'success',
+          });
+        },
+      },
+    );
   };
 
   const isValidAccountDataForm = accountDataFormSchema.safeParse({
@@ -95,7 +112,7 @@ export const RegisterFormTabs = () => {
 
       <FormProvider {...methods}>
         {currentTabForm === 0 && <AccountDataForm />}
-        {currentTabForm === 1 && <CreatePasswordForm isLoadingSignInButton={isUpdatingUser} />}
+        {currentTabForm === 1 && <CreatePasswordForm isLoadingSignInButton={isUpdatingFarmer} />}
       </FormProvider>
     </Box>
   );
