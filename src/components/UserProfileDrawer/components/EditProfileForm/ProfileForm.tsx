@@ -45,7 +45,7 @@ export const ProfileForm = () => {
           placeholder="Telefone"
           leftIcon={<PhoneIcon />}
           borderRadius="2.1rem"
-          defaultValue={user?.phoneNumber}
+          defaultValue={Mask.formatPhone(user?.phoneNumber ?? '')}
           {...register('phoneNumber')}
         />
       </FormWrapper>
@@ -56,7 +56,7 @@ export const ProfileForm = () => {
             placeholder="Seu cargo na sua empresa"
             leftIcon={<HouseIcon />}
             borderRadius="2.1rem"
-            defaultValue={user?.farmer?.company_position}
+            defaultValue={Mask.formatCNPJ(user?.farmer?.company_position ?? '')}
             {...register('company_position')}
           />
         </FormWrapper>
