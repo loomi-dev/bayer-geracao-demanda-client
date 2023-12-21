@@ -12,10 +12,8 @@ import {
 export const getFarmer = async ({ farmerId }: GetFarmerParams): Promise<GetFarmerResponse> => {
   const query = qs.stringify({
     filters: {
-      users_permissions_user: {
-        id: {
-          $eq: farmerId,
-        },
+      id: {
+        $eq: farmerId,
       },
     },
     populate: {

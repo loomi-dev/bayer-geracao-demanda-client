@@ -4,21 +4,14 @@ import axios from '@/lib/axios';
 
 import { GetManagerParams, UpdateManagerData, UpdateManagerResponse } from './types';
 
-export const getManager = async ({ id }: GetManagerParams) => {
+export const getManager = async ({ managerId }: GetManagerParams) => {
   const query = qs.stringify({
-    filters: {
-      users_permissions_user: {
-        id: {
-          $eq: id,
-        },
-      },
-    },
     populate: {
       safra: true,
       farmers: true,
     },
   });
-  const response = await axios.authorized().get(`/managers?${query}`);
+  const response = await axios.authorized().get(`/managers/${managerId}?${query}`);
   return response.data;
 };
 

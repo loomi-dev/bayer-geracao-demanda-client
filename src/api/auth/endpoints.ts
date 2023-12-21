@@ -12,8 +12,8 @@ export const loginWithCredentials = async (
     .post<LoginWithCredentialsResponse>('/auth/local', data);
 
   const harvestResponse = await getHarvests();
-  const harvest = harvestResponse?.data?.at(-1);
 
+  const harvest = harvestResponse?.data?.at(-1);
   if (!harvest) throw new Error('Occurred error when login');
 
   return {

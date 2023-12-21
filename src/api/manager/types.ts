@@ -1,7 +1,5 @@
-import { GenericListResponseType } from '../types';
-
-export type GetManagerParams = { id: number };
-export type GetManagerResponse = GenericListResponseType<Manager>;
+export type GetManagerParams = { managerId: number };
+export type GetManagerResponse = { data: Manager };
 
 export type UpdateManagerData = {
   managerId: number;
