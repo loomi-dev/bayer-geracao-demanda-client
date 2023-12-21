@@ -57,8 +57,10 @@ const yellow = {
 };
 
 const red = {
+  danger_05: '#F3C3CF',
   danger_10: '#F8D8D8',
   danger_20: '#EB8989',
+  danger_25: '#B33453',
   danger_30: '#F30000',
   danger_40: '#DE3B3B',
   danger_50: '#A10B30',
@@ -67,6 +69,7 @@ const red = {
   danger_90: '#810926',
   danger_100: '#C50022',
 };
+
 export const colors: ChakraTheme['colors'] = {
   ...theme.colors,
   ...semanticTokens.colors,

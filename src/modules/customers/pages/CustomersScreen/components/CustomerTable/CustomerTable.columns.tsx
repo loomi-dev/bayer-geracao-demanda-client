@@ -3,22 +3,22 @@ import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import { Customer } from '@/api/customer';
+import { CustomerPlannings } from '@/api/customer';
 import { ClockIcon } from '@/components';
 import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
 import { CustomerTableStatusColumn } from './CustomerTableStatusColumn';
 
-const columnHelper = createColumnHelper<Customer>();
+const columnHelper = createColumnHelper<CustomerPlannings>();
 
 dayjs.extend(relativeTime);
 export const CustomerColumns = [
-  columnHelper.accessor((data) => data.farmer.company_name, {
+  columnHelper.accessor((data) => data.farmer?.company_name, {
     id: 'razaoSocial',
     header: () => <Text textStyle="action4">Razão Social</Text>,
     cell: (info) => <Text textStyle="body3">{info.getValue()}</Text>,
   }),
-  columnHelper.accessor((data) => data.farmer.wallet.initialBalance, {
+  columnHelper.accessor((data) => data.farmer?.wallet?.initialBalance, {
     id: 'recursoGdInicial',
     header: () => <Text textStyle="action4">Recurso GD Inicial</Text>,
     cell: (info) => <Text textStyle="caption3">{`R$ ${formatPrice(info.getValue())}`}</Text>,
@@ -71,7 +71,7 @@ export const CustomerColumns = [
       </HStack>
     ),
   }),
-  columnHelper.accessor((data) => data.farmer.users_permissions_user?.lastAccess, {
+  columnHelper.accessor((data) => data.farmer?.users_permissions_user?.lastAccess, {
     id: 'ultimoAcesso',
     header: () => <Text textStyle="action4">Ultimo acesso</Text>,
     cell: (info) => (

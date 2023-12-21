@@ -8,4 +8,5 @@ export const shadows: ChakraTheme['shadows'] = {
   fifth: '0px 0px 20px 0px rgba(0, 0, 0, 0.25)',
   card: '0px 4px 50px 0px rgba(0, 0, 0, 0.05)',
   datepicker: '0px 0px 24px 0px rgba(0, 0, 0, 0.25)',
+  glass: '0px 4px 14px rgba(200, 185, 239, 0.37)',
 };

@@ -22,19 +22,18 @@ import {
   GetPlanningStatisticsResponse,
   GetPlanningStatusParams,
   GetPlanningStatusResponse,
+  GetPlanningsResponse,
   UpdatePlanningHistoricParams,
   UpdatePlanningHistoricResponse,
 } from './types';
 
 export const getPlanningStatistics = async ({
-  userId,
+  farmerId,
 }: GetPlanningStatisticsParams): Promise<GetPlanningStatisticsResponse> => {
   const queryParams = qs.stringify({
     filters: {
-      users_permissions_user: {
-        id: {
-          $eq: userId,
-        },
+      id: {
+        $eq: farmerId,
       },
     },
     populate: {
@@ -55,7 +54,7 @@ export const getFarmerPlans = async ({
 }: GetFarmerPlansParams): Promise<GetFarmerPlansResponse> => {
   const query = qs.stringify({
     filters: {
-      users_permissions_user: {
+      farmer: {
         id: {
           $eq: farmerId,
         },
@@ -102,6 +101,7 @@ export const getFarmerPendingPlannings = async ({
 
 export const createPlanning = async ({
   farmerId,
+  harvestId,
 }: CreatePlanningData): Promise<CreatePlanningResponse> => {
   const { data } = await axios.authorized().post('/plannings', {
     data: {
@@ -115,7 +115,7 @@ export const createPlanning = async ({
       safra: {
         connect: [
           {
-            id: farmerId,
+            id: harvestId,
           },
         ],
       },
@@ -148,6 +148,9 @@ export const getPlanningActions = async ({
     filters: {
       planning: {
         id: planningId,
+      },
+      deletedAt: {
+        $notNull: false,
       },
     },
     pagination,
@@ -221,3 +224,15 @@ export const deletePlanning = async ({
   planningId,
 }: DeletePlanningParams): Promise<DeletePlanningResponse> =>
   await axios.authorized().delete(`/plannings/${planningId}`);
+
+export const getPlannings = async (): Promise<GetPlanningsResponse> => {
+  const query = qs.stringify({
+    populate: {
+      actions: true,
+      historic: true,
+      farmer: true,
+    },
+  });
+  const response = await axios.authorized().get(`/plannings?${query}`);
+  return response.data;
+};

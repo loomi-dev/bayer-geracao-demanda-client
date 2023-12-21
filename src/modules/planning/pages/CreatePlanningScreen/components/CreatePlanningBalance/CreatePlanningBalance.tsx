@@ -7,23 +7,26 @@ import { CreatePlanningActionDrawerButton } from '../CreatePlanningActionDrawerB
 
 type CreatePlanningBalanceProps = {
   planningStatus: HistoricStatus | 'default';
-  isLoading?: boolean;
+  isLoadingPlanningStatus?: boolean;
 };
 
-export const CreatePlanningBalance = ({ planningStatus }: CreatePlanningBalanceProps) => {
+export const CreatePlanningBalance = ({
+  planningStatus,
+  isLoadingPlanningStatus,
+}: CreatePlanningBalanceProps) => {
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const farmerId = session.data?.user?.farmer?.id as number;
   const isPlanningAccepted = planningStatus === 'accepted';
 
   return (
-    <Balance.Container farmerId={userId}>
+    <Balance.Container farmerId={farmerId}>
       <Balance.Label />
       <Balance.Value />
 
       <HStack w="full" align="center" justify="space-between">
         <Balance.ExpirationDate />
 
-        {!isPlanningAccepted && <CreatePlanningActionDrawerButton />}
+        {!isPlanningAccepted && !isLoadingPlanningStatus && <CreatePlanningActionDrawerButton />}
       </HStack>
     </Balance.Container>
   );
