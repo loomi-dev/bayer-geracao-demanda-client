@@ -1,13 +1,7 @@
-import { Button, Drawer, DrawerContent, DrawerOverlay, HStack } from '@chakra-ui/react';
+import { Drawer, DrawerBody, DrawerContent, DrawerOverlay } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import {
-  EditProfileForm,
-  ProfileDetails,
-  ProfileDrawerBody,
-  ProfileDrawerFooter,
-  ProfileDrawerHeader,
-} from './components';
+import { EditProfileForm, ProfileDetails, ProfileDrawerHeader } from './components';
 
 type UserProfileDrawerProps = {
   isOpen: boolean;
@@ -30,25 +24,10 @@ export const UserProfileDrawer = ({ isOpen, onClose }: UserProfileDrawerProps) =
       <DrawerOverlay />
       <DrawerContent>
         <ProfileDrawerHeader onClose={onClose} />
-        <ProfileDrawerBody>
+        <DrawerBody p="initial">
           {mode === ProfileMode.PREVIEW && <ProfileDetails onEdit={setEditModeOn} />}
-          {mode === ProfileMode.EDIT && <EditProfileForm />}
-        </ProfileDrawerBody>
-        <ProfileDrawerFooter>
-          {mode === ProfileMode.EDIT && (
-            <HStack>
-              <Button
-                variant="sixth"
-                bgColor="surface.secondary"
-                minW="18rem"
-                onClick={setEditModeOff}
-              >
-                Voltar
-              </Button>
-              <Button minW="18rem">Salvar Alterações</Button>
-            </HStack>
-          )}
-        </ProfileDrawerFooter>
+          {mode === ProfileMode.EDIT && <EditProfileForm onCancel={setEditModeOff} />}
+        </DrawerBody>
       </DrawerContent>
     </Drawer>
   );

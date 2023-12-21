@@ -2,12 +2,7 @@ import axios from '@/lib/axios';
 
 import { getHarvests } from '../harverst';
 
-import {
-  LoginWithCredentialsData,
-  LoginWithCredentialsResponse,
-  UpdateUserData,
-  UpdateUserResponse,
-} from './types';
+import { LoginWithCredentialsData, LoginWithCredentialsResponse } from './types';
 
 export const loginWithCredentials = async (
   data: LoginWithCredentialsData,
@@ -28,29 +23,4 @@ export const loginWithCredentials = async (
       safra: harvest,
     },
   };
-};
-
-export const updateUser = async ({
-  farmerId,
-  name,
-  email,
-  number,
-  companyRole,
-  password,
-  confirmPassword,
-  confirmed,
-}: UpdateUserData): Promise<UpdateUserResponse> => {
-  const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
-    data: {
-      company_position: companyRole,
-      username: name,
-      email,
-      password,
-      passwordConfirmation: confirmPassword,
-      confirmed,
-      number,
-    },
-  });
-
-  return data;
 };
