@@ -38,7 +38,7 @@ export const CustomerPlanningDetailCards = () => {
             {isLoading || isFetching ? (
               <Skeleton noOfLines={1} h="3rem" w="23rem" />
             ) : (
-              <Text textStyle="h4">{farmer?.users_permissions_user.username}</Text>
+              <Text textStyle="h4">{farmer?.users_permissions_user?.username}</Text>
             )}
           </VStack>
           <VStack align="flex-start" w="25.4rem">

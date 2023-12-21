@@ -43,8 +43,8 @@ export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
         <FilterBody h="28rem" overflowY="auto">
           {filteredCustomers.map((customer) => (
             <FilterOption
-              key={customer.farmer?.id}
-              label={customer.farmer?.name}
+              key={customer?.farmer?.id}
+              label={customer?.farmer?.name ?? ''}
               subLabel={Mask.formatCNPJ(customer.farmer?.company_identifier)}
               value={customer.farmer?.company_identifier}
             />
