@@ -60,7 +60,7 @@ export const UpdatePlanningActionDrawer = (props: UpdatePlanningActionDrawerProp
   const session = useSession();
 
   const planningId = Number(query?.planning_id);
-  const farmerId = session.data?.user.id as number;
+  const farmerId = session.data?.user?.farmer?.id as number;
 
   const [currentStep, setCurrentStep] = useUpdatePlanningActionStore((state) => [
     state.currentStep,

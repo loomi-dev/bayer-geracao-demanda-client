@@ -13,7 +13,7 @@ export const useUpdatePlanningHistoric = (options?: MutOpt<UpdatePlanningHistori
     onSuccess: () => {
       invalidateQueries(
         'farmer-pending-plannings',
-        'get-customers',
+        'get-customers-plannings-by-userId ',
         'farmer-plans',
         'planning-historic',
         'planning-status',

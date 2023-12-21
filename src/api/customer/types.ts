@@ -1,22 +1,24 @@
 import { GenericListResponseType, Pagination } from '@/api';
 
-export type GetCustomerParams = {
-  id: number;
-  filter: {
+export type GetCustomerPlanningsByUserIdParams = {
+  userId: number;
+  filter?: {
     region?: string;
     district?: string;
     search?: string;
   };
-  pagination: Pagination;
+  pagination?: Pagination;
 };
 
-export type Customer = {
+export type CustomerPlannings = {
+  id: number;
   date: Date;
   farmer: Farmer;
   historic: Historic[];
   financial_summary: FinancialSummary;
   actions: PlanningAction[];
+  updatedAt: string;
   provenResourceAmountInCents: number;
 };
 
-export type GetCustomersResponse = GenericListResponseType<Customer>;
+export type GetCustomerPlanningsByUserIdResponse = GenericListResponseType<CustomerPlannings>;

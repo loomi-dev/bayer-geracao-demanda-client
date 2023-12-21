@@ -12,6 +12,7 @@ type User = {
   company_position?: string;
   farmer?: Farmer;
   manager?: Manager;
+  safra: Harvest;
 };
 type PlanningSummary = {
   id: number;
@@ -67,6 +68,7 @@ type Planning = {
   safra?: Harvest;
   actions?: PlanningAction[];
   historic?: Historic[];
+  farmer?: Farmer;
 };
 
 type Wallet = {
