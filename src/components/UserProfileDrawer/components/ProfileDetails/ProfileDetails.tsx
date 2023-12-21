@@ -25,11 +25,14 @@ export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
         <ProfileInformationField label="E-mail" value={user?.email} />
       </ProfileInformationFieldContainer>
       <ProfileInformationFieldContainer>
-        <ProfileInformationField label="Telefone" value={user?.phone} />
-        <ProfileInformationField label="Cargo na sua empresa" value={user?.company_position} />
+        <ProfileInformationField label="Telefone" value={user?.phoneNumber} />
+        <ProfileInformationField
+          label="Cargo na sua empresa"
+          value={user?.farmer?.company_position}
+        />
       </ProfileInformationFieldContainer>
       <ProfileInformationFieldContainer border="initial">
-        <ProfileInformationField label="cnpj" value={user?.company_identifier} />
+        <ProfileInformationField label="cnpj" value={user?.farmer?.company_identifier} />
       </ProfileInformationFieldContainer>
       <Button
         w="100%"

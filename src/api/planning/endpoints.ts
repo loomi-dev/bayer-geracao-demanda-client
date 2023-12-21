@@ -102,6 +102,7 @@ export const getFarmerPendingPlannings = async ({
 
 export const createPlanning = async ({
   farmerId,
+  harvestId,
 }: CreatePlanningData): Promise<CreatePlanningResponse> => {
   const { data } = await axios.authorized().post('/plannings', {
     data: {
@@ -115,7 +116,7 @@ export const createPlanning = async ({
       safra: {
         connect: [
           {
-            id: farmerId,
+            id: harvestId,
           },
         ],
       },

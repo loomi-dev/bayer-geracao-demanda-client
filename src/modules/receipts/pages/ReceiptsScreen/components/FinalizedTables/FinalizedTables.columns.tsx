@@ -37,7 +37,7 @@ export const columns = [
       cell: (info) => <Cell value={info.getValue()} />,
     },
   ),
-  columnHelper.accessor((data) => data.farmer.wallet.initialBalance ?? 0, {
+  columnHelper.accessor((data) => data?.farmer?.wallet?.initialBalance ?? 0, {
     id: 'initialGD',
     header: () => <Header title="GD INICIAL" />,
     cell: (info) => <Cell value={toBRL(info.getValue() / 100)} />,

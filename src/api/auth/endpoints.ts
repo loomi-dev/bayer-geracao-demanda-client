@@ -18,7 +18,7 @@ export const loginWithCredentials = async (
 };
 
 export const updateUser = async ({
-  id: userId,
+  farmerId,
   name,
   email,
   number,
@@ -27,7 +27,7 @@ export const updateUser = async ({
   confirmPassword,
   confirmed,
 }: UpdateUserData): Promise<UpdateUserResponse> => {
-  const { data } = await axios.authorized().put(`/farmers/${userId}`, {
+  const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
     data: {
       company_position: companyRole,
       username: name,

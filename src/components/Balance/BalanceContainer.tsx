@@ -22,7 +22,7 @@ export const BalanceContainer = ({ farmerId, children, ...restProps }: BalancePr
     { farmerId },
     { enabled: Boolean(farmerId) },
   );
-  const balanceValue = formatPrice(dataGetFarmer?.data?.[0]?.wallet.balance ?? 0);
+  const balanceValue = formatPrice(dataGetFarmer?.data?.[0]?.wallet?.balance ?? 0);
   const expirationDateValue = formatDate(
     dataGetFarmer?.data?.[0]?.safra?.deadline_to_add_plannings,
   );
