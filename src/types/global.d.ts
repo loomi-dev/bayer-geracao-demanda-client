@@ -12,6 +12,7 @@ type User = {
   company_position?: string;
   farmer?: Farmer;
   manager?: Manager;
+  safra: Harvest;
 };
 type PlanningSummary = {
   id: number;

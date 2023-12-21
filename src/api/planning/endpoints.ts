@@ -151,6 +151,9 @@ export const getPlanningActions = async ({
       planning: {
         id: planningId,
       },
+      deletedAt: {
+        $notNull: false,
+      },
     },
     pagination,
   });

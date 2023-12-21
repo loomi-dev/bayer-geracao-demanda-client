@@ -14,7 +14,7 @@ export const PlanningTable = () => {
   const { push } = useRouter();
   const session = useSession();
   const farmerId = session.data?.user?.farmer?.id as number;
-  const harvestId = session.data?.user.farmer?.safra?.id as number;
+  const harvestId = session.data?.user?.safra?.id as number;
 
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('planning_table');
 

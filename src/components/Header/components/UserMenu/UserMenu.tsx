@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { signOut, useSession } from 'next-auth/react';
+import { Fragment } from 'react';
 
 import { Avatar, CircleChevronDownIcon, LogoutIcon, UserIcon } from '@/components';
 
@@ -72,13 +73,12 @@ export const UserMenu = ({ handleOpenUserProfile }: UserMenuProps) => {
               mt="1.4rem"
             >
               {menuItem.map((item, index, array) => (
-                <>
+                <Fragment key={item.label}>
                   <MenuItem
                     _hover={{ opacity: '0.7' }}
                     bg="surface.primary"
                     color="text.footnote"
                     onClick={() => item.onClick()}
-                    key={item.label}
                   >
                     {item.icon}
                     <Text textStyle="footnote">{item.label}</Text>
@@ -86,7 +86,7 @@ export const UserMenu = ({ handleOpenUserProfile }: UserMenuProps) => {
                   {index < array.length - 1 && (
                     <Divider w="full" borderColor="greyscale.150" my="1rem" />
                   )}
-                </>
+                </Fragment>
               ))}
             </MenuList>
           </Menu>
