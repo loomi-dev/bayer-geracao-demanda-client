@@ -8,8 +8,7 @@ import { AddInsideCircleIcon, CircleIcon, WarningModal } from '@/components';
 export const CreatePlanningButton = () => {
   const session = useSession();
   const farmerId = session.data?.user?.farmer?.id as number;
-  const harvestId = session.data?.user.farmer?.safra?.id as number;
-
+  const harvestId = session.data?.user?.safra?.id as number;
   const {
     isOpen: isOpenPlanningAlreadyExistsModal,
     onOpen: onOpenPlanningAlreadyExistsModal,

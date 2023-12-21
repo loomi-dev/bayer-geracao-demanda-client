@@ -17,7 +17,7 @@ type User = {
 type PlanningSummary = {
   id: number;
   farm_task_in_cents: number;
-  farmk_kit_in_cents: number;
+  farm_kit_in_cents: number;
   planned_actions: number;
   planned_budget_in_cents: number;
   relationship_action_in_cents: number;
