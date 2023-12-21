@@ -44,13 +44,19 @@ export const CreatePlanningScreen = () => {
         <CreatePlanningStatusSection planningStatus={planningStatus} />
       )}
 
-      <CreatePlanningBalance planningStatus={planningStatus} />
+      <CreatePlanningBalance
+        planningStatus={planningStatus}
+        isLoadingPlanningStatus={isLoadingPlanningStatus}
+      />
 
       <VStack w="full" align="flex-start" gap="1.6rem">
         <Text textStyle="h4">Ações</Text>
 
         <PlanningActionsStatistics />
-        <PlanningActionsTable planningStatus={planningStatus} />
+        <PlanningActionsTable
+          planningStatus={planningStatus}
+          isLoadingPlanningStatus={isLoadingPlanningStatus}
+        />
       </VStack>
 
       {planningStatus !== 'default' &&

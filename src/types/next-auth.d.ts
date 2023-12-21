@@ -12,6 +12,7 @@ declare module 'next-auth' {
     lastAccess?: string;
     farmer?: Farmer;
     manager?: Manager;
+    safra: Harvest;
   }
 
   interface Session extends DefaultSession {

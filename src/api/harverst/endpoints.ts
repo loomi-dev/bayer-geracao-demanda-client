@@ -2,14 +2,16 @@ import qs from 'qs';
 
 import axios from '@/lib/axios';
 
-export const getHarvests = async () => {
+import { GetHarvestsResponse } from './types';
+
+export const getHarvests = async (): Promise<GetHarvestsResponse> => {
   const query = qs.stringify({
     filters: {
       current: true,
     },
   });
 
-  const { data } = await axios.authorized().get(`/safra?${query}`);
+  const { data } = await axios.unauthorized().get(`/safras?${query}`);
 
   return data;
 };
