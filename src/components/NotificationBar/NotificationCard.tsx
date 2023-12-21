@@ -1,7 +1,19 @@
-import { Flex, HStack, Text } from '@chakra-ui/react';
+import { Flex, FlexProps, HStack, Text } from '@chakra-ui/react';
 
-export const NotificationCard = () => (
-  <Flex flexDir="column" layerStyle="card" gap="0.9rem" h="auto" px="2.4rem" py="2rem">
+type NotificationCardProps = FlexProps;
+
+export const NotificationCard = ({ ...restProps }: NotificationCardProps) => (
+  <Flex
+    w="full"
+    flexDir="column"
+    layerStyle="card"
+    gap="0.9rem"
+    h="auto"
+    px="2.4rem"
+    py="2rem"
+    borderRadius="3rem"
+    {...restProps}
+  >
     <Text textTransform="uppercase" textStyle={{ lg: 'action4', xl: 'action3', '3xl': 'action2' }}>
       Planejamento 2023/24
     </Text>
