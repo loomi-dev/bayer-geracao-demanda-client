@@ -50,14 +50,14 @@ export const ProfileForm = () => {
         />
       </FormWrapper>
       {user?.role === 'Farmer' && (
-        <FormWrapper error={errors.company_position}>
+        <FormWrapper error={errors.companyPosition}>
           <TextInput
             size="xl"
             placeholder="Seu cargo na sua empresa"
             leftIcon={<HouseIcon />}
             borderRadius="2.1rem"
             defaultValue={Mask.formatCNPJ(user?.farmer?.company_position ?? '')}
-            {...register('company_position')}
+            {...register('companyPosition')}
           />
         </FormWrapper>
       )}

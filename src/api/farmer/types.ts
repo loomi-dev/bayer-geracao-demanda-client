@@ -9,7 +9,7 @@ export type UpdateFarmerData = {
   farmerId: number;
   username: string;
   email: string;
-  company_position: string;
+  companyPosition: string;
   password?: string;
   confirmPassword?: string;
   confirmed?: boolean;

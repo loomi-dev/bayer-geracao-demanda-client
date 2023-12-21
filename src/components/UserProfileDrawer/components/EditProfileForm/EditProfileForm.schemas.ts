@@ -19,7 +19,7 @@ export type ManagerProfileFormSchemaType = z.infer<typeof managerProfileFormSche
 
 export const farmerProfileFormSchema = z
   .object({
-    company_position: z.string().trim().min(1, { message: 'Digite seu cargo na sua empresa.' }),
+    companyPosition: z.string().trim().min(1, { message: 'Digite seu cargo na sua empresa.' }),
   })
   .merge(managerProfileFormSchema);
 

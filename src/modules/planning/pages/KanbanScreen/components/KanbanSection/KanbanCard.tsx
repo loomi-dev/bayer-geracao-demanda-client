@@ -59,7 +59,7 @@ export const KanbanCard = ({ planning, badgeColor }: KanbanCardProps) => {
           Cliente
         </Text>
         <VStack gap="initial" align="flex-start">
-          <Text textStyle="body2">{planning.farmer?.users_permissions_user?.username}</Text>
+          <Text textStyle="body2">{planning.farmer?.users_permissions_user?.username ?? ''}</Text>
           <Text textStyle="footnote" lineHeight="1.8rem">
             {Mask.formatCNPJ(planning.farmer?.company_identifier ?? '')}
           </Text>

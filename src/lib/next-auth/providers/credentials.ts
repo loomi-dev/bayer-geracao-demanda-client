@@ -15,8 +15,6 @@ export const credentialsProvider = CredentialsProvider({
       return {
         ...user,
         accessToken: jwt,
-        phoneNumber: user.phoneNumber ?? '',
-        role: user.role,
       };
     } catch (err) {
       const error = err as ApiServiceErr;

@@ -31,8 +31,7 @@ export const useUpdateManager = (options?: MutOpt<UpdateManagerResponse, UpdateM
 
       return newUser;
     },
-    onSuccess: ({ data: { user } }) => {
-      console.log(user);
+    onSuccess: () => {
       toast({
         description: 'Seus dados foram atualizados!',
         status: 'success',

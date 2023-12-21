@@ -54,7 +54,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
       farmerId: Number(user?.farmer?.id),
       username: data.username,
       email: data.email,
-      company_position: data.company_position,
+      companyPosition: data.companyPosition,
       phoneNumber: data.phoneNumber,
     });
   };

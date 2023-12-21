@@ -46,7 +46,7 @@ export const RegisterFormTabs = () => {
         farmerId,
         username: data.name,
         email: data.email,
-        company_position: data.role,
+        companyPosition: data.role,
         phoneNumber: data.phone,
         password: data.password,
         confirmPassword: data.confirmPassword,
@@ -56,7 +56,6 @@ export const RegisterFormTabs = () => {
         onSuccess: ({ data: { user } }) => {
           const privatePage =
             user.role === 'Manager' ? DEFAULT_PRIVATE_MANAGER_PAGE : DEFAULT_PRIVATE_FARMER_PAGE;
-
           push(privatePage);
           toast({
             description: 'Seus dados foram atualizados!',

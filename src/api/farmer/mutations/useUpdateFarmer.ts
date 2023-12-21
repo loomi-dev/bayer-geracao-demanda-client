@@ -30,7 +30,6 @@ export const useUpdateFarmer = (options?: MutOpt<UpdateFarmerResponse, UpdateFar
 
       return newUser;
     },
-
     onError: () => {
       toast({
         description: 'Ocorreu um erro na atualização dos seus dados.',

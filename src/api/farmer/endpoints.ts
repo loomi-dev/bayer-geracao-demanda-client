@@ -35,14 +35,14 @@ export const updateFarmer = async ({
   username,
   email,
   phoneNumber,
-  company_position,
+  companyPosition,
   password,
   confirmPassword,
   confirmed,
 }: UpdateFarmerData): Promise<UpdateFarmerResponse> => {
   const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
     data: {
-      company_position,
+      company_position: companyPosition,
       username,
       email,
       password,
