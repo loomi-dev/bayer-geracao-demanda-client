@@ -1,6 +1,7 @@
+import { useSession } from 'next-auth/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { useGetPlannings } from '@/api';
+import { useGetCustomerPlanningsByUserId } from '@/api';
 
 import { KanbanSection } from './components';
 import { getSectionPlannings } from './utils';
@@ -8,7 +9,14 @@ import { getSectionPlannings } from './utils';
 import 'swiper/css';
 
 export const KanbanScreen = () => {
-  const { data, isLoading, isFetching } = useGetPlannings();
+  const session = useSession();
+  const userId = session.data?.user.id as number;
+  const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
+    {
+      userId,
+    },
+    { enabled: Boolean(userId) },
+  );
   const plannings = data?.data ?? [];
 
   const { pendingPlannings, acceptedPlannings, revalidatedPlannings, refusedPlannings } =
@@ -26,7 +34,7 @@ export const KanbanScreen = () => {
   ];
 
   return (
-    <Swiper slidesPerView="auto" spaceBetween={10}>
+    <Swiper slidesPerView="auto" style={{ height: '100%' }} spaceBetween={10}>
       {sections.map((section, index) => (
         <SwiperSlide key={section.title} style={{ width: 'fit-content', height: 'inherit' }}>
           <KanbanSection

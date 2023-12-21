@@ -3,13 +3,13 @@ import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import { Customer } from '@/api/customer';
+import { CustomerPlannings } from '@/api/customer';
 import { ClockIcon } from '@/components';
 import { formatPrice, getTotalPlanningBudgetValue } from '@/utils';
 
 import { CustomerTableStatusColumn } from './CustomerTableStatusColumn';
 
-const columnHelper = createColumnHelper<Customer>();
+const columnHelper = createColumnHelper<CustomerPlannings>();
 
 dayjs.extend(relativeTime);
 export const CustomerColumns = [

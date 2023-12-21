@@ -1,4 +1,6 @@
-export const getSectionPlannings = (plannings: Planning[]) =>
+import { CustomerPlannings } from '@/api';
+
+export const getSectionPlannings = (plannings: CustomerPlannings[]) =>
   plannings.reduce(
     ({ pendingPlannings, acceptedPlannings, refusedPlannings, revalidatedPlannings }, planning) => {
       const planningStatus = planning.historic?.at(-1)?.status;
@@ -19,9 +21,9 @@ export const getSectionPlannings = (plannings: Planning[]) =>
       return { pendingPlannings, acceptedPlannings, revalidatedPlannings, refusedPlannings };
     },
     {
-      pendingPlannings: [] as Planning[],
-      refusedPlannings: [] as Planning[],
-      acceptedPlannings: [] as Planning[],
-      revalidatedPlannings: [] as Planning[],
+      pendingPlannings: [] as CustomerPlannings[],
+      refusedPlannings: [] as CustomerPlannings[],
+      acceptedPlannings: [] as CustomerPlannings[],
+      revalidatedPlannings: [] as CustomerPlannings[],
     },
   );

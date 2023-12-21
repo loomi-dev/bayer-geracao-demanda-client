@@ -2,11 +2,12 @@ import { Badge, Flex, Text, VStack } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+import { CustomerPlannings } from '@/api';
 import { PlanningStatus, PlanningValue } from '@/types';
 import { Mask, formatPrice } from '@/utils';
 
 type KanbanCardProps = {
-  planning: Planning;
+  planning: CustomerPlannings;
   badgeColor?: string;
 };
 
