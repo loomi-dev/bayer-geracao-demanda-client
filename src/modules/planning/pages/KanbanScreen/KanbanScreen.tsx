@@ -27,13 +27,14 @@ export const KanbanScreen = () => {
 
   return (
     <Swiper slidesPerView="auto" spaceBetween={10}>
-      {sections.map((section) => (
-        <SwiperSlide key={section.title} style={{ width: 'fit-content', height: 'fit-content' }}>
+      {sections.map((section, index) => (
+        <SwiperSlide key={section.title} style={{ width: 'fit-content', height: 'inherit' }}>
           <KanbanSection
             isLoading={isLoading || isFetching}
             plannings={section.plannings}
             titleColor={section.titleColor}
             title={section.title}
+            border={index === sections.length - 1 ? 'none' : ''}
           />
         </SwiperSlide>
       ))}

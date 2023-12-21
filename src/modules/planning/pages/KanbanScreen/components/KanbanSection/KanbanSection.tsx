@@ -22,6 +22,7 @@ export const KanbanSection = ({
     align="start"
     p="2.4rem"
     gap="2.4rem"
+    h="100%"
     {...props}
   >
     <Text textStyle="h5" color={titleColor}>
