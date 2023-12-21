@@ -5,7 +5,7 @@ import axios from '@/lib/axios';
 import { GetCustomersResponse, GetCustomerParams } from './types';
 
 export const getCustomers = async ({
-  id,
+  userId,
   filter,
   pagination,
 }: GetCustomerParams): Promise<GetCustomersResponse> => {
@@ -14,7 +14,7 @@ export const getCustomers = async ({
       manager: {
         users_permissions_user: {
           id: {
-            $eq: id,
+            $eq: userId,
           },
         },
       },

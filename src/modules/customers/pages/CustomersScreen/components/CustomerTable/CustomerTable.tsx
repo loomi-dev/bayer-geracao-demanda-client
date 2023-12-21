@@ -14,12 +14,12 @@ import { CustomerColumns } from './CustomerTable.columns';
 export const CustomerTable = () => {
   const session = useSession();
   const { pathname, push } = useRouter();
-  const userId = session.data?.user.id as number;
+  const userId = session.data?.user?.id as number;
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
   const { data, isLoading, isFetching } = useGetCustomers(
     {
-      id: userId,
+      userId,
       filter: { search },
       pagination: { page: currentPage, pageSize: 5 },
     },

@@ -12,11 +12,11 @@ type CreatePlanningBalanceProps = {
 
 export const CreatePlanningBalance = ({ planningStatus }: CreatePlanningBalanceProps) => {
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const farmerId = session.data?.user?.farmer?.id as number;
   const isPlanningAccepted = planningStatus === 'accepted';
 
   return (
-    <Balance.Container farmerId={userId}>
+    <Balance.Container farmerId={farmerId}>
       <Balance.Label />
       <Balance.Value />
 

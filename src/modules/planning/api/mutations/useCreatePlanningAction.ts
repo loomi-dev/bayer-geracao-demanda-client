@@ -29,7 +29,7 @@ export const useCreatePlanningAction = (options?: MutOpt<CreatePlanningActionRes
       toast({
         description:
           'Ocorreu um erro ao criar a ação para o planejamento, tente novamente ou contate o suporte.',
-        status: 'success',
+        status: 'error',
       });
     },
   });
