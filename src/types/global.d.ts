@@ -68,6 +68,7 @@ type Planning = {
   safra?: Harvest;
   actions?: PlanningAction[];
   historic?: Historic[];
+  farmer?: Farmer;
 };
 
 type Wallet = {

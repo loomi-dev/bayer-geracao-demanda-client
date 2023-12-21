@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 
 import { MutOpt } from '@/api/types';
-import { queryClient } from '@/lib/react-query';
+import { invalidateQueries } from '@/utils';
 
 import { deletePlanning } from '../endpoints';
 import { DeletePlanningResponse } from '../types';
@@ -15,9 +15,12 @@ export const useDeletePlanning = (options?: MutOpt<DeletePlanningResponse>) => {
     mutationKey: ['delete-planning'],
     mutationFn: deletePlanning,
     onSuccess: async () => {
-      queryClient.invalidateQueries(['farmer-plans']);
-      queryClient.invalidateQueries(['planning-statistics']);
-      queryClient.invalidateQueries(['get-farmer']);
+      invalidateQueries(
+        'get-customers-plannings-by-userId ',
+        'farmer-plans',
+        'planning-statistics',
+        'get-farmer',
+      );
 
       toast({
         description: 'Você deletou um planejamento.',

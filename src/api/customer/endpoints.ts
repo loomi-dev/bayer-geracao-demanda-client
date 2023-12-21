@@ -2,16 +2,16 @@ import qs from 'qs';
 
 import axios from '@/lib/axios';
 
-import { GetCustomersResponse, GetCustomerParams } from './types';
+import { GetCustomerPlanningsByUserIdParams, GetCustomerPlanningsByUserIdResponse } from './types';
 
-export const getCustomers = async ({
+export const getCustomerPlanningsByUserId = async ({
   userId,
   filter,
   pagination,
-}: GetCustomerParams): Promise<GetCustomersResponse> => {
+}: GetCustomerPlanningsByUserIdParams): Promise<GetCustomerPlanningsByUserIdResponse> => {
   const filters = {
     farmer: {
-      manager: {
+      managers: {
         users_permissions_user: {
           id: {
             $eq: userId,
