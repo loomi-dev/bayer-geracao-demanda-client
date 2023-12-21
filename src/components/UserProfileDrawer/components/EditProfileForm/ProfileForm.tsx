@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { TextInput, PersonIcon, EmailIcon, PhoneIcon, HouseIcon, FormWrapper } from '@/components';
 import { Mask } from '@/utils';
 
-import { EditProfileFormSchemaType } from './EditProfileForm.schemas';
+import { FormSchemaType } from './EditProfileForm';
 
 export const ProfileForm = () => {
   const session = useSession();
@@ -14,7 +14,7 @@ export const ProfileForm = () => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<EditProfileFormSchemaType>();
+  } = useFormContext<FormSchemaType>();
 
   return (
     <VStack w="100%" align="start" gap="1.2rem" mt="1.2rem">

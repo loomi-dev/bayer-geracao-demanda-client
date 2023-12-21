@@ -10,28 +10,38 @@ import { EditIcon } from '@/components/icons';
 import { ProfileDrawerFooter } from '../ProfileDrawer';
 import { ProfileImage } from '../ProfileImage';
 
-import { EditProfileFormSchemaType, editProfileFormSchema } from './EditProfileForm.schemas';
+import {
+  FarmerProfileFormSchemaType,
+  ManagerProfileFormSchemaType,
+  farmerProfileFormSchema,
+  managerProfileFormSchema,
+} from './EditProfileForm.schemas';
 import { ProfileForm } from './ProfileForm';
 
 type EditProfileFormProps = {
   onCancel: () => void;
 };
+
+export type FormSchemaType = ManagerProfileFormSchemaType & FarmerProfileFormSchemaType;
+
 export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const session = useSession();
   const user = session.data?.user;
-  const role = user?.role.toLowerCase();
+  const isManager = user?.role === 'Manager';
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
   const { mutate: updateManager, isLoading: isUpdatingManager } = useUpdateManager();
-  const methods = useForm<EditProfileFormSchemaType>({
-    resolver: zodResolver(editProfileFormSchema),
+  const formSchema = isManager ? managerProfileFormSchema : farmerProfileFormSchema;
+
+  const methods = useForm<FormSchemaType>({
+    resolver: zodResolver(formSchema),
     mode: 'all',
     criteriaMode: 'all',
   });
 
   const { handleSubmit } = methods;
 
-  const onSubmitEditProfileForm = (data: EditProfileFormSchemaType) => {
-    if (role === 'manager') {
+  const onSubmitEditProfileForm = (data: FormSchemaType) => {
+    if (isManager) {
       updateManager({
         managerId: Number(user?.manager?.id),
         username: data.username,

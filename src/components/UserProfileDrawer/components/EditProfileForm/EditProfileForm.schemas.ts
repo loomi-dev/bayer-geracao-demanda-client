@@ -1,13 +1,12 @@
 import { z } from 'zod';
 
-export const editProfileFormSchema = z.object({
+export const managerProfileFormSchema = z.object({
   username: z.string().trim().min(1, { message: 'Digite seu nome.' }),
   email: z
     .string()
     .trim()
     .min(1, { message: 'Digite seu e-mail.' })
     .email({ message: 'Digite um email válido.' }),
-  company_position: z.string().trim().min(1, { message: 'Digite seu cargo na sua empresa.' }),
   phoneNumber: z
     .string()
     .trim()
@@ -16,4 +15,12 @@ export const editProfileFormSchema = z.object({
     .transform((value) => value.replace(/\D/g, '')),
 });
 
-export type EditProfileFormSchemaType = z.infer<typeof editProfileFormSchema>;
+export type ManagerProfileFormSchemaType = z.infer<typeof managerProfileFormSchema>;
+
+export const farmerProfileFormSchema = z
+  .object({
+    company_position: z.string().trim().min(1, { message: 'Digite seu cargo na sua empresa.' }),
+  })
+  .merge(managerProfileFormSchema);
+
+export type FarmerProfileFormSchemaType = z.infer<typeof farmerProfileFormSchema>;
