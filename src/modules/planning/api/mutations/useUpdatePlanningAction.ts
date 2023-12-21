@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 
 import { MutOpt } from '@/api';
-import { queryClient } from '@/lib/react-query';
+import { invalidateQueries } from '@/utils';
 
 import { updatePlanningAction } from '../endpoints';
 import { UpdatePlanningActionResponse } from '../types';
@@ -15,10 +15,13 @@ export const useUpdatePlanningAction = (options?: MutOpt<UpdatePlanningActionRes
     mutationKey: ['update-planning-action'],
     mutationFn: updatePlanningAction,
     onSuccess: (_, { title }) => {
-      queryClient.invalidateQueries(['planning-actions']);
-      queryClient.invalidateQueries(['planning-actions-statistics']);
-      queryClient.invalidateQueries(['planning-status']);
-      queryClient.invalidateQueries(['get-farmer']);
+      invalidateQueries(
+        'get-customers-plannings-by-userId ',
+        'planning-actions',
+        'planning-actions-statistics',
+        'planning-status',
+        'get-farmer',
+      );
 
       toast({
         description: `Você editou a ação ${title}.`,

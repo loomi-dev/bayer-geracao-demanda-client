@@ -1,7 +1,6 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { ChangeEvent, useState } from 'react';
 
-import { CustomerPlannings } from '@/api';
 import {
   BaseFilter,
   FilterBody,
@@ -15,7 +14,7 @@ import { ChevronDownIcon, ChevronTopIcon, UserIcon } from '@/components/icons';
 import { Mask } from '@/utils';
 
 type CustomerFilterProps = {
-  customers?: CustomerPlannings['farmer'][];
+  customers?: Farmer[];
 };
 
 export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {

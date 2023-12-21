@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 
 import { MutOpt } from '@/api';
-import { queryClient } from '@/lib/react-query';
+import { invalidateQueries } from '@/utils';
 
 import { deletePlanningAction } from '../endpoints';
 import { DeletePlanningActionResponse } from '../types';
@@ -15,10 +15,13 @@ export const useDeletePlanningAction = (options?: MutOpt<DeletePlanningActionRes
     mutationKey: ['delete-planning-action'],
     mutationFn: deletePlanningAction,
     onSuccess: () => {
-      queryClient.invalidateQueries(['planning-actions']);
-      queryClient.invalidateQueries(['planning-actions-statistics']);
-      queryClient.invalidateQueries(['planning-status']);
-      queryClient.invalidateQueries(['get-farmer']);
+      invalidateQueries(
+        'get-customers-plannings-by-userId ',
+        'planning-actions',
+        'planning-actions-statistics',
+        'planning-status',
+        'get-farmer',
+      );
 
       toast({
         description: 'Você excluiu uma ação do seu planejamento.',

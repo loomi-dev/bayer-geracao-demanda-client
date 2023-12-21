@@ -11,6 +11,6 @@ export const useGetCustomerPlanningsByUserId = (
 ) =>
   useQuery({
     ...options,
-    queryKey: ['get-customers', ...Object.values(params)],
+    queryKey: ['get-customers-plannings-by-userId', ...Object.values(params)],
     queryFn: () => getCustomerPlanningsByUserId(params),
   });

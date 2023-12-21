@@ -14,7 +14,7 @@ export const getCustomerPlanningsByUserId = async ({
       managers: {
         users_permissions_user: {
           id: {
-            $in: [userId],
+            $eq: userId,
           },
         },
       },
