@@ -29,6 +29,8 @@ export const KanbanSection = ({
     </Text>
     {isLoading
       ? Array.from({ length: 4 }).map((_, index) => <KanbanCardSkeleton key={index} />)
-      : plannings.map((planning) => <KanbanCard planning={planning} key={planning.id} />)}
+      : plannings.map((planning) => (
+          <KanbanCard badgeColor={titleColor} planning={planning} key={planning.id} />
+        ))}
   </VStack>
 );

@@ -7,11 +7,12 @@ import { formatPrice } from '@/utils';
 
 type KanbanCardProps = {
   planning: Planning;
+  badgeColor?: string;
 };
 
 dayjs.extend(relativeTime);
 
-export const KanbanCard = ({ planning }: KanbanCardProps) => {
+export const KanbanCard = ({ planning, badgeColor }: KanbanCardProps) => {
   const planningStatus = planning.historic?.at(-1)?.status ?? '';
   const actionsSummary = planning.actions?.reduce(
     ({ actionsTotalValue, actionsQuantity }, action) => {
@@ -37,6 +38,7 @@ export const KanbanCard = ({ planning }: KanbanCardProps) => {
         top="0.9rem"
         right="1.1rem"
         variant="filled_primary"
+        bgColor={badgeColor}
         border="none"
         py="0rem"
       >
