@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { PlanningStatus, PlanningValue } from '@/types';
-import { formatPrice } from '@/utils';
+import { Mask, formatPrice } from '@/utils';
 
 type KanbanCardProps = {
   planning: Planning;
@@ -58,9 +58,9 @@ export const KanbanCard = ({ planning, badgeColor }: KanbanCardProps) => {
           Cliente
         </Text>
         <VStack gap="initial" align="flex-start">
-          <Text textStyle="body2">Nome do Cliente</Text>
+          <Text textStyle="body2">{planning.farmer?.name}</Text>
           <Text textStyle="footnote" lineHeight="1.8rem">
-            67.890.123/0006-46
+            {Mask.formatCNPJ(planning.farmer?.company_identifier ?? '')}
           </Text>
         </VStack>
       </VStack>
