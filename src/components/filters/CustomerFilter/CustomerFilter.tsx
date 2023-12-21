@@ -33,7 +33,7 @@ export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
     <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
         variant="primary-filter"
-        label="Clientes"
+        label="Multiplicadores"
         onClick={onOpen}
         leftIcon={<UserIcon />}
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
@@ -51,7 +51,7 @@ export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
           ))}
         </FilterBody>
         <FilterFooter
-          label={customers.length > 1 ? 'Clientes' : 'Cliente'}
+          label={customers.length > 1 ? 'Multiplicadores' : 'Multiplicador'}
           value={customers.length}
         />
       </FilterContent>
