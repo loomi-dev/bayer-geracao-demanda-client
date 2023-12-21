@@ -19,7 +19,7 @@ export const columns = [
     header: () => <Header title="segmento" />,
     cell: (info) => <Segment status={info.getValue()} />,
   }),
-  columnHelper.accessor((data) => data.farmer.wallet.initialBalance ?? 0, {
+  columnHelper.accessor((data) => data?.farmer?.wallet?.initialBalance ?? 0, {
     id: 'homeGdFeature',
     header: () => <Header title="recurso GD INICIAL" />,
     cell: (info) => <Cell value={toBRL(info.getValue() / 100)} />,

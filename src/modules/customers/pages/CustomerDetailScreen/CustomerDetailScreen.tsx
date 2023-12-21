@@ -33,7 +33,7 @@ export const CustomerDetailScreen = () => {
   return (
     <>
       <Header
-        label={`${customer?.users_permissions_user.username}`}
+        label={`${customer?.users_permissions_user?.username}`}
         subLabel={Mask.formatCNPJ(customer?.company_identifier ?? '')}
         onClick={() => push('/clientes')}
         icon={<ChevronLeftIcon fontSize={36} color="white" />}

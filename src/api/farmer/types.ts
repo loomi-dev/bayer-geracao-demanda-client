@@ -6,7 +6,7 @@ export type GetFarmerParams = {
 export type GetFarmerResponse = GenericListResponseType<Farmer>;
 
 export type UpdateFarmerData = {
-  id: number;
+  farmerId: number;
   name: string;
   email: string;
   companyRole: string;

@@ -10,6 +10,7 @@ import { EditProfileFormSchemaType } from './EditProfileForm.schemas';
 export const ProfileForm = () => {
   const session = useSession();
   const user = session.data?.user;
+  const role = user?.role.toLocaleLowerCase();
   const {
     register,
     formState: { errors },
@@ -54,7 +55,7 @@ export const ProfileForm = () => {
           placeholder="Seu cargo na sua empresa"
           leftIcon={<HouseIcon />}
           borderRadius="2.1rem"
-          defaultValue={user?.company_position}
+          defaultValue={user?.[role ?? '']?.company_position}
           {...register('company_position')}
         />
       </FormWrapper>

@@ -31,7 +31,7 @@ export const getFarmer = async ({ farmerId }: GetFarmerParams): Promise<GetFarme
 };
 
 export const updateFarmer = async ({
-  id: userId,
+  farmerId,
   name,
   email,
   number,
@@ -40,7 +40,7 @@ export const updateFarmer = async ({
   confirmPassword,
   confirmed,
 }: UpdateFarmerData): Promise<UpdateFarmerResponse> => {
-  const { data } = await axios.authorized().put(`/farmers/${userId}`, {
+  const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
     data: {
       company_position: companyRole,
       username: name,

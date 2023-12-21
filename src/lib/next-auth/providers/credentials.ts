@@ -13,10 +13,7 @@ export const credentialsProvider = CredentialsProvider({
       const { jwt, user } = await loginWithCredentials({ identifier, password });
 
       return {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        confirmed: user.confirmed,
+        ...user,
         accessToken: jwt,
         phoneNumber: user.phoneNumber ?? '',
         company_identifier: user.company_identifier ?? '',

@@ -9,8 +9,9 @@ declare module 'next-auth' {
     accessToken: string;
     role: Roles;
     phoneNumber?: string;
-    company_identifier?: string;
-    company_position?: string;
+    lastAccess?: string;
+    farmer?: Farmer;
+    manager?: Manager;
   }
 
   interface Session extends DefaultSession {
@@ -28,8 +29,9 @@ declare module 'next-auth/jwt' {
       accessToken: string;
       role: Roles;
       phoneNumber?: string;
-      company_identifier?: string;
-      company_position?: string;
+      lastAccess?: string;
+      farmer?: Farmer;
+      manager?: Manager;
     };
   }
 }

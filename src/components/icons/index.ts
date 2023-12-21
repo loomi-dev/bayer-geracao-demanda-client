@@ -58,3 +58,4 @@ export { default as ComputerBigIcon } from './ComputerBig';
 export { default as RejectedIcon } from './RejectedIcon';
 export { default as SmallDoneIcon } from './SmallDoneIcon';
 export { default as HouseIcon } from './House';
+export { default as ChevronCircleRightIcon } from './ChevronCircleRightIcon';

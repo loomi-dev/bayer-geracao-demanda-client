@@ -21,11 +21,12 @@ export const useUpdateFarmer = (options?: MutOpt<UpdateFarmerResponse, UpdateFar
     mutationFn: async (userData) => {
       const newUser = await updateFarmer(userData);
       const {
-        data: { jwt: accessToken, user },
+        data: { jwt: accessToken, user, farmer },
       } = newUser;
 
       const newUserSession: User = {
         ...user,
+        farmer,
         accessToken,
       };
 

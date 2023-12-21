@@ -18,7 +18,7 @@ import {
 
 export const RegisterFormTabs = () => {
   const session = useSession();
-  const userId = session.data?.user?.id as number;
+  const farmerId = session.data?.user?.farmer?.id as number;
 
   const [agreePrivacyPolicies, currentTabForm, setCurrentTabForm] = useRegisterFormTabs((state) => [
     state.agreePrivacyPolicies,
@@ -38,7 +38,7 @@ export const RegisterFormTabs = () => {
 
   const onSubmitAccountDataForm = (data: RegisterFormSchemaType) => {
     updateFarmer({
-      id: userId,
+      farmerId,
       name: data.name,
       email: data.email,
       companyRole: data.role,

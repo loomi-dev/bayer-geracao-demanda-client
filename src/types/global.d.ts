@@ -6,10 +6,12 @@ type User = {
   confirmed: boolean;
   blocked: boolean;
   role: Roles;
-  lastAccess: Date;
+  lastAccess: string;
   phoneNumber?: string;
   company_identifier?: string;
   company_position?: string;
+  farmer?: Farmer;
+  manager?: Manager;
 };
 type PlanningSummary = {
   id: number;
@@ -73,15 +75,23 @@ type Wallet = {
   id: number;
 };
 
+type Manager = {
+  id: number;
+  current_planned_amount_in_cents: string;
+  region?: string;
+  district?: string;
+};
+
 type Farmer = {
   company_identifier: string;
-  company_name: string;
+  company_name?: string;
+  company_position?: string;
   cpf: string;
   id: number;
-  name: string;
-  wallet: Wallet;
-  safra: Harvest;
-  users_permissions_user: User;
+  name?: string;
+  wallet?: Wallet;
+  safra?: Harvest;
+  users_permissions_user?: User;
 };
 
 type Pagination = {

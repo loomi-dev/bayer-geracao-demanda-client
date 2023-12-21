@@ -15,6 +15,7 @@ type ProfileDetailProps = {
 export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
   const session = useSession();
   const user = session.data?.user;
+  const role = user?.role.toLowerCase();
 
   return (
     <Flex as="form" w="100%" h="100%" flexDir="column" justify="space-between">
@@ -46,10 +47,13 @@ export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
             value={user?.phoneNumber}
             mask={Mask.formatPhone}
           />
-          <ProfileInformationField label="Cargo na sua empresa" value={user?.company_position} />
+          <ProfileInformationField
+            label="Cargo na sua empresa"
+            value={user?.[role ?? ''].company_position}
+          />
         </ProfileInformationFieldContainer>
         <ProfileInformationFieldContainer border="initial">
-          <ProfileInformationField label="cnpj" value={user?.company_identifier} />
+          <ProfileInformationField label="cnpj" value={user?.[role ?? '']?.company_identifier} />
         </ProfileInformationFieldContainer>
       </Flex>
       <ProfileDrawerFooter />
