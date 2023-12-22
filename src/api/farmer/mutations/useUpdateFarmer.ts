@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
 
-import { getHarvests } from '@/api/harverst';
+import { getHarvests } from '@/api/harvest';
 import { MutOpt } from '@/api/types';
 
 import { updateFarmer } from '../endpoints';
