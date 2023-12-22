@@ -25,7 +25,7 @@ export const CreatePlanningButton = () => {
       },
       {
         onError: (err) => {
-          if (err?.response?.data?.error?.name === 'PLANNING_ALREADY_EXIST') {
+          if (err?.response?.data?.error?.message === 'PLANNING_ALREADY_EXIST') {
             onOpenPlanningAlreadyExistsModal();
           }
         },
