@@ -8,7 +8,7 @@ import { PlanningActionTypeColumn } from './PlanningActionTypeColumn';
 
 const columnHelper = createColumnHelper<PlanningAction>();
 
-export const planningActionsColumns = [
+export const planningActionsColumns = (planningStatus: string) => [
   columnHelper.accessor((data) => data?.title, {
     id: 'titulo',
     header: () => <Text>Título da ação</Text>,
@@ -34,13 +34,13 @@ export const planningActionsColumns = [
     header: () => <Text>Orçamento</Text>,
     cell: (info) => <Text textStyle="action3">{`R$ ${formatPrice(info.getValue() ?? 0)}`}</Text>,
   }),
-
-  columnHelper.accessor((data) => data, {
-    id: 'acoes',
-    header: () => null,
-    cell: (info) => {
-      const actionStatus = info.getValue().status;
-      if (actionStatus !== 'accepted') return <PlanningActionsTableAction {...info.getValue()} />;
-    },
-  }),
+  ...(planningStatus !== 'accepted'
+    ? [
+        columnHelper.accessor((data) => data, {
+          id: 'acoes',
+          header: () => null,
+          cell: (info) => <PlanningActionsTableAction {...info.getValue()} />,
+        }),
+      ]
+    : []),
 ];

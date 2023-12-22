@@ -96,7 +96,7 @@ export const PlanningActionsTable = ({
   return (
     <>
       <DynamicTable<PlanningAction>
-        columns={planningActionsColumns}
+        columns={planningActionsColumns(planningStatus)}
         data={planningActionsList}
         isLoading={isLoadingPlanningActionsList}
         fallbackMessage="Ainda não possui ações criadas, crie sua primeira ação."
