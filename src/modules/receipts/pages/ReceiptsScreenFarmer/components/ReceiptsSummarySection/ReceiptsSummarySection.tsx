@@ -1,4 +1,4 @@
-import { HStack, Text, VStack } from '@chakra-ui/react';
+import { HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
 import { useGetReceiptsSummary } from '@/api';
@@ -10,7 +10,10 @@ import { calculatePercentageObtained } from '../../utils';
 export const ReceiptsSummarySection = () => {
   const session = useSession();
   const farmerId = session.data?.user.farmer?.id as number;
-  const { data } = useGetReceiptsSummary({ farmerId }, { enabled: Boolean(farmerId) });
+  const { data, isLoading, isFetching } = useGetReceiptsSummary(
+    { farmerId },
+    { enabled: Boolean(farmerId) },
+  );
 
   const summary = data?.data[0];
   const totalPlannedAmount =
@@ -25,6 +28,9 @@ export const ReceiptsSummarySection = () => {
     comprovedAmount,
     totalPlannedAmount,
   );
+
+  if (isLoading || isFetching) return <Skeleton w="50rem" h="8.4rem" borderRadius="1.6rem" />;
+
   return (
     <HStack layerStyle="card" pl="1rem" pr="2rem" py="0.5rem" spacing="2.4rem" h="8.4rem">
       <ProgressBar
