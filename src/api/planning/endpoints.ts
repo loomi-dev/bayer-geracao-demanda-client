@@ -28,14 +28,12 @@ import {
 } from './types';
 
 export const getPlanningStatistics = async ({
-  userId,
+  farmerId,
 }: GetPlanningStatisticsParams): Promise<GetPlanningStatisticsResponse> => {
   const queryParams = qs.stringify({
     filters: {
-      users_permissions_user: {
-        id: {
-          $eq: userId,
-        },
+      id: {
+        $eq: farmerId,
       },
     },
     populate: {
@@ -56,7 +54,7 @@ export const getFarmerPlans = async ({
 }: GetFarmerPlansParams): Promise<GetFarmerPlansResponse> => {
   const query = qs.stringify({
     filters: {
-      users_permissions_user: {
+      farmer: {
         id: {
           $eq: farmerId,
         },

@@ -18,10 +18,11 @@ type BalanceProps = {
 } & StackProps;
 
 export const BalanceContainer = ({ farmerId, children, ...restProps }: BalanceProps) => {
-  const { data: dataGetFarmer, isLoading: isLoadingDataGetFarmer } = useGetFarmer(
-    { farmerId },
-    { enabled: Boolean(farmerId) },
-  );
+  const {
+    data: dataGetFarmer,
+    isLoading: isLoadingDataGetFarmer,
+    isFetching: isFetchingDataGetFarmer,
+  } = useGetFarmer({ farmerId }, { enabled: Boolean(farmerId) });
   const balanceValue = formatPrice(dataGetFarmer?.data?.[0]?.wallet?.balance ?? 0);
   const expirationDateValue = formatDate(
     dataGetFarmer?.data?.[0]?.safra?.deadline_to_add_plannings,
@@ -29,7 +30,7 @@ export const BalanceContainer = ({ farmerId, children, ...restProps }: BalancePr
   return (
     <BalanceContext.Provider
       value={{
-        isLoading: isLoadingDataGetFarmer,
+        isLoading: isLoadingDataGetFarmer || isFetchingDataGetFarmer,
         balanceValue,
         expirationDate: expirationDateValue,
       }}

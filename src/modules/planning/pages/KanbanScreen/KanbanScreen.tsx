@@ -10,12 +10,12 @@ import 'swiper/css';
 
 export const KanbanScreen = () => {
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const managerId = session.data?.user.manager?.id as number;
   const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
-      userId,
+      managerId,
     },
-    { enabled: Boolean(userId) },
+    { enabled: Boolean(managerId) },
   );
   const plannings = data?.data ?? [];
 
@@ -30,7 +30,7 @@ export const KanbanScreen = () => {
       titleColor: 'yellow.warning_60',
       plannings: revalidatedPlannings,
     },
-    { title: 'Aprovados', titleColor: 'text.brand', plannings: acceptedPlannings },
+    { title: 'Aprovados', titleColor: 'green.100', plannings: acceptedPlannings },
   ];
 
   return (

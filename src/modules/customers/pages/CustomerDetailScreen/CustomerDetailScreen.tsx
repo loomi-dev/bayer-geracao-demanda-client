@@ -21,7 +21,7 @@ export const CustomerDetailScreen = () => {
     isFetching: isFetchingPlanning,
   } = useGetPlanningStatistics(
     {
-      userId: customerId,
+      farmerId: customerId,
     },
     {
       enabled: Boolean(customerId),
@@ -29,7 +29,6 @@ export const CustomerDetailScreen = () => {
   );
   const customer = getCustomerData?.data[0];
   const customerPlannings = getPlanningData?.data[0];
-
   return (
     <>
       <Header

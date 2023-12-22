@@ -5,17 +5,15 @@ import axios from '@/lib/axios';
 import { GetCustomerPlanningsByUserIdParams, GetCustomerPlanningsByUserIdResponse } from './types';
 
 export const getCustomerPlanningsByUserId = async ({
-  userId,
+  managerId,
   filter,
   pagination,
 }: GetCustomerPlanningsByUserIdParams): Promise<GetCustomerPlanningsByUserIdResponse> => {
   const filters = {
     farmer: {
       managers: {
-        users_permissions_user: {
-          id: {
-            $eq: userId,
-          },
+        id: {
+          $eq: managerId,
         },
       },
       ...(filter?.region ? { region: { $eq: filter?.region } } : {}),
