@@ -1,9 +1,7 @@
 import { Text, TextProps } from '@chakra-ui/react';
 
-import { GetActionsResponse } from '@/api';
-
 type ReceiptStatusProps = {
-  status: GetActionsResponse['data'][0]['status'];
+  status: PlanningActionStatus;
   textProps?: TextProps;
 };
 

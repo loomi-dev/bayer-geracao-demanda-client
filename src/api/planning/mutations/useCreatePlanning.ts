@@ -32,7 +32,7 @@ export const useCreatePlanning = (options?: MutOpt<CreatePlanningResponse>) => {
     },
     onError: (err) => {
       const errorPlanningAlreadyExists =
-        err?.response?.data?.error?.name === 'PLANNING_ALREADY_EXIST';
+        err?.response?.data?.error?.message === 'PLANNING_ALREADY_EXIST';
 
       toast({
         description: errorPlanningAlreadyExists

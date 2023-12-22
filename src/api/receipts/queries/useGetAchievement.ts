@@ -3,9 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryOpt } from '@/api';
 
 import { getAchievement } from '../endpoints';
-import { GetAchievementParams } from '../types';
+import { GetAchievementParams, GetAchievementResponse } from '../types';
 
-export const useGetAchievement = (params: GetAchievementParams, options?: QueryOpt<any>) =>
+export const useGetAchievement = (
+  params: GetAchievementParams,
+  options?: QueryOpt<GetAchievementResponse>,
+) =>
   useQuery({
     ...options,
     queryKey: ['get-achievement', params],

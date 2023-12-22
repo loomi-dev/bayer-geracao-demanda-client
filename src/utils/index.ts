@@ -15,3 +15,4 @@ export * from './brlToNumber';
 export * from './brlToCents';
 export * from './formatValue';
 export * from './invalidateQueries';
+export * from './downloadFile';

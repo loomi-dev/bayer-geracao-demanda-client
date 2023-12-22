@@ -1,2 +1,2 @@
 export * from './useUploadFile';
-export * from './usePutAction';
+export * from './useSendReceiptAction';
