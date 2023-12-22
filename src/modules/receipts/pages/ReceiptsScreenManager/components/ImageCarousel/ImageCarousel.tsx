@@ -4,7 +4,7 @@ import { CarouselCard } from './CarouselCard';
 
 type Image = {
   id: string | number;
-  path: string;
+  url: string;
   date: string;
 };
 

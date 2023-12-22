@@ -1,21 +1,20 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 
-import { ActionResponse } from '@/api';
 import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
 import { formatPrice } from '@/utils';
 
-import { ViewButton } from '../ViewButton';
+import { ViewReceiptActionsDetailsButton } from '../ViewReceiptActionsDetailsButton';
 
-const columnHelper = createColumnHelper<ActionResponse>();
+const columnHelper = createColumnHelper<ReceiptAction>();
 
 export const finalizedTablesColumns = [
-  columnHelper.accessor((data) => data.title, {
+  columnHelper.accessor((data) => data?.title ?? '', {
     id: 'shareTitle',
     header: () => <Header title="Titulo da Ação" />,
     cell: (info) => <Cell value={info.getValue()} textProps={{ textStyle: 'caption7' }} />,
   }),
-  columnHelper.accessor((data) => data.type, {
+  columnHelper.accessor((data) => data.type ?? 'farm_task', {
     id: 'segment',
     header: () => <Header title="segmento" />,
     cell: (info) => <Segment status={info.getValue()} />,
@@ -27,7 +26,7 @@ export const finalizedTablesColumns = [
   }),
   columnHelper.accessor(
     (data) => {
-      const formattedDate = dayjs(data.createdAt).format('DD/MM/YYYY');
+      const formattedDate = dayjs(data?.createdAt).format('DD/MM/YYYY');
 
       return formattedDate;
     },
@@ -47,7 +46,7 @@ export const finalizedTablesColumns = [
     header: () => <Header title="GD FINAL" />,
     cell: (info) => <Cell value={`R$ ${formatPrice(info.getValue())}`} />,
   }),
-  columnHelper.accessor((data) => data.status, {
+  columnHelper.accessor((data) => data?.status ?? 'not_evaluated', {
     id: 'status',
     header: () => <Header title="STATUS" />,
     cell: (info) => <ReceiptStatus status={info.getValue()} />,
@@ -55,6 +54,6 @@ export const finalizedTablesColumns = [
   columnHelper.accessor((data) => data, {
     id: 'action',
     header: () => <Header title="AÇÃO" />,
-    cell: (value) => <ViewButton value={value} />,
+    cell: (info) => <ViewReceiptActionsDetailsButton action={info.getValue()} />,
   }),
 ];

@@ -1,46 +1,44 @@
-import { Box } from '@chakra-ui/react';
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box } from '@chakra-ui/react';
+import { Fragment } from 'react';
 
-import { CustomAcordion, Minus2Icon } from '@/components';
+import { ExpandIcon, Minus2Icon } from '@/components';
 
 import { DescribeYourExpense } from '../DescribeYourExpense';
 import { ImageCarousel } from '../ImageCarousel';
 
-const imagesMock = [
-  {
-    id: 1,
-    path: 'https://www.petz.com.br/blog//wp-content/uploads/2020/08/cat-cafe-pet.jpg',
-    date: '19 de Jan 2023',
-  },
-  {
-    id: 2,
-    path: 'https://www.petz.com.br/blog//wp-content/uploads/2020/08/cat-cafe-pet.jpg',
-    date: '19 de Jan 2023',
-  },
-  {
-    id: 3,
-    path: 'https://www.petz.com.br/blog//wp-content/uploads/2020/08/cat-cafe-pet.jpg',
-    date: '19 de Jan 2023',
-  },
-  {
-    id: 4,
-    path: 'https://www.petz.com.br/blog//wp-content/uploads/2020/08/cat-cafe-pet.jpg',
-    date: '19 de Jan 2023',
-  },
-];
+type ProveYourExpensesProps = ReceiptAction;
 
-export const ProveYourExpenses = () => (
-  <CustomAcordion
-    accordionProps={{ mt: '1rem' }}
-    accordionIcon={<Minus2Icon />}
-    accordionButtonProps={{
-      children: (
-        <Box as="span" flex="1" textAlign="left">
-          Comprove seus gastos
-        </Box>
-      ),
-    }}
-  >
-    <ImageCarousel images={imagesMock} />
-    <DescribeYourExpense description="Mensagem enviada por Ricardo mensagem enviada por Ricardo  mensagem enviada por Ricardo  mensagem enviada por Ricardo  mensagem enviada por Ricardo  mensagem enviada por Ricardo " />
-  </CustomAcordion>
-);
+export const ProveYourExpenses = ({ detail, receipts }: ProveYourExpensesProps) => {
+  const imagesReceipts = receipts?.documents?.map(({ id, url, createdAt }) => ({
+    id,
+    url,
+    date: createdAt,
+  }));
+
+  const hasReceipts = imagesReceipts?.length > 0;
+
+  return (
+    <Accordion allowToggle defaultIndex={[0]}>
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <Fragment>
+            <h2>
+              <AccordionButton _hover={{}}>
+                <Box as="span" flex="1" textAlign="left">
+                  Comprove seus gastos
+                </Box>
+
+                {isExpanded ? <Minus2Icon /> : <ExpandIcon />}
+              </AccordionButton>
+            </h2>
+
+            <AccordionPanel>
+              {hasReceipts && <ImageCarousel images={imagesReceipts} />}
+              {detail && <DescribeYourExpense description={detail} />}
+            </AccordionPanel>
+          </Fragment>
+        )}
+      </AccordionItem>
+    </Accordion>
+  );
+};

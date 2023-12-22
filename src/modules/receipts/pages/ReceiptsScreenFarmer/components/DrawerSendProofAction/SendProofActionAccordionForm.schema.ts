@@ -9,7 +9,7 @@ export const sendProofActionFormSchema = z.object({
         file: z.custom<File>(),
       }),
     )
-    .min(1, { message: 'Selecione um comprovante antes de enviar.' }),
+    .min(1, { message: 'Insira um comprovante antes de enviar.' }),
 });
 
 export type SendProofActionFormSchemaType = z.infer<typeof sendProofActionFormSchema>;

@@ -4,124 +4,47 @@ export type Faq = {
   question: string;
   answer: string;
 };
-
 export type GetFaqsResponse = GenericListResponseType<Faq>;
 
 export type GetFarmerData = { id: number | string };
 
 export type GetReceiptsActionsParams = {
-  farmerId: number;
-  pagination: Pick<Pagination, 'page' | 'pageSize'>;
+  farmerId?: number;
+  pagination: Pagination;
 };
 export type GetReceiptsActionsResponse = GenericListResponseType<ReceiptAction>;
 
 export type UploadFileParams = {
   files: File[];
 };
+export type UploadFileResponse = FileDocument[];
 
-export type UploadFileResponse = {
+type Achievement = {
   id: number;
-  name: string;
-  alternativeText?: unknown;
-  caption?: unknown;
-  width: number;
-  height: number;
-  formats?: Format;
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl: string | null;
-  provider: string;
-};
-
-type Format = {
-  thumbnail: Thumbnail;
-};
-
-type Thumbnail = {
-  ext: string;
-  url: string;
-  hash: string;
-  mime: string;
-  name: string;
-  path?: unknown;
-  size: number;
-  width: number;
-  height: number;
-};
-
-export type GetCropsResponse = {
-  data: Datum[];
-  meta: Meta;
-};
-
-type Meta = {
-  pagination: Pagination;
-};
-
-type Pagination = {
-  page: number;
-  pageSize: number;
-  pageCount: number;
-  total: number;
-};
-
-type Datum = {
-  id: number;
+  amount_won_in_cent: string;
+  amount_to_be_won_in_cent: string;
   createdAt: string;
   updatedAt: string;
-  year: string;
-  deadline_to_add_plannings?: unknown;
-  current: boolean;
+  safra: Harvest;
 };
-
 export type GetAchievementParams = {
   farmerId: number;
   harvestId: number;
 };
-export type GetAchievementResponse = {
-  data: Array<{
-    id: number;
-    amount_won_in_cent: string;
-    amount_to_be_won_in_cent: string;
-    createdAt: string;
-    updatedAt: string;
-    safra: Harvest;
-  }>;
-  meta: Meta;
-};
+export type GetAchievementResponse = GenericListResponseType<Achievement>;
 
-export type GetExampleReceiptsResponse = {
-  data: Array<{
-    id: number;
-    title: string;
-    createdAt: string;
-    updatedAt: string;
-    documents: Document[];
-  }>;
-  meta: Meta;
-};
-
-export type SendReceiptActionResponse = void;
-
-type Document = {
+type ExampleReceipt = {
   id: number;
-  name: string;
-  alternativeText?: any;
-  caption?: any;
-  width?: any;
-  height?: any;
-  formats?: any;
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl?: any;
-  provider: string;
-  provider_metadata?: any;
+  title: string;
   createdAt: string;
   updatedAt: string;
+  documents: FileDocument[];
 };
+export type GetExampleReceiptsResponse = GenericListResponseType<ExampleReceipt>;
+
+export type SendReceiptActionData = {
+  actionId: number;
+  documents: FileDocument[];
+  description: string;
+};
+export type SendReceiptActionResponse = void;

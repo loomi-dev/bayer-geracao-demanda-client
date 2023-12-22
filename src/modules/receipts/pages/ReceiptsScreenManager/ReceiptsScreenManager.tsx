@@ -1,21 +1,31 @@
-import React, { Fragment } from 'react';
+import { VStack } from '@chakra-ui/react';
+import React from 'react';
 
+import { useGetReceiptsActions } from '@/api';
 import { Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 
-import { DrawerExpenseReceipt, FinalizedTables, RunningTable, TableFilter } from './components';
+import { FinalizedTables, RunningTable } from './components';
 
 export const ReceiptsScreenManager = () => {
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('actions_table');
 
-  const { data, isLoading } = useGetActions({
+  const {
+    data: dataGetReceiptsActions,
+    isLoading: isLoadingGetReceiptsActions,
+    isFetching: isFetchingGetReceiptsActions,
+  } = useGetReceiptsActions({
     pagination: {
       page: currentPage,
       pageSize: 5,
     },
   });
 
-  const separateData = data?.data?.reduce(
+  const isLoadingReceiptsActions = isLoadingGetReceiptsActions || isFetchingGetReceiptsActions;
+  const countReceiptsActions = dataGetReceiptsActions?.data.length ?? 0;
+  const totalReceiptsActionsPage = dataGetReceiptsActions?.meta.pagination.pageCount ?? 1;
+
+  const separateData = dataGetReceiptsActions?.data?.reduce(
     (prev, action) => {
       if (action.status === 'accepted') {
         prev.finished.push(action);
@@ -25,28 +35,29 @@ export const ReceiptsScreenManager = () => {
       return prev;
     },
     {
-      finished: [] as ActionResponse[],
-      running: [] as ActionResponse[],
+      finished: [] as ReceiptAction[],
+      running: [] as ReceiptAction[],
     },
   );
 
   return (
-    <Fragment>
-      <DrawerExpenseReceipt />
+    <VStack align="flex-start" w="full" spacing="3.2rem">
+      {/* <TableFilter /> */}
 
-      <TableFilter />
-
-      <RunningTable actions={separateData?.running ?? []} isLoading={isLoading} />
-      <FinalizedTables actions={separateData?.finished ?? []} isLoading={isLoading} />
+      <RunningTable actions={separateData?.running ?? []} isLoading={isLoadingReceiptsActions} />
+      <FinalizedTables
+        actions={separateData?.finished ?? []}
+        isLoading={isLoadingReceiptsActions}
+      />
 
       <Pagination
         page={currentPage}
-        countItems={data?.data.length ?? 0}
-        totalPages={data?.meta.pagination.pageCount ?? 1}
+        countItems={countReceiptsActions}
+        totalPages={totalReceiptsActionsPage}
         onPreviousPage={handlePreviousPage}
         onNextPage={handleNextPage}
         mt="1.6rem"
       />
-    </Fragment>
+    </VStack>
   );
 };

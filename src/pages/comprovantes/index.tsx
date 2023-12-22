@@ -1,14 +1,13 @@
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getServerSession } from 'next-auth';
+import { Fragment } from 'react';
 
+import { BigDocumentIcon, Header, ImageIcon } from '@/components';
 import { LayoutWithoutNotifications } from '@/layouts';
+import { authOptions } from '@/lib/next-auth';
 import { ReceiptsScreenManager, ReceiptsScreenFarmer } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
-import { GetServerSideProps } from 'next';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/next-auth';
-import { BigDocumentIcon, Header, ImageIcon } from '@/components';
-import { Fragment } from 'react';
 
 const Page: NextPageWithLayout = (props) => {
   const isManager = props?.role === 'Manager';

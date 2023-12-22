@@ -1,9 +1,12 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
+import { Fragment } from 'react';
 
 import { useGetExampleReceipts } from '@/api';
 import { DocumentIcon, ImageIcon, InboxIcon, UserGroupIcon } from '@/components';
+import { STALE_TIME_CONFIG } from '@/config';
 
 import { HowToProveCard } from './HowToProveCard';
+import { HowToProveCardSkeleton } from './HowToProveCardSkeleton';
 
 const items = [
   { icon: <InboxIcon width={21} height={21} />, text: 'Nota fiscal', id: '1' },
@@ -17,7 +20,9 @@ const items = [
 ];
 
 export const HowToProveSection = () => {
-  const { data } = useGetExampleReceipts();
+  const { data, isLoading } = useGetExampleReceipts({
+    staleTime: STALE_TIME_CONFIG,
+  });
 
   return (
     <Box>
@@ -30,11 +35,21 @@ export const HowToProveSection = () => {
         Não sabe como comprovar?
       </Text>
       <HStack spacing="1.2rem" mt="1.2rem">
-        {data?.data.map((receipt, index) => {
-          const item = items[index];
+        {isLoading ? (
+          <Fragment>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <HowToProveCardSkeleton key={i} />
+            ))}
+          </Fragment>
+        ) : (
+          <Fragment>
+            {data?.data.map((receipt, index) => {
+              const item = items[index];
 
-          return <HowToProveCard key={item.id} {...item} documents={receipt.documents} />;
-        })}
+              return <HowToProveCard key={item.id} {...item} documents={receipt.documents} />;
+            })}
+          </Fragment>
+        )}
       </HStack>
     </Box>
   );

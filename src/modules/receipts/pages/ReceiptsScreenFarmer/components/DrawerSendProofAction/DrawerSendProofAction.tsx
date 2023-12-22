@@ -39,8 +39,8 @@ export const DrawerSendProofAction = ({
 
   const { handleSubmit, reset } = methods;
 
-  const { mutate: sendReceiptAction, isLoading: isSendingReceiptAction } = useSendReceiptAction();
   const { mutate: uploadFileMutate, isLoading: isUploadingFile } = useUploadFile();
+  const { mutate: sendReceiptAction, isLoading: isSendingReceiptAction } = useSendReceiptAction();
 
   const isLoadingSendReceiptAction = isSendingReceiptAction || isUploadingFile;
 
@@ -56,11 +56,8 @@ export const DrawerSendProofAction = ({
         onSuccess: (uploadFileResponse) => {
           sendReceiptAction({
             actionId: action.id,
-            body: {
-              data: {
-                receipts: { documents: uploadFileResponse, approved: false, description },
-              },
-            },
+            documents: uploadFileResponse,
+            description,
           });
         },
       },

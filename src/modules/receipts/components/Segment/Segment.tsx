@@ -1,9 +1,7 @@
 import { Badge } from '@chakra-ui/react';
 
-import { GetActionsResponse } from '@/api';
-
 type SegmentProps = {
-  status: GetActionsResponse['data'][0]['type'];
+  status: PlanningActionType;
 };
 
 const conditionalValues = {

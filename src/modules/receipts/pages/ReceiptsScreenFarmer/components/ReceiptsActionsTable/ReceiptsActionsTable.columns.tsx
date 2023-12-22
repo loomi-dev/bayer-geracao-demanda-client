@@ -13,7 +13,7 @@ export const receiptsActionsTableColumns = [
     header: () => <Header title="Titulo da Ação" />,
     cell: (info) => <Cell value={info.getValue()} textProps={{ textStyle: 'caption7' }} />,
   }),
-  columnHelper.accessor((data) => data.type, {
+  columnHelper.accessor((data) => data?.type ?? 'farm_task', {
     id: 'segment',
     header: () => <Header title="segmento" />,
     cell: (info) => <Segment status={info.getValue()} />,
@@ -28,7 +28,7 @@ export const receiptsActionsTableColumns = [
     header: () => <Header title="recurso GD FINAL" />,
     cell: (info) => <Cell value={`R$ ${formatPrice(info.getValue())}`} />,
   }),
-  columnHelper.accessor((data) => data.status, {
+  columnHelper.accessor((data) => data?.status ?? 'not_evaluated', {
     id: 'status',
     header: () => <Header title="STATUS" />,
     cell: (info) => <ReceiptStatus status={info.getValue()} />,

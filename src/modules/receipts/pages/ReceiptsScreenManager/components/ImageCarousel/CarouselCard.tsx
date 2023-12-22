@@ -1,4 +1,5 @@
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 
 import { AbsoluteNextImage } from '@/components';
 
@@ -6,12 +7,13 @@ import { ModalCarouselCard } from './ModalCarouselCard';
 
 export type CarouselCardProps = {
   id: string | number;
-  path: string;
+  url: string;
   date: string;
 };
 
-export const CarouselCard = ({ date, path }: CarouselCardProps) => {
+export const CarouselCard = ({ date, url }: CarouselCardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dateFormatted = dayjs(date).format('DD [de] MMM, YYYY');
 
   return (
     <Box>
@@ -24,16 +26,16 @@ export const CarouselCard = ({ date, path }: CarouselCardProps) => {
           onClick: onOpen,
           as: 'button',
         }}
-        src={path}
+        src={url}
         alt="carousel-card"
         priority
         style={{ objectFit: 'cover' }}
         fill
       />
-      <Text textStyle="footnote-bold-2" color="greyscale.700">
-        {date}
+      <Text textStyle="footnote-bold-2" color="greyscale.700" mt="0.5rem">
+        {dateFormatted}
       </Text>
-      <ModalCarouselCard image={path} isOpen={isOpen} onClose={onClose} />
+      <ModalCarouselCard image={url} isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

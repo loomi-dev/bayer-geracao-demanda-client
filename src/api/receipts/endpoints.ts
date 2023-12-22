@@ -8,6 +8,7 @@ import {
   GetExampleReceiptsResponse,
   GetReceiptsActionsParams,
   GetReceiptsActionsResponse,
+  SendReceiptActionData,
   SendReceiptActionResponse,
   UploadFileParams,
   UploadFileResponse,
@@ -29,13 +30,19 @@ export const getReceiptsActions = async ({
           wallet: true,
         },
       },
-      receipts: true,
-    },
-    filters: {
-      farmer: {
-        id: farmerId,
+      receipts: {
+        populate: {
+          documents: true,
+        },
       },
     },
+    ...(farmerId && {
+      filters: {
+        farmer: {
+          id: farmerId,
+        },
+      },
+    }),
     pagination,
   });
 
@@ -83,7 +90,7 @@ export const getExampleReceipts = async (): Promise<GetExampleReceiptsResponse> 
   return response.data;
 };
 
-export const uploadFile = async ({ files }: UploadFileParams): Promise<UploadFileResponse[]> => {
+export const uploadFile = async ({ files }: UploadFileParams): Promise<UploadFileResponse> => {
   const formData = new FormData();
 
   files.forEach((file) => {
@@ -99,8 +106,20 @@ export const uploadFile = async ({ files }: UploadFileParams): Promise<UploadFil
   return response.data;
 };
 
-export const sendReceiptAction = async ({ actionId, body }): Promise<SendReceiptActionResponse> => {
-  const response = await axios.authorized().put(`/actions/${actionId}`, body);
+export const sendReceiptAction = async ({
+  actionId,
+  documents,
+  description,
+}: SendReceiptActionData): Promise<SendReceiptActionResponse> => {
+  const response = await axios.authorized().put(`/actions/${actionId}`, {
+    data: {
+      receipts: {
+        documents,
+        description,
+        approved: false,
+      },
+    },
+  });
 
   return response.data;
 };
