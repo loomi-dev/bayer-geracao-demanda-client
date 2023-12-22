@@ -44,6 +44,11 @@ export const DrawerSendProofAction = ({
 
   const isLoadingSendReceiptAction = isSendingReceiptAction || isUploadingFile;
 
+  const handleCloseDrawerSendProofAction = () => {
+    onClose();
+    reset();
+  };
+
   const onSubmitSendProofActionForm = async ({
     files,
     description,
@@ -54,19 +59,21 @@ export const DrawerSendProofAction = ({
       { files: filesList },
       {
         onSuccess: (uploadFileResponse) => {
-          sendReceiptAction({
-            actionId: action.id,
-            documents: uploadFileResponse,
-            description,
-          });
+          sendReceiptAction(
+            {
+              actionId: action.id,
+              documents: uploadFileResponse,
+              description,
+            },
+            {
+              onSuccess: () => {
+                handleCloseDrawerSendProofAction();
+              },
+            },
+          );
         },
       },
     );
-  };
-
-  const handleCloseDrawerSendProofAction = () => {
-    onClose();
-    reset();
   };
 
   return (
