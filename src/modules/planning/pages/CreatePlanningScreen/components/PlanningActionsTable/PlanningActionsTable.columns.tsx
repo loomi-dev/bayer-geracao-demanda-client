@@ -34,9 +34,13 @@ export const planningActionsColumns = [
     header: () => <Text>Orçamento</Text>,
     cell: (info) => <Text textStyle="action3">{`R$ ${formatPrice(info.getValue() ?? 0)}`}</Text>,
   }),
+
   columnHelper.accessor((data) => data, {
     id: 'acoes',
     header: () => null,
-    cell: (info) => <PlanningActionsTableAction {...info.getValue()} />,
+    cell: (info) => {
+      const actionStatus = info.getValue().status;
+      if (actionStatus !== 'accepted') return <PlanningActionsTableAction {...info.getValue()} />;
+    },
   }),
 ];
