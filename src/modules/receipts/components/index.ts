@@ -6,4 +6,4 @@ export * from './Cell';
 export * from './Header';
 export * from './ReceiptStatus';
 export * from './Segment';
-export * from './ActionDetails';
+export * from './GridActionDetails';

@@ -1,11 +1,13 @@
 import { StackProps, Text, VStack } from '@chakra-ui/react';
 
+import { CustomerPlannings } from '@/api';
+
 import { KanbanCard } from './KanbanCard';
 import { KanbanCardSkeleton } from './KanbanCardSkeleton';
 
 type KanbanSectionProps = {
   title: string;
-  plannings?: Planning[];
+  plannings?: CustomerPlannings[];
   titleColor?: string;
   isLoading: boolean;
 } & StackProps;

@@ -21,7 +21,7 @@ export const CustomerDetailScreen = () => {
     isFetching: isFetchingPlanning,
   } = useGetPlanningStatistics(
     {
-      userId: customerId,
+      farmerId: customerId,
     },
     {
       enabled: Boolean(customerId),
@@ -29,11 +29,10 @@ export const CustomerDetailScreen = () => {
   );
   const customer = getCustomerData?.data[0];
   const customerPlannings = getPlanningData?.data[0];
-
   return (
     <>
       <Header
-        label={`${customer?.users_permissions_user.username}`}
+        label={`${customer?.users_permissions_user?.username ?? ''}`}
         subLabel={Mask.formatCNPJ(customer?.company_identifier ?? '')}
         onClick={() => push('/clientes')}
         icon={<ChevronLeftIcon fontSize={36} color="white" />}

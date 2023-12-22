@@ -7,7 +7,7 @@ import { centsToCompactValue } from '@/utils';
 
 export const PlanningStatisticsSection = () => {
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const farmerId = session.data?.user?.farmer?.id as number;
 
   const {
     data: dataGetPlanningStatistics,
@@ -15,10 +15,10 @@ export const PlanningStatisticsSection = () => {
     isFetching: isFetchingDataGetPlanningStatistics,
   } = useGetPlanningStatistics(
     {
-      userId,
+      farmerId,
     },
     {
-      enabled: Boolean(userId),
+      enabled: Boolean(farmerId),
     },
   );
   const summary = dataGetPlanningStatistics?.data?.[0]?.planning_summary ?? null;
@@ -27,11 +27,13 @@ export const PlanningStatisticsSection = () => {
   const isLoadingPlanningStatistics =
     isLoadingDataGetPlanningStatistics || isFetchingDataGetPlanningStatistics;
 
-  const plannedKit = centsToCompactValue(summary?.farmk_kit_in_cents ?? 0);
-  const plannedRelationship = centsToCompactValue(summary?.relationship_action_in_cents ?? 0);
-  const plannedTask = centsToCompactValue(summary?.farm_task_in_cents ?? 0);
-  const planningValue = centsToCompactValue(summary?.planned_budget_in_cents ?? 0);
-  const totalValue = centsToCompactValue(summary?.total_budget_in_cents ?? 0);
+  const plannedKit = centsToCompactValue(Number(summary?.farm_kit_in_cents ?? 0));
+  const plannedRelationship = centsToCompactValue(
+    Number(summary?.relationship_action_in_cents ?? 0),
+  );
+  const plannedTask = centsToCompactValue(Number(summary?.farm_task_in_cents ?? 0));
+  const planningValue = centsToCompactValue(Number(summary?.planned_budget_in_cents ?? 0));
+  const totalValue = centsToCompactValue(Number(summary?.total_budget_in_cents ?? 0));
 
   return (
     <Grid

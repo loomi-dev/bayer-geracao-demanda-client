@@ -1,7 +1,8 @@
 import { HStack } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { useGetPlannings } from '@/api';
+import { useGetCustomerPlanningsByUserId } from '@/api';
 import { CustomerFilter } from '@/components';
 
 import { KanbanSection } from './components';
@@ -10,7 +11,14 @@ import { getSectionPlannings } from './utils';
 import 'swiper/css';
 
 export const KanbanScreen = () => {
-  const { data, isLoading, isFetching } = useGetPlannings();
+  const session = useSession();
+  const managerId = session.data?.user.manager?.id as number;
+  const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
+    {
+      managerId,
+    },
+    { enabled: Boolean(managerId) },
+  );
   const plannings = data?.data ?? [];
 
   const { pendingPlannings, acceptedPlannings, revalidatedPlannings, refusedPlannings } =
@@ -24,7 +32,7 @@ export const KanbanScreen = () => {
       titleColor: 'yellow.warning_60',
       plannings: revalidatedPlannings,
     },
-    { title: 'Aprovados', titleColor: 'text.brand', plannings: acceptedPlannings },
+    { title: 'Aprovados', titleColor: 'green.100', plannings: acceptedPlannings },
   ];
 
   return (
@@ -32,7 +40,7 @@ export const KanbanScreen = () => {
       <HStack w="100%" justify="flex-end">
         <CustomerFilter />
       </HStack>
-      <Swiper slidesPerView="auto" spaceBetween={10}>
+      <Swiper slidesPerView="auto" style={{ height: '100%' }} spaceBetween={10}>
         {sections.map((section, index) => (
           <SwiperSlide key={section.title} style={{ width: 'fit-content', height: 'inherit' }}>
             <KanbanSection

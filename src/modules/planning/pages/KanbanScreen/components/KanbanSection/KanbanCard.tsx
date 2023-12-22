@@ -2,11 +2,12 @@ import { Badge, Flex, Text, VStack } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+import { CustomerPlannings } from '@/api';
 import { PlanningStatus, PlanningValue } from '@/types';
 import { Mask, formatPrice } from '@/utils';
 
 type KanbanCardProps = {
-  planning: Planning;
+  planning: CustomerPlannings;
   badgeColor?: string;
 };
 
@@ -58,7 +59,7 @@ export const KanbanCard = ({ planning, badgeColor }: KanbanCardProps) => {
           Cliente
         </Text>
         <VStack gap="initial" align="flex-start">
-          <Text textStyle="body2">{planning.farmer?.name}</Text>
+          <Text textStyle="body2">{planning.farmer?.users_permissions_user?.username ?? ''}</Text>
           <Text textStyle="footnote" lineHeight="1.8rem">
             {Mask.formatCNPJ(planning.farmer?.company_identifier ?? '')}
           </Text>

@@ -7,14 +7,14 @@ import { Balance } from '@/components';
 export const WalletBalance = () => {
   const { push } = useRouter();
   const user = useSession();
-  const userId = user.data?.user.id as number;
+  const farmerId = user.data?.user?.farmer?.id as number;
 
   const handleNavigateToPlanning = () => {
     push('/planejamento');
   };
 
   return (
-    <Balance.Container farmerId={userId}>
+    <Balance.Container farmerId={farmerId}>
       <Balance.Label />
       <Balance.Value />
 

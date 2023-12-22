@@ -37,7 +37,11 @@ export const createPlanningAction = async ({
 export const deletePlanningAction = async ({
   actionId,
 }: DeletePlanningActionParams): Promise<DeletePlanningActionResponse> =>
-  await axios.authorized().delete(`/actions/${actionId}`);
+  await axios.authorized().put(`/actions/${actionId}`, {
+    data: {
+      deletedAt: new Date().toISOString(),
+    },
+  });
 
 export const updatePlanningAction = async ({
   farmerId,

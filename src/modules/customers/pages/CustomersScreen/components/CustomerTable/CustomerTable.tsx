@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
-import { Customer, useGetCustomers } from '@/api/customer';
-import { CustomerFilter, DynamicTable, Pagination, SearchIcon, TextInput } from '@/components';
+import { CustomerPlannings, useGetCustomerPlanningsByUserId } from '@/api/customer';
+import { DynamicTable, Pagination, SearchIcon, TextInput } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { CustomerColumns } from './CustomerTable.columns';
@@ -14,16 +14,16 @@ import { CustomerColumns } from './CustomerTable.columns';
 export const CustomerTable = () => {
   const session = useSession();
   const { pathname, push } = useRouter();
-  const userId = session.data?.user.id as number;
+  const managerId = session.data?.user?.manager?.id as number;
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
-  const { data, isLoading, isFetching } = useGetCustomers(
+  const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
-      id: userId,
+      managerId,
       filter: { search },
       pagination: { page: currentPage, pageSize: 5 },
     },
-    { enabled: Boolean(userId) },
+    { enabled: Boolean(managerId) },
   );
   const customers = data?.data ?? [];
 
@@ -31,9 +31,10 @@ export const CustomerTable = () => {
     (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
     250,
   );
-  const handleRowClick = (row: Row<Customer>) => push(`${pathname}/${row.original.farmer.id}`);
+  const handleRowClick = (row: Row<CustomerPlannings>) =>
+    push(`${pathname}/${row.original.farmer.id}`);
 
-  const rowProps = (row: Row<Customer>) => {
+  const rowProps = (row: Row<CustomerPlannings>) => {
     const planningStatus = row.original.historic?.at(-1)?.status;
     const style =
       planningStatus === 'ready_for_evaluation' ? { background: 'rgba(55, 199, 69, 0.1)' } : {};
@@ -46,7 +47,6 @@ export const CustomerTable = () => {
       <Flex align="center" justify="space-between" px="1.6rem" w="100%">
         <Text textStyle="h5">Filtros</Text>
         <HStack gap="1.2rem">
-          <CustomerFilter customers={customers} />
           <TextInput
             w="32rem"
             borderRadius="1.6rem"
@@ -57,7 +57,7 @@ export const CustomerTable = () => {
           />
         </HStack>
       </Flex>
-      <DynamicTable<Customer>
+      <DynamicTable<CustomerPlannings>
         rowProps={rowProps}
         data={customers}
         columns={CustomerColumns}

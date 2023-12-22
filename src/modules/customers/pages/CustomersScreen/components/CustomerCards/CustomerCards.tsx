@@ -6,15 +6,15 @@ import { formatPrice } from '@/utils';
 
 export const CustomerCards = () => {
   const session = useSession();
-  const userId = session.data?.user.id as number;
+  const managerId = session.data?.user.manager?.id as number;
+  const harvest = session.data?.user.safra;
   const { data, isLoading, isFetching } = useGetManager(
     {
-      id: userId,
+      managerId,
     },
-    { enabled: Boolean(userId) },
+    { enabled: Boolean(managerId) },
   );
-  const manager = data?.data[0];
-
+  const manager = data?.data;
   return (
     <Flex gap="1.7rem">
       <Flex layerStyle="card" align="center" p="2.4rem" gap="0.8rem" h="10rem">
@@ -35,7 +35,7 @@ export const CustomerCards = () => {
         {isLoading || isFetching ? (
           <Skeleton w="15rem" h="4.8rem" />
         ) : (
-          <Text textStyle="h2">{manager?.safra?.year}</Text>
+          <Text textStyle="h2">{harvest?.year}</Text>
         )}
         <Text w="9.4rem" textStyle="body3" color="footnote">
           Safra atual

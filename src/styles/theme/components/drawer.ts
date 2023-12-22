@@ -16,6 +16,14 @@ export const Drawer = defineMultiStyleConfig({
       p: '1.4rem 2.4rem 3rem',
       bg: 'greyscale.500',
     },
+    closeButton: {
+      position: 'relative',
+      right: 'initial',
+      top: 'initial',
+      left: 'initial',
+      bottom: 'initial',
+      fontSize: '1.4rem',
+    },
     footer: {
       py: '1.6rem',
       px: '2.4rem',

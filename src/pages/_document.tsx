@@ -1,12 +1,13 @@
 import { ColorModeScript, theme } from '@chakra-ui/react';
 import { Html, Head, Main, NextScript } from 'next/document';
+
 export default function Document() {
   return (
     <Html lang="pt-BR">
       <Head>
         <meta charSet="UTF-8" />
         <meta name="robots" content="index,follow" />
-        <meta name="msapplication-TileColor" content="#37C745" />
+        <meta name="msapplication-TileColor" content="#A10B30" />
         <meta name="theme-color" content="#EFEFEF" />
         <meta
           name="description"

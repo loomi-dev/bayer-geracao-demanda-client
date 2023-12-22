@@ -1,7 +1,7 @@
 import { GenericListResponseType } from '@/api';
 
 export type GetPlanningStatisticsParams = {
-  userId: number;
+  farmerId: number;
 };
 export type GetPlanningStatisticsResponse = GenericListResponseType<{
   name: string;
@@ -21,6 +21,7 @@ export type GetFarmerPlansResponse = {
 
 export type CreatePlanningData = {
   farmerId: number;
+  harvestId: number;
 };
 export type CreatePlanningResponse = {
   data: {

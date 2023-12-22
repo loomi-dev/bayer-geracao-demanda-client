@@ -1,1 +1,1 @@
-export * from './useGetCustomers';
+export * from './useGetCustomersPlanningsByUserId';
