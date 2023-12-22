@@ -22,3 +22,5 @@ export type UpdateFarmerResponse = {
     user: User;
   };
 };
+
+export type GetFarmersResponse = GenericListResponseType<Farmer>;

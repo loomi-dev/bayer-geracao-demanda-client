@@ -1,6 +1,8 @@
 import { useDisclosure } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
+import { useGetFarmers } from '@/api';
 import {
   BaseFilter,
   FilterBody,
@@ -13,16 +15,15 @@ import {
 import { ChevronDownIcon, ChevronTopIcon, UserIcon } from '@/components/icons';
 import { Mask } from '@/utils';
 
-type CustomerFilterProps = {
-  customers?: Farmer[];
-};
-
-export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
+export const CustomerFilter = () => {
+  const session = useSession();
+  const managerId = session.data?.user.manager?.id as number;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [search, setSearch] = useState('');
-
+  const { data } = useGetFarmers({ managerId });
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
+  const customers = data?.data ?? [];
   const filteredCustomers = customers.filter(
     (customer) =>
       customer.users_permissions_user?.username?.includes(search) ||
@@ -50,8 +51,8 @@ export const CustomerFilter = ({ customers = [] }: CustomerFilterProps) => {
           ))}
         </FilterBody>
         <FilterFooter
-          label={customers.length > 1 ? 'Multiplicadores' : 'Multiplicador'}
-          value={customers.length}
+          label={filteredCustomers.length > 1 ? 'Multiplicadores' : 'Multiplicador'}
+          value={filteredCustomers.length}
         />
       </FilterContent>
     </BaseFilter>

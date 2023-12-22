@@ -5,6 +5,7 @@ import axios from '@/lib/axios';
 import {
   GetFarmerParams,
   GetFarmerResponse,
+  GetFarmersResponse,
   UpdateFarmerData,
   UpdateFarmerResponse,
 } from './types';
@@ -49,6 +50,25 @@ export const updateFarmer = async ({
       phoneNumber,
     },
   });
+
+  return data;
+};
+
+export const getFarmers = async ({ managerId }): Promise<GetFarmersResponse> => {
+  const query = qs.stringify({
+    filters: {
+      managers: {
+        id: {
+          $in: [managerId],
+        },
+      },
+    },
+    populate: {
+      users_permissions_user: true,
+    },
+  });
+
+  const { data } = await axios.authorized().get(`/farmers?${query}`);
 
   return data;
 };
