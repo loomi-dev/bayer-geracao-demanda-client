@@ -14,11 +14,13 @@ export const CustomerStatisticsSection = ({
   isLoading,
 }: CustomerStatisticsSectionProps) => {
   const plannedActions = summary?.planned_actions ?? 0;
-  const plannedKit = centsToCompactValue(Number(summary?.farm_kit_in_cents) ?? 0);
-  const plannedRelationship = centsToCompactValue(summary?.relationship_action_in_cents ?? 0);
-  const plannedTask = centsToCompactValue(Number(summary?.farm_task_in_cents) ?? 0);
-  const planningValue = centsToCompactValue(Number(summary?.planned_budget_in_cents) ?? 0);
-  const totalValue = centsToCompactValue(summary?.total_budget_in_cents ?? 0);
+  const plannedKit = centsToCompactValue(Number(summary?.farm_kit_in_cents ?? 0));
+  const plannedRelationship = centsToCompactValue(
+    Number(summary?.relationship_action_in_cents ?? 0),
+  );
+  const plannedTask = centsToCompactValue(Number(summary?.farm_task_in_cents ?? 0));
+  const planningValue = centsToCompactValue(Number(summary?.planned_budget_in_cents ?? 0));
+  const totalValue = centsToCompactValue(Number(summary?.total_budget_in_cents ?? 0));
   return (
     <Grid
       as="section"
