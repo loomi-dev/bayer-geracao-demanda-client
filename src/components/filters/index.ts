@@ -6,3 +6,4 @@ export * from './Filter';
 export * from './PartnerFilter';
 export * from './ResourceFilter';
 export * from './HarvestFilter';
+export * from './SearchFilter';

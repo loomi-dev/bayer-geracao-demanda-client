@@ -1,14 +1,14 @@
 import { QueryKey, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export type ApiResponseErrNames = 'PLANNING_ALREADY_EXIST' | 'INSUFICIENTE_FOUNDS';
+export type ApiResponseErrNames = 'PLANNING_ALREADY_EXIST' | 'INSUFFICIENT_FOUNDS';
 
 export type ApiResponseErr = {
   data?: null;
   error?: {
     status: number;
-    name: ApiResponseErrNames;
-    message: string;
+    name: string;
+    message: ApiResponseErrNames;
   };
 };
 export type ApiServiceErr = AxiosError<ApiResponseErr>;

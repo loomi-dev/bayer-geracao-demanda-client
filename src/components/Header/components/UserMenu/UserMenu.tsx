@@ -71,6 +71,7 @@ export const UserMenu = ({ handleOpenUserProfile }: UserMenuProps) => {
               bg="surface.primary"
               p="1.6rem"
               mt="1.4rem"
+              zIndex="9999999"
             >
               {menuItem.map((item, index, array) => (
                 <Fragment key={item.label}>

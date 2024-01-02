@@ -88,7 +88,7 @@ export const SendPlanningFormStep = ({
           });
         },
         onError: (err) => {
-          if (err?.response?.data?.error?.name === 'INSUFICIENTE_FOUNDS') {
+          if (err?.response?.data?.error?.message === 'INSUFFICIENT_FOUNDS') {
             toast({
               description: 'Não foi possível enviar seu planejamento para aprovação.',
               status: 'error',

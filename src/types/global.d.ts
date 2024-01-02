@@ -1,3 +1,37 @@
+type FileThumbnail = {
+  ext: string;
+  url: string;
+  hash: string;
+  mime: string;
+  name: string;
+  path?: unknown;
+  size: number;
+  width: number;
+  height: number;
+};
+type FileFormat = {
+  thumbnail: FileThumbnail;
+};
+type FileDocument = {
+  id: number;
+  name: string;
+  alternativeText?: unknown;
+  caption?: unknown;
+  width?: unknown;
+  height?: unknown;
+  formats?: FileFormat[];
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl?: unknown;
+  provider: string;
+  provider_metadata?: unknown;
+  createdAt: string;
+  updatedAt: string;
+};
+
 type User = {
   id: number;
   username: string;
@@ -141,4 +175,27 @@ type Trousseau = {
   material_items: TrousseauItem[];
   catalogs: TrousseauCatalog[];
   suppliers: TrousseauSupplier[];
+};
+
+type Receipt = {
+  description: string;
+  id: number;
+  status: string;
+  documents: FileDocument[];
+};
+type ReceiptAction = {
+  farmer: Farmer;
+  receipts: Receipt;
+  createdAt: string;
+} & PlanningAction;
+
+type UserNotification = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  read: boolean;
+  missingPlanning: string;
+  totalPlanning: string;
+  type: string;
+  safra: Harvest;
 };

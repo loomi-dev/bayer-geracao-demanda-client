@@ -16,7 +16,7 @@ export const getCustomerPlanningsByUserId = async ({
           $eq: managerId,
         },
       },
-      ...(filter?.region ? { region: { $eq: filter?.region } } : {}),
+      ...((filter?.regions ?? []).length > 0 ? { region: { $in: filter?.regions } } : {}),
       ...(filter?.district ? { district: { $eq: filter?.district } } : {}),
       ...(filter?.search
         ? {
@@ -34,9 +34,15 @@ export const getCustomerPlanningsByUserId = async ({
             ],
           }
         : {}),
+      ...((filter?.customers ?? []).length > 0
+        ? {
+            company_identifier: {
+              $in: filter?.customers,
+            },
+          }
+        : {}),
     },
   };
-
   const query = qs.stringify({
     filters,
     pagination,

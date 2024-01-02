@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
 import { CustomerPlannings, useGetCustomerPlanningsByUserId } from '@/api/customer';
-import { DynamicTable, Pagination, SearchIcon, TextInput } from '@/components';
+import { DynamicTable, Pagination, RegionFilter, SearchFilter } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { CustomerColumns } from './CustomerTable.columns';
@@ -17,10 +17,11 @@ export const CustomerTable = () => {
   const managerId = session.data?.user?.manager?.id as number;
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
+  const [regions, setRegions] = useState<string[]>([]);
   const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
       managerId,
-      filter: { search },
+      filter: { search, regions },
       pagination: { page: currentPage, pageSize: 5 },
     },
     { enabled: Boolean(managerId) },
@@ -40,21 +41,14 @@ export const CustomerTable = () => {
       planningStatus === 'ready_for_evaluation' ? { background: 'rgba(55, 199, 69, 0.1)' } : {};
     return style;
   };
-
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
       <Flex align="center" justify="space-between" px="1.6rem" w="100%">
         <Text textStyle="h5">Filtros</Text>
-        <HStack gap="1.2rem">
-          <TextInput
-            w="32rem"
-            borderRadius="1.6rem"
-            leftIcon={<SearchIcon />}
-            bgColor="surface.primary"
-            placeholder="Pesquisar por Nome ou CNPJ"
-            onChange={handleSearch}
-          />
+        <HStack gap="1.6rem">
+          <RegionFilter selectedValues={regions} onSelect={setRegions} />
+          <SearchFilter placeholder="Pesquisar por Nome ou CNPJ" onChange={handleSearch} />
         </HStack>
       </Flex>
       <DynamicTable<CustomerPlannings>

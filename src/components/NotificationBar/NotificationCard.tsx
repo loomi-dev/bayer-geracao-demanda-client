@@ -1,8 +1,19 @@
 import { Flex, FlexProps, HStack, Text } from '@chakra-ui/react';
 
-type NotificationCardProps = FlexProps;
+import { formatPrice } from '@/utils';
 
-export const NotificationCard = ({ ...restProps }: NotificationCardProps) => (
+type NotificationCardProps = {
+  harvestYear: string;
+  totalPlanning: string;
+  missingPlanning: string;
+} & FlexProps;
+
+export const NotificationCard = ({
+  harvestYear,
+  totalPlanning,
+  missingPlanning,
+  ...restProps
+}: NotificationCardProps) => (
   <Flex
     w="full"
     flexDir="column"
@@ -15,18 +26,21 @@ export const NotificationCard = ({ ...restProps }: NotificationCardProps) => (
     {...restProps}
   >
     <Text textTransform="uppercase" textStyle={{ lg: 'action4', xl: 'action3', '3xl': 'action2' }}>
-      Planejamento 2023/24
+      Planejamento {harvestYear}
     </Text>
     <HStack w="100%" justify="space-between" align="center">
       <Text textStyle="footnote" fontSize={{ lg: '1rem', xl: '1.2rem' }}>
         Valor já planejado
       </Text>
       <Text textStyle="footnote-bold" fontSize={{ lg: '1rem', xl: '1.2rem' }}>
-        R$ 40.000
+        {`R$ ${formatPrice(totalPlanning)}`}
       </Text>
     </HStack>
-    <Text textStyle="footnote-bold" fontSize={{ lg: '1rem', xl: '1.2rem' }}>
-      Falta planejar R$ 20.000 em ações
-    </Text>
+
+    {missingPlanning && (
+      <Text textStyle="footnote-bold" fontSize={{ lg: '1rem', xl: '1.2rem' }}>
+        Falta planejar {`R$ ${formatPrice(missingPlanning)}`} em ações
+      </Text>
+    )}
   </Flex>
 );
