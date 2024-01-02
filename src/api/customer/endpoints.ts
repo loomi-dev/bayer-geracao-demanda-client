@@ -34,9 +34,15 @@ export const getCustomerPlanningsByUserId = async ({
             ],
           }
         : {}),
+      ...((filter?.customers ?? []).length > 0
+        ? {
+            company_identifier: {
+              $in: filter?.customers,
+            },
+          }
+        : {}),
     },
   };
-
   const query = qs.stringify({
     filters,
     pagination,

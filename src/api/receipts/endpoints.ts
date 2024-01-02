@@ -13,10 +13,33 @@ import {
 } from './types';
 
 export const getReceiptsActions = async ({
+  filter,
   farmerId,
   pagination,
 }: GetReceiptsActionsParams): Promise<GetReceiptsActionsResponse> => {
+  const filters = {
+    farmer: {
+      ...(farmerId && {
+        id: farmerId,
+      }),
+      ...((filter?.customers ?? []).length > 0
+        ? {
+            company_identifier: {
+              $in: filter?.customers,
+            },
+          }
+        : {}),
+      planning: {
+        historic: {
+          status: {
+            $eq: 'accepted',
+          },
+        },
+      },
+    },
+  };
   const query = qs.stringify({
+    filters,
     populate: {
       planning: {
         populate: {
@@ -34,20 +57,7 @@ export const getReceiptsActions = async ({
         },
       },
     },
-    filters: {
-      ...(farmerId && {
-        farmer: {
-          id: farmerId,
-        },
-      }),
-      planning: {
-        historic: {
-          status: {
-            $eq: 'accepted',
-          },
-        },
-      },
-    },
+
     pagination,
   });
 

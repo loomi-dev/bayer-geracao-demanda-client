@@ -19,7 +19,9 @@ export const ReceiptsActionsTable = () => {
     isFetching: isFetchingGetReceiptsActions,
   } = useGetReceiptsActions(
     {
-      farmerId,
+      filter: {
+        farmerId,
+      },
       pagination: {
         page: currentPage,
         pageSize: 5,

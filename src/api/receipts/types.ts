@@ -10,6 +10,10 @@ export type GetFarmerData = { id: number | string };
 
 export type GetReceiptsActionsParams = {
   farmerId?: number;
+  filter?: {
+    farmerId?: number;
+    customers?: string[];
+  };
   pagination: Pagination;
 };
 export type GetReceiptsActionsResponse = GenericListResponseType<ReceiptAction>;

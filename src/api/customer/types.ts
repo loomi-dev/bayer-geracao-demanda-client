@@ -6,6 +6,7 @@ export type GetCustomerPlanningsByUserIdParams = {
     region?: string;
     district?: string;
     search?: string;
+    customers?: string[];
   };
   pagination?: Pagination;
 };
