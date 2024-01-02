@@ -17,6 +17,7 @@ export const credentialsProvider = CredentialsProvider({
         accessToken: jwt,
       };
     } catch (err) {
+      console.log(err);
       const error = err as ApiServiceErr;
 
       throw new Error(error?.response?.data?.error?.name ?? 'FailedRequest');

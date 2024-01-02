@@ -32,14 +32,21 @@ const ROLE_PAGES = {
     '/carteira',
     '/bem-vindo/:path*',
   ],
-  Manager: ['/planejamento', '/comprovantes', '/simulador', '/dashboard', '/clientes/:path*'],
+  Manager: [
+    '/planejamento',
+    '/comprovantes',
+    '/simulador',
+    '/dashboard',
+    '/bem-vindo',
+    '/clientes/:path*',
+  ],
 };
 
 export default withAuth(
   function middleware({ url, nextUrl: { pathname }, nextauth: { token } }) {
     const userRole = token?.user.role as Roles;
     const isUserManager = userRole === 'Manager';
-    const isNewUser = token?.user.confirmed === false && !isUserManager;
+    const isNewUser = token?.user.confirmed === false;
     const defaultPrivatePageByRole = isUserManager
       ? DEFAULT_PRIVATE_MANAGER_PAGE
       : DEFAULT_PRIVATE_FARMER_PAGE;

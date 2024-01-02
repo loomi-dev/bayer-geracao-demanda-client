@@ -37,7 +37,7 @@ export const useLoginMutation = (
     },
     onSuccess: (session) => {
       const isUserManager = session?.user.role === 'Manager';
-      const isNewUser = session?.user.confirmed === false && !isUserManager;
+      const isNewUser = session?.user.confirmed === false;
       const privatePage = isUserManager
         ? DEFAULT_PRIVATE_MANAGER_PAGE
         : DEFAULT_PRIVATE_FARMER_PAGE;
