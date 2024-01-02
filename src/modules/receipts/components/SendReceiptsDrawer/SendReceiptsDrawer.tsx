@@ -10,29 +10,25 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, FormProvider } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { useSendReceiptAction, useUploadFile } from '@/api';
-import { CircleIcon, DocumentIcon } from '@/components';
+import { BigDocumentIcon, CircleIcon } from '@/components';
 import { GridActionDetails } from '@/modules/receipts/components';
 
-import { SendProofActionAccordionForm } from './SendProofActionAccordionForm';
+import { SendReceiptsFormAccordion } from './SendReceiptsFormAccordion';
 import {
-  SendProofActionFormSchemaType,
-  sendProofActionFormSchema,
-} from './SendProofActionAccordionForm.schema';
+  SendReceiptsFormSchemaType,
+  sendReceiptsFormSchema,
+} from './SendReceiptsFormAccordion.schema';
 
-type DrawerSendProofActionProps = {
+type SendReceiptsDrawerProps = {
   action: ReceiptAction;
 } & Omit<DrawerProps, 'children'>;
 
-export const DrawerSendProofAction = ({
-  action,
-  onClose,
-  ...restProps
-}: DrawerSendProofActionProps) => {
-  const methods = useForm<SendProofActionFormSchemaType>({
-    resolver: zodResolver(sendProofActionFormSchema),
+export const SendReceiptsDrawer = ({ action, onClose, ...restProps }: SendReceiptsDrawerProps) => {
+  const methods = useForm<SendReceiptsFormSchemaType>({
+    resolver: zodResolver(sendReceiptsFormSchema),
     mode: 'all',
     criteriaMode: 'all',
   });
@@ -44,7 +40,7 @@ export const DrawerSendProofAction = ({
 
   const isLoadingSendReceiptAction = isSendingReceiptAction || isUploadingFile;
 
-  const handleCloseDrawerSendProofAction = () => {
+  const handleCloseSendReceiptsDrawer = () => {
     onClose();
     reset();
   };
@@ -52,7 +48,7 @@ export const DrawerSendProofAction = ({
   const onSubmitSendProofActionForm = async ({
     files,
     description,
-  }: SendProofActionFormSchemaType) => {
+  }: SendReceiptsFormSchemaType) => {
     const filesList = files.map(({ file }) => file);
 
     uploadFileMutate(
@@ -67,7 +63,7 @@ export const DrawerSendProofAction = ({
             },
             {
               onSuccess: () => {
-                handleCloseDrawerSendProofAction();
+                handleCloseSendReceiptsDrawer();
               },
             },
           );
@@ -77,7 +73,7 @@ export const DrawerSendProofAction = ({
   };
 
   return (
-    <Drawer onClose={handleCloseDrawerSendProofAction} {...restProps}>
+    <Drawer onClose={handleCloseSendReceiptsDrawer} {...restProps}>
       <DrawerOverlay />
 
       <DrawerContent maxW="unset" w="81rem !important">
@@ -91,7 +87,7 @@ export const DrawerSendProofAction = ({
           borderColor="opacity.black.0.20"
         >
           <CircleIcon>
-            <DocumentIcon />
+            <BigDocumentIcon />
           </CircleIcon>
           <Text ml="1.6rem" textStyle="h3">
             Comprovante de gastos
@@ -101,14 +97,14 @@ export const DrawerSendProofAction = ({
         <FormProvider {...methods}>
           <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem" gap="1rem">
             <GridActionDetails {...action} />
-            <SendProofActionAccordionForm />
+            <SendReceiptsFormAccordion />
           </DrawerBody>
 
           <DrawerFooter>
             <Button
               variant="secondary"
               w="18rem"
-              onClick={handleCloseDrawerSendProofAction}
+              onClick={handleCloseSendReceiptsDrawer}
               isDisabled={isLoadingSendReceiptAction}
             >
               Cancelar
