@@ -1,6 +1,6 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
 import { useGetFarmers } from '@/api';
 import {
@@ -15,12 +15,19 @@ import {
 import { ChevronDownIcon, ChevronTopIcon, UserIcon } from '@/components/icons';
 import { Mask } from '@/utils';
 
-export const CustomerFilter = () => {
+type CustomerFilterProps = {
+  selectedValues: string[];
+  onSelect: Dispatch<SetStateAction<string[]>>;
+};
+export const CustomerFilter = ({ selectedValues, onSelect }: CustomerFilterProps) => {
   const session = useSession();
   const managerId = session.data?.user.manager?.id as number;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data } = useGetFarmers({ managerId }, { enabled: Boolean(managerId) });
+
   const [search, setSearch] = useState('');
-  const { data } = useGetFarmers({ managerId });
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
   const customers = data?.data ?? [];
@@ -29,6 +36,18 @@ export const CustomerFilter = () => {
       customer.users_permissions_user?.username?.includes(search) ||
       Mask.formatCNPJ(customer?.company_identifier ?? '').includes(search),
   );
+
+  const handleSelectOption = (e: ChangeEvent<HTMLInputElement>) => {
+    const customer = e.target.value;
+    const isAlreadySelected = selectedValues.includes(customer);
+    if (isAlreadySelected) {
+      onSelect(selectedValues.filter((item: string) => item !== customer));
+      return;
+    }
+
+    onSelect((customers) => [...customers, customer]);
+  };
+
   return (
     <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
@@ -43,8 +62,9 @@ export const CustomerFilter = () => {
         <FilterBody h="28rem" overflowY="auto">
           {filteredCustomers.map((customer) => (
             <FilterOption
+              onCheckboxClick={handleSelectOption}
               key={customer?.id}
-              label={customer.users_permissions_user?.username ?? ''}
+              label={customer.company_name ?? ''}
               subLabel={Mask.formatCNPJ(customer.company_identifier)}
               value={customer.company_identifier}
             />

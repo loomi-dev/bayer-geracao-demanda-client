@@ -59,7 +59,7 @@ export const getFarmers = async ({ managerId }): Promise<GetFarmersResponse> => 
     filters: {
       managers: {
         id: {
-          $in: [managerId],
+          $eq: managerId,
         },
       },
     },
@@ -67,7 +67,6 @@ export const getFarmers = async ({ managerId }): Promise<GetFarmersResponse> => 
       users_permissions_user: true,
     },
   });
-
   const { data } = await axios.authorized().get(`/farmers?${query}`);
 
   return data;

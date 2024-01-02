@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
 import { CustomerPlannings, useGetCustomerPlanningsByUserId } from '@/api/customer';
-import { CustomerFilter, DynamicTable, Pagination, SearchIcon, TextInput } from '@/components';
+import { DynamicTable, Pagination, SearchIcon, TextInput } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { CustomerColumns } from './CustomerTable.columns';
@@ -40,14 +40,12 @@ export const CustomerTable = () => {
       planningStatus === 'ready_for_evaluation' ? { background: 'rgba(55, 199, 69, 0.1)' } : {};
     return style;
   };
-
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>
       <Flex align="center" justify="space-between" px="1.6rem" w="100%">
         <Text textStyle="h5">Filtros</Text>
         <HStack gap="1.2rem">
-          <CustomerFilter />
           <TextInput
             w="32rem"
             borderRadius="1.6rem"

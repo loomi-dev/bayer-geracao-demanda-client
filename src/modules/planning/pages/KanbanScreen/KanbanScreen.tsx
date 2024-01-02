@@ -1,9 +1,7 @@
-import { HStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useGetCustomerPlanningsByUserId } from '@/api';
-import { CustomerFilter } from '@/components';
 
 import { KanbanSection } from './components';
 import { getSectionPlannings } from './utils';
@@ -37,9 +35,6 @@ export const KanbanScreen = () => {
 
   return (
     <>
-      <HStack w="100%" justify="flex-end">
-        <CustomerFilter />
-      </HStack>
       <Swiper slidesPerView="auto" style={{ height: '100%' }} spaceBetween={10}>
         {sections.map((section, index) => (
           <SwiperSlide key={section.title} style={{ width: 'fit-content', height: 'inherit' }}>
