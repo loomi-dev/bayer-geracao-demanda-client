@@ -101,3 +101,27 @@ export const sendReceiptAction = async ({
 
   return response.data;
 };
+
+export const getReceiptsSummary = async ({ farmerId }) => {
+  const query = qs.stringify({
+    filters: {
+      historic: {
+        status: {
+          $eq: 'accepted',
+        },
+      },
+      farmer: {
+        id: {
+          $eq: farmerId,
+        },
+      },
+    },
+    populate: {
+      metric: true,
+    },
+  });
+
+  const response = await axios.authorized().get(`/plannings?${query}`);
+
+  return response.data;
+};

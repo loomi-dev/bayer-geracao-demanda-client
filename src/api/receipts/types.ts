@@ -48,3 +48,15 @@ export type SendReceiptActionData = {
   description: string;
 };
 export type SendReceiptActionResponse = void;
+
+type ReceiptsSummary = {
+  metric: {
+    farm_kit_in_cents: number;
+    farm_task_in_cents: number;
+    relationship_task_in_cent: number;
+  };
+  provenResourceAmountInCents: number;
+};
+
+export type GetReceiptsSummaryParams = { farmerId: number };
+export type GetReceiptsSummaryResponse = GenericListResponseType<ReceiptsSummary>;
