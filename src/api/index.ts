@@ -7,3 +7,4 @@ export * from './planning';
 export * from './trousseau';
 export * from './receipts';
 export * from './harvest';
+export * from './notifications';
