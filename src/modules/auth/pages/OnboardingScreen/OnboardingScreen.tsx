@@ -2,6 +2,7 @@ import { Box, Button, Center, Flex, HStack, Text, VStack } from '@chakra-ui/reac
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { Fragment } from 'react';
 
 import { ArrowRightIcon, CircleIcon } from '@/components';
 
@@ -26,6 +27,7 @@ const benefits = {
 };
 export const OnboardingScreen = () => {
   const session = useSession();
+
   return (
     <Flex minH="100%" position="relative" overflow="hidden">
       <AuthBanner />
@@ -67,15 +69,14 @@ export const OnboardingScreen = () => {
 
           <HStack align="flex-start">
             {benefits[session.data?.user.role ?? 'Farmer'].map((benefit, index, arr) => (
-              <>
+              <Fragment key={index}>
                 <Benefit
-                  key={index}
                   title={`${index + 1}`}
                   description={benefit}
                   descriptionStyles={{ maxW: '18rem' }}
                 />
                 {index < arr.length - 1 && <DividerBenefit />}
-              </>
+              </Fragment>
             ))}
           </HStack>
         </VStack>
