@@ -50,7 +50,7 @@ export const RegionFilter = ({ selectedValues, onSelect }: RegionFilterProps) =>
         <FilterBody h="28rem" overflowY="auto">
           {regionFilterOptions.map((option) => (
             <FilterOption
-              onCheckboxClick={handleSelectOption}
+              checkboxProps={{ onChange: handleSelectOption }}
               key={option.label}
               label={option.label}
               value={option.label}
