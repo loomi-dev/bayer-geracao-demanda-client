@@ -25,16 +25,24 @@ export const TrousseauOptionsSection = ({
   ]);
 
   const handleSelectTrousseau = (value: string, suppliers: TrousseauSupplier[]) => {
-    if (value === selectedTrousseau) {
-      setSelectedTrousseau('');
-      setSupplierIds([]);
-      return;
-    }
+    const isTrousseauAlreadySelected = value === selectedTrousseau;
 
+    if (isTrousseauAlreadySelected) {
+      resetSelect();
+    } else {
+      selectTrousseau(value, suppliers);
+    }
+  };
+
+  const resetSelect = () => {
+    setSelectedTrousseau('');
+    setSupplierIds([]);
+  };
+
+  const selectTrousseau = (value: string, suppliers: TrousseauSupplier[]) => {
     setSelectedTrousseau(value);
     setSupplierIds(suppliers.map((supplier) => supplier.id));
   };
-
   return (
     <Flex
       flexDir="column"
