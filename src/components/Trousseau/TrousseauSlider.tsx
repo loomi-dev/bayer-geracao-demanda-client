@@ -5,7 +5,7 @@ import 'swiper/css';
 type Children = {
   name: string;
   url: string;
-  suppliers: number[];
+  suppliers: TrousseauSupplier[];
 };
 type TrousseauSliderProps = {
   children: ({ name, url }: Children) => ReactNode;

@@ -8,7 +8,7 @@ export const TrousseauScreen = () => {
   const { data, isLoading } = useGetTrousseau({ supplierIds });
   const catalogs = data?.data.catalogs;
   const materialItems = data?.data.material_items;
-  const suppliers = data?.data.suppliers;
+  const suppliers = data?.data?.suppliers;
   return (
     <>
       <TrousseauOptionsSection

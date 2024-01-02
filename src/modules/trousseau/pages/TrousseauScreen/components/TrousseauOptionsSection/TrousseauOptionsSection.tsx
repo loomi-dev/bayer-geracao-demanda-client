@@ -24,14 +24,15 @@ export const TrousseauOptionsSection = ({
     state.setSupplierIds,
   ]);
 
-  const handleSelectTrousseau = (value: string, suppliers: number[]) => {
+  const handleSelectTrousseau = (value: string, suppliers: TrousseauSupplier[]) => {
     if (value === selectedTrousseau) {
       setSelectedTrousseau('');
       setSupplierIds([]);
       return;
     }
+
     setSelectedTrousseau(value);
-    setSupplierIds(suppliers);
+    setSupplierIds(suppliers.map((supplier) => supplier.id));
   };
 
   return (

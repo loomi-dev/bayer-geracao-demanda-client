@@ -21,13 +21,15 @@ export const getTrousseau = async ({
           document: true,
         },
       },
-      suppliers: {
-        filters: {
-          id: {
-            $in: supplierIds,
-          },
-        },
-      },
+      suppliers: supplierIds?.length
+        ? {
+            filters: {
+              id: {
+                $in: supplierIds,
+              },
+            },
+          }
+        : true,
     },
   });
   const { data } = await axios.authorized().get(`/trousseau?${query}`);
