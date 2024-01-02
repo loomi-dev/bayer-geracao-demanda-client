@@ -41,7 +41,7 @@ export const ModalCarouselCard = ({ image, isOpen, onClose }: ModalCarouselCardP
           src={image}
           alt="image"
           priority
-          style={{ objectFit: 'cover' }}
+          style={{ objectFit: 'contain' }}
           fill
         />
       </ModalBody>

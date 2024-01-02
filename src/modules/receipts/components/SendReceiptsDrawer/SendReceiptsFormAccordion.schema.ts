@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const sendProofActionFormSchema = z.object({
+export const sendReceiptsFormSchema = z.object({
   description: z.string().trim().min(1, { message: 'Descreva seu gasto.' }),
   files: z
     .array(
@@ -12,4 +12,4 @@ export const sendProofActionFormSchema = z.object({
     .min(1, { message: 'Insira um comprovante antes de enviar.' }),
 });
 
-export type SendProofActionFormSchemaType = z.infer<typeof sendProofActionFormSchema>;
+export type SendReceiptsFormSchemaType = z.infer<typeof sendReceiptsFormSchema>;

@@ -13,7 +13,11 @@ export const ReceiptsActionsTable = () => {
   const { currentPage, handleNextPage, handlePreviousPage } =
     usePagination('receipts_actions_table');
 
-  const { data: dataGetReceiptsActions, isLoading } = useGetReceiptsActions(
+  const {
+    data: dataGetReceiptsActions,
+    isLoading: isLoadingGetReceiptsActions,
+    isFetching: isFetchingGetReceiptsActions,
+  } = useGetReceiptsActions(
     {
       filter: {
         farmerId,
@@ -28,6 +32,7 @@ export const ReceiptsActionsTable = () => {
     },
   );
 
+  const isLoadingReceiptsActions = isLoadingGetReceiptsActions || isFetchingGetReceiptsActions;
   const receiptActions = dataGetReceiptsActions?.data ?? [];
   const countReceiptActions = receiptActions.length;
   const totalReceiptActionsPage = dataGetReceiptsActions?.meta?.pagination?.pageCount ?? 1;
@@ -37,7 +42,7 @@ export const ReceiptsActionsTable = () => {
       <DynamicTable<ReceiptAction>
         data={receiptActions}
         columns={receiptsActionsTableColumns}
-        isLoading={isLoading}
+        isLoading={isLoadingReceiptsActions}
         w="100%"
       />
 
