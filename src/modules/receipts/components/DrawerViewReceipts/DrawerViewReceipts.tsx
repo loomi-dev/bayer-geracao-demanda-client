@@ -11,19 +11,16 @@ import {
 } from '@chakra-ui/react';
 
 import { BigDocumentIcon, CircleIcon } from '@/components';
-import { GridActionDetails } from '@/modules/receipts/components';
 
-import { ProveYourExpenses } from '../ProveYourExpenses';
+import { GridActionDetails } from '../GridActionDetails';
 
-type ReceiptActionsDetailsDrawerProps = {
+import { ReceiptFilesAccordion } from './ReceiptFilesAccordion';
+
+type DrawerViewReceiptsProps = {
   data: ReceiptAction;
 } & Omit<DrawerProps, 'children'>;
 
-export const ReceiptActionsDetailsDrawer = ({
-  data,
-  onClose,
-  ...restProps
-}: ReceiptActionsDetailsDrawerProps) => (
+export const DrawerViewReceipts = ({ data, onClose, ...restProps }: DrawerViewReceiptsProps) => (
   <Drawer onClose={onClose} {...restProps}>
     <DrawerOverlay />
 
@@ -47,7 +44,7 @@ export const ReceiptActionsDetailsDrawer = ({
 
       <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem" gap="1rem">
         <GridActionDetails {...data} />
-        <ProveYourExpenses {...data} />
+        <ReceiptFilesAccordion {...data} />
       </DrawerBody>
 
       <DrawerFooter justifyContent="center">

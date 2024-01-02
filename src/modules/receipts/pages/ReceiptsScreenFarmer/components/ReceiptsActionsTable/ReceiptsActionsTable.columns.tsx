@@ -1,9 +1,15 @@
+import { Center } from '@chakra-ui/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
+import {
+  Cell,
+  Header,
+  ProveReceiptsButton,
+  ReceiptStatus,
+  Segment,
+  ViewReceiptsButton,
+} from '@/modules/receipts/components';
 import { formatPrice } from '@/utils';
-
-import { ProveActionButton } from './ProveActionButton';
 
 const columnHelper = createColumnHelper<ReceiptAction>();
 
@@ -28,14 +34,26 @@ export const receiptsActionsTableColumns = [
     header: () => <Header title="recurso GD FINAL" />,
     cell: (info) => <Cell value={`R$ ${formatPrice(info.getValue())}`} />,
   }),
-  columnHelper.accessor((data) => data?.status ?? 'not_evaluated', {
+  columnHelper.accessor((data) => data?.receipts?.documents ?? [], {
     id: 'status',
     header: () => <Header title="STATUS" />,
-    cell: (info) => <ReceiptStatus status={info.getValue()} />,
+    cell: (info) => <ReceiptStatus documents={info.getValue()} />,
   }),
   columnHelper.accessor((data) => data, {
     id: 'action',
     header: () => <Header title="AÇÃO" />,
-    cell: (info) => <ProveActionButton action={info.getValue()} />,
+    cell: (info) => {
+      const isReceiptPending = info.getValue().receipts?.documents?.length <= 0;
+
+      return (
+        <Center>
+          {isReceiptPending ? (
+            <ProveReceiptsButton action={info.getValue()} />
+          ) : (
+            <ViewReceiptsButton action={info.getValue()} />
+          )}
+        </Center>
+      );
+    },
   }),
 ];

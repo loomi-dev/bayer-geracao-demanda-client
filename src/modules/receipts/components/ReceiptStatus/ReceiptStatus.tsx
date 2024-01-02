@@ -1,37 +1,20 @@
 import { Text, TextProps } from '@chakra-ui/react';
 
 type ReceiptStatusProps = {
-  status: PlanningActionStatus;
-  textProps?: TextProps;
-};
+  documents: FileDocument[];
+} & TextProps;
 
-const conditionalValues = {
-  rejected: {
-    text: 'Comprovantes pendentes',
-    conditionalTextProps: {
-      color: 'greyscale.600',
-    },
-  },
-  not_evaluated: {
-    text: 'Comprovantes pendentes',
-    conditionalTextProps: {
-      color: 'greyscale.600',
-    },
-  },
-  accepted: {
-    text: 'Comprovantes enviados',
-    conditionalTextProps: {
-      color: 'red.danger_50',
-    },
-  },
-};
-
-export const ReceiptStatus = ({ status, textProps }: ReceiptStatusProps) => {
-  const { text, conditionalTextProps } = conditionalValues[status];
+export const ReceiptStatus = ({ documents, ...restProps }: ReceiptStatusProps) => {
+  const isPendingReceipts = documents?.length <= 0;
+  const receiptStatusText = isPendingReceipts ? 'Comprovantes pendentes' : 'Comprovantes enviados';
 
   return (
-    <Text textStyle="footnote-700" {...conditionalTextProps} {...textProps}>
-      {text}
+    <Text
+      textStyle="footnote-700"
+      color={isPendingReceipts ? 'text.secondary' : 'text.brand'}
+      {...restProps}
+    >
+      {receiptStatusText}
     </Text>
   );
 };

@@ -29,7 +29,7 @@ export const CarouselCard = ({ date, url }: CarouselCardProps) => {
         src={url}
         alt="carousel-card"
         priority
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: 'contain' }}
         fill
       />
       <Text textStyle="footnote-bold-2" color="greyscale.700" mt="0.5rem">

@@ -10,29 +10,25 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, FormProvider } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { useSendReceiptAction, useUploadFile } from '@/api';
 import { CircleIcon, DocumentIcon } from '@/components';
 import { GridActionDetails } from '@/modules/receipts/components';
 
-import { SendProofActionAccordionForm } from './SendProofActionAccordionForm';
+import { FormSendReceiptsAccordion } from './FormSendReceiptsAccordion';
 import {
-  SendProofActionFormSchemaType,
-  sendProofActionFormSchema,
-} from './SendProofActionAccordionForm.schema';
+  FormSendReceiptsSchemaType,
+  formSendReceiptsSchema,
+} from './FormSendReceiptsAccordion.schema';
 
-type DrawerSendProofActionProps = {
+type DrawerSendReceiptsProps = {
   action: ReceiptAction;
 } & Omit<DrawerProps, 'children'>;
 
-export const DrawerSendProofAction = ({
-  action,
-  onClose,
-  ...restProps
-}: DrawerSendProofActionProps) => {
-  const methods = useForm<SendProofActionFormSchemaType>({
-    resolver: zodResolver(sendProofActionFormSchema),
+export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSendReceiptsProps) => {
+  const methods = useForm<FormSendReceiptsSchemaType>({
+    resolver: zodResolver(formSendReceiptsSchema),
     mode: 'all',
     criteriaMode: 'all',
   });
@@ -44,7 +40,7 @@ export const DrawerSendProofAction = ({
 
   const isLoadingSendReceiptAction = isSendingReceiptAction || isUploadingFile;
 
-  const handleCloseDrawerSendProofAction = () => {
+  const handleCloseDrawerSendReceipts = () => {
     onClose();
     reset();
   };
@@ -52,7 +48,7 @@ export const DrawerSendProofAction = ({
   const onSubmitSendProofActionForm = async ({
     files,
     description,
-  }: SendProofActionFormSchemaType) => {
+  }: FormSendReceiptsSchemaType) => {
     const filesList = files.map(({ file }) => file);
 
     uploadFileMutate(
@@ -67,7 +63,7 @@ export const DrawerSendProofAction = ({
             },
             {
               onSuccess: () => {
-                handleCloseDrawerSendProofAction();
+                handleCloseDrawerSendReceipts();
               },
             },
           );
@@ -77,7 +73,7 @@ export const DrawerSendProofAction = ({
   };
 
   return (
-    <Drawer onClose={handleCloseDrawerSendProofAction} {...restProps}>
+    <Drawer onClose={handleCloseDrawerSendReceipts} {...restProps}>
       <DrawerOverlay />
 
       <DrawerContent maxW="unset" w="81rem !important">
@@ -101,14 +97,14 @@ export const DrawerSendProofAction = ({
         <FormProvider {...methods}>
           <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem" gap="1rem">
             <GridActionDetails {...action} />
-            <SendProofActionAccordionForm />
+            <FormSendReceiptsAccordion />
           </DrawerBody>
 
           <DrawerFooter>
             <Button
               variant="secondary"
               w="18rem"
-              onClick={handleCloseDrawerSendProofAction}
+              onClick={handleCloseDrawerSendReceipts}
               isDisabled={isLoadingSendReceiptAction}
             >
               Cancelar

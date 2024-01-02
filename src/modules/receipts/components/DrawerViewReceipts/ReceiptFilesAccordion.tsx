@@ -3,12 +3,13 @@ import { Fragment } from 'react';
 
 import { ExpandIcon, Minus2Icon } from '@/components';
 
-import { DescribeYourExpense } from '../DescribeYourExpense';
 import { ImageCarousel } from '../ImageCarousel';
 
-type ProveYourExpensesProps = ReceiptAction;
+import { ExpenseDetail } from './ExpenseDetail';
 
-export const ProveYourExpenses = ({ detail, receipts }: ProveYourExpensesProps) => {
+type ReceiptFilesAccordionProps = ReceiptAction;
+
+export const ReceiptFilesAccordion = ({ detail, receipts }: ReceiptFilesAccordionProps) => {
   const imagesReceipts = receipts?.documents?.map(({ id, url, createdAt }) => ({
     id,
     url,
@@ -34,7 +35,7 @@ export const ProveYourExpenses = ({ detail, receipts }: ProveYourExpensesProps) 
 
             <AccordionPanel>
               {hasReceipts && <ImageCarousel images={imagesReceipts} />}
-              {detail && <DescribeYourExpense description={detail} />}
+              {detail && <ExpenseDetail description={detail} />}
             </AccordionPanel>
           </Fragment>
         )}
