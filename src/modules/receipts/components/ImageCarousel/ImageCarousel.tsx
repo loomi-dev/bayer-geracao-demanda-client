@@ -19,6 +19,8 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => (
     bg="greyscale.330"
     p="0.8rem"
     spacing="0.8rem"
+    border="1px solid"
+    borderColor="greyscale.375"
   >
     {images.map((image) => (
       <CarouselCard {...image} key={image.id} />

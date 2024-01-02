@@ -7,10 +7,10 @@ import { ImageCarousel } from '../ImageCarousel';
 
 import { ExpenseDetail } from './ExpenseDetail';
 
-type ReceiptFilesAccordionProps = ReceiptAction;
+type ReceiptFilesAccordionProps = Receipt;
 
-export const ReceiptFilesAccordion = ({ detail, receipts }: ReceiptFilesAccordionProps) => {
-  const imagesReceipts = receipts?.documents?.map(({ id, url, createdAt }) => ({
+export const ReceiptFilesAccordion = ({ documents, description }: ReceiptFilesAccordionProps) => {
+  const imagesReceipts = documents?.map(({ id, url, createdAt }) => ({
     id,
     url,
     date: createdAt,
@@ -35,7 +35,7 @@ export const ReceiptFilesAccordion = ({ detail, receipts }: ReceiptFilesAccordio
 
             <AccordionPanel>
               {hasReceipts && <ImageCarousel images={imagesReceipts} />}
-              {detail && <ExpenseDetail description={detail} />}
+              {description && <ExpenseDetail description={description} />}
             </AccordionPanel>
           </Fragment>
         )}

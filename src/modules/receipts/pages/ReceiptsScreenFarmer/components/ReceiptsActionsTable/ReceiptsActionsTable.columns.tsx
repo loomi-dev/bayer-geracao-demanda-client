@@ -43,7 +43,7 @@ export const receiptsActionsTableColumns = [
     id: 'action',
     header: () => <Header title="AÇÃO" />,
     cell: (info) => {
-      const isReceiptPending = info.getValue().receipts?.documents?.length <= 0;
+      const isReceiptPending = (info.getValue().receipts?.documents ?? []).length <= 0;
 
       return (
         <Center>

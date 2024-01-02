@@ -44,7 +44,7 @@ export const DrawerViewReceipts = ({ data, onClose, ...restProps }: DrawerViewRe
 
       <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem" gap="1rem">
         <GridActionDetails {...data} />
-        <ReceiptFilesAccordion {...data} />
+        <ReceiptFilesAccordion {...data?.receipts} />
       </DrawerBody>
 
       <DrawerFooter justifyContent="center">

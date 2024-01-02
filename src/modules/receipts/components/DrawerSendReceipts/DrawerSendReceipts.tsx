@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useSendReceiptAction, useUploadFile } from '@/api';
-import { CircleIcon, DocumentIcon } from '@/components';
+import { BigDocumentIcon, CircleIcon } from '@/components';
 import { GridActionDetails } from '@/modules/receipts/components';
 
 import { FormSendReceiptsAccordion } from './FormSendReceiptsAccordion';
@@ -87,7 +87,7 @@ export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSend
           borderColor="opacity.black.0.20"
         >
           <CircleIcon>
-            <DocumentIcon />
+            <BigDocumentIcon />
           </CircleIcon>
           <Text ml="1.6rem" textStyle="h3">
             Comprovante de gastos
