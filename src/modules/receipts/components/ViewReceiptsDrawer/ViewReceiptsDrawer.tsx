@@ -16,11 +16,11 @@ import { GridActionDetails } from '../GridActionDetails';
 
 import { ReceiptFilesAccordion } from './ReceiptFilesAccordion';
 
-type DrawerViewReceiptsProps = {
+type ViewReceiptsDrawerProps = {
   data: ReceiptAction;
 } & Omit<DrawerProps, 'children'>;
 
-export const DrawerViewReceipts = ({ data, onClose, ...restProps }: DrawerViewReceiptsProps) => (
+export const ViewReceiptsDrawer = ({ data, onClose, ...restProps }: ViewReceiptsDrawerProps) => (
   <Drawer onClose={onClose} {...restProps}>
     <DrawerOverlay />
 

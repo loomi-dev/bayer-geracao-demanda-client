@@ -4,9 +4,9 @@ import { createColumnHelper } from '@tanstack/react-table';
 import {
   Cell,
   Header,
-  ProveReceiptsButton,
   ReceiptStatus,
   Segment,
+  SendReceiptsButton,
   ViewReceiptsButton,
 } from '@/modules/receipts/components';
 import { formatPrice } from '@/utils';
@@ -48,7 +48,7 @@ export const receiptsActionsTableColumns = [
       return (
         <Center>
           {isReceiptPending ? (
-            <ProveReceiptsButton action={info.getValue()} />
+            <SendReceiptsButton action={info.getValue()} />
           ) : (
             <ViewReceiptsButton action={info.getValue()} />
           )}

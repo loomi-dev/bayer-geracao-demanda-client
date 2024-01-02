@@ -3,23 +3,23 @@ import { Fragment } from 'react';
 
 import { Add2Icon } from '@/components';
 
-import { DrawerSendReceipts } from '..';
+import { SendReceiptsDrawer } from '..';
 
-type ProveReceiptsButtonProps = {
+type SendReceiptsButtonProps = {
   action: ReceiptAction;
 };
 
-export const ProveReceiptsButton = ({ action }: ProveReceiptsButtonProps) => {
+export const SendReceiptsButton = ({ action }: SendReceiptsButtonProps) => {
   const {
-    isOpen: isOpenDrawerSendReceipts,
-    onOpen: onOpenDrawerSendReceipts,
-    onClose: onCloseDrawerSendReceipts,
+    isOpen: isOpenSendReceiptsDrawer,
+    onOpen: onOpenSendReceiptsDrawer,
+    onClose: onCloseSendReceiptsDrawer,
   } = useDisclosure();
 
   return (
     <Fragment>
       <Button
-        onClick={onOpenDrawerSendReceipts}
+        onClick={onOpenSendReceiptsDrawer}
         leftIcon={<Add2Icon />}
         variant="primary-filter"
         h="3.4rem"
@@ -28,10 +28,10 @@ export const ProveReceiptsButton = ({ action }: ProveReceiptsButtonProps) => {
         Comprovar
       </Button>
 
-      <DrawerSendReceipts
+      <SendReceiptsDrawer
         action={action}
-        isOpen={isOpenDrawerSendReceipts}
-        onClose={onCloseDrawerSendReceipts}
+        isOpen={isOpenSendReceiptsDrawer}
+        onClose={onCloseSendReceiptsDrawer}
       />
     </Fragment>
   );

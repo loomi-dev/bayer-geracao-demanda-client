@@ -16,19 +16,19 @@ import { useSendReceiptAction, useUploadFile } from '@/api';
 import { BigDocumentIcon, CircleIcon } from '@/components';
 import { GridActionDetails } from '@/modules/receipts/components';
 
-import { FormSendReceiptsAccordion } from './FormSendReceiptsAccordion';
+import { SendReceiptsFormAccordion } from './SendReceiptsFormAccordion';
 import {
-  FormSendReceiptsSchemaType,
-  formSendReceiptsSchema,
-} from './FormSendReceiptsAccordion.schema';
+  SendReceiptsFormSchemaType,
+  sendReceiptsFormSchema,
+} from './SendReceiptsFormAccordion.schema';
 
-type DrawerSendReceiptsProps = {
+type SendReceiptsDrawerProps = {
   action: ReceiptAction;
 } & Omit<DrawerProps, 'children'>;
 
-export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSendReceiptsProps) => {
-  const methods = useForm<FormSendReceiptsSchemaType>({
-    resolver: zodResolver(formSendReceiptsSchema),
+export const SendReceiptsDrawer = ({ action, onClose, ...restProps }: SendReceiptsDrawerProps) => {
+  const methods = useForm<SendReceiptsFormSchemaType>({
+    resolver: zodResolver(sendReceiptsFormSchema),
     mode: 'all',
     criteriaMode: 'all',
   });
@@ -40,7 +40,7 @@ export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSend
 
   const isLoadingSendReceiptAction = isSendingReceiptAction || isUploadingFile;
 
-  const handleCloseDrawerSendReceipts = () => {
+  const handleCloseSendReceiptsDrawer = () => {
     onClose();
     reset();
   };
@@ -48,7 +48,7 @@ export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSend
   const onSubmitSendProofActionForm = async ({
     files,
     description,
-  }: FormSendReceiptsSchemaType) => {
+  }: SendReceiptsFormSchemaType) => {
     const filesList = files.map(({ file }) => file);
 
     uploadFileMutate(
@@ -63,7 +63,7 @@ export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSend
             },
             {
               onSuccess: () => {
-                handleCloseDrawerSendReceipts();
+                handleCloseSendReceiptsDrawer();
               },
             },
           );
@@ -73,7 +73,7 @@ export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSend
   };
 
   return (
-    <Drawer onClose={handleCloseDrawerSendReceipts} {...restProps}>
+    <Drawer onClose={handleCloseSendReceiptsDrawer} {...restProps}>
       <DrawerOverlay />
 
       <DrawerContent maxW="unset" w="81rem !important">
@@ -97,14 +97,14 @@ export const DrawerSendReceipts = ({ action, onClose, ...restProps }: DrawerSend
         <FormProvider {...methods}>
           <DrawerBody bg="greyscale.330" py="1.4rem" px="2.4rem" gap="1rem">
             <GridActionDetails {...action} />
-            <FormSendReceiptsAccordion />
+            <SendReceiptsFormAccordion />
           </DrawerBody>
 
           <DrawerFooter>
             <Button
               variant="secondary"
               w="18rem"
-              onClick={handleCloseDrawerSendReceipts}
+              onClick={handleCloseSendReceiptsDrawer}
               isDisabled={isLoadingSendReceiptAction}
             >
               Cancelar

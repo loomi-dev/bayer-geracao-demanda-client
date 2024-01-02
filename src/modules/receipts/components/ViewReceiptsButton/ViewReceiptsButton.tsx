@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 
 import { EyeIcon } from '@/components';
 
-import { DrawerViewReceipts } from '../DrawerViewReceipts';
+import { ViewReceiptsDrawer } from '../ViewReceiptsDrawer';
 
 type ViewReceiptsButtonProps = {
   action: ReceiptAction;
@@ -11,15 +11,15 @@ type ViewReceiptsButtonProps = {
 
 export const ViewReceiptsButton = ({ action }: ViewReceiptsButtonProps) => {
   const {
-    isOpen: isOpenDrawerViewReceipts,
-    onOpen: onOpenDrawerViewReceipts,
-    onClose: onCloseDrawerViewReceipts,
+    isOpen: isOpenViewReceiptsDrawer,
+    onOpen: onOpenViewReceiptsDrawer,
+    onClose: onCloseViewReceiptsDrawer,
   } = useDisclosure();
 
   return (
     <Fragment>
       <Button
-        onClick={onOpenDrawerViewReceipts}
+        onClick={onOpenViewReceiptsDrawer}
         leftIcon={<EyeIcon />}
         variant="primary-filter"
         h="3.4rem"
@@ -28,10 +28,10 @@ export const ViewReceiptsButton = ({ action }: ViewReceiptsButtonProps) => {
         Visualizar
       </Button>
 
-      <DrawerViewReceipts
+      <ViewReceiptsDrawer
         data={action}
-        isOpen={isOpenDrawerViewReceipts}
-        onClose={onCloseDrawerViewReceipts}
+        isOpen={isOpenViewReceiptsDrawer}
+        onClose={onCloseViewReceiptsDrawer}
       />
     </Fragment>
   );
