@@ -12,7 +12,9 @@ export type GetReceiptsActionsParams = {
   farmerId?: number;
   filter?: {
     farmerId?: number;
+    search?: string;
     customers?: string[];
+    regions?: string[];
   };
   pagination: Pagination;
 };

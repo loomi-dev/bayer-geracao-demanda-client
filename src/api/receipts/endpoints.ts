@@ -18,6 +18,9 @@ export const getReceiptsActions = async ({
   pagination,
 }: GetReceiptsActionsParams): Promise<GetReceiptsActionsResponse> => {
   const filters = {
+    title: {
+      $contains: filter?.search,
+    },
     farmer: {
       ...(farmerId && {
         id: farmerId,
@@ -29,6 +32,7 @@ export const getReceiptsActions = async ({
             },
           }
         : {}),
+      ...((filter?.regions ?? []).length > 0 ? { region: { $in: filter?.regions } } : {}),
       planning: {
         historic: {
           status: {
