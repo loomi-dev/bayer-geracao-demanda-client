@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import React, { ChangeEvent, useState } from 'react';
 
 import { useGetReceiptsActions } from '@/api';
-import { CustomerFilter, Pagination, SearchFilter } from '@/components';
+import { CustomerFilter, Pagination, RegionFilter, SearchFilter } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { FinalizedTables, RunningTable } from './components';
@@ -11,6 +11,7 @@ import { FinalizedTables, RunningTable } from './components';
 export const ReceiptsScreenManager = () => {
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('actions_table');
   const [search, setSearch] = useState('');
+  const [regions, setRegions] = useState<string[]>([]);
   const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
   const {
     data: dataGetReceiptsActions,
@@ -18,6 +19,7 @@ export const ReceiptsScreenManager = () => {
     isFetching: isFetchingGetReceiptsActions,
   } = useGetReceiptsActions({
     filter: {
+      regions,
       search,
       customers: selectedCustomers,
     },
@@ -55,6 +57,7 @@ export const ReceiptsScreenManager = () => {
     <VStack align="flex-start" w="full" spacing="3.2rem">
       <HStack gap="1.6rem" w="100%" justify="flex-end">
         <CustomerFilter selectedValues={selectedCustomers} onSelect={setSelectedCustomers} />
+        <RegionFilter selectedValues={regions} onSelect={setRegions} />
         <SearchFilter placeholder="Pesquisar por ação" onChange={handleSearch} />
       </HStack>
 
