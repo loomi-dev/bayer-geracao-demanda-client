@@ -13,15 +13,15 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { ExpandIcon, FormWrapper, Minus2Icon, TextInput } from '@/components';
 import { ImageListing, MultipleFileInput } from '@/modules/receipts/components';
 
-import { SendProofActionFormSchemaType } from './SendProofActionAccordionForm.schema';
+import { SendReceiptsFormSchemaType } from './SendReceiptsFormAccordion.schema';
 
-export const SendProofActionAccordionForm = () => {
+export const SendReceiptsFormAccordion = () => {
   const {
     control,
     register,
     watch,
     formState: { errors },
-  } = useFormContext<SendProofActionFormSchemaType>();
+  } = useFormContext<SendReceiptsFormSchemaType>();
 
   const fieldArray = useFieldArray({
     control,

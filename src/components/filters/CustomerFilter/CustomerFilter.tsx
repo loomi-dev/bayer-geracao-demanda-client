@@ -62,7 +62,7 @@ export const CustomerFilter = ({ selectedValues, onSelect }: CustomerFilterProps
         <FilterBody h="28rem" overflowY="auto">
           {filteredCustomers.map((customer) => (
             <FilterOption
-              onCheckboxClick={handleSelectOption}
+              checkboxProps={{ onChange: handleSelectOption }}
               key={customer?.id}
               label={customer.company_name ?? ''}
               subLabel={Mask.formatCNPJ(customer.company_identifier)}

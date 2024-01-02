@@ -1,10 +1,14 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 
-import { Cell, Header, ReceiptStatus, Segment } from '@/modules/receipts/components';
+import {
+  Cell,
+  Header,
+  ReceiptStatus,
+  Segment,
+  ViewReceiptsButton,
+} from '@/modules/receipts/components';
 import { formatPrice } from '@/utils';
-
-import { ViewReceiptActionsDetailsButton } from '../ViewReceiptActionsDetailsButton';
 
 const columnHelper = createColumnHelper<ReceiptAction>();
 
@@ -46,14 +50,14 @@ export const finalizedTablesColumns = [
     header: () => <Header title="GD FINAL" />,
     cell: (info) => <Cell value={`R$ ${formatPrice(info.getValue())}`} />,
   }),
-  columnHelper.accessor((data) => data?.status ?? 'not_evaluated', {
+  columnHelper.accessor((data) => data?.receipts?.documents ?? [], {
     id: 'status',
     header: () => <Header title="STATUS" />,
-    cell: (info) => <ReceiptStatus status={info.getValue()} />,
+    cell: (info) => <ReceiptStatus documents={info.getValue()} />,
   }),
   columnHelper.accessor((data) => data, {
     id: 'action',
     header: () => <Header title="AÇÃO" />,
-    cell: (info) => <ViewReceiptActionsDetailsButton action={info.getValue()} />,
+    cell: (info) => <ViewReceiptsButton action={info.getValue()} />,
   }),
 ];

@@ -1,20 +1,17 @@
 import { Checkbox, CheckboxProps, Flex, FlexProps, Text } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
 
 export type FilterOptionProps = {
   label: string;
   value: string;
   subLabel?: string;
-  checkBoxStyle?: CheckboxProps;
-  onCheckboxClick?: (e: ChangeEvent<HTMLInputElement>) => void;
+  checkboxProps?: CheckboxProps;
 } & FlexProps;
 
 export const FilterOption = ({
   label,
   subLabel,
   value,
-  onCheckboxClick,
-  checkBoxStyle = {},
+  checkboxProps = {},
   ...props
 }: FilterOptionProps) => (
   <Flex
@@ -25,7 +22,7 @@ export const FilterOption = ({
     borderBottomColor="surface.primary"
     {...props}
   >
-    <Checkbox onChange={onCheckboxClick} value={value} {...checkBoxStyle} />
+    <Checkbox value={value} {...checkboxProps} />
     <Flex flexDir="column">
       <Text textStyle="body2">{label}</Text>
       <Text textStyle="body3">{subLabel}</Text>
