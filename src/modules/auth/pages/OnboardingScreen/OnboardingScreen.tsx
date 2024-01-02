@@ -1,9 +1,10 @@
-import { Box, Button, Center, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, HStack, Text, VStack, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
+import { useUpdateManager } from '@/api';
 import { ArrowRightIcon, CircleIcon } from '@/components';
 
 import { AuthBanner } from '../../components';
@@ -27,7 +28,29 @@ const benefits = {
 };
 export const OnboardingScreen = () => {
   const session = useSession();
+  const toast = useToast();
+  const { mutate: updateManager, isLoading } = useUpdateManager();
+  const isManager = session.data?.user.role === 'Manager';
+  const redirectURL = isManager ? '' : '/bem-vindo/completar-cadastro';
+  const managerId = session.data?.user.manager?.id as number;
 
+  const handleUpdateManager = () =>
+    updateManager(
+      { managerId: managerId, confirmed: true },
+      {
+        onSuccess: () =>
+          toast({
+            description: 'Bem vindo a plataforma Top Multiplicadores!',
+            status: 'success',
+          }),
+        onError: () => {
+          toast({
+            description: 'Ocorreu um erro ao tentar entrar na plataforma.',
+            status: 'error',
+          });
+        },
+      },
+    );
   return (
     <Flex minH="100%" position="relative" overflow="hidden">
       <AuthBanner />
@@ -81,7 +104,7 @@ export const OnboardingScreen = () => {
           </HStack>
         </VStack>
 
-        <Link href="/bem-vindo/completar-cadastro" legacyBehavior passHref>
+        <Link href={redirectURL} legacyBehavior passHref>
           <Button
             as="a"
             mt="11.4rem"
@@ -89,6 +112,8 @@ export const OnboardingScreen = () => {
             size="2xl"
             p="1rem"
             w="31.5rem"
+            isLoading={isLoading}
+            onClick={isManager ? handleUpdateManager : () => null}
             rightIcon={
               <CircleIcon>
                 <ArrowRightIcon color="#fff" />
