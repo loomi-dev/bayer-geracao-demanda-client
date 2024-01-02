@@ -29,6 +29,13 @@ export const getReceiptsActions = async ({
             },
           }
         : {}),
+      planning: {
+        historic: {
+          status: {
+            $eq: 'accepted',
+          },
+        },
+      },
     },
   };
   const query = qs.stringify({
