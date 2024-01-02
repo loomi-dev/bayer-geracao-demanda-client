@@ -10,9 +10,9 @@ export const getNotificationsByUser = async ({
 }: GetNotificationsByUserParams): Promise<GetNotificationsByUserResponse> => {
   const query = qs.stringify({
     filters: {
-      users: {
+      user: {
         id: {
-          $in: [userId],
+          $eq: userId,
         },
       },
     },

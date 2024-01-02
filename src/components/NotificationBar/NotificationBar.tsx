@@ -96,27 +96,29 @@ export const NotificationBar = () => {
             </Fragment>
           )}
 
-          <>
-            <Button
-              variant="fourth"
-              w="full"
-              color="text.brand"
-              px="2.4rem"
-              rightIcon={<ArrowRightIcon />}
-              onClick={onOpenNotificationsDrawer}
-            >
-              <Text as="span" textStyle="action4" color="text.primary" w="full" align="left">
-                Ver todas
-              </Text>
-            </Button>
+          {!isLoadingNotifications && (
+            <>
+              <Button
+                variant="fourth"
+                w="full"
+                color="text.brand"
+                px="2.4rem"
+                rightIcon={<ArrowRightIcon />}
+                onClick={onOpenNotificationsDrawer}
+              >
+                <Text as="span" textStyle="action4" color="text.primary" w="full" align="left">
+                  Ver todas
+                </Text>
+              </Button>
 
-            {isOpenNotificationsDrawer && (
-              <DynamicNotificationsDrawer
-                isOpen={isOpenNotificationsDrawer}
-                onClose={onCloseNotificationsDrawer}
-              />
-            )}
-          </>
+              {isOpenNotificationsDrawer && (
+                <DynamicNotificationsDrawer
+                  isOpen={isOpenNotificationsDrawer}
+                  onClose={onCloseNotificationsDrawer}
+                />
+              )}
+            </>
+          )}
         </VStack>
       </Flex>
     </Flex>

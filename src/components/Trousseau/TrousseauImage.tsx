@@ -16,6 +16,14 @@ export const TrousseauImage = ({ src, imageProps, ...restProps }: TrousseauImage
     overflow="hidden"
     {...restProps}
   >
-    <Image alt="Imagem de enxoval" src={src} fill priority quality={100} {...imageProps} />
+    <Image
+      alt="Imagem de enxoval"
+      src={src}
+      fill
+      priority
+      quality={100}
+      style={{ objectFit: 'contain', userSelect: 'none' }}
+      {...imageProps}
+    />
   </Box>
 );

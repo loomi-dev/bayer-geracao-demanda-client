@@ -10,6 +10,7 @@ import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from '@/styles/them
 export type MultipleFileInputProps = {
   multiple?: boolean;
   dropZoneOptions?: DropzoneOptions;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fieldArray: UseFieldArrayReturn<any, any, any>;
 };
 
