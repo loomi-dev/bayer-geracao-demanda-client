@@ -37,7 +37,7 @@ export const Filter = ({ options = [] }: FilterProps) => {
               label={option.label}
               value={option.value}
               border="unset"
-              checkBoxStyle={{ variant: 'round' }}
+              checkboxProps={{ variant: 'round' }}
             />
           ))}
         </FilterBody>
