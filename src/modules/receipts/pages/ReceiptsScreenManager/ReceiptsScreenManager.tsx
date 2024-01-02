@@ -1,20 +1,23 @@
-import { VStack } from '@chakra-ui/react';
-import React from 'react';
+import { HStack, VStack } from '@chakra-ui/react';
+import React, { useState } from 'react';
 
 import { useGetReceiptsActions } from '@/api';
-import { Pagination } from '@/components';
+import { CustomerFilter, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { FinalizedTables, RunningTable } from './components';
 
 export const ReceiptsScreenManager = () => {
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('actions_table');
-
+  const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
   const {
     data: dataGetReceiptsActions,
     isLoading: isLoadingGetReceiptsActions,
     isFetching: isFetchingGetReceiptsActions,
   } = useGetReceiptsActions({
+    filter: {
+      customers: selectedCustomers,
+    },
     pagination: {
       page: currentPage,
       pageSize: 5,
@@ -42,7 +45,9 @@ export const ReceiptsScreenManager = () => {
 
   return (
     <VStack align="flex-start" w="full" spacing="3.2rem">
-      {/* <TableFilter /> */}
+      <HStack w="100%" justify="flex-end">
+        <CustomerFilter selectedValues={selectedCustomers} onSelect={setSelectedCustomers} />
+      </HStack>
 
       <RunningTable actions={separateData?.running ?? []} isLoading={isLoadingReceiptsActions} />
       <FinalizedTables

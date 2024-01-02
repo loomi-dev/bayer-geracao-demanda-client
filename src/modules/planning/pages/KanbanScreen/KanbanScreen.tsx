@@ -1,18 +1,24 @@
+import { HStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useGetCustomerPlanningsByUserId } from '@/api';
+import { CustomerFilter } from '@/components';
 
 import { KanbanSection } from './components';
 import { getSectionPlannings } from './utils';
 
 import 'swiper/css';
-
 export const KanbanScreen = () => {
   const session = useSession();
   const managerId = session.data?.user.manager?.id as number;
+  const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
   const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
+      filter: {
+        customers: selectedCustomers,
+      },
       managerId,
     },
     { enabled: Boolean(managerId) },
@@ -35,6 +41,9 @@ export const KanbanScreen = () => {
 
   return (
     <>
+      <HStack w="100%" justify="flex-end">
+        <CustomerFilter selectedValues={selectedCustomers} onSelect={setSelectedCustomers} />
+      </HStack>
       <Swiper slidesPerView="auto" style={{ height: '100%' }} spaceBetween={10}>
         {sections.map((section, index) => (
           <SwiperSlide key={section.title} style={{ width: 'fit-content', height: 'inherit' }}>

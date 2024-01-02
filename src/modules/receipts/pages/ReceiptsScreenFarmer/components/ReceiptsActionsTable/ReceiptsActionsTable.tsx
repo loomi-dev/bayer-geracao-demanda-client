@@ -15,7 +15,9 @@ export const ReceiptsActionsTable = () => {
 
   const { data: dataGetReceiptsActions, isLoading } = useGetReceiptsActions(
     {
-      farmerId,
+      filter: {
+        farmerId,
+      },
       pagination: {
         page: currentPage,
         pageSize: 5,

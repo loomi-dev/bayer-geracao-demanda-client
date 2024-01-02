@@ -33,7 +33,7 @@ export const CustomerFilter = ({ selectedValues, onSelect }: CustomerFilterProps
   const customers = data?.data ?? [];
   const filteredCustomers = customers.filter(
     (customer) =>
-      customer.users_permissions_user?.username?.includes(search) ||
+      customer?.company_name?.includes(search) ||
       Mask.formatCNPJ(customer?.company_identifier ?? '').includes(search),
   );
 
