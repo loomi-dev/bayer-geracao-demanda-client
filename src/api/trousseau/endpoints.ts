@@ -23,7 +23,7 @@ export const getTrousseau = async ({
       },
       suppliers: {
         filters: {
-          name: {
+          id: {
             $in: supplierIds,
           },
         },
