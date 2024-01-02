@@ -33,11 +33,11 @@ export const getReceiptsActions = async ({
           }
         : {}),
       ...((filter?.regions ?? []).length > 0 ? { region: { $in: filter?.regions } } : {}),
-      planning: {
-        historic: {
-          status: {
-            $eq: 'accepted',
-          },
+    },
+    planning: {
+      historic: {
+        status: {
+          $eq: 'accepted',
         },
       },
     },

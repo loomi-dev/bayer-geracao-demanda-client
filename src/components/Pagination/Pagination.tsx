@@ -22,7 +22,7 @@ export const Pagination = ({
   ...restProps
 }: PaginationProps) => {
   const isFirstPage = page === firstPage;
-  const isLastPage = page === totalPages;
+  const isLastPage = page >= totalPages;
 
   const handlePreviousPage = () => {
     if (page > firstPage) {
