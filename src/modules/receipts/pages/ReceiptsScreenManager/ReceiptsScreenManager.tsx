@@ -1,14 +1,16 @@
 import { HStack, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import debounce from 'lodash.debounce';
+import React, { ChangeEvent, useState } from 'react';
 
 import { useGetReceiptsActions } from '@/api';
-import { CustomerFilter, Pagination } from '@/components';
+import { CustomerFilter, Pagination, SearchFilter } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { FinalizedTables, RunningTable } from './components';
 
 export const ReceiptsScreenManager = () => {
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('actions_table');
+  const [search, setSearch] = useState('');
   const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
   const {
     data: dataGetReceiptsActions,
@@ -16,6 +18,7 @@ export const ReceiptsScreenManager = () => {
     isFetching: isFetchingGetReceiptsActions,
   } = useGetReceiptsActions({
     filter: {
+      search,
       customers: selectedCustomers,
     },
     pagination: {
@@ -43,10 +46,16 @@ export const ReceiptsScreenManager = () => {
     },
   );
 
+  const handleSearch = debounce(
+    (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
+    250,
+  );
+
   return (
     <VStack align="flex-start" w="full" spacing="3.2rem">
-      <HStack w="100%" justify="flex-end">
+      <HStack gap="1.6rem" w="100%" justify="flex-end">
         <CustomerFilter selectedValues={selectedCustomers} onSelect={setSelectedCustomers} />
+        <SearchFilter placeholder="Pesquisar por ação" onChange={handleSearch} />
       </HStack>
 
       <RunningTable actions={separateData?.running ?? []} isLoading={isLoadingReceiptsActions} />
