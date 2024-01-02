@@ -1,11 +1,12 @@
 import { GenericListResponseType, Pagination } from '@/api';
 
 export type GetCustomerPlanningsByUserIdParams = {
-  userId: number;
+  managerId: number;
   filter?: {
     region?: string;
     district?: string;
     search?: string;
+    customers?: string[];
   };
   pagination?: Pagination;
 };

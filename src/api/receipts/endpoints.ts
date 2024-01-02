@@ -3,22 +3,43 @@ import qs from 'qs';
 import axios from '@/lib/axios';
 
 import {
-  GetAchievementParams,
-  GetAchievementResponse,
-  GetActionsParams,
-  GetActionsResponse,
-  GetCropsResponse,
   GetExampleReceiptsResponse,
-  PutActionParams,
+  GetReceiptsActionsParams,
+  GetReceiptsActionsResponse,
+  SendReceiptActionData,
+  SendReceiptActionResponse,
   UploadFileParams,
   UploadFileResponse,
 } from './types';
 
-export const getActions = async ({
+export const getReceiptsActions = async ({
+  filter,
   farmerId,
   pagination,
-}: GetActionsParams = {}): Promise<GetActionsResponse> => {
-  const queryParams = qs.stringify({
+}: GetReceiptsActionsParams): Promise<GetReceiptsActionsResponse> => {
+  const filters = {
+    farmer: {
+      ...(farmerId && {
+        id: farmerId,
+      }),
+      ...((filter?.customers ?? []).length > 0
+        ? {
+            company_identifier: {
+              $in: filter?.customers,
+            },
+          }
+        : {}),
+      planning: {
+        historic: {
+          status: {
+            $eq: 'accepted',
+          },
+        },
+      },
+    },
+  };
+  const query = qs.stringify({
+    filters,
     populate: {
       planning: {
         populate: {
@@ -30,45 +51,17 @@ export const getActions = async ({
           wallet: true,
         },
       },
+      receipts: {
+        populate: {
+          documents: true,
+        },
+      },
     },
+
     pagination,
-    ...(farmerId && {
-      filters: {
-        farmer: {
-          id: farmerId,
-        },
-      },
-    }),
   });
 
-  const response = await axios.authorized().get(`/actions?${queryParams}`);
-
-  return response.data;
-};
-
-export const getAchievement = async ({
-  farmerId,
-  safraId,
-}: GetAchievementParams): Promise<GetAchievementResponse> => {
-  const queryParams = qs.stringify({
-    filters: {
-      farmer: {
-        id: {
-          $eq: farmerId,
-        },
-      },
-      safra: {
-        id: {
-          $eq: safraId,
-        },
-      },
-    },
-    populate: {
-      safra: true,
-    },
-  });
-
-  const response = await axios.authorized().get(`/achievements?${queryParams}`);
+  const response = await axios.authorized().get(`/actions?${query}`);
 
   return response.data;
 };
@@ -85,26 +78,14 @@ export const getExampleReceipts = async (): Promise<GetExampleReceiptsResponse> 
   return response.data;
 };
 
-export const getCrops = async (): Promise<GetCropsResponse> => {
-  const queryParams = qs.stringify({
-    filters: {
-      current: true,
-    },
-  });
-
-  const response = await axios.authorized().get(`/safras?${queryParams}`);
-
-  return response.data;
-};
-
-export const uploadFile = async ({ files }: UploadFileParams): Promise<UploadFileResponse[]> => {
-  const form = new FormData();
+export const uploadFile = async ({ files }: UploadFileParams): Promise<UploadFileResponse> => {
+  const formData = new FormData();
 
   files.forEach((file) => {
-    form.append('files', file);
+    formData.append('files', file);
   });
 
-  const response = await axios.authorized().post('/upload', form, {
+  const response = await axios.authorized().post('/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -113,8 +94,44 @@ export const uploadFile = async ({ files }: UploadFileParams): Promise<UploadFil
   return response.data;
 };
 
-export const putAction = async ({ actionId, body }: PutActionParams): Promise<unknown> => {
-  const response = await axios.authorized().put(`/actions/${actionId}`, body);
+export const sendReceiptAction = async ({
+  actionId,
+  documents,
+  description,
+}: SendReceiptActionData): Promise<SendReceiptActionResponse> => {
+  const response = await axios.authorized().put(`/actions/${actionId}`, {
+    data: {
+      receipts: {
+        documents,
+        description,
+        approved: false,
+      },
+    },
+  });
+
+  return response.data;
+};
+
+export const getReceiptsSummary = async ({ farmerId }) => {
+  const query = qs.stringify({
+    filters: {
+      historic: {
+        status: {
+          $eq: 'accepted',
+        },
+      },
+      farmer: {
+        id: {
+          $eq: farmerId,
+        },
+      },
+    },
+    populate: {
+      metric: true,
+    },
+  });
+
+  const response = await axios.authorized().get(`/plannings?${query}`);
 
   return response.data;
 };

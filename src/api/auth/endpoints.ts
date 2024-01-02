@@ -1,43 +1,26 @@
 import axios from '@/lib/axios';
 
-import {
-  LoginWithCredentialsData,
-  LoginWithCredentialsResponse,
-  UpdateUserData,
-  UpdateUserResponse,
-} from './types';
+import { getHarvests } from '../harvest';
+
+import { LoginWithCredentialsData, LoginWithCredentialsResponse } from './types';
 
 export const loginWithCredentials = async (
   data: LoginWithCredentialsData,
 ): Promise<LoginWithCredentialsResponse> => {
-  const response = await axios
+  const userResponse = await axios
     .unauthorized()
     .post<LoginWithCredentialsResponse>('/auth/local', data);
 
-  return response.data;
-};
+  const harvestResponse = await getHarvests();
 
-export const updateUser = async ({
-  farmerId,
-  name,
-  email,
-  number,
-  companyRole,
-  password,
-  confirmPassword,
-  confirmed,
-}: UpdateUserData): Promise<UpdateUserResponse> => {
-  const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
-    data: {
-      company_position: companyRole,
-      username: name,
-      email,
-      password,
-      passwordConfirmation: confirmPassword,
-      confirmed,
-      number,
+  const harvest = harvestResponse?.data?.at(-1);
+  if (!harvest) throw new Error('Occurred error when login');
+
+  return {
+    jwt: userResponse?.data?.jwt,
+    user: {
+      ...userResponse?.data?.user,
+      safra: harvest,
     },
-  });
-
-  return data;
+  };
 };

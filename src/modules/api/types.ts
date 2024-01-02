@@ -22,8 +22,8 @@ type Farmer = {
   updatedAt: string;
   company_identifier: string;
   company_name: string;
-  region?: any;
-  district?: any;
+  region?: string;
+  district?: string;
   company_position: string;
   wallet: Wallet;
 };

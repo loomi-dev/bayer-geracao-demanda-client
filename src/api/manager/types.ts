@@ -1,10 +1,16 @@
-import { GenericListResponseType } from '../types';
+export type GetManagerParams = { managerId: number };
+export type GetManagerResponse = { data: Manager };
 
-export type Manager = {
-  farmers: Farmer[];
-  safra: Harvest;
-  current_planned_amount_in_cents: number;
+export type UpdateManagerData = {
+  managerId: number;
+  username: string;
+  email: string;
+  phoneNumber: string;
 };
-
-export type GetManagerParams = { id: number };
-export type GetManagerResponse = GenericListResponseType<Manager>;
+export type UpdateManagerResponse = {
+  data: {
+    manager: Manager;
+    jwt: string;
+    user: User;
+  };
+};

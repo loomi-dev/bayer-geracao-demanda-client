@@ -1,3 +1,37 @@
+type FileThumbnail = {
+  ext: string;
+  url: string;
+  hash: string;
+  mime: string;
+  name: string;
+  path?: unknown;
+  size: number;
+  width: number;
+  height: number;
+};
+type FileFormat = {
+  thumbnail: FileThumbnail;
+};
+type FileDocument = {
+  id: number;
+  name: string;
+  alternativeText?: unknown;
+  caption?: unknown;
+  width?: unknown;
+  height?: unknown;
+  formats?: FileFormat[];
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl?: unknown;
+  provider: string;
+  provider_metadata?: unknown;
+  createdAt: string;
+  updatedAt: string;
+};
+
 type User = {
   id: number;
   username: string;
@@ -7,16 +41,15 @@ type User = {
   blocked: boolean;
   role: Roles;
   lastAccess: string;
-  phone?: string;
-  company_identifier?: string;
-  company_position?: string;
+  phoneNumber?: string;
   farmer?: Farmer;
   manager?: Manager;
+  safra: Harvest;
 };
 type PlanningSummary = {
   id: number;
   farm_task_in_cents: number;
-  farmk_kit_in_cents: number;
+  farm_kit_in_cents: number;
   planned_actions: number;
   planned_budget_in_cents: number;
   relationship_action_in_cents: number;
@@ -81,6 +114,8 @@ type Manager = {
   current_planned_amount_in_cents: string;
   region?: string;
   district?: string;
+  farmers: Farmer[];
+  safra: Harvest;
 };
 
 type Farmer = {
@@ -89,7 +124,6 @@ type Farmer = {
   company_position?: string;
   cpf: string;
   id: number;
-  name?: string;
   wallet?: Wallet;
   safra?: Harvest;
   users_permissions_user?: User;
@@ -142,4 +176,27 @@ type Trousseau = {
   material_items: TrousseauItem[];
   catalogs: TrousseauCatalog[];
   suppliers: TrousseauSupplier[];
+};
+
+type Receipt = {
+  description: string;
+  id: number;
+  status: string;
+  documents: FileDocument[];
+};
+type ReceiptAction = {
+  farmer: Farmer;
+  receipts: Receipt;
+  createdAt: string;
+} & PlanningAction;
+
+type UserNotification = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  read: boolean;
+  missingPlanning: string;
+  totalPlanning: string;
+  type: string;
+  safra: Harvest;
 };

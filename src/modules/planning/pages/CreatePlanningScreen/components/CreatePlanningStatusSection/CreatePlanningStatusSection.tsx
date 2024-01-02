@@ -16,6 +16,13 @@ const DynamicPlanningHistoricDrawer = dynamic(async () => {
   return PlanningHistoricDrawer;
 });
 
+enum PlanningHistoricButtonColor {
+  rejected = 'red.danger_40',
+  accepted = 'green.100',
+  ready_for_evaluation = 'yellow.warning_60',
+  default = 'text.primary',
+}
+
 export const CreatePlanningStatusSection = ({
   planningStatus,
 }: CreatePlanningStatusSectionProps) => {
@@ -83,7 +90,11 @@ export const CreatePlanningStatusSection = ({
               </Text>
             </Button>
           ) : (
-            <Button variant="unstyled" onClick={onOpenPlanningHistoricDrawer}>
+            <Button
+              variant="unstyled"
+              color={PlanningHistoricButtonColor[planningStatus]}
+              onClick={onOpenPlanningHistoricDrawer}
+            >
               <ArrowRightIcon />
             </Button>
           )}

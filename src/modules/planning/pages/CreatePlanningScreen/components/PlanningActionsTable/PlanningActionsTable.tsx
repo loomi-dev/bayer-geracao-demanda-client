@@ -14,6 +14,7 @@ import { planningActionsColumns } from './PlanningActionsTable.columns';
 
 type PlanningActionsTableProps = {
   planningStatus: HistoricStatus | 'default';
+  isLoadingPlanningStatus: boolean;
 };
 
 const DynamicCreatePlanningActionDrawerButton = dynamic(async () => {
@@ -28,7 +29,10 @@ const DynamicViewActionDetailsDrawer = dynamic(async () => {
   return ViewActionDetailsDrawer;
 });
 
-export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTableProps) => {
+export const PlanningActionsTable = ({
+  planningStatus,
+  isLoadingPlanningStatus,
+}: PlanningActionsTableProps) => {
   const [planningActionSelected, setPlanningActionSelected] = useState<PlanningAction>(
     {} as PlanningAction,
   );
@@ -92,7 +96,7 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
   return (
     <>
       <DynamicTable<PlanningAction>
-        columns={planningActionsColumns}
+        columns={planningActionsColumns(planningStatus)}
         data={planningActionsList}
         isLoading={isLoadingPlanningActionsList}
         fallbackMessage="Ainda não possui ações criadas, crie sua primeira ação."
@@ -122,7 +126,9 @@ export const PlanningActionsTable = ({ planningStatus }: PlanningActionsTablePro
             </Text>
           )}
 
-          {!isPlanningAccepted && <DynamicCreatePlanningActionDrawerButton />}
+          {!isPlanningAccepted && !isLoadingPlanningStatus && (
+            <DynamicCreatePlanningActionDrawerButton />
+          )}
         </HStack>
       </DynamicTable>
 

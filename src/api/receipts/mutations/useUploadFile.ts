@@ -1,28 +1,24 @@
 import { useToast } from '@chakra-ui/react';
-import { useMutation, UseMutationOptions } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import { useMutation } from '@tanstack/react-query';
+
+import { MutOpt } from '@/api';
 
 import { uploadFile } from '../endpoints';
-import { UploadFileParams, UploadFileResponse } from '../types';
+import { UploadFileResponse } from '../types';
 
-export const useUploadFile = (
-  params?: UseMutationOptions<
-    UploadFileResponse[],
-    AxiosError<unknown, unknown>,
-    UploadFileParams,
-    unknown
-  >,
-) => {
+export const useUploadFile = (options?: MutOpt<UploadFileResponse>) => {
   const toast = useToast();
+
   return useMutation({
-    mutationFn: (body: UploadFileParams) => uploadFile(body),
+    ...options,
+    mutationFn: uploadFile,
     mutationKey: ['upload-file'],
     onError: () => {
       toast({
-        description: 'Erro ao enviar arquivo! Tente novamente mais tarde',
+        description:
+          'Ocorreu um erro ao enviar o comprovante, tente novamente ou contate o suporte.',
         status: 'error',
       });
     },
-    ...params,
   });
 };

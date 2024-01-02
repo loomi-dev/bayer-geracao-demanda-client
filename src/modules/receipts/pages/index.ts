@@ -1,2 +1,2 @@
-export * from './ReceiptsScreen';
-export * from './ProducerProofsScreen';
+export * from './ReceiptsScreenFarmer';
+export * from './ReceiptsScreenManager';

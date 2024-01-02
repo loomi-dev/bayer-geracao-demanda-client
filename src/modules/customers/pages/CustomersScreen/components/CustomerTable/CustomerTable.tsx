@@ -14,16 +14,16 @@ import { CustomerColumns } from './CustomerTable.columns';
 export const CustomerTable = () => {
   const session = useSession();
   const { pathname, push } = useRouter();
-  const userId = session.data?.user.id as number;
+  const managerId = session.data?.user?.manager?.id as number;
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
   const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
-      userId,
+      managerId,
       filter: { search },
       pagination: { page: currentPage, pageSize: 5 },
     },
-    { enabled: Boolean(userId) },
+    { enabled: Boolean(managerId) },
   );
   const customers = data?.data ?? [];
 
@@ -40,7 +40,6 @@ export const CustomerTable = () => {
       planningStatus === 'ready_for_evaluation' ? { background: 'rgba(55, 199, 69, 0.1)' } : {};
     return style;
   };
-
   return (
     <Flex flexDir="column" w="100%" gap="2.5rem" h="100%">
       <Text textStyle="h4">Planejamentos</Text>

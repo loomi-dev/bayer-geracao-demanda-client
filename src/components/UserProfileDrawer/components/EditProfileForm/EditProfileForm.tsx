@@ -1,21 +1,109 @@
-import { Flex } from '@chakra-ui/react';
+import { Button, Flex, HStack, Text } from '@chakra-ui/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
+import { FormProvider, useForm } from 'react-hook-form';
 
+import { useUpdateFarmer, useUpdateManager } from '@/api';
 import { CircleIcon } from '@/components/CircleIcon';
 import { EditIcon } from '@/components/icons';
 
+import { ProfileDrawerFooter } from '../ProfileDrawer';
 import { ProfileImage } from '../ProfileImage';
 
+import {
+  FarmerProfileFormSchemaType,
+  ManagerProfileFormSchemaType,
+  farmerProfileFormSchema,
+  managerProfileFormSchema,
+} from './EditProfileForm.schemas';
 import { ProfileForm } from './ProfileForm';
 
-export const EditProfileForm = () => (
-  <>
-    <Flex w="100%" justify="center">
-      <ProfileImage border="none" position="relative" w="fit-content">
-        <CircleIcon position="absolute" bottom="1rem" right="0.5rem" boxSize="4rem">
-          <EditIcon color="white" />
-        </CircleIcon>
-      </ProfileImage>
+type EditProfileFormProps = {
+  onCancel: () => void;
+};
+
+export type FormSchemaType = ManagerProfileFormSchemaType & FarmerProfileFormSchemaType;
+
+export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
+  const session = useSession();
+  const user = session.data?.user;
+  const isManager = user?.role === 'Manager';
+  const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
+  const { mutate: updateManager, isLoading: isUpdatingManager } = useUpdateManager();
+  const formSchema = isManager ? managerProfileFormSchema : farmerProfileFormSchema;
+
+  const methods = useForm<FormSchemaType>({
+    resolver: zodResolver(formSchema),
+    mode: 'all',
+    criteriaMode: 'all',
+  });
+
+  const { handleSubmit } = methods;
+
+  const onSubmitEditProfileForm = (data: FormSchemaType) => {
+    if (isManager) {
+      updateManager({
+        managerId: Number(user?.manager?.id),
+        username: data.username,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+      });
+      return;
+    }
+    updateFarmer({
+      farmerId: Number(user?.farmer?.id),
+      username: data.username,
+      email: data.email,
+      companyPosition: data.companyPosition,
+      phoneNumber: data.phoneNumber,
+    });
+  };
+
+  return (
+    <Flex
+      as="form"
+      w="100%"
+      h="100%"
+      onSubmit={handleSubmit(onSubmitEditProfileForm)}
+      flexDir="column"
+      justify="space-between"
+    >
+      <Flex
+        py="2rem"
+        px="2.4rem"
+        borderRadius="3rem"
+        flexDir="column"
+        align="flex-start"
+        layerStyle="card"
+        my="1.6rem"
+        mx="2.4rem"
+      >
+        <Text textStyle="footnote-bold" textTransform="uppercase">
+          informações pessoais
+        </Text>
+        <Flex flexDir="column" w="100%">
+          <Flex justify="center">
+            <ProfileImage border="none" position="relative" w="fit-content">
+              <CircleIcon position="absolute" bottom="1rem" right="0.5rem" boxSize="4rem">
+                <EditIcon color="white" />
+              </CircleIcon>
+            </ProfileImage>
+          </Flex>
+          <FormProvider {...methods}>
+            <ProfileForm />
+          </FormProvider>
+        </Flex>
+      </Flex>
+      <ProfileDrawerFooter>
+        <HStack>
+          <Button variant="sixth" bgColor="surface.secondary" minW="18rem" onClick={onCancel}>
+            Voltar
+          </Button>
+          <Button isLoading={isUpdatingUser || isUpdatingManager} type="submit" minW="18rem">
+            Salvar Alterações
+          </Button>
+        </HStack>
+      </ProfileDrawerFooter>
     </Flex>
-    <ProfileForm />
-  </>
-);
+  );
+};

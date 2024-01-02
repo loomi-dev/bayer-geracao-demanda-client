@@ -1,4 +1,4 @@
-import { HStack, Tooltip, VStack, useToast } from '@chakra-ui/react';
+import { HStack, Tooltip, VStack, useDisclosure, useToast } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useFormContext } from 'react-hook-form';
 
@@ -7,7 +7,7 @@ import {
   useGetPlanningActionsStatistics,
   useUpdatePlanningHistoric,
 } from '@/api';
-import { Historic, HistoricDrawer, Pagination } from '@/components';
+import { Historic, HistoricDrawer, Pagination, WarningModal } from '@/components';
 import { usePagination } from '@/hooks';
 
 import { SendPlanningFormStepSchemaType } from './SendPlanningFormStep.schema';
@@ -27,6 +27,12 @@ export const SendPlanningFormStep = ({
   const userId = session.data?.user.id as number;
 
   const toast = useToast();
+
+  const {
+    isOpen: isOpenInsufficientFundsModal,
+    onOpen: onOpenInsufficientFundsModal,
+    onClose: onCloseInsufficientFundsModal,
+  } = useDisclosure();
 
   const { currentPage, handleNextPage, handlePreviousPage, resetPage } = usePagination(
     'send-planning-actions-table',
@@ -81,7 +87,17 @@ export const SendPlanningFormStep = ({
             status: 'success',
           });
         },
-        onError: () => {
+        onError: (err) => {
+          if (err?.response?.data?.error?.message === 'INSUFFICIENT_FOUNDS') {
+            toast({
+              description: 'Não foi possível enviar seu planejamento para aprovação.',
+              status: 'error',
+            });
+            onOpenInsufficientFundsModal();
+
+            return;
+          }
+
           toast({
             description: 'Ocorreu um erro ao enviar seu planejamento para aprovação.',
             status: 'error',
@@ -92,51 +108,60 @@ export const SendPlanningFormStep = ({
   };
 
   return (
-    <HistoricDrawer.Step>
-      <Historic.Container
-        as="form"
-        borderBottom="0"
-        onSubmit={handleSubmit(onSubmitSendPlanningDrawerForm)}
-      >
-        <Historic.Header>
-          <Historic.Title>Você deseja enviar este planejamento para aprovação?</Historic.Title>
-        </Historic.Header>
+    <>
+      <HistoricDrawer.Step>
+        <Historic.Container
+          as="form"
+          borderBottom="0"
+          onSubmit={handleSubmit(onSubmitSendPlanningDrawerForm)}
+        >
+          <Historic.Header>
+            <Historic.Title>Você deseja enviar este planejamento para aprovação?</Historic.Title>
+          </Historic.Header>
 
-        <VStack align="flex-end" w="full" spacing="1rem">
-          <Historic.Table data={plansList} isLoading={isLoadingDataGetPlanningActions} />
-          <Pagination
-            page={currentPage}
-            onNextPage={handleNextPage}
-            onPreviousPage={handlePreviousPage}
-            countItems={countPlans}
-            totalPages={totalPlansListPage}
+          <VStack align="flex-end" w="full" spacing="1rem">
+            <Historic.Table data={plansList} isLoading={isLoadingDataGetPlanningActions} />
+            <Pagination
+              page={currentPage}
+              onNextPage={handleNextPage}
+              onPreviousPage={handlePreviousPage}
+              countItems={countPlans}
+              totalPages={totalPlansListPage}
+            />
+          </VStack>
+          <Historic.TextInput
+            label="Insira uma mensagem explicando o planejamento (opcional)"
+            error={errors.description}
+            register={register('description')}
           />
-        </VStack>
-        <Historic.TextInput
-          label="Insira uma mensagem explicando o planejamento (opcional)"
-          error={errors.description}
-          register={register('description')}
-        />
 
-        <Historic.Footer totalValue={totalPlanningActionsValue}>
-          <HStack spacing="1rem">
-            <Historic.CancelButton onClick={() => handleCloseSendPlanningDrawer(resetPage)} />
-            <Tooltip
-              label={
-                isDisabledCreateActionButton
-                  ? 'Você deve possuir ações antes de enviar um planejamento para aprovação.'
-                  : ''
-              }
-            >
-              <Historic.DoneButton
-                type="submit"
-                isDisabled={isDisabledCreateActionButton}
-                isLoading={isLoadingUpdatePlanningHistoric}
-              />
-            </Tooltip>
-          </HStack>
-        </Historic.Footer>
-      </Historic.Container>
-    </HistoricDrawer.Step>
+          <Historic.Footer totalValue={totalPlanningActionsValue}>
+            <HStack spacing="1rem">
+              <Historic.CancelButton onClick={() => handleCloseSendPlanningDrawer(resetPage)} />
+              <Tooltip
+                label={
+                  isDisabledCreateActionButton
+                    ? 'Você deve possuir ações antes de enviar um planejamento para aprovação.'
+                    : ''
+                }
+              >
+                <Historic.DoneButton
+                  type="submit"
+                  isDisabled={isDisabledCreateActionButton}
+                  isLoading={isLoadingUpdatePlanningHistoric}
+                />
+              </Tooltip>
+            </HStack>
+          </Historic.Footer>
+        </Historic.Container>
+      </HistoricDrawer.Step>
+
+      <WarningModal
+        title="Você não tem saldo disponível"
+        description="O planejamento que voce tentou enviar tem um valor acima do seu saldo disponível, tente diminuir o valor ou contate o suporte"
+        isOpen={isOpenInsufficientFundsModal}
+        onClose={onCloseInsufficientFundsModal}
+      />
+    </>
   );
 };

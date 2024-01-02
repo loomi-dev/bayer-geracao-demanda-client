@@ -1,12 +1,16 @@
 import { Box, Button, Flex, Text, VStack, useDisclosure } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/react';
+import { Fragment } from 'react';
 
+import { useGetNotificationsByUser } from '@/api';
 import { LAYOUT_NOTIFICATION_BAR_WIDTH } from '@/config';
 
 import { ArrowRightIcon } from '../icons';
 
 import { HeaderNotificationBar } from './HeaderNotificationBar';
 import { NotificationCard } from './NotificationCard';
+import { NotificationCardSkeleton } from './NotificationCardSkeleton';
 
 const DynamicNotificationsDrawer = dynamic(async () => {
   const { NotificationsDrawer } = await import('./NotificationsDrawer');
@@ -15,6 +19,29 @@ const DynamicNotificationsDrawer = dynamic(async () => {
 });
 
 export const NotificationBar = () => {
+  const session = useSession();
+  const userId = session.data?.user?.id as number;
+  const {
+    data: dataGetNotificationsByUser,
+    isLoading: isLoadingGetNotificationsByUser,
+    isFetching: isFetchingGetNotificationsByUser,
+  } = useGetNotificationsByUser(
+    {
+      userId,
+      pagination: {
+        page: 1,
+        pageSize: 5,
+      },
+    },
+    {
+      enabled: Boolean(userId),
+    },
+  );
+
+  const notifications = dataGetNotificationsByUser?.data ?? [];
+  const isLoadingNotifications =
+    isLoadingGetNotificationsByUser || isFetchingGetNotificationsByUser;
+
   const {
     isOpen: isOpenNotificationsDrawer,
     onOpen: onOpenNotificationsDrawer,
@@ -50,29 +77,48 @@ export const NotificationBar = () => {
         <HeaderNotificationBar />
 
         <VStack w="full" align="flex-start" spacing="1rem">
-          <NotificationCard />
+          {isLoadingNotifications ? (
+            <Fragment>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <NotificationCardSkeleton key={i} />
+              ))}
+            </Fragment>
+          ) : (
+            <Fragment>
+              {notifications?.map(({ id, totalPlanning, missingPlanning, safra: { year } }) => (
+                <NotificationCard
+                  harvestYear={year ?? ''}
+                  totalPlanning={totalPlanning}
+                  missingPlanning={missingPlanning}
+                  key={id}
+                />
+              ))}
+            </Fragment>
+          )}
 
-          <>
-            <Button
-              variant="fourth"
-              w="full"
-              color="text.brand"
-              px="2.4rem"
-              rightIcon={<ArrowRightIcon />}
-              onClick={onOpenNotificationsDrawer}
-            >
-              <Text as="span" textStyle="action4" color="text.primary" w="full" align="left">
-                Ver todas
-              </Text>
-            </Button>
+          {!isLoadingNotifications && (
+            <>
+              <Button
+                variant="fourth"
+                w="full"
+                color="text.brand"
+                px="2.4rem"
+                rightIcon={<ArrowRightIcon />}
+                onClick={onOpenNotificationsDrawer}
+              >
+                <Text as="span" textStyle="action4" color="text.primary" w="full" align="left">
+                  Ver todas
+                </Text>
+              </Button>
 
-            {isOpenNotificationsDrawer && (
-              <DynamicNotificationsDrawer
-                isOpen={isOpenNotificationsDrawer}
-                onClose={onCloseNotificationsDrawer}
-              />
-            )}
-          </>
+              {isOpenNotificationsDrawer && (
+                <DynamicNotificationsDrawer
+                  isOpen={isOpenNotificationsDrawer}
+                  onClose={onCloseNotificationsDrawer}
+                />
+              )}
+            </>
+          )}
         </VStack>
       </Flex>
     </Flex>

@@ -30,10 +30,14 @@ export const useCreatePlanning = (options?: MutOpt<CreatePlanningResponse>) => {
         },
       });
     },
-    onError: () => {
+    onError: (err) => {
+      const errorPlanningAlreadyExists =
+        err?.response?.data?.error?.message === 'PLANNING_ALREADY_EXIST';
+
       toast({
-        description:
-          'Ocorreu um erro na criação de um novo planejamento, tente novamente ou contate o suporte.',
+        description: errorPlanningAlreadyExists
+          ? 'Não foi possível criar um novo planejamento.'
+          : 'Ocorreu um erro na criação de um novo planejamento, tente novamente ou contate o suporte.',
         status: 'error',
       });
     },
