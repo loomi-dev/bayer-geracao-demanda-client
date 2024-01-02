@@ -1,22 +1,25 @@
 import { HStack } from '@chakra-ui/react';
+import debounce from 'lodash.debounce';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useGetCustomerPlanningsByUserId } from '@/api';
-import { CustomerFilter } from '@/components';
+import { CustomerFilter, SearchFilter } from '@/components';
 
 import { KanbanSection } from './components';
 import { getSectionPlannings } from './utils';
-
 import 'swiper/css';
+
 export const KanbanScreen = () => {
   const session = useSession();
   const managerId = session.data?.user.manager?.id as number;
   const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
+  const [search, setSearch] = useState('');
   const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
       filter: {
+        search,
         customers: selectedCustomers,
       },
       managerId,
@@ -38,11 +41,15 @@ export const KanbanScreen = () => {
     },
     { title: 'Aprovados', titleColor: 'green.100', plannings: acceptedPlannings },
   ];
-
+  const handleSearch = debounce(
+    (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value),
+    250,
+  );
   return (
     <>
-      <HStack w="100%" justify="flex-end">
+      <HStack w="100%" gap="1.6rem" justify="flex-end">
         <CustomerFilter selectedValues={selectedCustomers} onSelect={setSelectedCustomers} />
+        <SearchFilter placeholder="Pesquisar por nome ou CNPJ" onChange={handleSearch} />
       </HStack>
       <Swiper slidesPerView="auto" style={{ height: '100%' }} spaceBetween={10}>
         {sections.map((section, index) => (
