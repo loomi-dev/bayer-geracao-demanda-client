@@ -3,8 +3,6 @@ import qs from 'qs';
 import axios from '@/lib/axios';
 
 import {
-  GetAchievementParams,
-  GetAchievementResponse,
   GetExampleReceiptsResponse,
   GetReceiptsActionsParams,
   GetReceiptsActionsResponse,
@@ -52,37 +50,11 @@ export const getReceiptsActions = async ({
         },
       },
     },
+
     pagination,
   });
 
   const response = await axios.authorized().get(`/actions?${query}`);
-
-  return response.data;
-};
-
-export const getAchievement = async ({
-  farmerId,
-  harvestId,
-}: GetAchievementParams): Promise<GetAchievementResponse> => {
-  const query = qs.stringify({
-    filters: {
-      farmer: {
-        id: {
-          $eq: farmerId,
-        },
-      },
-      safra: {
-        id: {
-          $eq: harvestId,
-        },
-      },
-    },
-    populate: {
-      safra: true,
-    },
-  });
-
-  const response = await axios.authorized().get(`/achievements?${query}`);
 
   return response.data;
 };
@@ -129,6 +101,30 @@ export const sendReceiptAction = async ({
       },
     },
   });
+
+  return response.data;
+};
+
+export const getReceiptsSummary = async ({ farmerId }) => {
+  const query = qs.stringify({
+    filters: {
+      historic: {
+        status: {
+          $eq: 'accepted',
+        },
+      },
+      farmer: {
+        id: {
+          $eq: farmerId,
+        },
+      },
+    },
+    populate: {
+      metric: true,
+    },
+  });
+
+  const response = await axios.authorized().get(`/plannings?${query}`);
 
   return response.data;
 };

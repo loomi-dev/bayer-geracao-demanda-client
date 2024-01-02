@@ -188,3 +188,14 @@ type ReceiptAction = {
   receipts: Receipt;
   createdAt: string;
 } & PlanningAction;
+
+type UserNotification = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  read: boolean;
+  missingPlanning: string;
+  totalPlanning: string;
+  type: string;
+  safra: Harvest;
+};

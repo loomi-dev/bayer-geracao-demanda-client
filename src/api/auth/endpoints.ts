@@ -1,6 +1,6 @@
 import axios from '@/lib/axios';
 
-import { getHarvests } from '../harverst';
+import { getHarvests } from '../harvest';
 
 import { LoginWithCredentialsData, LoginWithCredentialsResponse } from './types';
 
