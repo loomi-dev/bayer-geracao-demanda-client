@@ -1,6 +1,7 @@
 import { useDisclosure } from '@chakra-ui/react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
+import { useGetHarvests } from '@/api';
 import {
   BaseFilter,
   FilterBody,
@@ -12,16 +13,29 @@ import {
 } from '@/components/BaseFilter';
 import { CalendarIcon, ChevronDownIcon, ChevronTopIcon } from '@/components/icons';
 
-const options = [{ label: '23/24', value: '23/24' }];
-
-export const HarvestFilter = () => {
+type HarvestFilterProps = {
+  selectedValues: string[];
+  onSelect: Dispatch<SetStateAction<string[]>>;
+};
+export const HarvestFilter = ({ selectedValues, onSelect }: HarvestFilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data } = useGetHarvests();
   const [search, setSearch] = useState('');
-
+  const harvests = data?.data ?? [];
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
-  const harvestOptions = options.filter((option) => option.label.includes(search));
+  const harvestOptions = harvests.filter((option) => option?.year?.includes(search));
 
+  const handleSelectOption = (e: ChangeEvent<HTMLInputElement>) => {
+    const harvest = e.target.value;
+    const isAlreadySelected = selectedValues.includes(harvest);
+    if (isAlreadySelected) {
+      onSelect(selectedValues.filter((item: string) => item !== harvest));
+      return;
+    }
+
+    onSelect((harvests) => [...harvests, harvest]);
+  };
   return (
     <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
@@ -35,7 +49,12 @@ export const HarvestFilter = () => {
         <FilterSearchInput onChange={handleSearch} placeholder="Pesquisar por safra" />
         <FilterBody h="25rem" overflowY="auto">
           {harvestOptions.map((option) => (
-            <FilterOption key={option.value} label={option.label} value={option.value} />
+            <FilterOption
+              checkboxProps={{ onChange: handleSelectOption }}
+              key={option.year}
+              label={option.year ?? ''}
+              value={option.year ?? ''}
+            />
           ))}
         </FilterBody>
         <FilterFooter
