@@ -1,11 +1,13 @@
 import { Box, Button, Center, Flex, HStack, Text, VStack, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import { useUpdateManager } from '@/api';
 import { ArrowRightIcon, CircleIcon } from '@/components';
+import { DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 
 import { AuthBanner } from '../../components';
 
@@ -28,6 +30,7 @@ const benefits = {
 };
 export const OnboardingScreen = () => {
   const session = useSession();
+  const { push } = useRouter();
   const toast = useToast();
   const { mutate: updateManager, isLoading } = useUpdateManager();
   const isManager = session.data?.user.role === 'Manager';
@@ -38,11 +41,13 @@ export const OnboardingScreen = () => {
     updateManager(
       { managerId: managerId, confirmed: true },
       {
-        onSuccess: () =>
+        onSuccess: () => {
           toast({
             description: 'Bem vindo a plataforma Top Multiplicadores!',
             status: 'success',
-          }),
+          });
+          push(DEFAULT_PRIVATE_MANAGER_PAGE);
+        },
         onError: () => {
           toast({
             description: 'Ocorreu um erro ao tentar entrar na plataforma.',
@@ -51,6 +56,13 @@ export const OnboardingScreen = () => {
         },
       },
     );
+
+  const handleOnClick = () => {
+    if (isManager) {
+      handleUpdateManager();
+    }
+  };
+
   return (
     <Flex minH="100%" position="relative" overflow="hidden">
       <AuthBanner />
@@ -113,7 +125,7 @@ export const OnboardingScreen = () => {
             p="1rem"
             w="31.5rem"
             isLoading={isLoading}
-            onClick={isManager ? handleUpdateManager : () => null}
+            onClick={handleOnClick}
             rightIcon={
               <CircleIcon>
                 <ArrowRightIcon color="#fff" />
