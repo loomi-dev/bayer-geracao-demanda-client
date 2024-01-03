@@ -35,6 +35,7 @@ export const getReceiptsActions = async ({
       ...((filter?.regions ?? []).length > 0 ? { region: { $in: filter?.regions } } : {}),
     },
     planning: {
+      ...(filter?.harvests?.length ? { safra: { year: { $in: filter.harvests } } } : {}),
       historic: {
         status: {
           $eq: 'accepted',

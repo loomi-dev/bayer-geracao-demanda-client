@@ -32,7 +32,16 @@ export const ReceiptsSummarySection = () => {
   if (isLoading || isFetching) return <Skeleton w="50rem" h="8.4rem" borderRadius="1.6rem" />;
 
   return (
-    <HStack layerStyle="card" pl="1rem" pr="2rem" py="0.5rem" spacing="2.4rem" h="8.4rem">
+    <HStack
+      w="fit-content"
+      layerStyle="card"
+      pl="1rem"
+      pr="2rem"
+      py="0.5rem"
+      spacing="2.4rem"
+      h="8.4rem"
+      mb="2rem"
+    >
       <ProgressBar
         size={75}
         progress={percentageAlreadyCompleted}
