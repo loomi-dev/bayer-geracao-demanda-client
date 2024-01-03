@@ -3,11 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryOpt } from '@/api/types';
 
 import { getTrousseau } from '../endpoints';
-import { UseGetTrousseauResponse } from '../types';
+import { UseGetTrousseauResponse, useGetTrousseauParams } from '../types';
 
-export const useGetTrousseau = (options?: QueryOpt<UseGetTrousseauResponse>) =>
+export const useGetTrousseau = (
+  params: useGetTrousseauParams,
+  options?: QueryOpt<UseGetTrousseauResponse>,
+) =>
   useQuery({
     ...options,
-    queryKey: ['get-trousseau'],
-    queryFn: () => getTrousseau(),
+    queryKey: ['get-trousseau', ...Object.values(params)],
+    queryFn: () => getTrousseau(params),
   });

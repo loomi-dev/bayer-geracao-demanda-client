@@ -5,6 +5,7 @@ import 'swiper/css';
 type Children = {
   name: string;
   url: string;
+  suppliers: TrousseauSupplier[];
 };
 type TrousseauSliderProps = {
   children: ({ name, url }: Children) => ReactNode;
@@ -19,7 +20,7 @@ export const TrousseauSlider = ({
   ...restProps
 }: TrousseauSliderProps) => (
   <Swiper slidesPerView="auto" spaceBetween={20} {...restProps}>
-    {trousseauList.map(({ id, name, photo }) => (
+    {trousseauList.map(({ id, name, photo, suppliers }) => (
       <SwiperSlide
         {...swiperSlideProps}
         style={{
@@ -33,7 +34,7 @@ export const TrousseauSlider = ({
         }}
         key={id}
       >
-        {children({ name, url: photo?.url })}
+        {children({ name, url: photo?.url, suppliers })}
       </SwiperSlide>
     ))}
   </Swiper>
