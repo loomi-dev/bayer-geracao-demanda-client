@@ -16,6 +16,14 @@ export type UpdateManagerResponse = {
   };
 };
 
+export type GetDashboardParams = {
+  filters: {
+    farmers_ids?: string[];
+    districts?: string[];
+    regions?: string[];
+    actions_types?: string[];
+  };
+};
 export type GetDashboardResponse = {
   data: {
     farmKitSumInCents: number;

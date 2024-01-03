@@ -3,6 +3,7 @@ import qs from 'qs';
 import axios from '@/lib/axios';
 
 import {
+  GetDashboardParams,
   GetDashboardResponse,
   GetManagerParams,
   UpdateManagerData,
@@ -39,7 +40,17 @@ export const updateManager = async ({
   return data;
 };
 
-export const getDashboard = async (): Promise<GetDashboardResponse> => {
-  const response = await axios.authorized().get('/managers/dashboard');
+export const getDashboard = async ({
+  filters,
+}: GetDashboardParams): Promise<GetDashboardResponse> => {
+  const query = qs.stringify({
+    filters: {
+      ...(filters.farmers_ids?.length ? { farmer_ids: { $in: filters.farmers_ids } } : {}),
+      ...(filters.regions?.length ? { regions: { $in: filters.regions } } : {}),
+      ...(filters.districts?.length ? { districts: { $in: filters.districts } } : {}),
+      ...(filters.actions_types?.length ? { action_types: { $in: filters.actions_types } } : {}),
+    },
+  });
+  const response = await axios.authorized().get(`/managers/dashboard?${query}`);
   return response.data;
 };

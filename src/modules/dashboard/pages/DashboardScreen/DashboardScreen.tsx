@@ -11,7 +11,9 @@ export const DashboardScreen = () => {
   const [regions, setRegions] = useState<string[]>([]);
   const [actions, setActions] = useState<string[]>([]);
 
-  const { data, isLoading } = useGetDashboard();
+  const { data, isLoading } = useGetDashboard({
+    filters: { farmers_ids: customers, regions, actions_types: actions },
+  });
 
   const financialSectionData = {
     initialResource: data?.data.plannedActionsAmountAvailable ?? 0,

@@ -1,11 +1,14 @@
 import { QueryOptions, useQuery } from '@tanstack/react-query';
 
 import { getDashboard } from '../endpoints';
-import { GetDashboardResponse } from '../types';
+import { GetDashboardParams, GetDashboardResponse } from '../types';
 
-export const useGetDashboard = (options?: QueryOptions<GetDashboardResponse>) =>
+export const useGetDashboard = (
+  params: GetDashboardParams,
+  options?: QueryOptions<GetDashboardResponse>,
+) =>
   useQuery({
     ...options,
-    queryKey: ['get-dashboard'],
-    queryFn: () => getDashboard(),
+    queryKey: ['get-dashboard', ...Object.values(params)],
+    queryFn: () => getDashboard(params),
   });
