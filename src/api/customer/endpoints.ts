@@ -42,6 +42,9 @@ export const getCustomerPlanningsByUserId = async ({
           }
         : {}),
     },
+    deletedAt: {
+      $notNull: false,
+    },
     ...(filter?.harvests?.length ? { safra: { year: { $in: filter.harvests } } } : {}),
   };
   const query = qs.stringify({
