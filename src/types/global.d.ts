@@ -160,6 +160,7 @@ type TrousseauItem = {
   photo: {
     url: string;
   };
+  suppliers: TrousseauSupplier[];
 };
 
 type TrousseauSupplier = {

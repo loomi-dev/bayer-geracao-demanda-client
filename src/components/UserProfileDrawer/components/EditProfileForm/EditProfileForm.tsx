@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Text } from '@chakra-ui/react';
+import { Button, Flex, HStack, Text, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -26,6 +26,7 @@ export type FormSchemaType = ManagerProfileFormSchemaType & FarmerProfileFormSch
 
 export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const session = useSession();
+  const toast = useToast();
   const user = session.data?.user;
   const isManager = user?.role === 'Manager';
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
@@ -42,12 +43,27 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const onSubmitEditProfileForm = (data: FormSchemaType) => {
     if (isManager) {
-      updateManager({
-        managerId: Number(user?.manager?.id),
-        username: data.username,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-      });
+      updateManager(
+        {
+          managerId: Number(user?.manager?.id),
+          username: data.username,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+        },
+        {
+          onSuccess: () =>
+            toast({
+              description: 'Seus dados foram atualizados com sucesso!',
+              status: 'success',
+            }),
+          onError: () => {
+            toast({
+              description: 'Ocorreu um erro ao atualizar seus dados.',
+              status: 'error',
+            });
+          },
+        },
+      );
       return;
     }
     updateFarmer({

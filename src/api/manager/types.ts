@@ -3,9 +3,10 @@ export type GetManagerResponse = { data: Manager };
 
 export type UpdateManagerData = {
   managerId: number;
-  username: string;
-  email: string;
-  phoneNumber: string;
+  username?: string;
+  email?: string;
+  confirmed?: boolean;
+  phoneNumber?: string;
 };
 export type UpdateManagerResponse = {
   data: {

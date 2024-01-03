@@ -20,12 +20,14 @@ export const updateManager = async ({
   username,
   phoneNumber,
   email,
+  confirmed,
 }: UpdateManagerData): Promise<UpdateManagerResponse> => {
   const { data } = await axios.authorized().put(`/managers/${managerId}`, {
     data: {
       username,
       email,
       phoneNumber,
+      confirmed,
     },
   });
 

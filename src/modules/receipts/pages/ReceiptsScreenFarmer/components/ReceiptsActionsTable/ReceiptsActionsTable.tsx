@@ -1,9 +1,12 @@
-import { Box } from '@chakra-ui/react';
+import { Flex, HStack } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 
 import { useGetReceiptsActions } from '@/api';
-import { DynamicTable, Pagination } from '@/components';
+import { DynamicTable, HarvestFilter, Pagination } from '@/components';
 import { usePagination } from '@/hooks';
+
+import { ReceiptsSummarySection } from '../ReceiptsSummarySection';
 
 import { receiptsActionsTableColumns } from './ReceiptsActionsTable.columns';
 
@@ -13,6 +16,8 @@ export const ReceiptsActionsTable = () => {
   const { currentPage, handleNextPage, handlePreviousPage } =
     usePagination('receipts_actions_table');
 
+  const [harvests, setHarvests] = useState<string[]>([]);
+
   const {
     data: dataGetReceiptsActions,
     isLoading: isLoadingGetReceiptsActions,
@@ -20,6 +25,7 @@ export const ReceiptsActionsTable = () => {
   } = useGetReceiptsActions(
     {
       farmerId,
+      filter: { harvests },
       pagination: {
         page: currentPage,
         pageSize: 5,
@@ -36,7 +42,11 @@ export const ReceiptsActionsTable = () => {
   const totalReceiptActionsPage = dataGetReceiptsActions?.meta?.pagination?.pageCount ?? 1;
 
   return (
-    <Box w="100%">
+    <Flex w="100%" flexDir="column">
+      <HStack align="center" w="100%" justify="space-between">
+        <ReceiptsSummarySection />
+        <HarvestFilter selectedValues={harvests} onSelect={setHarvests} />
+      </HStack>
       <DynamicTable<ReceiptAction>
         data={receiptActions}
         columns={receiptsActionsTableColumns}
@@ -52,6 +62,6 @@ export const ReceiptsActionsTable = () => {
         onNextPage={handleNextPage}
         mt="1.6rem"
       />
-    </Box>
+    </Flex>
   );
 };

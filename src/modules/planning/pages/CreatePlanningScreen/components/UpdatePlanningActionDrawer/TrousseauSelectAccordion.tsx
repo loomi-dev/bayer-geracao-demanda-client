@@ -6,7 +6,7 @@ import { Trousseau } from '@/components';
 import { AccordionIcon } from './AccordionIcon';
 
 export const TrousseauSelectAccordion = () => {
-  const { data } = useGetTrousseau();
+  const { data } = useGetTrousseau({ supplierIds: [] });
 
   const material_items = data?.data.material_items;
 
