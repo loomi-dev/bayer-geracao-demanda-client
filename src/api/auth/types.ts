@@ -5,6 +5,7 @@ export type Credentials = {
 
 export type LoginWithCredentialsData = Credentials;
 export type LoginWithCredentialsResponse = {
-  jwt: string;
+  accessToken: string;
+  refreshToken: string;
   user: User;
 };

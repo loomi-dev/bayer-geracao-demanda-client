@@ -18,7 +18,8 @@ export type UpdateFarmerData = {
 export type UpdateFarmerResponse = {
   data: {
     farmer: Farmer;
-    jwt: string;
+    accessToken: string;
+    refreshToken: string;
     user: User;
   };
 };

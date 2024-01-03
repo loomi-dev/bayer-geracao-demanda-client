@@ -17,7 +17,8 @@ export const loginWithCredentials = async (
   if (!harvest) throw new Error('Occurred error when login');
 
   return {
-    jwt: userResponse?.data?.jwt,
+    accessToken: userResponse?.data?.accessToken,
+    refreshToken: userResponse?.data?.refreshToken,
     user: {
       ...userResponse?.data?.user,
       safra: harvest,
