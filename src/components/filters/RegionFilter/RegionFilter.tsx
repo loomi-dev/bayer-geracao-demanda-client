@@ -12,12 +12,12 @@ import {
 import { ChevronDownIcon, ChevronTopIcon, MapMarkerIcon } from '@/components/icons';
 
 const regionFilterOptions = [
-  { label: 'Sul Leste' },
-  { label: 'Sul Oeste' },
-  { label: 'Centro' },
-  { label: 'Paraná' },
-  { label: 'Cerrado Oeste' },
-  { label: 'Cerrado Leste' },
+  { label: 'CENTRO SOJA' },
+  { label: 'CERL SOJA' },
+  { label: 'CERO SOJA' },
+  { label: 'PARANA SOJA' },
+  { label: 'SUL OESTE SOJA' },
+  { label: 'SUL LESTE SOJA' },
 ];
 
 type RegionFilterProps = {
