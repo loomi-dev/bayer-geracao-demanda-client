@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, HStack, Text, VStack, useToast } from '@chakra-ui/react';
+import { Box, Center, Flex, HStack, Text, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -11,6 +11,7 @@ import { DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 
 import { AuthBanner } from '../../components';
 
+import { MotionButton, MotionFlex, MotionStack, MotionText } from './animation';
 import { Benefit, DividerBenefit } from './components';
 
 const managerBenefits = [
@@ -67,22 +68,23 @@ export const OnboardingScreen = () => {
     <Flex minH="100%" position="relative" overflow="hidden">
       <AuthBanner />
 
-      <Flex
+      <MotionFlex
         direction="column"
         align="center"
         justify="center"
         bg="linear-gradient(187deg, #FFF 40.98%, rgba(255, 255, 255, 0.00) 153.35%)"
         backdropFilter="blur(27px)"
         borderRadius="0 2.8rem 2.8rem 0"
-        maxW="65%"
-        w="full"
+        width="full"
         py="10rem"
         px={{ base: '2rem', '2xl': '9.6rem' }}
         position="relative"
+        transition={{ duration: 1.8, ease: 'easeInOut' }}
+        animate={{ maxWidth: ['100%', '63%', '65%'] }}
       >
         <Image src="/assets/images/logo.webp" alt="" width={80} height={80} />
 
-        <Text
+        <MotionText
           fontSize="3.6rem"
           fontWeight="normal"
           color="text.footnote"
@@ -90,14 +92,29 @@ export const OnboardingScreen = () => {
           align="center"
           mt="5.4rem"
           lineHeight="4rem"
+          transition={{
+            ease: 'easeInOut',
+            duration: 1.35,
+            delay: 0.7,
+          }}
+          animate={{ opacity: [0, 1], y: [100, -20, 0] }}
         >
           Desejamos nossas boas vindas ao <br />
           <Text as="strong">programa de resgate de iniciativas</Text> do programa top
           multiplicadores de <br />
           soja da Bayer
-        </Text>
+        </MotionText>
 
-        <VStack mt="11.4rem">
+        <MotionStack
+          align="center"
+          mt="11.4rem"
+          transition={{
+            ease: 'easeInOut',
+            duration: 1.35,
+            delay: 0.85,
+          }}
+          animate={{ opacity: [0, 1], y: [100, -20, 0] }}
+        >
           <Text textStyle="action4" color="surface.brand" textTransform="uppercase">
             Aqui você vai poder
           </Text>
@@ -114,10 +131,10 @@ export const OnboardingScreen = () => {
               </Fragment>
             ))}
           </HStack>
-        </VStack>
+        </MotionStack>
 
         <Link href={redirectURL} legacyBehavior passHref>
-          <Button
+          <MotionButton
             as="a"
             mt="11.4rem"
             variant="white"
@@ -131,11 +148,17 @@ export const OnboardingScreen = () => {
                 <ArrowRightIcon color="#fff" />
               </CircleIcon>
             }
+            transition={{
+              ease: 'easeInOut',
+              duration: 1.35,
+              delay: 0.9,
+            }}
+            animate={{ opacity: [0, 1], y: [100, -20, 0] }}
           >
             <Text as="span" textStyle="body1" color="text.footnote" w="full" align="center">
               Acessar a plataforma
             </Text>
-          </Button>
+          </MotionButton>
         </Link>
 
         <Center
@@ -160,7 +183,7 @@ export const OnboardingScreen = () => {
             />
           </Box>
         </Center>
-      </Flex>
+      </MotionFlex>
     </Flex>
   );
 };

@@ -3,11 +3,12 @@ import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import ptBR from 'dayjs/locale/pt-br';
 import updateLocale from 'dayjs/plugin/updateLocale';
+import { AnimatePresence } from 'framer-motion';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import Head from 'next/head';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { SessionProvider } from 'next-auth/react';
 import NProgress from 'nprogress';
 import { useState, ReactNode, ReactElement } from 'react';
@@ -69,7 +70,7 @@ const arial = localFont({
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(defaultQueryClient);
-
+  const { pathname } = useRouter();
   const getLayout = Component.getLayout ?? ((page) => page);
 
   const toastOptions: ToastProviderProps = {
@@ -99,7 +100,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <QueryClientProvider client={queryClient}>
           <SessionProvider>
             <Hydrate state={pageProps.dehydratedState}>
-              {getLayout(<Component {...pageProps} />)}
+              {getLayout(
+                <AnimatePresence mode="wait">
+                  <Component {...pageProps} key={pathname} />
+                </AnimatePresence>,
+              )}
             </Hydrate>
           </SessionProvider>
         </QueryClientProvider>
