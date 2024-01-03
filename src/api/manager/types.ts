@@ -25,5 +25,6 @@ export type GetDashboardResponse = {
     plannedActionsAmountUsed: number;
     plannedActionsQuantity: number;
     relationshipTaskSumInCents: number;
+    plannedActionsAmountComproved: number;
   };
 };

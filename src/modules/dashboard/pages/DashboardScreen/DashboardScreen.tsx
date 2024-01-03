@@ -12,12 +12,21 @@ export const DashboardScreen = () => {
   const [actions, setActions] = useState<string[]>([]);
 
   const { data, isLoading } = useGetDashboard();
+
+  const financialSectionData = {
+    initialResource: data?.data.plannedActionsAmountAvailable ?? 0,
+    finalResource: data?.data.plannedActionsAmountUsed ?? 0,
+    balance:
+      (data?.data.plannedActionsAmountUsed ?? 0) - (data?.data.plannedActionsAmountAvailable ?? 0),
+    proven: data?.data.plannedActionsAmountComproved ?? 0,
+  };
   const actionsResumeSectionData = {
     plannedActionsQuantity: data?.data.plannedActionsQuantity ?? 0,
     farmKitTask: data?.data.farmKitSumInCents ?? 0,
     relationshipTask: data?.data.relationshipTaskSumInCents ?? 0,
     farmTask: data?.data.farmTaskSumInCents ?? 0,
   };
+
   return (
     <>
       <HStack w="100%" justify="flex-end">
@@ -25,7 +34,7 @@ export const DashboardScreen = () => {
         <RegionFilter selectedValues={regions} onSelect={setRegions} />
         <ActionFilter selectedValues={actions} onSelect={setActions} />
       </HStack>
-      <FinancialSection />
+      <FinancialSection data={financialSectionData} isLoading={isLoading} />
       <ActionsResumeSection data={actionsResumeSectionData} isLoading={isLoading} />
     </>
   );
