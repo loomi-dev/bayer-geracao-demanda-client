@@ -9,15 +9,7 @@ type FinancialCardProps = {
 };
 
 export const FinancialCard = ({ title, value, description }: FinancialCardProps) => (
-  <Flex
-    h="17.5rem"
-    pl="2.4rem"
-    pr="4rem"
-    pt="2.4rem"
-    layerStyle="card"
-    gap="0.4rem"
-    flexDir="column"
-  >
+  <Flex h="17.5rem" px="2.4rem" pt="2.4rem" layerStyle="card" gap="0.4rem" flexDir="column">
     <Text textTransform="uppercase" textStyle="action3">
       {title}
     </Text>

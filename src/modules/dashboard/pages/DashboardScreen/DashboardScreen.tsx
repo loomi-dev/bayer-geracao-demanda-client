@@ -1,11 +1,8 @@
-import { FinancialCard } from './components';
+import { ActionsResumeSection, FinancialSection } from './components';
 
 export const DashboardScreen = () => (
   <>
-    <FinancialCard
-      title="recurso gd inicial"
-      value={2000000000}
-      description="Valor atribuído para os multiplicadores na safra atual"
-    />
+    <FinancialSection />
+    <ActionsResumeSection />
   </>
 );
