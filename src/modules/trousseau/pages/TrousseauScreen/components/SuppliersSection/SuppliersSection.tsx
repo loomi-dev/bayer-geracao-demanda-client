@@ -2,7 +2,6 @@ import { Divider, Flex, Text } from '@chakra-ui/react';
 
 import { SupplierCard } from './SupplierCard';
 import { SuppliersSectionSkeleton } from './SuppliersSectionSkeleton';
-import { SuppliersSectionZeroState } from './SuppliersSectionZeroState';
 
 type SuppliersSectionProps = {
   suppliers?: TrousseauSupplier[];
@@ -22,21 +21,19 @@ export const SuppliersSection = ({ suppliers = [], isLoading }: SuppliersSection
     </Text>
     <Divider w="full" borderColor="opacity.black.0.20" />
     <Flex h="40rem" overflowY="auto" flexWrap="wrap" gap="1.2rem">
-      <SuppliersSectionZeroState hasSuppliers={suppliers.length > 0}>
-        {isLoading ? (
-          <SuppliersSectionSkeleton />
-        ) : (
-          suppliers.map((supplier) => (
-            <SupplierCard
-              key={supplier.id}
-              name={supplier.name}
-              region={supplier.region}
-              phone={supplier.phoneNumber}
-              email={supplier.email}
-            />
-          ))
-        )}
-      </SuppliersSectionZeroState>
+      {isLoading ? (
+        <SuppliersSectionSkeleton />
+      ) : (
+        suppliers.map((supplier) => (
+          <SupplierCard
+            key={supplier.id}
+            name={supplier.name}
+            region={supplier.region}
+            phone={supplier.phoneNumber}
+            email={supplier.email}
+          />
+        ))
+      )}
     </Flex>
   </Flex>
 );
