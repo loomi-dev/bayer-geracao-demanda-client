@@ -15,3 +15,15 @@ export type UpdateManagerResponse = {
     user: User;
   };
 };
+
+export type GetDashboardResponse = {
+  data: {
+    farmKitSumInCents: number;
+    farmTaskSumInCents: number;
+    plannedActionsAmountAvailable: number;
+    plannedActionsAmountLimit: number;
+    plannedActionsAmountUsed: number;
+    plannedActionsQuantity: number;
+    relationshipTaskSumInCents: number;
+  };
+};

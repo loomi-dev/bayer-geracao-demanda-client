@@ -2,7 +2,12 @@ import qs from 'qs';
 
 import axios from '@/lib/axios';
 
-import { GetManagerParams, UpdateManagerData, UpdateManagerResponse } from './types';
+import {
+  GetDashboardResponse,
+  GetManagerParams,
+  UpdateManagerData,
+  UpdateManagerResponse,
+} from './types';
 
 export const getManager = async ({ managerId }: GetManagerParams) => {
   const query = qs.stringify({
@@ -32,4 +37,9 @@ export const updateManager = async ({
   });
 
   return data;
+};
+
+export const getDashboard = async (): Promise<GetDashboardResponse> => {
+  const response = await axios.authorized().get('/managers/dashboard');
+  return response.data;
 };
