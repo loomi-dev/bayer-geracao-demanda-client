@@ -17,6 +17,7 @@ const unauthenticatedInstance = axiosInstance.create(defaultOptions);
 const authenticatedInstance = axiosInstance.create(defaultOptions);
 
 let lastSession: Session | null = null;
+let isRefreshing = false;
 
 const axiosObject = {
   unauthorized() {
@@ -48,10 +49,12 @@ const axiosObject = {
     authenticatedInstance.interceptors.response.use(
       async (response) => response,
       async (error: AxiosError) => {
-        if (error.response?.status === 401 && IS_CLIENT) {
+        if (error.response?.status === 401 && IS_CLIENT && !isRefreshing) {
           const refreshToken = lastSession?.user?.refreshToken;
 
           if (refreshToken && lastSession) {
+            isRefreshing = true;
+
             try {
               const tokens = await getTokens({ refreshToken });
               await updateSession({

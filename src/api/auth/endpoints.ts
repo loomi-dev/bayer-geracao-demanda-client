@@ -44,15 +44,13 @@ export const updateSession = async (newSession: User): Promise<void> => {
   const csrfToken = await getCsrfToken();
 
   await axios.unauthorized().post(
-    '/api/auth/session',
+    '/api/auth/session?update',
     {
       csrfToken,
-      data: {
-        user: newSession,
-      },
+      data: newSession,
     },
     {
-      baseURL: process.env.NEXTAUTH_URL,
+      baseURL: 'http://localhost:3000',
     },
   );
 };
