@@ -9,3 +9,11 @@ export type LoginWithCredentialsResponse = {
   refreshToken: string;
   user: User;
 };
+
+export type GetTokensData = {
+  refreshToken: string;
+};
+export type GetTokensResponse = {
+  accessToken: string;
+  refreshToken: string;
+};

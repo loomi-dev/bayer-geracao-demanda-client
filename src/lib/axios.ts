@@ -3,6 +3,7 @@ import { GetServerSidePropsContext } from 'next/types';
 import { Session } from 'next-auth';
 import { getSession, signOut } from 'next-auth/react';
 
+import { getTokens, updateSession } from '@/api';
 import { API_URL, IS_CLIENT } from '@/config';
 
 const defaultOptions: AxiosRequestConfig = {
@@ -48,7 +49,22 @@ const axiosObject = {
       async (response) => response,
       async (error: AxiosError) => {
         if (error.response?.status === 401 && IS_CLIENT) {
-          await signOut();
+          const refreshToken = lastSession?.user?.refreshToken;
+
+          if (refreshToken && lastSession) {
+            try {
+              const tokens = await getTokens({ refreshToken });
+              await updateSession({
+                ...lastSession.user,
+                accessToken: tokens.accessToken,
+                refreshToken: tokens.refreshToken,
+              });
+            } catch {
+              await signOut();
+            }
+          } else {
+            await signOut();
+          }
         }
 
         return Promise.reject(error);
