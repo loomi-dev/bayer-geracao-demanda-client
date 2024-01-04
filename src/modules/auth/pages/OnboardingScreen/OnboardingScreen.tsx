@@ -1,4 +1,4 @@
-import { Box, Center, Flex, HStack, Text, useToast } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,6 +9,7 @@ import { useUpdateManager } from '@/api';
 import {
   ArrowRightIcon,
   CircleIcon,
+  MotionBox,
   MotionButton,
   MotionFlex,
   MotionStack,
@@ -88,7 +89,22 @@ export const OnboardingScreen = () => {
         transition={{ duration: 1.8, ease: 'easeInOut' }}
         animate={{ maxWidth: ['100%', '63%', '65%'] }}
       >
-        <Image src="/assets/images/logo.webp" alt="" width={80} height={80} />
+        <MotionBox
+          animate={{
+            y: [300, 0],
+            x: [300, 0],
+            z: [300, 0],
+            opacity: [0, 1],
+            rotateZ: [-200, 0],
+          }}
+          transition={{
+            ease: 'easeInOut',
+            duration: 1,
+            delay: 0.3,
+          }}
+        >
+          <Image src="/assets/images/logo.webp" alt="" width={80} height={80} />
+        </MotionBox>
 
         <MotionText
           fontSize="3.6rem"
@@ -100,10 +116,10 @@ export const OnboardingScreen = () => {
           lineHeight="4rem"
           transition={{
             ease: 'easeInOut',
-            duration: 1.35,
-            delay: 0.7,
+            duration: 1.15,
+            delay: 0.6,
           }}
-          animate={{ opacity: [0, 1], y: [100, -20, 0] }}
+          animate={{ opacity: [0, 1], y: [100, -10, 0] }}
         >
           Desejamos nossas boas vindas ao <br />
           <Text as="strong">programa de resgate de iniciativas</Text> do programa top
@@ -116,8 +132,8 @@ export const OnboardingScreen = () => {
           mt="11.4rem"
           transition={{
             ease: 'easeInOut',
-            duration: 1.35,
-            delay: 0.85,
+            duration: 1,
+            delay: 0.75,
           }}
           animate={{ opacity: [0, 1], y: [100, -20, 0] }}
         >
@@ -156,7 +172,7 @@ export const OnboardingScreen = () => {
             }
             transition={{
               ease: 'easeInOut',
-              duration: 1.35,
+              duration: 0.75,
               delay: 0.9,
             }}
             animate={{ opacity: [0, 1], y: [100, -20, 0] }}
@@ -167,12 +183,18 @@ export const OnboardingScreen = () => {
           </MotionButton>
         </Link>
 
-        <Center
+        <MotionFlex
           position="absolute"
           bottom="-0"
           right={{ base: '-41rem', '3xl': '-50rem' }}
           alignItems="flex-end"
           justifyContent="flex-end"
+          transition={{
+            ease: 'easeInOut',
+            duration: 0.5,
+            delay: 0.45,
+          }}
+          animate={{ x: [180, -20, 0] }}
         >
           <Box
             w={{ base: '48rem', '3xl': '60.5rem' }}
@@ -188,7 +210,7 @@ export const OnboardingScreen = () => {
               }}
             />
           </Box>
-        </Center>
+        </MotionFlex>
       </MotionFlex>
     </Flex>
   );
