@@ -16,3 +16,24 @@ export type UpdateManagerResponse = {
     user: User;
   };
 };
+
+export type GetDashboardParams = {
+  filters: {
+    farmers_ids?: string[];
+    districts?: string[];
+    regions?: string[];
+    actions_types?: string[];
+  };
+};
+export type GetDashboardResponse = {
+  data: {
+    farmKitSumInCents: number;
+    farmTaskSumInCents: number;
+    plannedActionsAmountAvailable: number;
+    plannedActionsAmountLimit: number;
+    plannedActionsAmountUsed: number;
+    plannedActionsQuantity: number;
+    relationshipTaskSumInCents: number;
+    plannedActionsAmountComproved: number;
+  };
+};
