@@ -1,6 +1,7 @@
-import { Button, Flex, HStack, Text, useToast } from '@chakra-ui/react';
+import { Button, Flex, HStack, Input, Text, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
+import { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useUpdateFarmer, useUpdateManager } from '@/api';
@@ -27,11 +28,13 @@ export type FormSchemaType = ManagerProfileFormSchemaType & FarmerProfileFormSch
 export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const session = useSession();
   const toast = useToast();
+  const inputImageRef = useRef<HTMLInputElement>(null);
   const user = session.data?.user;
   const isManager = user?.role === 'Manager';
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
   const { mutate: updateManager, isLoading: isUpdatingManager } = useUpdateManager();
   const formSchema = isManager ? managerProfileFormSchema : farmerProfileFormSchema;
+  const [avatar, setAvatar] = useState('');
 
   const methods = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -41,6 +44,18 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const { handleSubmit } = methods;
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setAvatar(reader.result as string);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
   const onSubmitEditProfileForm = (data: FormSchemaType) => {
     if (isManager) {
       updateManager(
@@ -49,6 +64,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           username: data.username,
           email: data.email,
           phoneNumber: data.phoneNumber,
+          photo: avatar,
         },
         {
           onSuccess: () =>
@@ -72,6 +88,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
       email: data.email,
       companyPosition: data.companyPosition,
       phoneNumber: data.phoneNumber,
+      photo: avatar,
     });
   };
 
@@ -99,8 +116,24 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
         </Text>
         <Flex flexDir="column" w="100%">
           <Flex justify="center">
-            <ProfileImage border="none" position="relative" w="fit-content">
-              <CircleIcon position="absolute" bottom="1rem" right="0.5rem" boxSize="4rem">
+            <ProfileImage src={avatar} border="none" position="relative" w="fit-content">
+              <Input
+                hidden
+                ref={inputImageRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              <CircleIcon
+                onClick={() => {
+                  console.log(inputImageRef.current?.click());
+                }}
+                position="absolute"
+                bottom="1rem"
+                right="0.5rem"
+                boxSize="4rem"
+                _hover={{ opacity: '0.7', cursor: 'pointer' }}
+              >
                 <EditIcon color="white" />
               </CircleIcon>
             </ProfileImage>

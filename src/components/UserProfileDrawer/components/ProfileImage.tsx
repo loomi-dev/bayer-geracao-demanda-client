@@ -17,7 +17,7 @@ export const ProfileImage = ({ src = '', children, ...props }: ProfileImageProps
     pb="1.2rem"
     {...props}
   >
-    <Avatar url={src} imageFallbackSize={80} boxSize="15rem" bg="white" />
+    <Avatar overflow="hidden" url={src} imageFallbackSize={80} boxSize="15rem" bg="white" />
     {children}
   </VStack>
 );
