@@ -32,7 +32,7 @@ const errors = {
   MINIMUM_FUNDS_NOT_REACHED: {
     title: 'Valor do planejamento insuficiente',
     description:
-      'O planejamento que voce tentou enviar tem um valor abaixo de 95% do seu saldo, aumente o valor do planejamento planejamento',
+      'O planejamento que voce tentou enviar tem um valor abaixo de 95% do seu saldo, aumente o valor do planejamento',
   },
 };
 export const WarningModal = ({ errorCode, onClose, ...restProps }: WarningModalProps) => (
