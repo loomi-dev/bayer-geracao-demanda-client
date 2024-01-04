@@ -49,9 +49,7 @@ export const updateFarmer = async ({
       passwordConfirmation: confirmPassword,
       confirmed,
       phoneNumber,
-      photo: {
-        connect: [imageId],
-      },
+      photo: imageId,
     },
   });
 

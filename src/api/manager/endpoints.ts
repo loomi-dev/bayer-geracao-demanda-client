@@ -35,9 +35,7 @@ export const updateManager = async ({
       email,
       phoneNumber,
       confirmed,
-      photo: {
-        connect: [imageId],
-      },
+      photo: imageId,
     },
   });
 
