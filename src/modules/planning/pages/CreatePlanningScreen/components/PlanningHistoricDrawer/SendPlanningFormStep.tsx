@@ -1,5 +1,6 @@
-import { HStack, Tooltip, VStack, useDisclosure, useToast } from '@chakra-ui/react';
+import { HStack, Tooltip, VStack, useToast } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import {
@@ -25,14 +26,9 @@ export const SendPlanningFormStep = ({
 }: SendPlanningFormStepProps) => {
   const session = useSession();
   const userId = session.data?.user.id as number;
-
+  const [showInsufficientFundsModal, setShowInsufficientFundsModal] = useState(false);
+  const [showMinimunFundsNotReachedModal, setShowMinimunFundsNotReachedModal] = useState(false);
   const toast = useToast();
-
-  const {
-    isOpen: isOpenInsufficientFundsModal,
-    onOpen: onOpenInsufficientFundsModal,
-    onClose: onCloseInsufficientFundsModal,
-  } = useDisclosure();
 
   const { currentPage, handleNextPage, handlePreviousPage, resetPage } = usePagination(
     'send-planning-actions-table',
@@ -88,20 +84,17 @@ export const SendPlanningFormStep = ({
           });
         },
         onError: (err) => {
-          if (err?.response?.data?.error?.message === 'INSUFFICIENT_FOUNDS') {
-            toast({
-              description: 'Não foi possível enviar seu planejamento para aprovação.',
-              status: 'error',
-            });
-            onOpenInsufficientFundsModal();
-
-            return;
-          }
-
           toast({
-            description: 'Ocorreu um erro ao enviar seu planejamento para aprovação.',
+            description: 'Não foi possível enviar seu planejamento para aprovação.',
             status: 'error',
           });
+          if (err?.response?.data?.error?.message === 'INSUFFICIENT_FUNDS') {
+            setShowInsufficientFundsModal(true);
+            return;
+          }
+          if (err?.response?.data?.error?.message === 'MINIMUM_FUNDS_NOT_REACHED') {
+            setShowMinimunFundsNotReachedModal(true);
+          }
         },
       },
     );
@@ -157,10 +150,16 @@ export const SendPlanningFormStep = ({
       </HistoricDrawer.Step>
 
       <WarningModal
+        title="Valor do planejamento insuficiente"
+        description="O planejamento que voce tentou enviar tem um valor abaixo de 95% do seu saldo, aumente o valor do planejamento planejamento"
+        isOpen={showMinimunFundsNotReachedModal}
+        onClose={() => setShowMinimunFundsNotReachedModal(false)}
+      />
+      <WarningModal
         title="Você não tem saldo disponível"
         description="O planejamento que voce tentou enviar tem um valor acima do seu saldo disponível, tente diminuir o valor ou contate o suporte"
-        isOpen={isOpenInsufficientFundsModal}
-        onClose={onCloseInsufficientFundsModal}
+        isOpen={showInsufficientFundsModal}
+        onClose={() => setShowInsufficientFundsModal(false)}
       />
     </>
   );
