@@ -1,4 +1,4 @@
-import { HStack, Tooltip, VStack, useToast } from '@chakra-ui/react';
+import { HStack, Tooltip, VStack, useDisclosure, useToast } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -26,10 +26,9 @@ export const SendPlanningFormStep = ({
 }: SendPlanningFormStepProps) => {
   const session = useSession();
   const userId = session.data?.user.id as number;
-  const [showInsufficientFundsModal, setShowInsufficientFundsModal] = useState(false);
-  const [showMinimunFundsNotReachedModal, setShowMinimunFundsNotReachedModal] = useState(false);
+  const [errorCode, setErrorCode] = useState('');
   const toast = useToast();
-
+  const { onOpen, isOpen, onClose } = useDisclosure();
   const { currentPage, handleNextPage, handlePreviousPage, resetPage } = usePagination(
     'send-planning-actions-table',
   );
@@ -88,13 +87,8 @@ export const SendPlanningFormStep = ({
             description: 'Não foi possível enviar seu planejamento para aprovação.',
             status: 'error',
           });
-          if (err?.response?.data?.error?.message === 'INSUFFICIENT_FUNDS') {
-            setShowInsufficientFundsModal(true);
-            return;
-          }
-          if (err?.response?.data?.error?.message === 'MINIMUM_FUNDS_NOT_REACHED') {
-            setShowMinimunFundsNotReachedModal(true);
-          }
+          setErrorCode(err?.response?.data?.error?.message ?? '');
+          onOpen();
         },
       },
     );
@@ -149,18 +143,7 @@ export const SendPlanningFormStep = ({
         </Historic.Container>
       </HistoricDrawer.Step>
 
-      <WarningModal
-        title="Valor do planejamento insuficiente"
-        description="O planejamento que voce tentou enviar tem um valor abaixo de 95% do seu saldo, aumente o valor do planejamento planejamento"
-        isOpen={showMinimunFundsNotReachedModal}
-        onClose={() => setShowMinimunFundsNotReachedModal(false)}
-      />
-      <WarningModal
-        title="Você não tem saldo disponível"
-        description="O planejamento que voce tentou enviar tem um valor acima do seu saldo disponível, tente diminuir o valor ou contate o suporte"
-        isOpen={showInsufficientFundsModal}
-        onClose={() => setShowInsufficientFundsModal(false)}
-      />
+      <WarningModal errorCode={errorCode} isOpen={isOpen} onClose={onClose} />
     </>
   );
 };
