@@ -38,7 +38,7 @@ export const updateFarmer = async ({
   password,
   confirmPassword,
   confirmed,
-  photo,
+  imageId,
 }: UpdateFarmerData): Promise<UpdateFarmerResponse> => {
   const { data } = await axios.authorized().put(`/farmers/${farmerId}`, {
     data: {
@@ -49,7 +49,9 @@ export const updateFarmer = async ({
       passwordConfirmation: confirmPassword,
       confirmed,
       phoneNumber,
-      photo,
+      photo: {
+        connect: [imageId],
+      },
     },
   });
 

@@ -7,7 +7,7 @@ export type UpdateManagerData = {
   email?: string;
   confirmed?: boolean;
   phoneNumber?: string;
-  photo?: string;
+  imageId?: number;
 };
 export type UpdateManagerResponse = {
   data: {

@@ -14,7 +14,7 @@ export type UpdateFarmerData = {
   confirmPassword?: string;
   confirmed?: boolean;
   phoneNumber?: string;
-  photo?: string;
+  imageId?: number;
 };
 export type UpdateFarmerResponse = {
   data: {

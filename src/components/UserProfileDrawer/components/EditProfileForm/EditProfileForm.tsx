@@ -1,10 +1,10 @@
 import { Button, Flex, HStack, Input, Text, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { useUpdateFarmer, useUpdateManager } from '@/api';
+import { useUpdateFarmer, useUpdateManager, useUploadFile } from '@/api';
 import { CircleIcon } from '@/components/CircleIcon';
 import { EditIcon } from '@/components/icons';
 
@@ -31,11 +31,14 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const inputImageRef = useRef<HTMLInputElement>(null);
   const user = session.data?.user;
   const isManager = user?.role === 'Manager';
+  const [avatar, setAvatar] = useState('');
+  const [fileImage, setFileImage] = useState<File>({} as File);
+
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
   const { mutate: updateManager, isLoading: isUpdatingManager } = useUpdateManager();
-  const formSchema = isManager ? managerProfileFormSchema : farmerProfileFormSchema;
-  const [avatar, setAvatar] = useState('');
+  const { mutateAsync: uploadFileImage, isLoading: isLoadingUploadFile } = useUploadFile();
 
+  const formSchema = isManager ? managerProfileFormSchema : farmerProfileFormSchema;
   const methods = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     mode: 'all',
@@ -44,8 +47,9 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const { handleSubmit } = methods;
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
     const reader = new FileReader();
 
     reader.onloadend = () => {
@@ -53,10 +57,18 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
     };
 
     if (file) {
+      setFileImage(file);
       reader.readAsDataURL(file);
     }
   };
-  const onSubmitEditProfileForm = (data: FormSchemaType) => {
+
+  const onSubmitEditProfileForm = async (data: FormSchemaType) => {
+    let imageId: number | undefined;
+
+    if (fileImage) {
+      const image = await uploadFileImage({ files: [fileImage] });
+      imageId = image[0].id;
+    }
     if (isManager) {
       updateManager(
         {
@@ -64,7 +76,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           username: data.username,
           email: data.email,
           phoneNumber: data.phoneNumber,
-          photo: avatar,
+          imageId,
         },
         {
           onSuccess: () =>
@@ -88,7 +100,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
       email: data.email,
       companyPosition: data.companyPosition,
       phoneNumber: data.phoneNumber,
-      photo: avatar,
+      imageId,
     });
   };
 
@@ -148,7 +160,11 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           <Button variant="sixth" bgColor="surface.secondary" minW="18rem" onClick={onCancel}>
             Voltar
           </Button>
-          <Button isLoading={isUpdatingUser || isUpdatingManager} type="submit" minW="18rem">
+          <Button
+            isLoading={isUpdatingUser || isUpdatingManager || isLoadingUploadFile}
+            type="submit"
+            minW="18rem"
+          >
             Salvar Alterações
           </Button>
         </HStack>
