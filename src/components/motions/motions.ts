@@ -1,4 +1,6 @@
 import {
+  Box,
+  BoxProps,
   Button,
   ButtonProps,
   Flex,
@@ -11,6 +13,7 @@ import {
 import { motion } from 'framer-motion';
 
 export const MotionFlex = motion<Omit<FlexProps, 'transition'>>(Flex);
+export const MotionBox = motion<Omit<BoxProps, 'transition'>>(Box);
 export const MotionStack = motion<Omit<StackProps, 'transition'>>(Stack);
 export const MotionText = motion<Omit<TextProps, 'transition'>>(Text);
 export const MotionButton = motion<Omit<ButtonProps, 'transition'>>(Button);

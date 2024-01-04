@@ -6,12 +6,18 @@ import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import { useUpdateManager } from '@/api';
-import { ArrowRightIcon, CircleIcon } from '@/components';
+import {
+  ArrowRightIcon,
+  CircleIcon,
+  MotionButton,
+  MotionFlex,
+  MotionStack,
+  MotionText,
+} from '@/components';
 import { DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 
 import { AuthBanner } from '../../components';
 
-import { MotionButton, MotionFlex, MotionStack, MotionText } from './animation';
 import { Benefit, DividerBenefit } from './components';
 
 const managerBenefits = [
