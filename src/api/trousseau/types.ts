@@ -1,2 +1,2 @@
 export type UseGetTrousseauResponse = { data: Trousseau };
-export type useGetTrousseauParams = { supplierIds?: number[] };
+export type useGetTrousseauParams = { isSelected?: boolean; supplierIds?: number[] };
