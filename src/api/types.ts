@@ -1,7 +1,10 @@
 import { QueryKey, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export type ApiResponseErrNames = 'PLANNING_ALREADY_EXIST' | 'INSUFFICIENT_FOUNDS';
+export type ApiResponseErrNames =
+  | 'PLANNING_ALREADY_EXIST'
+  | 'INSUFFICIENT_FUNDS'
+  | 'MINIMUM_FUNDS_NOT_REACHED';
 
 export type ApiResponseErr = {
   data?: null;
