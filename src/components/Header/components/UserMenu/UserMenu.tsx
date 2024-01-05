@@ -32,6 +32,7 @@ export const UserMenu = ({ handleOpenUserProfile }: UserMenuProps) => {
   return (
     <Flex gap="1.8rem" align="center" justify="center">
       <Avatar
+        overflow="hidden"
         layerStyle="card"
         boxSize={{ lg: '4.8rem', xl: '5.5rem' }}
         imageFallbackSize={30}

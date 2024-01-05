@@ -31,7 +31,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const inputImageRef = useRef<HTMLInputElement>(null);
   const user = session.data?.user;
   const isManager = user?.role === 'Manager';
-  const [avatar, setAvatar] = useState(user?.photo.url);
+  const [avatar, setAvatar] = useState(user?.photo?.url);
   const [fileImage, setFileImage] = useState<File>({} as File);
 
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
