@@ -1,8 +1,21 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { getServerSession } from 'next-auth';
 
+import { authOptions } from '@/lib/next-auth';
 import { OnboardingScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getServerSession(req, res, authOptions);
+
+  return {
+    props: {
+      session,
+    },
+  };
+};
 
 const Page: NextPageWithLayout = () => <OnboardingScreen />;
 
