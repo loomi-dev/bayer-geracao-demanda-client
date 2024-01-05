@@ -49,7 +49,7 @@ export const getDashboard = async ({
     filters: {
       ...(filters.farmers_ids?.length ? { farmer_ids: { $in: filters.farmers_ids } } : {}),
       ...(filters.regions?.length ? { regions: { $in: filters.regions } } : {}),
-      ...(filters.districts?.length ? { districts: { $in: filters.districts } } : {}),
+      ...(filters.districts?.length ? { districts: { name: { $in: filters.districts } } } : {}),
       ...(filters.actions_types?.length ? { action_types: { $in: filters.actions_types } } : {}),
     },
   });

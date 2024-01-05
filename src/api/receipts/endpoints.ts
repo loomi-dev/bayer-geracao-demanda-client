@@ -33,6 +33,7 @@ export const getReceiptsActions = async ({
           }
         : {}),
       ...((filter?.regions ?? []).length > 0 ? { region: { $in: filter?.regions } } : {}),
+      ...(filter?.districts?.length ? { district: { name: { $in: filter?.districts } } } : {}),
     },
     planning: {
       ...(filter?.harvests?.length ? { safra: { year: { $in: filter.harvests } } } : {}),

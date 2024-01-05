@@ -16,6 +16,7 @@ export type GetReceiptsActionsParams = {
     customers?: string[];
     regions?: string[];
     harvests?: string[];
+    districts?: string[];
   };
   pagination: Pagination;
 };
