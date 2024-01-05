@@ -13,8 +13,8 @@ export default function Document() {
           name="description"
           content="Top Multiplicadores - Programa de resgate de iniciativas da Bayer"
         />
-        <link rel="icon" type="image/webp" sizes="32x32" href="../favicon.webp" />
-        <link rel="icon" type="image/webp" sizes="16x16" href="../favicon.webp" />
+        <link rel="icon" type="image/webp" sizes="32x32" href="../assets/favicon.webp" />
+        <link rel="icon" type="image/webp" sizes="16x16" href="../assets/favicon.webp" />
       </Head>
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />

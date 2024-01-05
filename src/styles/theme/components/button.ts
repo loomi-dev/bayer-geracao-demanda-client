@@ -134,6 +134,14 @@ export const Button = defineStyleConfig({
       fontWeight: 'semibold',
       borderRadius: 'full',
       bg: 'opacity.gray.1.10',
+
+      _hover: {
+        bg: 'opacity.gray.1.10',
+
+        _disabled: {
+          bg: 'opacity.gray.1.10',
+        },
+      },
     },
     white: {
       bg: 'surface.primary',

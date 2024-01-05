@@ -4,7 +4,9 @@ import { AxiosError } from 'axios';
 export type ApiResponseErrNames =
   | 'PLANNING_ALREADY_EXIST'
   | 'INSUFFICIENT_FUNDS'
-  | 'MINIMUM_FUNDS_NOT_REACHED';
+  | 'MINIMUM_FUNDS_NOT_REACHED'
+  | 'NO_USER_WITH_THIS_EMAIL_WAS_FOUND'
+  | 'Incorrect code provided';
 
 export type ApiResponseErr = {
   data?: null;
