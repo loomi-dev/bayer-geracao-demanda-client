@@ -56,7 +56,7 @@ export const ProfileForm = () => {
             placeholder="Seu cargo na sua empresa"
             leftIcon={<HouseIcon />}
             borderRadius="2.1rem"
-            defaultValue={Mask.formatCNPJ(user?.farmer?.company_position ?? '')}
+            defaultValue={user?.farmer?.company_position ?? ''}
             {...register('companyPosition')}
           />
         </FormWrapper>
