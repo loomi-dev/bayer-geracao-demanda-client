@@ -19,9 +19,9 @@ export const NotificationCard = ({
   planning,
   ...restProps
 }: NotificationCardProps) => {
-  const actionsKit = planning?.metric?.farm_kit_in_cents ?? 0;
-  const actionsRelationship = Number(planning?.metric?.relationship_task_in_cent ?? 0);
-  const actionsTask = Number(planning?.metric?.farm_task_in_cents ?? 0);
+  const actionsKit = Number(planning?.metric?.farm_kit_in_cents) || 0;
+  const actionsRelationship = Number(planning?.metric?.relationship_task_in_cent) || 0;
+  const actionsTask = Number(planning?.metric?.farm_task_in_cents) || 0;
 
   const actionsAmount = [actionsKit, actionsRelationship, actionsTask].filter(
     (action) => action > 0,
