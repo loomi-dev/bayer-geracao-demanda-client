@@ -24,6 +24,10 @@ const errors = {
     description:
       'Um dos seus planejamentos já foi aprovado para esta safra, não será possível criar novos planejamentos nem os enviar para aprovação',
   },
+  EMAIL_ALREADY_TAKEN: {
+    title: 'O email ja está sendo utilizado',
+    description: 'Por favor, selecione outro email',
+  },
   INSUFFICIENT_FUNDS: {
     title: 'Você não tem saldo disponível',
     description:
