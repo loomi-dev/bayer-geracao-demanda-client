@@ -1,12 +1,13 @@
-import { Button, Flex, HStack, Input, Text, useToast } from '@chakra-ui/react';
+import { Button, Flex, HStack, Input, Text, useDisclosure, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { useUpdateFarmer, useUpdateManager, useUploadFile } from '@/api';
+import { ApiServiceErr, useUpdateFarmer, useUpdateManager, useUploadFile } from '@/api';
 import { CircleIcon } from '@/components/CircleIcon';
 import { EditIcon } from '@/components/icons';
+import { WarningModal } from '@/components/WarningModal';
 
 import { ProfileDrawerFooter } from '../ProfileDrawer';
 import { ProfileImage } from '../ProfileImage';
@@ -33,7 +34,8 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const isManager = user?.role === 'Manager';
   const [avatar, setAvatar] = useState(user?.photo?.url);
   const [fileImage, setFileImage] = useState<File>({} as File);
-
+  const [errorMessage, setErrorMessage] = useState('');
+  const { onClose, isOpen, onOpen } = useDisclosure();
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
   const { mutate: updateManager, isLoading: isUpdatingManager } = useUpdateManager();
   const { mutateAsync: uploadFileImage, isLoading: isLoadingUploadFile } = useUploadFile();
@@ -68,15 +70,13 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
     });
   };
 
-  const onErrorEdit = () => {
-    toast({
-      description: 'Ocorreu um erro ao atualizar seus dados.',
-      status: 'error',
-    });
+  const onErrorEdit = (error: ApiServiceErr) => {
+    setErrorMessage(error.response?.data.error?.message ?? '');
+    onOpen();
   };
 
   const uploadUserImage = async () => {
-    if (fileImage) {
+    if (fileImage.size > 0) {
       const image = await uploadFileImage({ files: [fileImage] });
       return image[0].id;
     }
@@ -183,6 +183,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           </Button>
         </HStack>
       </ProfileDrawerFooter>
+      <WarningModal errorCode={errorMessage} isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };
