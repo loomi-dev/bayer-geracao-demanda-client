@@ -49,46 +49,55 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-
     const reader = new FileReader();
 
     reader.onloadend = () => {
       setAvatar(reader.result as string);
     };
-
     if (file) {
       setFileImage(file);
       reader.readAsDataURL(file);
     }
   };
 
-  const onSubmitEditProfileForm = async (data: FormSchemaType) => {
-    let imageId: number | undefined;
-    if (fileImage.size) {
+  const onSuccessEdit = () => {
+    setFileImage({} as File);
+    toast({
+      description: 'Seus dados foram atualizados com sucesso!',
+      status: 'success',
+    });
+  };
+
+  const onErrorEdit = () => {
+    toast({
+      description: 'Ocorreu um erro ao atualizar seus dados.',
+      status: 'error',
+    });
+  };
+
+  const uploadUserImage = async () => {
+    if (fileImage) {
       const image = await uploadFileImage({ files: [fileImage] });
-      imageId = image[0].id;
+      return image[0].id;
     }
+    return null;
+  };
+
+  const onSubmitEditProfileForm = async (data: FormSchemaType) => {
+    const imageId = await uploadUserImage();
+
     if (isManager) {
       updateManager(
         {
           managerId: Number(user?.manager?.id),
-          username: data.username,
-          email: data.email,
-          phoneNumber: data.phoneNumber,
-          imageId,
+          ...(data.username === user?.username ? {} : { username: data.username }),
+          ...(data.email === user?.email ? {} : { email: data.email }),
+          ...(data.phoneNumber === user?.phoneNumber ? {} : { phoneNumber: data.phoneNumber }),
+          ...(imageId ? { imageId } : {}),
         },
         {
-          onSuccess: () =>
-            toast({
-              description: 'Seus dados foram atualizados com sucesso!',
-              status: 'success',
-            }),
-          onError: () => {
-            toast({
-              description: 'Ocorreu um erro ao atualizar seus dados.',
-              status: 'error',
-            });
-          },
+          onSuccess: onSuccessEdit,
+          onError: onErrorEdit,
         },
       );
       return;
@@ -96,24 +105,17 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
     updateFarmer(
       {
         farmerId: Number(user?.farmer?.id),
-        username: data.username,
-        email: data.email,
-        companyPosition: data.companyPosition,
-        phoneNumber: data.phoneNumber,
-        imageId,
+        ...(data.username === user?.username ? {} : { username: data.username }),
+        ...(data.companyPosition === user?.farmer?.company_position
+          ? {}
+          : { companyPosition: data.companyPosition }),
+        ...(data.email === user?.email ? {} : { email: data.email }),
+        ...(data.phoneNumber === user?.phoneNumber ? {} : { phoneNumber: data.phoneNumber }),
+        ...(imageId ? { imageId } : {}),
       },
       {
-        onSuccess: () =>
-          toast({
-            description: 'Seus dados foram atualizados com sucesso!',
-            status: 'success',
-          }),
-        onError: () => {
-          toast({
-            description: 'Ocorreu um erro ao atualizar seus dados.',
-            status: 'error',
-          });
-        },
+        onSuccess: onSuccessEdit,
+        onError: onErrorEdit,
       },
     );
   };
