@@ -1,7 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { AuthBanner } from '../../components';
+import { AuthBanner } from '@/components';
 
 import { RegisterFormTabs, RegisterOverlay } from './components';
 

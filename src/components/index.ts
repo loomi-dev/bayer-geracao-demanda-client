@@ -24,3 +24,4 @@ export * from './ConfirmationModal';
 export * from './Trousseau';
 export * from './UserProfileDrawer';
 export * from './WarningModal';
+export * from './AuthBanner';

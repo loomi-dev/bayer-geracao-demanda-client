@@ -6,10 +6,8 @@ import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import { useUpdateManager } from '@/api';
-import { ArrowRightIcon, CircleIcon } from '@/components';
+import { ArrowRightIcon, AuthBanner, CircleIcon } from '@/components';
 import { DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
-
-import { AuthBanner } from '../../components';
 
 import { Benefit, DividerBenefit } from './components';
 

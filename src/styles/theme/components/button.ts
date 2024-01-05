@@ -129,6 +129,12 @@ export const Button = defineStyleConfig({
         },
       },
     },
+    eighth: {
+      fontSize: '1.8rem',
+      fontWeight: 'semibold',
+      borderRadius: 'full',
+      bg: 'opacity.gray.1.10',
+    },
     white: {
       bg: 'surface.primary',
       color: 'text.footnote',
