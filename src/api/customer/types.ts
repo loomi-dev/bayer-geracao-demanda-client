@@ -4,7 +4,7 @@ export type GetCustomerPlanningsByUserIdParams = {
   managerId: number;
   filter?: {
     regions?: string[];
-    district?: string;
+    districts?: string[];
     search?: string;
     customers?: string[];
     harvests?: string[];

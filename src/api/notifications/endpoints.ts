@@ -17,6 +17,12 @@ export const getNotificationsByUser = async ({
       },
     },
     populate: {
+      planning: {
+        populate: {
+          actions: true,
+          metric: true,
+        },
+      },
       safra: true,
     },
     sort: 'createdAt:desc',

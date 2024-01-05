@@ -101,14 +101,17 @@ export const NotificationBar = () => {
 
           {!isLoadingNotifications && hasNotifications && (
             <Fragment>
-              {notifications?.map(({ id, totalPlanning, missingPlanning, safra: { year } }) => (
-                <NotificationCard
-                  harvestYear={year ?? ''}
-                  totalPlanning={totalPlanning}
-                  missingPlanning={missingPlanning}
-                  key={id}
-                />
-              ))}
+              {notifications?.map(
+                ({ id, totalPlanning, missingPlanning, safra: { year }, planning }) => (
+                  <NotificationCard
+                    planning={planning}
+                    harvestYear={year ?? ''}
+                    totalPlanning={totalPlanning}
+                    missingPlanning={missingPlanning}
+                    key={id}
+                  />
+                ),
+              )}
 
               <Button
                 variant="fourth"

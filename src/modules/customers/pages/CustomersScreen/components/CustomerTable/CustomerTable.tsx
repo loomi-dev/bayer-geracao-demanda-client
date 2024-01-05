@@ -6,7 +6,14 @@ import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 
 import { CustomerPlannings, useGetCustomerPlanningsByUserId } from '@/api/customer';
-import { DynamicTable, Pagination, RegionFilter, SearchFilter } from '@/components';
+import {
+  DistrictFilter,
+  DynamicTable,
+  HarvestFilter,
+  Pagination,
+  RegionFilter,
+  SearchFilter,
+} from '@/components';
 import { usePagination } from '@/hooks';
 
 import { CustomerColumns } from './CustomerTable.columns';
@@ -18,10 +25,12 @@ export const CustomerTable = () => {
   const { currentPage, handleNextPage, handlePreviousPage } = usePagination('customer_table');
   const [search, setSearch] = useState('');
   const [regions, setRegions] = useState<string[]>([]);
+  const [districts, setDistricts] = useState<string[]>([]);
+  const [harvests, setHarvests] = useState<string[]>([]);
   const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
       managerId,
-      filter: { search, regions },
+      filter: { search, regions, districts, harvests },
       pagination: { page: currentPage, pageSize: 5 },
     },
     { enabled: Boolean(managerId) },
@@ -47,6 +56,8 @@ export const CustomerTable = () => {
       <Flex align="center" justify="space-between" px="1.6rem" w="100%">
         <Text textStyle="h5">Filtros</Text>
         <HStack gap="1.6rem">
+          <HarvestFilter selectedValues={harvests} onSelect={setHarvests} />
+          <DistrictFilter selectedValues={districts} onSelect={setDistricts} />
           <RegionFilter selectedValues={regions} onSelect={setRegions} />
           <SearchFilter placeholder="Pesquisar por Nome ou CNPJ" onChange={handleSearch} />
         </HStack>

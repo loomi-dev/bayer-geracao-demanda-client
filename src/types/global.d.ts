@@ -102,6 +102,14 @@ type Planning = {
   actions?: PlanningAction[];
   historic?: Historic[];
   farmer?: Farmer;
+  metric?: PlanningMetric;
+};
+
+type PlanningMetric = {
+  id: number;
+  farm_kit_in_cents: number;
+  farm_task_in_cents: string;
+  relationship_task_in_cent: string;
 };
 
 type Wallet = {
@@ -198,6 +206,7 @@ type UserNotification = {
   read: boolean;
   missingPlanning: string;
   totalPlanning: string;
+  planning: Planning;
   type: string;
   safra: Harvest;
 };

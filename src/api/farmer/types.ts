@@ -1,5 +1,9 @@
 import { GenericListResponseType } from '../types';
 
+export type District = {
+  name: string;
+};
+
 export type GetFarmerParams = {
   farmerId: number;
 };
@@ -26,3 +30,6 @@ export type UpdateFarmerResponse = {
 };
 
 export type GetFarmersResponse = GenericListResponseType<Farmer>;
+
+export type GetDistrictsParams = { managerId: number };
+export type GetDistrictsResponse = GenericListResponseType<District>;

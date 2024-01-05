@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useGetCustomerPlanningsByUserId } from '@/api';
-import { CustomerFilter, RegionFilter, SearchFilter } from '@/components';
+import { CustomerFilter, DistrictFilter, RegionFilter, SearchFilter } from '@/components';
 
 import { KanbanSection } from './components';
 import { getSectionPlannings } from './utils';
@@ -16,6 +16,7 @@ export const KanbanScreen = () => {
   const managerId = session.data?.user.manager?.id as number;
   const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
+  const [districts, setDistricts] = useState<string[]>([]);
   const [search, setSearch] = useState('');
   const { data, isLoading, isFetching } = useGetCustomerPlanningsByUserId(
     {
@@ -23,6 +24,7 @@ export const KanbanScreen = () => {
         regions,
         search,
         customers: selectedCustomers,
+        districts,
       },
       managerId,
     },
@@ -51,6 +53,7 @@ export const KanbanScreen = () => {
     <>
       <HStack w="100%" gap="1.6rem" justify="flex-end">
         <CustomerFilter selectedValues={selectedCustomers} onSelect={setSelectedCustomers} />
+        <DistrictFilter selectedValues={districts} onSelect={setDistricts} />
         <RegionFilter selectedValues={regions} onSelect={setRegions} />
         <SearchFilter placeholder="Pesquisar por nome ou CNPJ" onChange={handleSearch} />
       </HStack>

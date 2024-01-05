@@ -2,17 +2,18 @@ import { HStack } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { useGetDashboard } from '@/api';
-import { ActionFilter, CustomerFilter, RegionFilter } from '@/components';
+import { ActionFilter, CustomerFilter, DistrictFilter, RegionFilter } from '@/components';
 
 import { ActionsResumeSection, FinancialSection } from './components';
 
 export const DashboardScreen = () => {
   const [customers, setCustomers] = useState<string[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
+  const [districts, setDistricts] = useState<string[]>([]);
   const [actions, setActions] = useState<string[]>([]);
 
   const { data, isLoading } = useGetDashboard({
-    filters: { farmers_ids: customers, regions, actions_types: actions },
+    filters: { farmers_ids: customers, regions, actions_types: actions, districts },
   });
 
   const financialSectionData = {
@@ -33,6 +34,7 @@ export const DashboardScreen = () => {
     <>
       <HStack w="100%" justify="flex-end">
         <CustomerFilter selectedValues={customers} onSelect={setCustomers} />
+        <DistrictFilter selectedValues={districts} onSelect={setDistricts} />
         <RegionFilter selectedValues={regions} onSelect={setRegions} />
         <ActionFilter selectedValues={actions} onSelect={setActions} />
       </HStack>

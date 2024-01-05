@@ -61,3 +61,4 @@ export { default as HouseIcon } from './House';
 export { default as ChevronCircleRightIcon } from './ChevronCircleRightIcon';
 export { default as BigDocumentIcon } from './BigDocumentIcon';
 export { default as CodeIcon } from './CodeIcon';
+export { default as GrouperIcon } from './GrouperIcon';
