@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, VStack, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Text, VStack, useDisclosure } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
@@ -41,6 +41,7 @@ export const NotificationBar = () => {
   const notifications = dataGetNotificationsByUser?.data ?? [];
   const isLoadingNotifications =
     isLoadingGetNotificationsByUser || isFetchingGetNotificationsByUser;
+  const hasNotifications = notifications.length > 0;
 
   const {
     isOpen: isOpenNotificationsDrawer,
@@ -59,10 +60,7 @@ export const NotificationBar = () => {
       bg="transparent"
       position="fixed"
       right={0}
-      pl="2.8rem"
-      pr="5.2rem"
       pt="5rem"
-      pb="2rem"
     >
       <Box
         w="1px"
@@ -73,17 +71,35 @@ export const NotificationBar = () => {
         left="0"
         top="0rem"
       />
-      <Flex w="100%" gap="5rem" flexDir="column">
+      <Flex w="100%" gap="3rem" flexDir="column" pr="2rem">
         <HeaderNotificationBar />
 
-        <VStack w="full" align="flex-start" spacing="1rem">
-          {isLoadingNotifications ? (
+        <VStack
+          h="full"
+          w="full"
+          align="flex-start"
+          spacing="1rem"
+          overflow="auto"
+          p="3rem"
+          pb="5rem"
+        >
+          {isLoadingNotifications && (
             <Fragment>
               {Array.from({ length: 5 }).map((_, i) => (
                 <NotificationCardSkeleton key={i} />
               ))}
             </Fragment>
-          ) : (
+          )}
+
+          {!isLoadingNotifications && !hasNotifications && (
+            <Center h="100%" w="full">
+              <Text maxW="18rem" align="center" fontSize="1.8rem">
+                Você não tem notificações no momento
+              </Text>
+            </Center>
+          )}
+
+          {!isLoadingNotifications && hasNotifications && (
             <Fragment>
               {notifications?.map(({ id, totalPlanning, missingPlanning, safra: { year } }) => (
                 <NotificationCard
@@ -93,14 +109,11 @@ export const NotificationBar = () => {
                   key={id}
                 />
               ))}
-            </Fragment>
-          )}
 
-          {!isLoadingNotifications && (
-            <>
               <Button
                 variant="fourth"
                 w="full"
+                minH="5.2rem"
                 color="text.brand"
                 px="2.4rem"
                 rightIcon={<ArrowRightIcon />}
@@ -117,7 +130,7 @@ export const NotificationBar = () => {
                   onClose={onCloseNotificationsDrawer}
                 />
               )}
-            </>
+            </Fragment>
           )}
         </VStack>
       </Flex>
