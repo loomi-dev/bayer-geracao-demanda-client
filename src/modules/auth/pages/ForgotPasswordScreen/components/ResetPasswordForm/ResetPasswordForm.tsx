@@ -1,12 +1,28 @@
-import { Box, Button, Text, VStack } from '@chakra-ui/react';
+import { Button, Text, VStack } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { CodeIcon, FormWrapper, LockClosedIcon, TextInput } from '@/components';
+import { useForgotPassword, useResetPassword } from '@/api';
+import {
+  CodeIcon,
+  FormWrapper,
+  LockClosedIcon,
+  MotionBox,
+  PasswordInput,
+  TextInput,
+} from '@/components';
+
+import { useForgotPasswordStore } from '../../stores';
 
 import { ResetPasswordFormSchemaType, resetPasswordFormSchema } from './ResetPasswordForm.schema';
 
 export const ResetPasswordForm = () => {
+  const { mutate: resetPassword, isLoading: isResettingCode } = useResetPassword();
+  const { mutate: resendCode, isLoading: isResendingCode } = useForgotPassword();
+  const [recoveryEmail, setForgotPasswordStep, setRecoveryEmail] = useForgotPasswordStore(
+    (state) => [state.recoveryEmail, state.setForgotPasswordStep, state.setRecoveryEmail],
+  );
+
   const {
     handleSubmit,
     register,
@@ -15,17 +31,48 @@ export const ResetPasswordForm = () => {
     resolver: zodResolver(resetPasswordFormSchema),
   });
 
-  const onSubmitResetPasswordForm = async (data) => {
-    console.log(data);
+  const onSubmitResetPasswordForm = ({
+    code,
+    password,
+    confirmPassword,
+  }: ResetPasswordFormSchemaType) => {
+    resetPassword(
+      {
+        code,
+        password,
+        passwordConfirmation: confirmPassword,
+      },
+      {
+        onSuccess: () => {
+          setForgotPasswordStep(2);
+        },
+      },
+    );
+  };
+
+  const handleResendCode = () => {
+    if (recoveryEmail) {
+      resendCode({ email: recoveryEmail });
+    }
+  };
+
+  const handleBackSendEmailStep = () => {
+    setForgotPasswordStep(0);
+    setRecoveryEmail(null);
   };
 
   return (
-    <Box
+    <MotionBox
       as="form"
       w="full"
       mt="1.6rem"
-      mb="3rem"
+      mb="6rem"
       onSubmit={handleSubmit(onSubmitResetPasswordForm)}
+      animate={{ y: [50, 0], opacity: [0, 1] }}
+      exit={{ y: [0, 50], opacity: [1, 0] }}
+      transition={{
+        duration: 0.4,
+      }}
     >
       <VStack align="flex-start" spacing="1.6rem">
         <Text textStyle="h1" lineHeight="4rem">
@@ -51,7 +98,7 @@ export const ResetPasswordForm = () => {
         </FormWrapper>
 
         <FormWrapper error={errors.password}>
-          <TextInput
+          <PasswordInput
             placeholder="Senha"
             size="xl"
             leftIcon={<LockClosedIcon />}
@@ -64,7 +111,7 @@ export const ResetPasswordForm = () => {
         </FormWrapper>
 
         <FormWrapper error={errors.confirmPassword}>
-          <TextInput
+          <PasswordInput
             placeholder="Confirmação de senha"
             size="xl"
             leftIcon={<LockClosedIcon />}
@@ -78,14 +125,30 @@ export const ResetPasswordForm = () => {
       </VStack>
 
       <VStack spacing="2.4rem">
-        <Button type="submit" w="full" fontSize="1.8rem">
+        <Button
+          type="submit"
+          w="full"
+          fontSize="1.8rem"
+          isDisabled={isResendingCode}
+          isLoading={isResettingCode}
+        >
           Redefinir a senha
         </Button>
 
-        <Button variant="eighth" w="full">
+        <Button
+          variant="eighth"
+          w="full"
+          onClick={handleResendCode}
+          isDisabled={isResettingCode}
+          isLoading={isResendingCode}
+        >
           Enviar o código novamente
         </Button>
+
+        <Button variant="unstyled" fontSize="1.6rem" onClick={handleBackSendEmailStep}>
+          Voltar
+        </Button>
       </VStack>
-    </Box>
+    </MotionBox>
   );
 };

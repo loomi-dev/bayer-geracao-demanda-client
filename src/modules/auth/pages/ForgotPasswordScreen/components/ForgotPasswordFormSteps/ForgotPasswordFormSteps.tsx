@@ -1,9 +1,14 @@
 import { Flex, Text } from '@chakra-ui/react';
 
-export const ForgotPasswordFormSteps = () => (
-  <Flex w="full" justify="flex-start">
+type ForgotPasswordFormStepsProps = {
+  step: number;
+  totalSteps;
+};
+
+export const ForgotPasswordFormSteps = ({ step, totalSteps }: ForgotPasswordFormStepsProps) => (
+  <Flex w="full" justify="space-between">
     <Text textStyle="action1" color="text.brand">
-      1 de 3
+      {step} de {totalSteps}
     </Text>
   </Flex>
 );
