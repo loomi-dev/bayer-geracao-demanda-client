@@ -1,5 +1,7 @@
 import { Button, Text, VStack } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Head from 'next/head';
+import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useForgotPassword, useResetPassword } from '@/api';
@@ -62,93 +64,99 @@ export const ResetPasswordForm = () => {
   };
 
   return (
-    <MotionBox
-      as="form"
-      w="full"
-      mt="1.6rem"
-      mb="6rem"
-      onSubmit={handleSubmit(onSubmitResetPasswordForm)}
-      animate={{ y: [50, 0], opacity: [0, 1] }}
-      exit={{ y: [0, 50], opacity: [1, 0] }}
-      transition={{
-        duration: 0.4,
-      }}
-    >
-      <VStack align="flex-start" spacing="1.6rem">
-        <Text textStyle="h1" lineHeight="4rem">
-          Digite seu código
-        </Text>
-        <Text textStyle="body1" opacity="0.6" maxW="33rem" lineHeight="2.4rem">
-          Enviamos para seu e-mail um código para redefinir a senha
-        </Text>
-      </VStack>
+    <Fragment>
+      <Head>
+        <title>Redefinir senha - Top Multiplicadores</title>
+      </Head>
 
-      <VStack w="full" spacing="1.6rem" my="4rem">
-        <FormWrapper error={errors.code}>
-          <TextInput
-            placeholder="Código recebido"
-            size="xl"
-            leftIcon={<CodeIcon />}
-            _placeholder={{
-              fontSize: '1.8rem',
-              color: 'greyscale.600',
-            }}
-            {...register('code')}
-          />
-        </FormWrapper>
+      <MotionBox
+        as="form"
+        w="full"
+        mt="1.6rem"
+        mb="6rem"
+        onSubmit={handleSubmit(onSubmitResetPasswordForm)}
+        animate={{ y: [50, 0], opacity: [0, 1] }}
+        exit={{ y: [0, 50], opacity: [1, 0] }}
+        transition={{
+          duration: 0.4,
+        }}
+      >
+        <VStack align="flex-start" spacing="1.6rem">
+          <Text textStyle="h1" lineHeight="4rem">
+            Digite seu código
+          </Text>
+          <Text textStyle="body1" opacity="0.6" maxW="33rem" lineHeight="2.4rem">
+            Enviamos para seu e-mail um código para redefinir a senha
+          </Text>
+        </VStack>
 
-        <FormWrapper error={errors.password}>
-          <PasswordInput
-            placeholder="Senha"
-            size="xl"
-            leftIcon={<LockClosedIcon />}
-            _placeholder={{
-              fontSize: '1.8rem',
-              color: 'greyscale.600',
-            }}
-            {...register('password')}
-          />
-        </FormWrapper>
+        <VStack w="full" spacing="1.6rem" my="4rem">
+          <FormWrapper error={errors.code}>
+            <TextInput
+              placeholder="Código recebido"
+              size="xl"
+              leftIcon={<CodeIcon />}
+              _placeholder={{
+                fontSize: '1.8rem',
+                color: 'greyscale.600',
+              }}
+              {...register('code')}
+            />
+          </FormWrapper>
 
-        <FormWrapper error={errors.confirmPassword}>
-          <PasswordInput
-            placeholder="Confirmação de senha"
-            size="xl"
-            leftIcon={<LockClosedIcon />}
-            _placeholder={{
-              fontSize: '1.8rem',
-              color: 'greyscale.600',
-            }}
-            {...register('confirmPassword')}
-          />
-        </FormWrapper>
-      </VStack>
+          <FormWrapper error={errors.password}>
+            <PasswordInput
+              placeholder="Senha"
+              size="xl"
+              leftIcon={<LockClosedIcon />}
+              _placeholder={{
+                fontSize: '1.8rem',
+                color: 'greyscale.600',
+              }}
+              {...register('password')}
+            />
+          </FormWrapper>
 
-      <VStack spacing="2.4rem">
-        <Button
-          type="submit"
-          w="full"
-          fontSize="1.8rem"
-          isDisabled={isResendingCode}
-          isLoading={isResettingCode}
-        >
-          Redefinir a senha
-        </Button>
+          <FormWrapper error={errors.confirmPassword}>
+            <PasswordInput
+              placeholder="Confirmação de senha"
+              size="xl"
+              leftIcon={<LockClosedIcon />}
+              _placeholder={{
+                fontSize: '1.8rem',
+                color: 'greyscale.600',
+              }}
+              {...register('confirmPassword')}
+            />
+          </FormWrapper>
+        </VStack>
 
-        <Button
-          variant="eighth"
-          w="full"
-          onClick={handleResendCode}
-          isDisabled={isResettingCode}
-          isLoading={isResendingCode}
-        >
-          Enviar o código novamente
-        </Button>
+        <VStack spacing="2.4rem">
+          <Button
+            type="submit"
+            w="full"
+            fontSize="1.8rem"
+            isDisabled={isResendingCode}
+            isLoading={isResettingCode}
+          >
+            Redefinir a senha
+          </Button>
 
-        <Button variant="unstyled" fontSize="1.6rem" onClick={handleBackSendEmailStep}>
-          Voltar
-        </Button>
-      </VStack>
-    </MotionBox>
+          <Button
+            variant="eighth"
+            w="full"
+            onClick={handleResendCode}
+            isDisabled={isResettingCode}
+            isLoading={isResendingCode}
+          >
+            Enviar o código novamente
+          </Button>
+
+          <Button variant="unstyled" fontSize="1.6rem" onClick={handleBackSendEmailStep}>
+            Voltar
+          </Button>
+        </VStack>
+      </MotionBox>
+    </Fragment>
   );
 };
