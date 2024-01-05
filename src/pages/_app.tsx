@@ -98,7 +98,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
       <ChakraProvider theme={theme} toastOptions={toastOptions}>
         <QueryClientProvider client={queryClient}>
-          <SessionProvider>
+          <SessionProvider session={pageProps.session}>
             <Hydrate state={pageProps.dehydratedState}>
               {getLayout(
                 <AnimatePresence mode="wait">

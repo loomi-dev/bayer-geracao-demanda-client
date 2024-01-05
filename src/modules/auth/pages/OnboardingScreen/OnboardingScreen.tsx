@@ -36,6 +36,7 @@ const benefits = {
   Manager: managerBenefits,
   Farmer: farmerBenefits,
 };
+
 export const OnboardingScreen = () => {
   const session = useSession();
   const { push } = useRouter();
