@@ -13,6 +13,7 @@ declare module 'next-auth' {
     farmer?: Farmer;
     manager?: Manager;
     safra: Harvest;
+    photo: FileDocument;
   }
 
   interface Session extends DefaultSession {
@@ -33,6 +34,7 @@ declare module 'next-auth/jwt' {
       lastAccess?: string;
       farmer?: Farmer;
       manager?: Manager;
+      photo: FileDocument;
     };
   }
 }

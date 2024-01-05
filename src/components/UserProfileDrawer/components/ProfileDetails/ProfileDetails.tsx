@@ -15,7 +15,6 @@ type ProfileDetailProps = {
 export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
   const session = useSession();
   const user = session.data?.user;
-
   return (
     <Flex as="form" w="100%" h="100%" flexDir="column" justify="space-between">
       <Flex
@@ -31,7 +30,7 @@ export const ProfileDetails = ({ onEdit }: ProfileDetailProps) => {
         <Text textStyle="footnote-bold" textTransform="uppercase">
           informações pessoais
         </Text>
-        <ProfileImage>
+        <ProfileImage src={user?.photo?.url}>
           <Button onClick={onEdit} w="18rem" size="md">
             Editar perfil
           </Button>

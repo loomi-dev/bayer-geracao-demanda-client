@@ -45,6 +45,7 @@ type User = {
   farmer?: Farmer;
   manager?: Manager;
   safra: Harvest;
+  photo: FileDocument;
 };
 type PlanningSummary = {
   id: number;

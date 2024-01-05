@@ -31,7 +31,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const inputImageRef = useRef<HTMLInputElement>(null);
   const user = session.data?.user;
   const isManager = user?.role === 'Manager';
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState(user?.photo.url);
   const [fileImage, setFileImage] = useState<File>({} as File);
 
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
@@ -64,8 +64,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const onSubmitEditProfileForm = async (data: FormSchemaType) => {
     let imageId: number | undefined;
-
-    if (fileImage) {
+    if (fileImage.size) {
       const image = await uploadFileImage({ files: [fileImage] });
       imageId = image[0].id;
     }
@@ -94,14 +93,29 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
       );
       return;
     }
-    updateFarmer({
-      farmerId: Number(user?.farmer?.id),
-      username: data.username,
-      email: data.email,
-      companyPosition: data.companyPosition,
-      phoneNumber: data.phoneNumber,
-      imageId,
-    });
+    updateFarmer(
+      {
+        farmerId: Number(user?.farmer?.id),
+        username: data.username,
+        email: data.email,
+        companyPosition: data.companyPosition,
+        phoneNumber: data.phoneNumber,
+        imageId,
+      },
+      {
+        onSuccess: () =>
+          toast({
+            description: 'Seus dados foram atualizados com sucesso!',
+            status: 'success',
+          }),
+        onError: () => {
+          toast({
+            description: 'Ocorreu um erro ao atualizar seus dados.',
+            status: 'error',
+          });
+        },
+      },
+    );
   };
 
   return (
@@ -137,9 +151,7 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
                 onChange={handleImageChange}
               />
               <CircleIcon
-                onClick={() => {
-                  console.log(inputImageRef.current?.click());
-                }}
+                onClick={() => inputImageRef.current?.click()}
                 position="absolute"
                 bottom="1rem"
                 right="0.5rem"

@@ -2,6 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'top-multiplicadores-stage.s3.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     unoptimized: true,
   },
   swcMinify: false,
