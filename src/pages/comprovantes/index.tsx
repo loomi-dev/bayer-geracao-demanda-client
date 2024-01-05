@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import { BigDocumentIcon, Header, ImageIcon } from '@/components';
@@ -9,8 +10,9 @@ import { ReceiptsScreenManager, ReceiptsScreenFarmer } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 
-const Page: NextPageWithLayout = (props) => {
-  const isManager = props?.role === 'Manager';
+const Page: NextPageWithLayout = () => {
+  const session = useSession();
+  const isManager = session.data?.user?.role === 'Manager';
 
   if (isManager) {
     return (
@@ -39,9 +41,10 @@ Page.getLayout = function getLayout(page) {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
+
   return {
     props: {
-      role: session?.user.role,
+      session,
     },
   };
 };

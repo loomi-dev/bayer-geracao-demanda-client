@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, HStack, Text, VStack, useToast } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,7 +6,16 @@ import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import { useUpdateManager } from '@/api';
-import { ArrowRightIcon, AuthBanner, CircleIcon } from '@/components';
+import {
+  ArrowRightIcon,
+  AuthBanner,
+  CircleIcon,
+  MotionBox,
+  MotionButton,
+  MotionFlex,
+  MotionStack,
+  MotionText,
+} from '@/components';
 import { DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 
 import { Benefit, DividerBenefit } from './components';
@@ -26,6 +35,7 @@ const benefits = {
   Manager: managerBenefits,
   Farmer: farmerBenefits,
 };
+
 export const OnboardingScreen = () => {
   const session = useSession();
   const { push } = useRouter();
@@ -65,22 +75,38 @@ export const OnboardingScreen = () => {
     <Flex minH="100%" position="relative" overflow="hidden">
       <AuthBanner />
 
-      <Flex
+      <MotionFlex
         direction="column"
         align="center"
         justify="center"
         bg="linear-gradient(187deg, #FFF 40.98%, rgba(255, 255, 255, 0.00) 153.35%)"
         backdropFilter="blur(27px)"
         borderRadius="0 2.8rem 2.8rem 0"
-        maxW="65%"
-        w="full"
+        width="full"
         py="10rem"
         px={{ base: '2rem', '2xl': '9.6rem' }}
         position="relative"
+        transition={{ duration: 1.8, ease: 'easeInOut' }}
+        animate={{ maxWidth: ['100%', '63%', '65%'] }}
       >
-        <Image src="/assets/images/logo.webp" alt="" width={80} height={80} />
+        <MotionBox
+          animate={{
+            y: [300, 0],
+            x: [300, 0],
+            z: [300, 0],
+            opacity: [0, 1],
+            rotateZ: [-200, 0],
+          }}
+          transition={{
+            ease: 'easeInOut',
+            duration: 1,
+            delay: 0.3,
+          }}
+        >
+          <Image src="/assets/images/logo.webp" alt="" width={80} height={80} />
+        </MotionBox>
 
-        <Text
+        <MotionText
           fontSize="3.6rem"
           fontWeight="normal"
           color="text.footnote"
@@ -88,14 +114,29 @@ export const OnboardingScreen = () => {
           align="center"
           mt="5.4rem"
           lineHeight="4rem"
+          transition={{
+            ease: 'easeInOut',
+            duration: 1.15,
+            delay: 0.6,
+          }}
+          animate={{ opacity: [0, 1], y: [100, -10, 0] }}
         >
           Desejamos nossas boas vindas ao <br />
           <Text as="strong">programa de resgate de iniciativas</Text> do programa top
           multiplicadores de <br />
           soja da Bayer
-        </Text>
+        </MotionText>
 
-        <VStack mt="11.4rem">
+        <MotionStack
+          align="center"
+          mt="11.4rem"
+          transition={{
+            ease: 'easeInOut',
+            duration: 1,
+            delay: 0.75,
+          }}
+          animate={{ opacity: [0, 1], y: [100, -20, 0] }}
+        >
           <Text textStyle="action4" color="surface.brand" textTransform="uppercase">
             Aqui você vai poder
           </Text>
@@ -112,10 +153,10 @@ export const OnboardingScreen = () => {
               </Fragment>
             ))}
           </HStack>
-        </VStack>
+        </MotionStack>
 
         <Link href={redirectURL} legacyBehavior passHref>
-          <Button
+          <MotionButton
             as="a"
             mt="11.4rem"
             variant="white"
@@ -129,19 +170,31 @@ export const OnboardingScreen = () => {
                 <ArrowRightIcon color="#fff" />
               </CircleIcon>
             }
+            transition={{
+              ease: 'easeInOut',
+              duration: 0.75,
+              delay: 0.9,
+            }}
+            animate={{ opacity: [0, 1], y: [100, -20, 0] }}
           >
             <Text as="span" textStyle="body1" color="text.footnote" w="full" align="center">
               Acessar a plataforma
             </Text>
-          </Button>
+          </MotionButton>
         </Link>
 
-        <Center
+        <MotionFlex
           position="absolute"
           bottom="-0"
           right={{ base: '-41rem', '3xl': '-50rem' }}
           alignItems="flex-end"
           justifyContent="flex-end"
+          transition={{
+            ease: 'easeInOut',
+            duration: 0.5,
+            delay: 0.45,
+          }}
+          animate={{ x: [180, -20, 0] }}
         >
           <Box
             w={{ base: '48rem', '3xl': '60.5rem' }}
@@ -157,8 +210,8 @@ export const OnboardingScreen = () => {
               }}
             />
           </Box>
-        </Center>
-      </Flex>
+        </MotionFlex>
+      </MotionFlex>
     </Flex>
   );
 };

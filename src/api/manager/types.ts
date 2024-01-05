@@ -11,7 +11,8 @@ export type UpdateManagerData = {
 export type UpdateManagerResponse = {
   data: {
     manager: Manager;
-    jwt: string;
+    accessToken: string;
+    refreshToken: string;
     user: User;
   };
 };
