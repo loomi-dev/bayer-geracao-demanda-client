@@ -16,13 +16,14 @@ export const useUpdateManager = (options?: MutOpt<UpdateManagerResponse, UpdateM
     mutationFn: async (userData) => {
       const newUser = await updateManager(userData);
       const {
-        data: { jwt: accessToken, user, manager },
+        data: { accessToken, refreshToken, user, manager },
       } = newUser;
 
       const newUserSession: User = {
         ...user,
         manager,
         accessToken,
+        refreshToken,
       };
 
       await updateSession(newUserSession);

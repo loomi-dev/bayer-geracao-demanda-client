@@ -23,7 +23,7 @@ export const useUpdateFarmer = (options?: MutOpt<UpdateFarmerResponse, UpdateFar
       if (!harvest) throw new Error('Occurred error when login');
 
       const {
-        data: { jwt: accessToken, user, farmer },
+        data: { accessToken, refreshToken, user, farmer },
       } = newUser;
 
       const newUserSession: User = {
@@ -31,6 +31,7 @@ export const useUpdateFarmer = (options?: MutOpt<UpdateFarmerResponse, UpdateFar
         farmer,
         safra: harvest,
         accessToken,
+        refreshToken,
       };
 
       await updateSession(newUserSession);

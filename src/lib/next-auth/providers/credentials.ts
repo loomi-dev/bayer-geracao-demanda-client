@@ -10,11 +10,15 @@ export const credentialsProvider = CredentialsProvider({
     const { identifier, password } = credentials as Credentials;
 
     try {
-      const { jwt, user } = await loginWithCredentials({ identifier, password });
+      const { accessToken, refreshToken, user } = await loginWithCredentials({
+        identifier,
+        password,
+      });
 
       return {
         ...user,
-        accessToken: jwt,
+        accessToken,
+        refreshToken,
       };
     } catch (err) {
       const error = err as ApiServiceErr;
