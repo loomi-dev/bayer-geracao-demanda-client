@@ -94,14 +94,17 @@ export const NotificationsDrawer = ({ ...restProps }: NotificationsDrawerProps) 
             </Fragment>
           ) : (
             <Fragment>
-              {notifications.map(({ id, missingPlanning, totalPlanning, safra: { year } }) => (
-                <NotificationCard
-                  harvestYear={year ?? ''}
-                  missingPlanning={missingPlanning}
-                  totalPlanning={totalPlanning}
-                  key={id}
-                />
-              ))}
+              {notifications.map(
+                ({ id, missingPlanning, totalPlanning, safra: { year }, planning }) => (
+                  <NotificationCard
+                    harvestYear={year ?? ''}
+                    missingPlanning={missingPlanning}
+                    totalPlanning={totalPlanning}
+                    planning={planning}
+                    key={id}
+                  />
+                ),
+              )}
 
               {(hasNextPage || isLoadingNotifications) && (
                 <Center mt="1rem">
