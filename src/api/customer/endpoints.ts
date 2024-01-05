@@ -17,7 +17,7 @@ export const getCustomerPlanningsByUserId = async ({
         },
       },
       ...((filter?.regions ?? []).length > 0 ? { region: { $in: filter?.regions } } : {}),
-      ...(filter?.district ? { district: { $eq: filter?.district } } : {}),
+      ...(filter?.districts?.length ? { district: { name: { $in: filter?.districts } } } : {}),
       ...(filter?.search
         ? {
             $or: [

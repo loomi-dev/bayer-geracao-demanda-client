@@ -1,5 +1,8 @@
 import { useDisclosure } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
+import { useGetDistricts } from '@/api/farmer/queries/useGetDistricts';
 import {
   BaseFilter,
   FilterBody,
@@ -7,17 +10,39 @@ import {
   FilterFooter,
   FilterSearchInput,
   FilterOption,
-  FilterOptionProps,
   FilterTrigger,
 } from '@/components/BaseFilter';
 import { ChevronDownIcon, ChevronTopIcon, MapMarkerIcon } from '@/components/icons';
 
 type DistrictFilterProps = {
-  options?: FilterOptionProps[];
+  selectedValues: string[];
+  onSelect: Dispatch<SetStateAction<string[]>>;
 };
-export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
+export const DistrictFilter = ({ selectedValues, onSelect }: DistrictFilterProps) => {
+  const session = useSession();
+  const managerId = session.data?.user.manager?.id as number;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data } = useGetDistricts({ managerId: 39 }, { enabled: Boolean(39) });
+  const [search, setSearch] = useState('');
+  const filterOptions = data?.data ?? [];
+
+  const filteredDistricts = filterOptions.filter((filterOption) =>
+    filterOption?.name?.includes(search),
+  );
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
+
+  const handleSelectOption = (e: ChangeEvent<HTMLInputElement>) => {
+    const district = e.target.value;
+    const isAlreadySelected = selectedValues.includes(district);
+    if (isAlreadySelected) {
+      onSelect(selectedValues.filter((item: string) => item !== district));
+      return;
+    }
+
+    onSelect((districts) => [...districts, district]);
+  };
   return (
     <BaseFilter placement="bottom-end" isOpen={isOpen} onClose={onClose}>
       <FilterTrigger
@@ -28,20 +53,20 @@ export const DistrictFilter = ({ options = [] }: DistrictFilterProps) => {
         rightIcon={isOpen ? <ChevronTopIcon /> : <ChevronDownIcon />}
       />
       <FilterContent w="28rem" overflowY="auto">
-        <FilterSearchInput placeholder="Pesquisar por distrito" />
+        <FilterSearchInput onChange={handleSearch} placeholder="Pesquisar por distrito" />
         <FilterBody h="28rem" overflowY="auto">
-          {options.map((option) => (
+          {filteredDistricts.map((option) => (
             <FilterOption
-              key={option.value}
-              label={option.label}
-              subLabel={option.subLabel}
-              value={option.value}
+              checkboxProps={{ onChange: handleSelectOption }}
+              key={option.name}
+              label={option.name}
+              value={option.name}
             />
           ))}
         </FilterBody>
         <FilterFooter
-          label={options.length > 1 ? 'Distritos' : 'Distrito'}
-          value={options.length}
+          label={filteredDistricts.length > 1 ? 'Distritos' : 'Distrito'}
+          value={filteredDistricts.length}
         />
       </FilterContent>
     </BaseFilter>
