@@ -34,7 +34,7 @@ const errors = {
     description:
       'O planejamento que voce tentou enviar tem um valor abaixo de 95% do seu saldo, aumente o valor do planejamento',
   },
-  NOT_ENOUGHT_BALANCE: {
+  NOT_ENOUGH_BALANCE: {
     title: 'Saldo insuficiente',
     description:
       'A ação que você está tentando criar possui um valor acima do seu saldo, reduza o valor da ação ou contate o suporte',
