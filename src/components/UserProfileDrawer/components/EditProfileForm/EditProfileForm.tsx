@@ -1,9 +1,10 @@
-import { Button, Flex, HStack, Text, useToast } from '@chakra-ui/react';
+import { Button, Flex, HStack, Input, Text, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { useUpdateFarmer, useUpdateManager } from '@/api';
+import { useUpdateFarmer, useUpdateManager, useUploadFile } from '@/api';
 import { CircleIcon } from '@/components/CircleIcon';
 import { EditIcon } from '@/components/icons';
 
@@ -27,12 +28,17 @@ export type FormSchemaType = ManagerProfileFormSchemaType & FarmerProfileFormSch
 export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
   const session = useSession();
   const toast = useToast();
+  const inputImageRef = useRef<HTMLInputElement>(null);
   const user = session.data?.user;
   const isManager = user?.role === 'Manager';
+  const [avatar, setAvatar] = useState(user?.photo?.url);
+  const [fileImage, setFileImage] = useState<File>({} as File);
+
   const { mutate: updateFarmer, isLoading: isUpdatingUser } = useUpdateFarmer();
   const { mutate: updateManager, isLoading: isUpdatingManager } = useUpdateManager();
-  const formSchema = isManager ? managerProfileFormSchema : farmerProfileFormSchema;
+  const { mutateAsync: uploadFileImage, isLoading: isLoadingUploadFile } = useUploadFile();
 
+  const formSchema = isManager ? managerProfileFormSchema : farmerProfileFormSchema;
   const methods = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     mode: 'all',
@@ -41,38 +47,77 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
 
   const { handleSubmit } = methods;
 
-  const onSubmitEditProfileForm = (data: FormSchemaType) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setAvatar(reader.result as string);
+    };
+    if (file) {
+      setFileImage(file);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const onSuccessEdit = () => {
+    setFileImage({} as File);
+    toast({
+      description: 'Seus dados foram atualizados com sucesso!',
+      status: 'success',
+    });
+  };
+
+  const onErrorEdit = () => {
+    toast({
+      description: 'Ocorreu um erro ao atualizar seus dados.',
+      status: 'error',
+    });
+  };
+
+  const uploadUserImage = async () => {
+    if (fileImage) {
+      const image = await uploadFileImage({ files: [fileImage] });
+      return image[0].id;
+    }
+    return null;
+  };
+
+  const onSubmitEditProfileForm = async (data: FormSchemaType) => {
+    const imageId = await uploadUserImage();
+
     if (isManager) {
       updateManager(
         {
           managerId: Number(user?.manager?.id),
-          username: data.username,
-          email: data.email,
-          phoneNumber: data.phoneNumber,
+          ...(data.username === user?.username ? {} : { username: data.username }),
+          ...(data.email === user?.email ? {} : { email: data.email }),
+          ...(data.phoneNumber === user?.phoneNumber ? {} : { phoneNumber: data.phoneNumber }),
+          ...(imageId ? { imageId } : {}),
         },
         {
-          onSuccess: () =>
-            toast({
-              description: 'Seus dados foram atualizados com sucesso!',
-              status: 'success',
-            }),
-          onError: () => {
-            toast({
-              description: 'Ocorreu um erro ao atualizar seus dados.',
-              status: 'error',
-            });
-          },
+          onSuccess: onSuccessEdit,
+          onError: onErrorEdit,
         },
       );
       return;
     }
-    updateFarmer({
-      farmerId: Number(user?.farmer?.id),
-      username: data.username,
-      email: data.email,
-      companyPosition: data.companyPosition,
-      phoneNumber: data.phoneNumber,
-    });
+    updateFarmer(
+      {
+        farmerId: Number(user?.farmer?.id),
+        ...(data.username === user?.username ? {} : { username: data.username }),
+        ...(data.companyPosition === user?.farmer?.company_position
+          ? {}
+          : { companyPosition: data.companyPosition }),
+        ...(data.email === user?.email ? {} : { email: data.email }),
+        ...(data.phoneNumber === user?.phoneNumber ? {} : { phoneNumber: data.phoneNumber }),
+        ...(imageId ? { imageId } : {}),
+      },
+      {
+        onSuccess: onSuccessEdit,
+        onError: onErrorEdit,
+      },
+    );
   };
 
   return (
@@ -99,8 +144,22 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
         </Text>
         <Flex flexDir="column" w="100%">
           <Flex justify="center">
-            <ProfileImage border="none" position="relative" w="fit-content">
-              <CircleIcon position="absolute" bottom="1rem" right="0.5rem" boxSize="4rem">
+            <ProfileImage src={avatar} border="none" position="relative" w="fit-content">
+              <Input
+                hidden
+                ref={inputImageRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              <CircleIcon
+                onClick={() => inputImageRef.current?.click()}
+                position="absolute"
+                bottom="1rem"
+                right="0.5rem"
+                boxSize="4rem"
+                _hover={{ opacity: '0.7', cursor: 'pointer' }}
+              >
                 <EditIcon color="white" />
               </CircleIcon>
             </ProfileImage>
@@ -115,7 +174,11 @@ export const EditProfileForm = ({ onCancel }: EditProfileFormProps) => {
           <Button variant="sixth" bgColor="surface.secondary" minW="18rem" onClick={onCancel}>
             Voltar
           </Button>
-          <Button isLoading={isUpdatingUser || isUpdatingManager} type="submit" minW="18rem">
+          <Button
+            isLoading={isUpdatingUser || isUpdatingManager || isLoadingUploadFile}
+            type="submit"
+            minW="18rem"
+          >
             Salvar Alterações
           </Button>
         </HStack>

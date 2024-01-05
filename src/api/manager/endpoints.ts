@@ -27,6 +27,7 @@ export const updateManager = async ({
   phoneNumber,
   email,
   confirmed,
+  imageId,
 }: UpdateManagerData): Promise<UpdateManagerResponse> => {
   const { data } = await axios.authorized().put(`/managers/${managerId}`, {
     data: {
@@ -34,6 +35,7 @@ export const updateManager = async ({
       email,
       phoneNumber,
       confirmed,
+      photo: imageId,
     },
   });
 
