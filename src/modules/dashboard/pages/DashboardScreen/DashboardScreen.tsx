@@ -19,7 +19,7 @@ export const DashboardScreen = () => {
     initialResource: data?.data.plannedActionsAmountAvailable ?? 0,
     finalResource: data?.data.plannedActionsAmountUsed ?? 0,
     balance:
-      (data?.data.plannedActionsAmountUsed ?? 0) - (data?.data.plannedActionsAmountAvailable ?? 0),
+      (data?.data.plannedActionsAmountAvailable ?? 0) - (data?.data.plannedActionsAmountUsed ?? 0),
     proven: data?.data.plannedActionsAmountComproved ?? 0,
   };
   const actionsResumeSectionData = {
