@@ -7,12 +7,14 @@ declare module 'next-auth' {
     email: string;
     confirmed: boolean;
     accessToken: string;
+    refreshToken: string;
     role: Roles;
     phoneNumber?: string;
     lastAccess?: string;
     farmer?: Farmer;
     manager?: Manager;
     safra: Harvest;
+    photo: FileDocument;
   }
 
   interface Session extends DefaultSession {
@@ -28,11 +30,13 @@ declare module 'next-auth/jwt' {
       email: string;
       confirmed: boolean;
       accessToken: string;
+      refreshToken: string;
       role: Roles;
       phoneNumber?: string;
       lastAccess?: string;
       farmer?: Farmer;
       manager?: Manager;
+      photo: FileDocument;
     };
   }
 }

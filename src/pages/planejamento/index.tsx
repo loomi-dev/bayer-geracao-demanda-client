@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
+import { useSession } from 'next-auth/react';
 
 import { BigCalendarIcon, CircleIcon, Header } from '@/components';
 import { LayoutWithNotifications, LayoutWithoutNotifications } from '@/layouts';
@@ -8,10 +9,13 @@ import { KanbanScreen, PlanningScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 
-const Page: NextPageWithLayout = (props) => {
-  if (props.role === 'Farmer')
+const Page: NextPageWithLayout = () => {
+  const session = useSession();
+  const isManager = session.data?.user?.role === 'Manager';
+
+  if (isManager) {
     return (
-      <LayoutWithNotifications title="Planejamento - Top Multiplicadores">
+      <LayoutWithoutNotifications title="Planejamento - Top Multiplicadores">
         <Header
           label="Planejamento"
           icon={
@@ -20,12 +24,13 @@ const Page: NextPageWithLayout = (props) => {
             </CircleIcon>
           }
         />
-        <PlanningScreen />
-      </LayoutWithNotifications>
+        <KanbanScreen />
+      </LayoutWithoutNotifications>
     );
+  }
 
   return (
-    <LayoutWithoutNotifications title="Planejamento - Top Multiplicadores">
+    <LayoutWithNotifications title="Planejamento - Top Multiplicadores">
       <Header
         label="Planejamento"
         icon={
@@ -34,8 +39,8 @@ const Page: NextPageWithLayout = (props) => {
           </CircleIcon>
         }
       />
-      <KanbanScreen />
-    </LayoutWithoutNotifications>
+      <PlanningScreen />
+    </LayoutWithNotifications>
   );
 };
 
@@ -43,9 +48,10 @@ export default Page;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions);
+
   return {
     props: {
-      role: session?.user.role,
+      session,
     },
   };
 };

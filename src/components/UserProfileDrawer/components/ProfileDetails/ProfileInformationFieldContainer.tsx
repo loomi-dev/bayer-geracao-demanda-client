@@ -10,12 +10,12 @@ export const ProfileInformationFieldContainer = ({
   ...props
 }: ProfileInformationFieldContainerProps) => (
   <HStack
-    py="1.6rem"
     borderBottom="1px solid"
     borderBottomColor="greyscale.600"
     justify="space-between"
     w="100%"
-    h="8.1rem"
+    py="1rem"
+    align="flex-start"
     {...props}
   >
     {children}

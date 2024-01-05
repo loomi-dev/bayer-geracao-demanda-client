@@ -15,8 +15,7 @@ export const useUploadFile = (options?: MutOpt<UploadFileResponse>) => {
     mutationKey: ['upload-file'],
     onError: () => {
       toast({
-        description:
-          'Ocorreu um erro ao enviar o comprovante, tente novamente ou contate o suporte.',
+        description: 'Ocorreu um erro ao enviar o arquivo, tente novamente ou contate o suporte.',
         status: 'error',
       });
     },

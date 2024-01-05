@@ -39,7 +39,23 @@ export const LoginForm = () => {
   };
 
   return (
-    <Box as="form" mt="5.4rem" maxW="48.5rem" w="full" onSubmit={handleSubmit(onSubmitLogin)}>
+    <Box as="form" w="full" onSubmit={handleSubmit(onSubmitLogin)}>
+      <VStack mb="5.4rem" spacing="0">
+        <Text textStyle="action3" lineHeight="2rem" color="text.primary" letterSpacing="1px">
+          TROQUE SEUS PONTOS
+        </Text>
+        <Text
+          textStyle="h1"
+          fontWeight="normal"
+          lineHeight="4rem"
+          color="text.footnote"
+          mt="0.7rem"
+          letterSpacing="2px"
+        >
+          Plataformas de pontos
+        </Text>
+      </VStack>
+
       <VStack spacing="2.4rem" mb="1rem">
         <FormWrapper error={errors.identifier}>
           <TextInput
@@ -48,6 +64,10 @@ export const LoginForm = () => {
             mask={Mask.formatCNPJ}
             maskEnabled={identifierValueIsOnlyNumber}
             leftIcon={<PersonIcon />}
+            _placeholder={{
+              fontSize: '1.8rem',
+              color: 'greyscale.600',
+            }}
             {...register('identifier')}
           />
         </FormWrapper>
@@ -57,12 +77,16 @@ export const LoginForm = () => {
             placeholder="Senha"
             size="xl"
             leftIcon={<LockClosedIcon />}
+            _placeholder={{
+              fontSize: '1.8rem',
+              color: 'greyscale.600',
+            }}
             {...register('password')}
           />
         </FormWrapper>
       </VStack>
 
-      <Link href="/esqueceu-a-senha" passHref legacyBehavior>
+      <Link href="/recuperar-senha" passHref legacyBehavior>
         <Text
           as="a"
           textStyle="caption3"

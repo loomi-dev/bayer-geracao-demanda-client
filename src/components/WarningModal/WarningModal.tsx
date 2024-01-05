@@ -15,11 +15,36 @@ import {
 import { WarningIcon } from '@/components';
 
 type WarningModalProps = {
-  title: string;
-  description: string;
+  errorCode: string;
 } & Omit<ModalProps, 'children'>;
 
-export const WarningModal = ({ title, description, onClose, ...restProps }: WarningModalProps) => (
+const errors = {
+  PLANNING_ALREADY_EXIST: {
+    title: 'Não é possível criar mais planejamentos para esta safra',
+    description:
+      'Um dos seus planejamentos já foi aprovado para esta safra, não será possível criar novos planejamentos nem os enviar para aprovação',
+  },
+  EMAIL_ALREADY_TAKEN: {
+    title: 'O email ja está sendo utilizado',
+    description: 'Por favor, selecione outro email',
+  },
+  INSUFFICIENT_FUNDS: {
+    title: 'Você não tem saldo disponível',
+    description:
+      'O planejamento que voce tentou enviar tem um valor acima do seu saldo disponível, tente diminuir o valor ou contate o suporte',
+  },
+  MINIMUM_FUNDS_NOT_REACHED: {
+    title: 'Valor do planejamento insuficiente',
+    description:
+      'O planejamento que voce tentou enviar tem um valor abaixo de 95% do seu saldo, aumente o valor do planejamento',
+  },
+  NOT_ENOUGH_BALANCE: {
+    title: 'Saldo insuficiente',
+    description:
+      'A ação que você está tentando criar possui um valor acima do seu saldo, reduza o valor da ação ou contate o suporte',
+  },
+};
+export const WarningModal = ({ errorCode, onClose, ...restProps }: WarningModalProps) => (
   <Modal onClose={onClose} isCentered {...restProps}>
     <ModalOverlay />
 
@@ -32,13 +57,13 @@ export const WarningModal = ({ title, description, onClose, ...restProps }: Warn
         </HStack>
 
         <Text textStyle="caption1" lineHeight="2.2rem" maxW="37.3rem">
-          {title}
+          {errors[errorCode]?.title ?? 'Erro desconhecido'}
         </Text>
       </ModalHeader>
 
       <ModalBody>
         <Text textStyle="caption3" color="text.secondary" lineHeight="2rem">
-          {description}
+          {errors[errorCode]?.description ?? 'Por favor, contate o suporte.'}
         </Text>
       </ModalBody>
 

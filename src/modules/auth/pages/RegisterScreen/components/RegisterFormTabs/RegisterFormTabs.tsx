@@ -1,11 +1,12 @@
-import { Box, HStack, Text, useToast } from '@chakra-ui/react';
+import { Box, HStack, Text, useDisclosure, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useUpdateFarmer } from '@/api';
-import { ArrowRightSmallIcon } from '@/components';
+import { ArrowRightSmallIcon, WarningModal } from '@/components';
 import { DEFAULT_PRIVATE_FARMER_PAGE, DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 
 import { useRegisterFormTabs } from '../../stores';
@@ -23,7 +24,8 @@ export const RegisterFormTabs = () => {
   const toast = useToast();
   const { push } = useRouter();
   const farmerId = session.data?.user?.farmer?.id as number;
-
+  const { onOpen, onClose, isOpen } = useDisclosure();
+  const [errorMessage, setErrorMessage] = useState('');
   const [agreePrivacyPolicies, currentTabForm, setCurrentTabForm] = useRegisterFormTabs((state) => [
     state.agreePrivacyPolicies,
     state.currentTabForm,
@@ -61,6 +63,10 @@ export const RegisterFormTabs = () => {
             description: 'Seus dados foram atualizados!',
             status: 'success',
           });
+        },
+        onError: (error) => {
+          setErrorMessage(error.response?.data.error?.message ?? '');
+          onOpen();
         },
       },
     );
@@ -114,6 +120,7 @@ export const RegisterFormTabs = () => {
         {currentTabForm === 0 && <AccountDataForm />}
         {currentTabForm === 1 && <CreatePasswordForm isLoadingSignInButton={isUpdatingFarmer} />}
       </FormProvider>
+      <WarningModal onClose={onClose} isOpen={isOpen} errorCode={errorMessage} />
     </Box>
   );
 };

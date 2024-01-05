@@ -7,11 +7,13 @@ export type UpdateManagerData = {
   email?: string;
   confirmed?: boolean;
   phoneNumber?: string;
+  imageId?: number;
 };
 export type UpdateManagerResponse = {
   data: {
     manager: Manager;
-    jwt: string;
+    accessToken: string;
+    refreshToken: string;
     user: User;
   };
 };

@@ -1,6 +1,6 @@
 import { Button, Spinner, Text, useDisclosure } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 import { useCreatePlanning } from '@/api';
 import { AddInsideCircleIcon, CircleIcon, WarningModal } from '@/components';
@@ -9,6 +9,7 @@ export const CreatePlanningButton = () => {
   const session = useSession();
   const farmerId = session.data?.user?.farmer?.id as number;
   const harvestId = session.data?.user?.safra?.id as number;
+  const [errorCode, setErrorCode] = useState('');
   const {
     isOpen: isOpenPlanningAlreadyExistsModal,
     onOpen: onOpenPlanningAlreadyExistsModal,
@@ -25,9 +26,8 @@ export const CreatePlanningButton = () => {
       },
       {
         onError: (err) => {
-          if (err?.response?.data?.error?.message === 'PLANNING_ALREADY_EXIST') {
-            onOpenPlanningAlreadyExistsModal();
-          }
+          setErrorCode(err?.response?.data?.error?.message ?? '');
+          onOpenPlanningAlreadyExistsModal();
         },
       },
     );
@@ -65,8 +65,7 @@ export const CreatePlanningButton = () => {
       </Button>
 
       <WarningModal
-        title="Não é possível criar mais planejamentos para esta safra"
-        description="Um dos seus planejamentos já foi aprovado para esta safra, não será possível criar novos planejamentos nem os enviar para aprovação"
+        errorCode={errorCode}
         isOpen={isOpenPlanningAlreadyExistsModal}
         onClose={onClosePlanningAlreadyExistsModal}
       />

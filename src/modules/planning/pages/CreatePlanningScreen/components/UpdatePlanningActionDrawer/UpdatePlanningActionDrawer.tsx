@@ -9,14 +9,16 @@ import {
   DrawerProps,
   HStack,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { CircleIcon, BigCalendarIcon } from '@/components';
+import { CircleIcon, BigCalendarIcon, WarningModal } from '@/components';
 import {
   PatchPlanningActionData,
   useCreatePlanningAction,
@@ -61,12 +63,12 @@ export const UpdatePlanningActionDrawer = (props: UpdatePlanningActionDrawerProp
 
   const planningId = Number(query?.planning_id);
   const farmerId = session.data?.user?.farmer?.id as number;
-
+  const [errorMessage, setErrorMessage] = useState('');
   const [currentStep, setCurrentStep] = useUpdatePlanningActionStore((state) => [
     state.currentStep,
     state.setCurrentStep,
   ]);
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate: createPlanningAction, isLoading: isLoadingCreatePlanningAction } =
     useCreatePlanningAction();
   const { mutate: updatePlanningAction, isLoading: isLoadingUpdatePlanningAction } =
@@ -134,6 +136,10 @@ export const UpdatePlanningActionDrawer = (props: UpdatePlanningActionDrawerProp
             onSuccess: () => {
               handleCloseUpdatePlanningActionDrawer();
             },
+            onError: (error) => {
+              setErrorMessage(error?.response?.data?.error?.message ?? '');
+              onOpen();
+            },
           },
         );
       } else {
@@ -141,87 +147,94 @@ export const UpdatePlanningActionDrawer = (props: UpdatePlanningActionDrawerProp
           onSuccess: () => {
             handleCloseUpdatePlanningActionDrawer();
           },
+          onError: (error) => {
+            setErrorMessage(error?.response?.data?.error?.message ?? '');
+            onOpen();
+          },
         });
       }
     }
   };
 
   return (
-    <Drawer {...props} onClose={handleCloseUpdatePlanningActionDrawer} placement="right">
-      <DrawerOverlay onClick={handleCloseUpdatePlanningActionDrawer} />
-      <DrawerContent>
-        <FormProvider {...methods}>
-          <DrawerHeader>
-            <HStack spacing="1.6rem">
-              <CircleIcon>
-                <BigCalendarIcon />
-              </CircleIcon>
+    <>
+      <Drawer {...props} onClose={handleCloseUpdatePlanningActionDrawer} placement="right">
+        <DrawerOverlay onClick={handleCloseUpdatePlanningActionDrawer} />
+        <DrawerContent>
+          <FormProvider {...methods}>
+            <DrawerHeader>
+              <HStack spacing="1.6rem">
+                <CircleIcon>
+                  <BigCalendarIcon />
+                </CircleIcon>
 
-              <Text textStyle="caption1">
-                {props.mode === 'EDIT' ? 'Editar ação' : 'Criar nova ação'}
-              </Text>
-            </HStack>
+                <Text textStyle="caption1">
+                  {props.mode === 'EDIT' ? 'Editar ação' : 'Criar nova ação'}
+                </Text>
+              </HStack>
 
-            <PlanningActionFormStepper mode={props.mode} />
-          </DrawerHeader>
+              <PlanningActionFormStepper mode={props.mode} />
+            </DrawerHeader>
 
-          <DrawerBody justifyContent={currentStep === 1 ? 'space-between' : 'initial'}>
-            {currentStep === 0 && (
-              <>
-                <RecommendationsAccordion key="recommendations-accordion" />
-                <PlanningActionFormAccordion key="planning-action-form-accordion" />
-                {planningActionTypeValue === 'farm_kit' && (
-                  <TrousseauSelectAccordion key="trousseau-select-accordion" />
-                )}
-              </>
-            )}
+            <DrawerBody justifyContent={currentStep === 1 ? 'space-between' : 'initial'}>
+              {currentStep === 0 && (
+                <>
+                  <RecommendationsAccordion key="recommendations-accordion" />
+                  <PlanningActionFormAccordion key="planning-action-form-accordion" />
+                  {planningActionTypeValue === 'farm_kit' && (
+                    <TrousseauSelectAccordion key="trousseau-select-accordion" />
+                  )}
+                </>
+              )}
 
-            {currentStep === 1 && (
-              <PlanningActionDetail
-                title={planningActionTitle}
-                type={planningActionType}
-                investment={planningActionInvestment}
-                description={planningActionDescription}
-              />
-            )}
+              {currentStep === 1 && (
+                <PlanningActionDetail
+                  title={planningActionTitle}
+                  type={planningActionType}
+                  investment={planningActionInvestment}
+                  description={planningActionDescription}
+                />
+              )}
 
-            <HStack mt="1rem" justify="flex-end">
-              <Text
-                textStyle="caption3"
-                color="text.footnote"
-                maxW="45rem"
-                align="right"
-                lineHeight="2rem"
+              <HStack mt="1rem" justify="flex-end">
+                <Text
+                  textStyle="caption3"
+                  color="text.footnote"
+                  maxW="45rem"
+                  align="right"
+                  lineHeight="2rem"
+                >
+                  Obs: Sua solicitação será analisada e em até 5 dias úteis você poderá utilizar os
+                  recursos
+                </Text>
+              </HStack>
+            </DrawerBody>
+
+            <DrawerFooter>
+              <Button
+                variant="secondary"
+                w="18rem"
+                onClick={currentStep === 0 ? handleCloseUpdatePlanningActionDrawer : handleBackStep}
               >
-                Obs: Sua solicitação será analisada e em até 5 dias úteis você poderá utilizar os
-                recursos
-              </Text>
-            </HStack>
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button
-              variant="secondary"
-              w="18rem"
-              onClick={currentStep === 0 ? handleCloseUpdatePlanningActionDrawer : handleBackStep}
-            >
-              {currentStep === 0 ? 'Cancelar' : 'Voltar'}
-            </Button>
-            <Button
-              w="18rem"
-              isDisabled={!isValid}
-              isLoading={isLoadingCreatePlanningAction || isLoadingUpdatePlanningAction}
-              onClick={currentStep === 1 ? onSubmitUpdatePlanningActionForm : handleNextStep}
-            >
-              {currentStep === 0
-                ? props.mode === 'EDIT'
-                  ? 'Editar ação'
-                  : 'Criar nova ação'
-                : 'Confirmar ação'}
-            </Button>
-          </DrawerFooter>
-        </FormProvider>
-      </DrawerContent>
-    </Drawer>
+                {currentStep === 0 ? 'Cancelar' : 'Voltar'}
+              </Button>
+              <Button
+                w="18rem"
+                isDisabled={!isValid}
+                isLoading={isLoadingCreatePlanningAction || isLoadingUpdatePlanningAction}
+                onClick={currentStep === 1 ? onSubmitUpdatePlanningActionForm : handleNextStep}
+              >
+                {currentStep === 0
+                  ? props.mode === 'EDIT'
+                    ? 'Editar ação'
+                    : 'Criar nova ação'
+                  : 'Confirmar ação'}
+              </Button>
+            </DrawerFooter>
+          </FormProvider>
+        </DrawerContent>
+      </Drawer>
+      <WarningModal errorCode={errorMessage} isOpen={isOpen} onClose={onClose} />
+    </>
   );
 };
