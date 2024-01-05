@@ -3,6 +3,8 @@ import qs from 'qs';
 import axios from '@/lib/axios';
 
 import {
+  GetDistrictsParams,
+  GetDistrictsResponse,
   GetFarmerParams,
   GetFarmerResponse,
   GetFarmersResponse,
@@ -71,5 +73,23 @@ export const getFarmers = async ({ managerId }): Promise<GetFarmersResponse> => 
   });
   const { data } = await axios.authorized().get(`/farmers?${query}`);
 
+  return data;
+};
+
+export const getDistricts = async ({
+  managerId,
+}: GetDistrictsParams): Promise<GetDistrictsResponse> => {
+  const query = qs.stringify({
+    filters: {
+      farmers: {
+        managers: {
+          id: {
+            $eq: managerId,
+          },
+        },
+      },
+    },
+  });
+  const { data } = await axios.authorized().get(`/districts?${query}`);
   return data;
 };
