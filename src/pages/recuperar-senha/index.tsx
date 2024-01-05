@@ -1,11 +1,10 @@
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { getServerSession } from 'next-auth';
 
 import { DEFAULT_PRIVATE_FARMER_PAGE, DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
 import { LayoutAuth } from '@/layouts';
 import { authOptions } from '@/lib/next-auth';
-import { LoginScreen } from '@/modules';
+import { ForgotPasswordScreen } from '@/modules';
 
 import { NextPageWithLayout } from '../_app';
 
@@ -29,17 +28,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   };
 };
 
-const Page: NextPageWithLayout = () => <LoginScreen />;
+const Page: NextPageWithLayout = () => <ForgotPasswordScreen />;
 
 Page.getLayout = function getLayout(page) {
-  return (
-    <LayoutAuth>
-      <Head>
-        <title>Entrar na plataforma - Top Multiplicadores</title>
-      </Head>
-      {page}
-    </LayoutAuth>
-  );
+  return <LayoutAuth>{page}</LayoutAuth>;
 };
 
 export default Page;

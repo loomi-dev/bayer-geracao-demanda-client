@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 import { useUpdateManager } from '@/api';
 import {
   ArrowRightIcon,
+  AuthBanner,
   CircleIcon,
   MotionBox,
   MotionButton,
@@ -16,8 +17,6 @@ import {
   MotionText,
 } from '@/components';
 import { DEFAULT_PRIVATE_MANAGER_PAGE } from '@/config';
-
-import { AuthBanner } from '../../components';
 
 import { Benefit, DividerBenefit } from './components';
 
